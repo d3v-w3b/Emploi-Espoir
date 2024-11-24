@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{# todo: changer le titre si possible pour le référencement #}
+{% block title %}Emploi Espoir{% endblock %}
+
+{% block body %}
+
+    <div>
+
+        {% if app.user  %}
+            <div>
+                <p>
+                    <a href="#">Paramètres</a>
+                </p>
+
+                <p>
+                    <a href="{{ path('user_logout') }}" style="color: red">Déconnexion</a>
+                </p>
+            </div>
+
+        {% else %}
+            <div>
+                <p>
+                    <a href="{{ path('login_email') }}">Créer mon compte</a>
+                </p>
+
+                <p>
+                    <a href="{{ path('login_email') }}">Me connecter</a>
+                </p>
+            </div>
+        {% endif %}
+
+    </div>
+
+{% endblock %}

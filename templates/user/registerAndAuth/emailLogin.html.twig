@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{# todo: ici changer le title si possible pour le référencement #}
+{% block title %}Bienvenue - Emploi Espoir{% endblock %}
+
+{% block body %}
+    <h1>Formulaire pour e-mail</h1>
+
+    {{ form_start(emailLoginForm) }}
+        <div>
+            {{ form_label(emailLoginForm.email) }}<br>
+            {{ form_widget(emailLoginForm.email) }}
+            {{ form_errors(emailLoginForm.email) }}
+        </div>
+
+        <button type="submit">Continuer</button>
+    {{ form_end(emailLoginForm) }}
+{% endblock %}

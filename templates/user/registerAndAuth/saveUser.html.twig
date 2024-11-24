@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{# todo: changer le title si posisble pour le référencement #}
+{% block title %}Créer un compte - Emploi Espoir{% endblock %}
+
+{% block body %}
+
+    <h1>Créer un compte</h1>
+
+    {{ form_start(saveUserForm) }}
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 15px">
+            <div>
+                {{ form_label(saveUserForm.email) }}<br >
+                {{ form_widget(saveUserForm.email) }}
+                {{ form_help(saveUserForm.email) }}
+                {{ form_errors(saveUserForm.email) }}
+            </div>
+
+            <div>
+                {{ form_label(saveUserForm.lastName) }}<br >
+                {{ form_widget(saveUserForm.lastName) }}
+                {{ form_errors(saveUserForm.lastName) }}
+            </div>
+
+            <div>
+                {{ form_label(saveUserForm.firstName) }}<br >
+                {{ form_widget(saveUserForm.firstName) }}
+                {{ form_errors(saveUserForm.firstName) }}
+            </div>
+
+            <div>
+                {{ form_label(saveUserForm.dateOfBirth) }}<br >
+                {{ form_widget(saveUserForm.dateOfBirth) }}
+                {{ form_errors(saveUserForm.dateOfBirth) }}
+            </div>
+
+            <div>
+                <button type="submit">Créer mon compte</button>
+            </div>
+        </div>
+    {{ form_end(saveUserForm) }}
+{% endblock %}
