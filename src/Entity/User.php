@@ -34,6 +34,21 @@
         #[ORM\Column]
         private ?string $password = null;
 
+        #[ORM\Column(nullable: true)]
+        private ?string $gender = null;
+
+        #[ORM\Column(nullable: true)]
+        private ?string $phone = null;
+
+        #[ORM\Column(nullable: true)]
+        private ?string $address = null;
+
+        #[ORM\Column(nullable: true)]
+        private ?array $mainObjectives = null;
+
+        #[ORM\Column(nullable: true)]
+        private ?string $currentProfessionalSituation = null;
+
 
 
         //setters
@@ -71,6 +86,31 @@
             $this->password = $password;
 
             return $this;
+        }
+
+        public function setGender(?string $gender): void
+        {
+            $this->gender = $gender;
+        }
+
+        public function setAddress(?string $address): void
+        {
+            $this->address = $address;
+        }
+
+        public function setCurrentProfessionalSituation(?string $currentProfessionalSituation): void
+        {
+            $this->currentProfessionalSituation = $currentProfessionalSituation;
+        }
+
+        public function setMainObjectives(?array $mainObjectives): void
+        {
+            $this->mainObjectives = $mainObjectives;
+        }
+
+        public function setPhone(?string $phone): void
+        {
+            $this->phone = $phone;
         }
 
 
@@ -118,6 +158,31 @@
         public function getPassword(): ?string
         {
             return $this->password;
+        }
+
+        public function getAddress(): ?string
+        {
+            return $this->address;
+        }
+
+        public function getCurrentProfessionalSituation(): ?string
+        {
+            return $this->currentProfessionalSituation;
+        }
+
+        public function getGender(): ?string
+        {
+            return $this->gender;
+        }
+
+        public function getMainObjectives(): ?array
+        {
+            return $this->mainObjectives;
+        }
+
+        public function getPhone(): ?string
+        {
+            return $this->phone;
         }
 
         public function eraseCredentials(): void

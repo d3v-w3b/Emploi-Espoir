@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{# todo: modifier le title si possible pour le référencement #}
+{% block title %}Personnaliser votre expérience - Emploi Espoir{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/user/profile/validateUserChoices.js') }}" defer></script>
+{% endblock %}
+
+{% block body %}
+    <section>
+        <h1>Quel sont vos objectifs ?</h1>
+
+        <div class="for-students">
+            {#
+                <p class="alternance">Trouver une alternance</p>
+
+                <p class="job">Trouver un premier emploi</p>
+            #}
+
+            {{ form_start(mainObjectivesForm) }}
+                <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
+
+                    <div>
+                        {{ form_widget(mainObjectivesForm.alternance) }}
+                    </div>
+
+                    <div>
+                        {{ form_widget(mainObjectivesForm.job) }}
+                    </div>
+
+                    <button type="submit" disabled>Valider</button>
+                </div>
+
+            {{ form_end(mainObjectivesForm) }}
+        </div>
+
+
+        {#
+            pour le mode employer nouc aurons :
+
+            <p>Recruter en alternance</p>
+
+            <p>Recruter un diplomé </p>
+        #}
+    </section>
+{% endblock %}
+
+
+
+
+
+
+
+
+{% block stylesheets %}
+    <style>
+        /* Masque complètement la checkbox native */
+        input[type="checkbox"] {
+            appearance: none; /* Supprime l'apparence par défaut */
+            background-color: transparent; /* Fond transparent */
+            border: none; /* Supprime le contour */
+            outline: none; /* Supprime les bordures lors du focus */
+        }
+
+
+        /* Ajoute une personnalisation (facultatif) */
+        input[type="checkbox"]:checked {
+            content: '✔'; /* Exemple : coche personnalisée */
+            color: green;
+        }
+
+        label {
+            border: 1px solid grey;
+            cursor: pointer;
+        }
+    </style>
+{% endblock %}

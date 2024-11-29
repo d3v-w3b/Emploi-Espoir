@@ -104,7 +104,7 @@
                     }
                 }
 
-                return $this->redirectToRoute('user_dashboard');
+                return $this->redirectToRoute('welcome');
             }
 
             return $this->render('user/registerAndAuth/saveUser.html.twig', [
