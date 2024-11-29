@@ -49,6 +49,15 @@
         #[ORM\Column(nullable: true)]
         private ?string $currentProfessionalSituation = null;
 
+        #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+        private ?JobAndAlternation $jobAndAlternation = null;
+
+        #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+        private ?Career $career = null;
+
+        #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+        private ?Formation $formation = null;
+
 
 
         //setters
@@ -111,6 +120,52 @@
         public function setPhone(?string $phone): void
         {
             $this->phone = $phone;
+        }
+
+        public function setJobAndAlternation(?JobAndAlternation $jobAndAlternation): static
+        {
+            // unset the owning side of the relation if necessary
+            if ($jobAndAlternation === null && $this->jobAndAlternation !== null) {
+                $this->jobAndAlternation->setUser(null);
+            }
+
+            // set the owning side of the relation if necessary
+            if ($jobAndAlternation !== null && $jobAndAlternation->getUser() !== $this) {
+                $jobAndAlternation->setUser($this);
+            }
+
+            $this->jobAndAlternation = $jobAndAlternation;
+
+            return $this;
+        }
+
+        public function setCareer(?Career $career): static
+        {
+            // unset the owning side of the relation if necessary
+            if ($career === null && $this->career !== null) {
+                $this->career->setUser(null);
+            }
+
+            // set the owning side of the relation if necessary
+            if ($career !== null && $career->getUser() !== $this) {
+                $career->setUser($this);
+            }
+
+            $this->career = $career;
+
+            return $this;
+        }
+
+        public function setFormation(Formation $formation): static
+        {
+            // set the owning side of the relation if necessary
+            if ($formation->getUser() !== $this) {
+                $formation->setUser($this);
+            }
+
+            $this->formation = $formation;
+
+            return $this;
         }
 
 
@@ -189,5 +244,20 @@
         {
             // If you store any temporary, sensitive data on the user, clear it here
             // $this->plainPassword = null;
+        }
+
+        public function getJobAndAlternation(): ?JobAndAlternation
+        {
+            return $this->jobAndAlternation;
+        }
+
+        public function getCareer(): ?Career
+        {
+            return $this->career;
+        }
+
+        public function getFormation(): ?Formation
+        {
+            return $this->formation;
         }
     }
