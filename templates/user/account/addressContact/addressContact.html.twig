@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adresse et contact - Emploi Espoir{% endblock %}
+
+{% block body %}
+    <h1>Adresse et contact</h1>
+
+    <div>
+        <a href="#">
+            <strong>E-mail : </strong> {{ user.email }}
+        </a>
+
+        <a href="#">
+            <strong>Numéro de téléphone : </strong>
+            <span>
+                {% if user.phone is not null %}
+                    {{ user.phone }}
+                {% else %}
+                    <em>Information non fournie</em>
+                {% endif %}
+            </span>
+        </a>
+
+        <a href="#">
+            <strong>Adresse : </strong>
+            <span>
+                {% if user.address is not null %}
+                    {{ user.address }}
+                {% else %}
+                    <em>Information non fournie</em>
+                {% endif %}
+            </span>
+        </a>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% block stylesheets %}
+    <style>
+        a {
+            display: block;
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+{% endblock %}

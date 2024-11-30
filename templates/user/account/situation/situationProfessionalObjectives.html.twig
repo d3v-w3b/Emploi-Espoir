@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Situation et objectifs professionnels - Emploi Espoir{% endblock%}
+
+{% block body %}
+    <h1>Situation et objectifs professionnels</h1>
+
+    <div>
+        <a href="#">
+            <strong>Objectifs principaux</strong>
+            <span>
+                {% for objective in user.mainObjectives %}
+                    {% for obj in objective %}
+                        {{ obj }},
+                    {% endfor %}
+                {% endfor %}
+            </span>
+        </a>
+
+        <a href="#">
+            <strong>Situation professionnelle actuelle : </strong>
+            <span>
+                {% if user.currentProfessionalSituation is not null %}
+                    {{ currentProfessionalSituation }}
+                {% else  %}
+                    <em>Information non fournie</em>
+                {% endif %}
+            </span>
+        </a>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% block stylesheets %}
+    <style>
+        a {
+            display: block;
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Emploi Espoir{% endblock %}
+
+{% block body %}
+    <section>
+        <h1>Identité</h1>
+
+        <div>
+            <a href="#">
+                <strong>Prénom et nom : </strong> {{ user.firstName }} {{ user.lastName }}
+            </a>
+
+            <a href="#">
+                <strong>Date de naissance : </strong> {{ user.dateOfBirth|date('d/m/Y') }}
+            </a>
+
+            <a href="#">
+                <strong>Genre : </strong>
+                <span>
+                    {% if user.gender is not null %}
+                        {{ user.gender }}
+                    {% else %}
+                        <em>Information non fournie</em>
+                    {% endif %}
+                </span>
+            </a>
+        </div>
+    </section>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% block stylesheets %}
+    <style>
+        a {
+            display: block;
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+{% endblock %}

@@ -10,6 +10,7 @@
     use App\Form\Fields\Users\Profile\MainObjectivesFields;
     use App\Form\Types\Users\Profile\MainObjectivesType;
     use Symfony\Component\HttpFoundation\RequestStack;
+    use Symfony\Component\Security\Http\Attribute\IsGranted;
 
     class MainObjectivesController extends AbstractController
     {
@@ -25,6 +26,7 @@
 
 
         #[Route(path: '/welcome', name: 'welcome')]
+        #[IsGranted('ROLE_USER')]
         public function mainObjectives(): Response
         {
             $objectifFields = new MainObjectivesFields();

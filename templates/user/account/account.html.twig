@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{# todo: revoir le title ici pour le référencement #}
+{% block title %}Emploi Espoir{% endblock %}
+
+{% block body %}
+    <section>
+        <h1>
+            {{ user.firstName }} {{ user.lastName }}
+        </h1>
+
+        <div>
+            <h2>Infos personnelles</h2>
+
+            <p>
+                <a href="{{ path('account_identity') }}">Identité</a> <br >
+                <a href="{{ path('account_address_contact') }}">Adresse et contact</a> <br >
+                <a href="{{ path('account_situation') }}">Situation et objectifs personnels</a> <br >
+            </p>
+        </div>
+    </section>
+{% endblock %}
