@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Préférences d'emploi{% endblock %}
+
+{% block body %}
+    <section>
+        <h1>Emploi</h1>
+
+        <h2>Préférences relatives au télétravail</h2>
+
+        <div>
+            {{ form_start(job_preferences_form) }}
+                <div>
+                    {{ form_widget(job_preferences_form.jobPreferences) }}
+                </div>
+
+                <button type="submit">Enregistrer</button>
+            {{ form_end(job_preferences_form) }}
+        </div>
+    </section>
+{% endblock %}

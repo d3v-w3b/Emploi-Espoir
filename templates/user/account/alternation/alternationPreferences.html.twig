@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Alternance - Emploi Espoir{% endblock %}
+
+{% block body %}
+    {# message if a changing has been make about alternation preferences #}
+    {% if app.flashes('preferences_saved') is defined %}
+        {% for preferenceSavedMsg in app.flashes('preferences_saved') %}
+            {{ preferenceSavedMsg }}
+        {% endfor %}
+    {% endif %}
+
+    <section>
+        <h1>Alternance</h1>
+        <h2>Vos critères de recherches d'alternance</h2>
+    </section>
+
+    <div>
+        <a href="#">
+            <strong>Zone de recherche d'alternance : </strong>
+            <span>
+                {% if job_and_alternation is not null and job_and_alternation.alternationZone is not null %}
+                    {{ job_and_alternation.alternationZone }}
+                {% else %}
+                    <em>Information non fournie</em>
+                {% endif %}
+            </span>
+        </a>
+
+        <a href="{{ path('account_alternation_preferences_choices') }}">
+            <strong>Préférences relatives au télétravail : </strong>
+            <span>
+                {% if job_and_alternation is not null and job_and_alternation.alternationPreference is not null %}
+                    {% for alternation_preferences in job_and_alternation.alternationPreference %}
+                        {{ alternation_preferences }},
+                    {% endfor %}
+                {% else %}
+                    <em>Information non fournie</em>
+                {% endif %}
+            </span>
+        </a>
+
+        <a href="#">
+            <strong>Domaine d'alternance : </strong>
+            <span>
+                {% if job_and_alternation is not null and job_and_alternation.alternationField is not null %}
+                    {{ job_and_alternation.alternationField }}
+                {% else %}
+                    <em>Information non fournie</em>
+                {% endif %}
+            </span>
+        </a>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% block stylesheets %}
+    <style>
+        a {
+            display:  block;
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+{% endblock %}

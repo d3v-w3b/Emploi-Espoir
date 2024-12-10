@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Présentation - Emploi Espoir{% endblock %}
+
+{% block body %}
+    <section>
+        <h1>Présentation</h1>
+
+        <div>
+            <a href="#">
+                <strong>A propose de vous : </strong>
+
+                <span>
+                    {% if career is not null and career.aboutYou is not null %}
+                        {{ career.aboutYou }}
+                    {% else %}
+                        <em>Informations non fournie</em>
+                    {% endif %}
+                </span>
+            </a>
+
+            <a href="#">
+                <strong>CV: </strong>
+
+                <span>
+                    {% if career is not null and career.cv is not null %}
+                        {{ career.cv }}
+                    {% else %}
+                        <em>Informations non fournie</em>
+                    {% endif %}
+                </span>
+            </a>
+        </div>
+    </section>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% block stylesheets %}
+    <style>
+        a {
+            display:  block;
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+{% endblock %}

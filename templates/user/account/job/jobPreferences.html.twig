@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Job - Emploi Espoir{% endblock %}
+
+{% block body %}
+    {# message if changing has been make about job preferences #}
+    {% if app.flashes('job_preference_saved') is defined %}
+        {% for jobPreferenceMsg in app.flashes('job_preference_saved') %}
+            {{ jobPreferenceMsg }}
+        {% endfor %}
+    {% endif %}
+
+    <section>
+        <h1>Emploi</h1>
+
+        <div>
+            <a href="#">
+                <strong>Zone de recherche d'emploi : </strong>
+                <span>
+                    {% if job_preferences is not null and job_preferences.employmentArea is not null %}
+                        {{ job_preferences.employmentArea }}
+                    {% else  %}
+                        <em>Information non fournie</em>
+                    {% endif %}
+                </span>
+            </a>
+
+            <a href="{{ path('account_job_preferences_preference') }}">
+                <strong>Préférence relative au télétravail : </strong>
+                <span>
+                    {% if job_preferences is not null and job_preferences.employmentPreference is not null %}
+                        {% for jobPreferences in job_preferences.employmentPreference %}
+                            {{ jobPreferences }},
+                        {% endfor %}
+                    {% else  %}
+                        <em>Information non fournie</em>
+                    {% endif %}
+                </span>
+            </a>
+        </div>
+    </section>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% block stylesheets %}
+    <style>
+        a {
+            display:  block;
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Préférences d'alternance - Emploi Espoir{% endblock %}
+
+{% block body %}
+    <section>
+        <h1>Alternances</h1>
+
+        <h2>Préférences relatives au télétravail</h2>
+
+        <div>
+            {{ form_start(alternation_preferences_form) }}
+                <div>
+                    {{ form_widget(alternation_preferences_form.alternationPreferences) }}
+                </div>
+
+                <button type="submit">Enregistrer</button>
+            {{ form_end(alternation_preferences_form) }}
+        </div>
+    </section>
+{% endblock %}

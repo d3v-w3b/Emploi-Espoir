@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formations - Emploi Espoir{% endblock %}
+
+{% block body %}
+    <h1>Formations</h1>
+
+    <div>
+        {{ form_start(formation_form) }}
+            <div style="display: grid; grid-template-columns: 1fr; gap: 20px">
+                <div>
+                    {{ form_label(formation_form.diplomaLevel) }}<br >
+                    {{ form_widget(formation_form.diplomaLevel) }}
+                    {{ form_errors(formation_form.diplomaLevel) }}
+                </div>
+
+                <div>
+                    {{ form_label(formation_form.diplomaName) }}<br >
+                    {{ form_widget(formation_form.diplomaName) }}
+                    {{ form_errors(formation_form.diplomaName) }}
+                </div>
+
+                <div>
+                    {{ form_label(formation_form.diplomaSpecialities) }}<br >
+                    {{ form_widget(formation_form.diplomaSpecialities) }}
+                    {{ form_errors(formation_form.diplomaSpecialities) }}
+                </div>
+
+                <div>
+                    {{ form_label(formation_form.universityName) }}<br >
+                    {{ form_widget(formation_form.universityName) }}
+                    {{ form_errors(formation_form.universityName) }}
+                </div>
+
+                <div>
+                    {{ form_label(formation_form.diplomaTown) }}<br >
+                    {{ form_widget(formation_form.diplomaTown) }}
+                    {{ form_errors(formation_form.diplomaTown) }}
+                </div>
+
+                <div>
+                    {{ form_label(formation_form.diplomaMonth) }}<br >
+                    {{ form_widget(formation_form.diplomaMonth) }}
+                    {{ form_errors(formation_form.diplomaMonth) }}
+                </div>
+
+                <div>
+                    {{ form_label(formation_form.diplomaYear) }}<br >
+                    {{ form_widget(formation_form.diplomaYear) }}
+                    {{ form_errors(formation_form.diplomaYear) }}
+                </div>
+
+                <div>
+                    {{ form_label(formation_form.diploma) }}<br >
+                    {{ form_widget(formation_form.diploma) }}
+                    {{ form_errors(formation_form.diploma) }}
+                </div>
+            </div>
+        {{ form_end(formation_form) }}
+    </div>
+{% endblock %}

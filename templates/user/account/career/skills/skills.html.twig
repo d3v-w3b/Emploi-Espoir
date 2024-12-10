@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Compétences - Emploi Espoir{% endblock %}
+
+{% block body %}
+    <section>
+        <h1>Compétences</h1>
+
+        <div>
+            <a href="#">
+                <strong>Compétences principales : </strong>
+                <span>
+                    {% if career is not null and career.skills is not null %}
+                        {% for careerSkills in career.skills %}
+                            {{ careerSkills }},
+                        {% endfor %}
+                    {% else %}
+                        <em>Informations non fournie</em>
+                    {% endif %}
+                </span>
+            </a>
+        </div>
+    </section>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% block stylesheets %}
+    <style>
+        a {
+            display:  block;
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+{% endblock %}

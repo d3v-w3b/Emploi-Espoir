@@ -1,9 +1,9 @@
 <?php
 
-    namespace App\Controller\User\Account\AddressContact;
+    namespace App\Controller\User\Account\PersonalInfos\Address;
 
-    use Symfony\Component\HttpFoundation\Response;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+    use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\Routing\Annotation\Route;
     use Symfony\Component\Security\Http\Attribute\IsGranted;
 
@@ -16,7 +16,7 @@
             //get current user
             $user = $this->getUser();
 
-            return $this->render('user/account/addressContact/addressContact.html.twig', [
+            return $this->render('user/account/personalInfos/addressContact/addressContact.html.twig', [
                 'user' => $user,
             ]);
         }

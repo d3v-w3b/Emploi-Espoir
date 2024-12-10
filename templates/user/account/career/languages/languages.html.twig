@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Niveau de langue - Emploi Espoir{% endblock %}
+
+{% block body %}
+    <h1>Niveau de langues</h1>
+
+    <div>
+        <a href="#">
+            <strong>Français : </strong>
+
+            <span>
+                {% if career_language_level is not null and career_language_level.frenchLevel is not null %}
+                    {{ career_language_level.frenchLevel }}
+                {% else %}
+                    <em>Information non fournie</em>
+                {% endif %}
+            </span>
+        </a>
+
+
+        <a href="#">
+            <strong>Anglais : </strong>
+
+            <span>
+                {% if career_language_level is not null and career_language_level.englishLevel is not null %}
+                    {{ career_language_level.englishLevel }}
+                {% else %}
+                    <em>Information non fournie</em>
+                {% endif %}
+            </span>
+        </a>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% block stylesheets %}
+    <style>
+        a {
+            display:  block;
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+{% endblock %}

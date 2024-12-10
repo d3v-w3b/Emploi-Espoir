@@ -1,9 +1,9 @@
 <?php
 
-    namespace App\Controller\User\Account\Identity;
+    namespace App\Controller\User\Account\PersonalInfos\Identity;
 
-    use Symfony\Component\HttpFoundation\Response;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+    use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\Routing\Annotation\Route;
     use Symfony\Component\Security\Http\Attribute\IsGranted;
 
@@ -16,7 +16,7 @@
             //get current user
             $user = $this->getUser();
 
-            return $this->render('user/account/identity/identity.html.twig', [
+            return $this->render('user/account/personalInfos/identity/identity.html.twig', [
                 'user' => $user,
             ]);
         }

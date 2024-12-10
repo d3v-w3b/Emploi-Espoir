@@ -2,6 +2,7 @@
 
     namespace App\Entity;
 
+    use App\Enum\User\Account\Career\Formation\Months;
     use App\Repository\FormationRepository;
     use Doctrine\ORM\Mapping as ORM;
 
@@ -28,7 +29,7 @@
         #[ORM\Column(length: 128, nullable: true)]
         private ?string $diplomaTown = null;
 
-        #[ORM\Column(type: 'date_immutable', nullable: true)]
+        #[ORM\Column(type: 'date_immutable', nullable: true, enumType: Months::class)]
         private ?\DateTimeImmutable $diplomaMonth = null;
 
         #[ORM\Column(type: 'date_immutable', nullable: true)]
