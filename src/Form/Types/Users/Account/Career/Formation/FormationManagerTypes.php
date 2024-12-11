@@ -27,21 +27,22 @@
                         'Bac +3/4' => 'Bac +3/4',
                         'Bac +5' => 'Bac +5',
                         'Doctorat' => 'Doctorat',
-                        'Autre' => 'Autre (certificat)'
+                        'Autre (certificat)' => 'Autre'
                     ],
                     'expanded' => false,
                     'multiple' => false
                 ])
 
                 ->add('diplomaName', TextType::class, [
-                    'label' => 'Nom du diplôme'
+                    'label' => 'Nom du diplôme',
                 ])
 
                 ->add('diplomaSpecialities', EnumType::class, [
                     'class' => DiplomaSpeciality::class,
                     'choice_label' => 'value',
+                    'placeholder' => 'Sélectionnez une spécialité',
                     'attr' => [
-                        'placeholder' => 'Sélectionner la ou les spécialités du diplôme',
+                        'disabled' => true,
                     ]
                 ])
 
@@ -55,7 +56,7 @@
 
                 ->add('diplomaMonth', EnumType::class, [
                     'class' => Months::class,
-                    'choice_label' => 'value'
+                    'choice_label' => fn (Months $month) => $month->getLabel(),
                 ])
 
                 ->add('diplomaYear', ChoiceType::class, [

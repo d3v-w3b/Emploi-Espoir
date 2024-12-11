@@ -24,6 +24,16 @@
 
         #[Assert\NotBlank(message: 'Sélectionnez l\'année de la date d\'obtention du diplôme')]
         private ?string $diplomaYear = null;
+
+        #[Assert\File(
+            maxSize: '5M',
+            mimeTypes: ['application/pdf', 'application/doc', 'application/docx', 'image/jpeg', 'image/jpg', 'image/png'],
+            mimeTypesMessage: 'Les extensions valident sont : .pdf, .doc, .docx, .jpeg, .jpg, .png'
+        )]
+        #[Assert\Count(
+            max: 5,
+            maxMessage: 'Vous ne pouvez charger que 5 fichiers'
+        )]
         private ?array $diploma = null;
 
 
