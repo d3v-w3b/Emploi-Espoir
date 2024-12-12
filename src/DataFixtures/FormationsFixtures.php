@@ -4,6 +4,7 @@
 
     use App\Entity\Formation;
     use App\Entity\User;
+    use App\Enum\User\Account\Career\Formation\DiplomaSpeciality;
     use Doctrine\Bundle\FixturesBundle\Fixture;
     use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
     use Doctrine\Persistence\ObjectManager;
@@ -21,11 +22,11 @@
                 $formation->setUser($user);
                 $formation->setDiplomaLevel('BAC+3');
                 $formation->setDiplomaName('MASTER');
-                $formation->setDiplomaSpecialities(['Communication', 'Informatique', 'data-analytics']);
+                $formation->setDiplomaSpeciality(DiplomaSpeciality::COMPUTER_SCIENCE);
                 $formation->setUniversityName('Université de HARVARD');
                 $formation->setDiplomaTown('Abidjan');
                 //$formation->setDiplomaMonth(new \DateTimeImmutable('2000-03-01'));
-                $formation->setDiplomaYear(new \DateTimeImmutable('2000-03-01'));
+                $formation->setDiplomaYear('2003');
 
                 $manager->persist($formation);
             }

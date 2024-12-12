@@ -2,6 +2,7 @@
 
     namespace App\Entity;
 
+    use App\Enum\User\Account\Career\Formation\DiplomaSpeciality;
     use App\Enum\User\Account\Career\Formation\Months;
     use App\Repository\FormationRepository;
     use Doctrine\ORM\Mapping as ORM;
@@ -20,8 +21,8 @@
         #[ORM\Column(length: 128, nullable: true)]
         private ?string $diplomaName = null;
 
-        #[ORM\Column(type: 'json', nullable: true)]
-        private ?array $diplomaSpecialities = null;
+        #[ORM\Column(length: 128, nullable: true, enumType: DiplomaSpeciality::class)]
+        private ?DiplomaSpeciality $diplomaSpeciality = null;
 
         #[ORM\Column(length: 128, nullable: true)]
         private ?string $universityName = null;
@@ -29,11 +30,11 @@
         #[ORM\Column(length: 128, nullable: true)]
         private ?string $diplomaTown = null;
 
-        #[ORM\Column(type: 'date_immutable', nullable: true, enumType: Months::class)]
-        private ?\DateTimeImmutable $diplomaMonth = null;
+        #[ORM\Column(length: 128, nullable: true, enumType: Months::class)]
+        private ?Months $diplomaMonth = null;
 
-        #[ORM\Column(type: 'date_immutable', nullable: true)]
-        private ?\DateTimeImmutable $diplomaYear = null;
+        #[ORM\Column(length: 128, nullable: true)]
+        private ?string $diplomaYear = null;
 
         #[ORM\Column(type: 'json', nullable: true)]
         private ?array $diploma = null;
@@ -59,11 +60,9 @@
             return $this;
         }
 
-        public function setDiplomaSpecialities(?array $diplomaSpecialities): static
+        public function setDiplomaSpeciality(?DiplomaSpeciality $diplomaSpeciality): void
         {
-            $this->diplomaSpecialities = $diplomaSpecialities;
-
-            return $this;
+            $this->diplomaSpeciality = $diplomaSpeciality;
         }
 
         public function setUniversityName(?string $universityName): static
@@ -80,18 +79,14 @@
             return $this;
         }
 
-        public function setDiplomaMonth(?\DateTimeImmutable $diplomaMonth): static
+        public function setDiplomaMonth(?Months $diplomaMonth): void
         {
             $this->diplomaMonth = $diplomaMonth;
-
-            return $this;
         }
 
-        public function setDiplomaYear(?\DateTimeImmutable $diplomaYear): static
+        public function setDiplomaYear(?string $diplomaYear): void
         {
             $this->diplomaYear = $diplomaYear;
-
-            return $this;
         }
 
         public function setDiploma(?array $diploma): static
@@ -126,9 +121,9 @@
             return $this->diplomaName;
         }
 
-        public function getDiplomaSpecialities(): ?array
+        public function getDiplomaSpeciality(): ?DiplomaSpeciality
         {
-            return $this->diplomaSpecialities;
+            return $this->diplomaSpeciality;
         }
 
         public function getUniversityName(): ?string
@@ -141,12 +136,12 @@
             return $this->diplomaTown;
         }
 
-        public function getDiplomaMonth(): ?\DateTimeImmutable
+        public function getDiplomaMonth(): ?Months
         {
             return $this->diplomaMonth;
         }
 
-        public function getDiplomaYear(): ?\DateTimeImmutable
+        public function getDiplomaYear(): ?string
         {
             return $this->diplomaYear;
         }

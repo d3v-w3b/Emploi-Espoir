@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Compétence - Emploi Espoir{% endblock %}
+
+{% block stylesheets %}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{{ asset('js/user/account/career/skills/skillsManagerSelectTag.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <section>
+        <h1>Compétences</h1>
+
+        <div>
+            {{ form_start(skills_manager_form) }}
+                <div>
+                    {{ form_widget(skills_manager_form.skills) }}
+                </div>
+
+                <button type="submit">Enregistrer</button>
+            {{ form_end(skills_manager_form) }}
+        </div>
+    </section>
+{% endblock %}

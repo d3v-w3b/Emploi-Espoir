@@ -3,6 +3,13 @@
 {% block title %}Formations - Emploi Espoir{% endblock %}
 
 {% block body %}
+    {# message if information about formation has been done #}
+    {% if app.flashes('formation_information_saved') is defined %}
+        {% for formationSavedMsg in app.flashes('formation_information_saved') %}
+            {{ formationSavedMsg }}
+        {% endfor %}
+    {% endif %}
+
     <section>
         <h1>Formations</h1>
 

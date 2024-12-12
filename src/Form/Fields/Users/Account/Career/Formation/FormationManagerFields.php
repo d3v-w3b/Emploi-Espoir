@@ -2,38 +2,19 @@
 
     namespace App\Form\Fields\Users\Account\Career\Formation;
 
+    use App\Enum\User\Account\Career\Formation\DiplomaSpeciality;
+    use App\Enum\User\Account\Career\Formation\Months;
     use Symfony\Component\Validator\Constraints as Assert;
 
     class FormationManagerFields
     {
-        #[Assert\NotBlank(message: 'Sélectionnez le niveau du diplôme')]
         private ?string $diplomaLevel = null;
-
-        #[Assert\NotBlank(message: 'Complétez le nom du diplôme')]
         private ?string $diplomaName = null;
-
-        #[Assert\NotBlank(message: 'Sélectionnez la ou les spécialités du diplôme')]
-        private ?array $diplomaSpecialities = null;
-
-        #[Assert\NotBlank(message: 'Sélectionnez le nom l\'organisme')]
+        private ?DiplomaSpeciality $diplomaSpeciality = null;
         private ?string $universityName = null;
-
-        #[Assert\NotBlank(message: 'Sélectionnez la ville d\'obtention du diplôme')]
         private ?string $diplomaTown = null;
-        private ?string $diplomaMonth = null;
-
-        #[Assert\NotBlank(message: 'Sélectionnez l\'année de la date d\'obtention du diplôme')]
+        private ?Months $diplomaMonth = null;
         private ?string $diplomaYear = null;
-
-        #[Assert\File(
-            maxSize: '5M',
-            mimeTypes: ['application/pdf', 'application/doc', 'application/docx', 'image/jpeg', 'image/jpg', 'image/png'],
-            mimeTypesMessage: 'Les extensions valident sont : .pdf, .doc, .docx, .jpeg, .jpg, .png'
-        )]
-        #[Assert\Count(
-            max: 5,
-            maxMessage: 'Vous ne pouvez charger que 5 fichiers'
-        )]
         private ?array $diploma = null;
 
 
@@ -48,7 +29,7 @@
             $this->diplomaLevel = $diplomaLevel;
         }
 
-        public function setDiplomaMonth(?string $diplomaMonth): void
+        public function setDiplomaMonth(?Months $diplomaMonth): void
         {
             $this->diplomaMonth = $diplomaMonth;
         }
@@ -58,9 +39,9 @@
             $this->diplomaName = $diplomaName;
         }
 
-        public function setDiplomaSpecialities(?array $diplomaSpecialities): void
+        public function setDiplomaSpeciality(?DiplomaSpeciality $diplomaSpeciality): void
         {
-            $this->diplomaSpecialities = $diplomaSpecialities;
+            $this->diplomaSpeciality = $diplomaSpeciality;
         }
 
         public function setDiplomaTown(?string $diplomaTown): void
@@ -90,7 +71,7 @@
             return $this->diplomaLevel;
         }
 
-        public function getDiplomaMonth(): ?string
+        public function getDiplomaMonth(): ?Months
         {
             return $this->diplomaMonth;
         }
@@ -100,9 +81,9 @@
             return $this->diplomaName;
         }
 
-        public function getDiplomaSpecialities(): ?array
+        public function getDiplomaSpeciality(): ?DiplomaSpeciality
         {
-            return $this->diplomaSpecialities;
+            return $this->diplomaSpeciality;
         }
 
         public function getDiplomaTown(): ?string

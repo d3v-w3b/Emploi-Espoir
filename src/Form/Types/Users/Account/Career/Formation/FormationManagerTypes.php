@@ -37,9 +37,9 @@
                     'label' => 'Nom du diplôme',
                 ])
 
-                ->add('diplomaSpecialities', EnumType::class, [
+                ->add('diplomaSpeciality', EnumType::class, [
                     'class' => DiplomaSpeciality::class,
-                    'choice_label' => 'value',
+                    'choice_label' => fn (DiplomaSpeciality $diplomaSpeciality) => $diplomaSpeciality->getLabel(),
                     'placeholder' => 'Sélectionnez une spécialité',
                     'attr' => [
                         'disabled' => true,
@@ -61,9 +61,7 @@
 
                 ->add('diplomaYear', ChoiceType::class, [
                     'choices' => array_combine(range(1945, date('Y')), range(1945, date('Y'))),
-                    'attr' => [
-                        'placeholder' => 'Année',
-                    ]
+                    'placeholder' => 'Année',
                 ])
 
                 ->add('diploma', FileType::class, [

@@ -3,11 +3,18 @@
 {% block title %}Compétences - Emploi Espoir{% endblock %}
 
 {% block body %}
+    {# message if a skills has been change #}
+    {% if app.flashes('skill_saved') is defined %}
+        {% for skillsSavedMsg in app.flashes('skill_saved') %}
+            {{ skillsSavedMsg }}
+        {% endfor %}
+    {% endif %}
+
     <section>
         <h1>Compétences</h1>
 
         <div>
-            <a href="#">
+            <a href="{{ path('account_skills_manager') }}">
                 <strong>Compétences principales : </strong>
                 <span>
                     {% if career is not null and career.skills is not null %}
