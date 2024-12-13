@@ -3,9 +3,16 @@
 {% block title %}Expériences professionnelles - Emploi Espoir{% endblock %}
 
 {% block body %}
+    {# message if experiences has been changed #}
+    {% if app.flashes('experiences_saved') is defined %}
+        {% for experienceSavedMsg in app.flashes('experiences_saved') %}
+            {{ experienceSavedMsg }}
+        {% endfor %}
+    {% endif %}
+
     <section>
         <h1>Expériences professionnelles</h1>
 
-        <a href="#">Ajouter</a>
+        <a href="{{ path('account_professional_experience_manager') }}">Ajouter</a>
     </section>
 {% endblock %}

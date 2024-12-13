@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Expériences professionnelles - Emploi Espoir{% endblock %}
+
+{% block stylesheets %}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/user/account/career/experiences/jobFieldsSelectTag.js') }}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{{ asset('js/user/account/career/experiences/jobFieldsDisabledManager.js') }}" defer></script>
+{% endblock %}
+
+{% block body %}
+    <h1>Expériences professionnelles</h1>
+
+    <div>
+        {{ form_start(experience_form) }}
+            <div style="display: grid; grid-template-columns: 1fr; gap: 20px">
+                <div>
+                    {{ form_label(experience_form.jobTitle) }}<br>
+                    {{ form_widget(experience_form.jobTitle) }}
+                </div>
+
+                <div>
+                    {{ form_label(experience_form.jobField) }}<br>
+                    {{ form_widget(experience_form.jobField) }}
+                </div>
+
+                <div>
+                    {{ form_label(experience_form.country) }}<br>
+                    {{ form_widget(experience_form.country) }}
+                </div>
+
+                <div>
+                    {{ form_label(experience_form.enterpriseName) }}<br>
+                    {{ form_widget(experience_form.enterpriseName) }}
+                </div>
+
+                <div>
+                    {{ form_label(experience_form.endDateCheckbox) }}<br>
+                    {{ form_widget(experience_form.endDateCheckbox) }}
+                </div>
+
+                <div>
+                    {{ form_label(experience_form.startDate) }}<br>
+                    {{ form_widget(experience_form.startDate) }}
+                </div>
+
+                <div style="display: none" class="end-date">
+                    {{ form_label(experience_form.endDate) }}<br>
+                    {{ form_widget(experience_form.endDate) }}
+                </div>
+
+                <div>
+                    {{ form_label(experience_form.jobDescription) }}<br>
+                    {{ form_widget(experience_form.jobDescription) }}
+                </div>
+
+                <button type="submit">Enregistrer</button>
+            </div>
+
+        {{ form_end(experience_form) }}
+    </div>
+{% endblock %}
