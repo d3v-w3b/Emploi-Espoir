@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{# todo: modifier le title si possible pour le référencement #}
+{% block title %}Récruter des talents - Emploi Espoir{% endblock %}
+
+{% block body %}
+    <section>
+        <h1>
+            Recrutez des talents grâce à un espace tout-en-un.
+        </h1>
+
+        <p>
+            <a href="{{ path('organization_add') }}">Explorer l'espace employeur</a>
+        </p>
+
+        <p>
+            <a href="#">Obtenir un devis ou une démo</a>
+        </p>
+    </section>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer votre organisation - Emploi Espoir{% endblock %}
+
+{% block body %}
+    <section>
+        <h1>Créez votre espace employeur</h1>
+
+        {{ form_start(add_organization_form) }}
+            <div style="display: grid; grid-template-columns: 1fr; gap: 20px">
+                <div>
+                    {{ form_label(add_organization_form.country) }}<br >
+                    {{ form_widget(add_organization_form.country) }}
+                    {{ form_errors(add_organization_form.country) }}
+                </div>
+
+                <div>
+                    {{ form_label(add_organization_form.organizationName) }}<br >
+                    {{ form_widget(add_organization_form.organizationName) }}
+                    {{ form_errors(add_organization_form.organizationName) }}
+                </div>
+
+                <div>
+                    {{ form_label(add_organization_form.organizationRegistrationNumber) }}<br >
+                    {{ form_widget(add_organization_form.organizationRegistrationNumber) }}
+                    {{ form_errors(add_organization_form.organizationRegistrationNumber) }}
+                </div>
+
+                <div>
+                    <a href="{{ path('user_dashboard') }}">Annuler</a>
+                    <button type="submit">Confirmé</button>
+                </div>
+
+            </div>
+        {{ form_end(add_organization_form) }}
+    </section>
+{% endblock %}

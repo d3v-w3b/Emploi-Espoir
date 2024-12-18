@@ -58,6 +58,9 @@
         #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
         private ?Formation $formation = null;
 
+        #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+        private ?Organization $organization = null;
+
 
 
         //setters
@@ -168,6 +171,18 @@
             return $this;
         }
 
+        public function setOrganization(Organization $organization): static
+        {
+            // set the owning side of the relation if necessary
+            if ($organization->getUser() !== $this) {
+                $organization->setUser($this);
+            }
+
+            $this->organization = $organization;
+
+            return $this;
+        }
+
 
 
         //getters
@@ -259,5 +274,10 @@
         public function getFormation(): ?Formation
         {
             return $this->formation;
+        }
+
+        public function getOrganization(): ?Organization
+        {
+            return $this->organization;
         }
     }
