@@ -21,7 +21,15 @@
                 </p>
 
                 <p>
-                    <a href="{{ path('organization_add') }}">Employeur</a>
+                    <a href="{{ path('organization_add') }}">
+                        <span>
+                            {% if organization is null %}
+                                Employeur
+                            {% else %}
+                                {{ organization.organizationName }}
+                            {% endif %}
+                        </span>
+                    </a>
                 </p>
 
                 <p>

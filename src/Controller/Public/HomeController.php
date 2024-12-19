@@ -11,6 +11,19 @@
         #[Route(path: '/', name: 'home')]
         public function home(): Response
         {
-            return $this->render('public/home.html.twig');
+            // default value if user does not exist
+            $organizationEntity = null;
+
+            // if an organization is associated to a user, put
+            // organization name is the view
+            $user = $this->getUser();
+            if($user) {
+                $organizationEntity = $user->getOrganization();
+            }
+
+
+            return $this->render('public/home.html.twig', [
+                'organization' => $organizationEntity,
+            ]);
         }
     }

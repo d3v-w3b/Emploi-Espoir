@@ -34,6 +34,18 @@
             $organizationAddFields = new OrganizationBasicsInfosFields();
             $organizationEntity = $user->getOrganization() ?? new Organization();
 
+            // Redirect to employer phone number if organization exist and
+            // employer phone does not exist
+            if($user->getOrganization() !== null && $user->getPhone() === null) {
+                return $this->redirectToRoute('organisation_employer_phone_number');
+            }
+
+            // redirect to organization dashboard if a user is associated to
+            // an organization and user phone exist
+            if($user->getOrganization() !== null && $user->getPhone() !== null) {
+                return $this->redirectToRoute('organization_dashboard');
+            }
+
             $organizationAddType = $this->createForm(OrganizationBasicsInfosType::class, $organizationAddFields);
 
             $organizationAddType->handleRequest($this->requestStack->getCurrentRequest());

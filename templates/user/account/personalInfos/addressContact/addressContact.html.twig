@@ -3,6 +3,13 @@
 {% block title %}Adresse et contact - Emploi Espoir{% endblock %}
 
 {% block body %}
+    {# message if a phone number has been saved #}
+    {% if app.flashes('phone_number_saved') is defined %}
+        {% for phoneSavedMsg in app.flashes('phone_number_saved') %}
+            {{ phoneSavedMsg }}
+        {% endfor %}
+    {% endif %}
+
     <h1>Adresse et contact</h1>
 
     <div>
@@ -10,7 +17,7 @@
             <strong>E-mail : </strong> {{ user.email }}
         </a>
 
-        <a href="#">
+        <a href="{{ path('account_address_contact_phone') }}">
             <strong>Numéro de téléphone : </strong>
             <span>
                 {% if user.phone is not null %}

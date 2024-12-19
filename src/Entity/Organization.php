@@ -23,12 +23,6 @@
         private ?string $organizationRegistrationNumber = null;
 
         #[ORM\Column(length: 128, nullable: true)]
-        private ?string $email = null;
-
-        #[ORM\Column(length: 128, nullable: true)]
-        private ?string $phone = null;
-
-        #[ORM\Column(length: 128, nullable: true)]
         private ?string $numberOfCollaborator = null;
 
         #[ORM\Column(length: 255, nullable: true)]
@@ -63,16 +57,6 @@
             $this->organizationRegistrationNumber = $organizationRegistrationNumber;
 
             return $this;
-        }
-
-        public function setEmail(?string $email): void
-        {
-            $this->email = $email;
-        }
-
-        public function setPhone(?string $phone): void
-        {
-            $this->phone = $phone;
         }
 
         public function setNumberOfCollaborator(?string $numberOfCollaborator): static
@@ -124,16 +108,6 @@
         public function getOrganizationRegistrationNumber(): ?string
         {
             return $this->organizationRegistrationNumber;
-        }
-
-        public function getEmail(): ?string
-        {
-            return $this->email;
-        }
-
-        public function getPhone(): ?string
-        {
-            return $this->phone;
         }
 
         public function getNumberOfCollaborator(): ?string

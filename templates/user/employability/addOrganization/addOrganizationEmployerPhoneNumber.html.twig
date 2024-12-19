@@ -5,5 +5,18 @@
 {% block body %}
     <section>
         <h1>Renseignez votre numéro de téléphone</h1>
+        <h2>Pour être accompagné au mieux dans vos besoins de recrutement d’alternants.</h2>
+
+        {{ form_start(organization_phone_form) }}
+            <div>
+                <div>
+                    {{ form_label(organization_phone_form.phone) }}<br>
+                    {{ form_widget(organization_phone_form.phone) }}
+                    {{ form_errors(organization_phone_form.phone) }}
+                </div>
+
+                <button type="submit">Envoyer</button>
+            </div>
+        {{ form_end(organization_phone_form) }}
     </section>
 {% endblock %}
