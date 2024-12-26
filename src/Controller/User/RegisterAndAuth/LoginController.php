@@ -26,9 +26,13 @@
             //     return $this->redirectToRoute('target_path');
             // }
 
-            //get session
+            // get session
             $session = $this->requestStack->getSession();
             $emailEntered = $session->get('email_entered');
+
+            if(!$emailEntered) {
+                return $this->redirectToRoute('login_email');
+            }
 
             // get the login error if there is one
             $error = $authenticationUtils->getLastAuthenticationError();

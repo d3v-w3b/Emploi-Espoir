@@ -37,6 +37,7 @@
             }
 
             $organizationPhoneFields = new OrganizationEmployerPhoneNumberFields();
+            $organizationPhoneFields->setPhone($user->getPhone());
 
             $organizationPhoneType = $this->createForm(OrganizationEmployerPhoneNumberType::class, $organizationPhoneFields);
             $organizationPhoneType->handleRequest($this->requestStack->getCurrentRequest());

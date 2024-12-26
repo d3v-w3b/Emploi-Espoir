@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liens externes - Emploi Espoir{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/user/account/career/externalLinks/fieldsLinksManager.js') }}" defer></script>
+{% endblock %}
+
+{% block body %}
+    <h1>Liens externes</h1>
+
+    {{ form_start(external_link_form) }}
+        <div style="display: grid; grid-template-columns: 1fr; gap: 20px">
+            <div>
+                {{ form_label(external_link_form.linkType) }}<br >
+                {{ form_widget(external_link_form.linkType) }}
+                {{ form_errors(external_link_form.linkType) }}
+            </div>
+
+            <div style="display: none;" id="linkedIn-block">
+                {{ form_label(external_link_form.linkedInLink) }}<br >
+                {{ form_widget(external_link_form.linkedInLink) }}
+                {{ form_errors(external_link_form.linkedInLink) }}
+                {{ form_help(external_link_form.linkedInLink) }}<br>
+                <span class="linkedFormat-error" style="color: red; display: none;">Le lien de votre profil LinkedIn doit ressembler à ça : https://www.linkedin.com/in/votrenom</span>
+            </div>
+
+            <div style="display: none;" id="github-block">
+                {{ form_label(external_link_form.githubLink) }}<br >
+                {{ form_widget(external_link_form.githubLink) }}
+                {{ form_errors(external_link_form.githubLink) }}<br >
+                <span class="githubFormat-error" style="color: red; display: none;">Le lien de votre github doit ressembler à ça : https://github.com/username</span>
+
+            </div>
+
+            <div style="display: none;" id="url-block">
+                {{ form_label(external_link_form.url) }}<br >
+                {{ form_widget(external_link_form.url) }}
+                {{ form_errors(external_link_form.url) }}
+            </div>
+
+            <button type="submit">Enregistrer</button>
+        </div>
+    {{ form_end(external_link_form) }}
+{% endblock %}

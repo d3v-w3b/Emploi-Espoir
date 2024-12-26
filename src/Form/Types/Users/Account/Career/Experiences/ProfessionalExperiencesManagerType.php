@@ -88,7 +88,6 @@
                         'Royaume-Uni' => 'Royaume-Uni',
                         'Suisse' => 'Suisse',
                     ],
-                    //'placeholder' => 'Choisissez un pays',
                     'data' => 'Côte d’Ivoire',
                 ])
 

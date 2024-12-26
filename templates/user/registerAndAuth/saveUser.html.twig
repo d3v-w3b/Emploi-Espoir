@@ -4,6 +4,19 @@
 {% block title %}Créer un compte - Emploi Espoir{% endblock %}
 
 {% block body %}
+    {# message if authentication has failed #}
+    {% if app.flashes('authentication_failed') is defined %}
+        {% for autenticationFailedMsg in app.flashes('authentication_failed') %}
+            {{ autenticationFailedMsg }}
+        {% endfor %}
+    {% endif %}
+
+    {# message if authentication contain errors #}
+    {% if app.flashes('authentication_error') is defined %}
+        {% for autenticationErrorMsg in app.flashes('authentication_error') %}
+            {{ autenticationErrorMsg }}
+        {% endfor %}
+    {% endif %}
 
     <h1>Créer un compte</h1>
 

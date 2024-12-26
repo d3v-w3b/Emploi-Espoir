@@ -3,11 +3,17 @@
 {% block title %}Liens externes - Emploi Espoir{% endblock %}
 
 {% block body %}
+    {# message if a link has been added or modify #}
+    {% if app.flashes('link_added_successfully') is defined %}
+        {% for linkSavedMsg in app.flashes('link_added_successfully') %}
+            {{ linkSavedMsg }}
+        {% endfor %}
+    {% endif %}
     <section>
         <h1>Liens externes </h1>
 
         <p>
-            <a href="#">Ajouter</a>
+            <a href="{{ path('account_external_links_link') }}">Ajouter</a>
         </p>
     </section>
 {% endblock %}
