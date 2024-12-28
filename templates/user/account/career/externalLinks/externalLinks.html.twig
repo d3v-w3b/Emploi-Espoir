@@ -2,11 +2,15 @@
 
 {% block title %}Liens externes - Emploi Espoir{% endblock %}
 
+{% block javascripts %}
+    <script src="{{ asset('js/user/account/career/externalLinks/hideLinkSavedMsg.js') }}" defer></script>
+{% endblock %}
+
 {% block body %}
     {# message if a link has been added or modify #}
     {% if app.flashes('link_added_successfully') is defined %}
         {% for linkSavedMsg in app.flashes('link_added_successfully') %}
-            {{ linkSavedMsg }}
+            <span class="linkSavedMsg">{{ linkSavedMsg }}</span>
         {% endfor %}
     {% endif %}
     <section>

@@ -11,10 +11,12 @@ let urlBlock = document.getElementById('url-block');
 // inputs error
 const linkedFormatErrorSpan = document.querySelector('.linkedFormat-error');
 const githubFormatErrorSpan = document.querySelector('.githubFormat-error');
+const urlFormatErrorSpan = document.querySelector('.urlFormat-error');
 
 // regex inputs
 const linkedFormatRegex = /^https:\/\/www\.linkedin\.com\/in\/[a-zA-Z0-9-]+\/?$/;
 const githubFormatRegex = /^https:\/\/github\.com\/[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/;
+const urlFormatRegex = /^https?:\/\/(www\.)?[a-zA-Z0-9-]+(\.[a-zA-Z]{2,})(\/[a-zA-Z0-9._~:\/?#\[\]@!$&'()*+,;=-]*)?$/;
 
 // this function contain code to forbidden form
 function forbiddenForm()
@@ -43,6 +45,11 @@ selectTag.addEventListener('input', (event) => {
 
                 linkedFormatErrorSpan.style.display = 'inline';
             }
+            else {
+                linkedFormatErrorSpan.style.display = 'none';
+
+                form.submit();
+            }
         });
     }
     else {
@@ -65,6 +72,11 @@ selectTag.addEventListener('input', (event) => {
 
                 githubFormatErrorSpan.style.display = 'inline';
             }
+            else {
+                githubFormatErrorSpan.style.display = 'none';
+
+                form.submit();
+            }
         });
 
     }
@@ -77,6 +89,22 @@ selectTag.addEventListener('input', (event) => {
     if(event.target.value === 'Autre') {
         urlBlock.style.display = 'block';
         urlInput.required = true;
+
+        // event listener for url is case the url format is wrong
+        urlInput.addEventListener('change', (event) => {
+            if(!urlFormatRegex.test(event.target.value)) {
+
+                // forbid form submit if url format si wrong
+                forbiddenForm();
+
+                urlFormatErrorSpan.style.display = 'inline';
+            }
+            else {
+                urlFormatErrorSpan.style.display = 'none';
+
+                form.submit();
+            }
+        });
     }
     else {
         urlBlock.style.display = 'none';

@@ -39,7 +39,9 @@
             <div style="display: none;" id="url-block">
                 {{ form_label(external_link_form.url) }}<br >
                 {{ form_widget(external_link_form.url) }}
-                {{ form_errors(external_link_form.url) }}
+                {{ form_errors(external_link_form.url) }}<br >
+                <span class="urlFormat-error" style="color: red; display: none;">Vérifier le lien. Il doit ressembler à ça : https://www.url.com</span>
+
             </div>
 
             <button type="submit">Enregistrer</button>
