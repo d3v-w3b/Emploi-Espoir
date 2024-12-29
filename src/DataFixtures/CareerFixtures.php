@@ -25,7 +25,7 @@
                 $career->setExternalLink('https://github.com/');
                 $career->setJobTitle('Job title');
                 $career->setJobField(['Dévéloppement', 'bank finance', 'santé']);
-                $career->setCountry('Côte d\'Ivoire');
+                $career->setTown('Abidjan');
                 $career->setEnterpriseName('ORANGE DIGITAL CENTER');
                 $career->setStartDate(new \DateTimeImmutable('2023-06-01'));
                 $career->setEndDate(new \DateTimeImmutable('2024-01-01'));

@@ -6,7 +6,7 @@
     {
         private ?string $jobTitle = null;
         private ?array $jobField = null;
-        private ?string $country = null;
+        private ?string $town = null;
         private ?string $enterpriseName = null;
         private ?\DateTimeImmutable $startDate = null;
         private ?\DateTimeImmutable $endDate = null;
@@ -14,9 +14,9 @@
 
 
         //setters
-        public function setCountry(?string $country): void
+        public function setTown(?string $town): void
         {
-            $this->country = $country;
+            $this->town = $town;
         }
 
         public function setEndDate(?\DateTimeImmutable $endDate): void
@@ -52,9 +52,9 @@
 
 
         //getters
-        public function getCountry(): ?string
+        public function getTown(): ?string
         {
-            return $this->country;
+            return $this->town;
         }
 
         public function getEndDate(): ?\DateTimeImmutable

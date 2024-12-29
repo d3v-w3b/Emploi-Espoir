@@ -33,7 +33,7 @@
         private ?array $jobField = null;
 
         #[ORM\Column(length: 128, nullable: true)]
-        private ?string $country = null;
+        private ?string $town = null;
 
         #[ORM\Column(length: 128, nullable: true)]
         private ?string $enterpriseName = null;
@@ -102,11 +102,9 @@
             return $this;
         }
 
-        public function setCountry(?string $country): static
+        public function setTown(?string $town): void
         {
-            $this->country = $country;
-
-            return $this;
+            $this->town = $town;
         }
 
         public function setEnterpriseName(?string $enterpriseName): static
@@ -196,9 +194,9 @@
             return $this->enterpriseName;
         }
 
-        public function getCountry(): ?string
+        public function getTown(): ?string
         {
-            return $this->country;
+            return $this->town;
         }
 
         public function getJobField(): ?array

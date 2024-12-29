@@ -18,7 +18,7 @@
                 $organization = new Organization();
 
                 $organization->setUser($user);
-                $organization->setCountry('USA');
+                $organization->setTown('Abidjan');
                 $organization->setOrganizationName('Emploi Espoir 2.0');
                 $organization->setOrganizationRegistrationNumber('EM-346429943-F');
                 //$organization->setNumberOfCollaborator();

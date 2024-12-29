@@ -6,7 +6,7 @@
 
     class OrganizationBasicsInfosFields
     {
-        private ?string $country = null;
+        private ?string $town = null;
 
         #[Assert\NotBlank]
         private ?string $organizationName = null;
@@ -20,11 +20,9 @@
 
 
         //setters
-        public function setCountry(?string $country): static
+        public function setTown(?string $town): void
         {
-            $this->country = $country;
-
-            return $this;
+            $this->town = $town;
         }
 
         public function setOrganizationName(?string $organizationName): static
@@ -44,9 +42,9 @@
 
 
         //getters
-        public function getCountry(): ?string
+        public function getTown(): ?string
         {
-            return $this->country;
+            return $this->town;
         }
 
         public function getOrganizationName(): ?string

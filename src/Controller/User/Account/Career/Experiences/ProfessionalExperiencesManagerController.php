@@ -45,7 +45,7 @@
 
                 $experienceEntity->setJobTitle($experienceFields->getJobTitle());
                 $experienceEntity->setJobField($experienceFields->getJobField());
-                $experienceEntity->setCountry($experienceFields->getCountry());
+                $experienceEntity->setTown($experienceFields->getTown());
                 $experienceEntity->setEnterpriseName($experienceFields->getEnterpriseName());
                 $experienceEntity->setStartDate($experienceFields->getStartDate());
                 $experienceEntity->setEndDate($experienceFields->getEndDate());

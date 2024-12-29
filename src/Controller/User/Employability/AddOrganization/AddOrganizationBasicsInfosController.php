@@ -55,7 +55,7 @@
                 $user->setOrganization($organizationEntity);
                 $organizationEntity->setUser($user);
 
-                $organizationEntity->setCountry($organizationAddFields->getCountry());
+                $organizationEntity->setTown($organizationAddFields->getTown());
                 $organizationEntity->setOrganizationName($organizationAddFields->getOrganizationName());
                 $organizationEntity->setOrganizationRegistrationNumber($organizationAddFields->getOrganizationRegistrationNumber());
 
