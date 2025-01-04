@@ -10,9 +10,9 @@
             <strong>Objectifs principaux</strong>
             <span>
                 {% for objective in user.mainObjectives %}
-                    {% for obj in objective %}
-                        {{ obj }},
-                    {% endfor %}
+                    {{ objective }},
+                {% else %}
+                    <em>Informations non fournie</em>
                 {% endfor %}
             </span>
         </a>

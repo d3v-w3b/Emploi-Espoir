@@ -57,4 +57,15 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    // this function allow to get the array
+    public function findUsersWithSameObjective(array $objectives): array
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        $qb->where('JSON_CONTAINS(u.mainObjectives, :objective) = 1')
+            ->setParameter('objective', json_encode($objectives));
+
+        return $qb->getQuery()->getResult();
+    }
 }

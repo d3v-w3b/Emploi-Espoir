@@ -2,11 +2,15 @@
 
 {% block title %}Formations - Emploi Espoir{% endblock %}
 
+{% block javascripts %}
+    <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
+{% endblock %}
+
 {% block body %}
     {# message if information about formation has been done #}
     {% if app.flashes('formation_information_saved') is defined %}
         {% for formationSavedMsg in app.flashes('formation_information_saved') %}
-            {{ formationSavedMsg }}
+            <span id="hide-flashMsg"></span>{{ formationSavedMsg }}
         {% endfor %}
     {% endif %}
 

@@ -21,6 +21,12 @@
                 </div>
 
                 <div>
+                    {{ form_label(add_organization_form.organizationPreferences) }}<br >
+                    {{ form_widget(add_organization_form.organizationPreferences) }}
+                    {{ form_errors(add_organization_form.organizationPreferences) }}
+                </div>
+
+                <div>
                     {{ form_label(add_organization_form.organizationRegistrationNumber) }}<br >
                     {{ form_widget(add_organization_form.organizationRegistrationNumber) }}
                     {{ form_errors(add_organization_form.organizationRegistrationNumber) }}

@@ -42,20 +42,10 @@
                     'email' => $this->getUser()->getUserIdentifier(),
                 ]);
 
+                // if user is saved in database, add main objectives
+                // for this user
                 if($user) {
-                    $alternance = $objectifFields->getAlternance();
-                    $job = $objectifFields->getJob();
-                    $objectives = [];
-
-                    //add objectives only if they are defined
-                    if ($alternance) {
-                        $objectives[] = $alternance;
-                    }
-                    if ($job) {
-                        $objectives[] = $job;
-                    }
-
-                    $user->setMainObjectives($objectives);
+                    $user->setMainObjectives($objectifFields->getMainObjectives());
                 }
 
                 $this->entityManager->persist($user);

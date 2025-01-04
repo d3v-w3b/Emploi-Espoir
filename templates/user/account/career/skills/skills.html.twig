@@ -2,11 +2,15 @@
 
 {% block title %}Compétences - Emploi Espoir{% endblock %}
 
+{% block javascripts %}
+    <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
+{% endblock %}
+
 {% block body %}
     {# message if a skills has been change #}
     {% if app.flashes('skill_saved') is defined %}
         {% for skillsSavedMsg in app.flashes('skill_saved') %}
-            {{ skillsSavedMsg }}
+            <span id="hide-flashMsg">{{ skillsSavedMsg }}</span>
         {% endfor %}
     {% endif %}
 

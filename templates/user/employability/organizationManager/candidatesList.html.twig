@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Candidats - Emploi Espoir{% endblock %}
+
+{% block body %}
+    <div>
+        {#  this block will be side in the view #}
+        
+    </div>
+
+    <section>
+
+        <h1>Liste des candidats</h1>
+
+        {#
+        <h2>Objectif de l'utilisateur actuel</h2>
+        {% for userMainObj in userMainObjectives %}
+            {% for myMainObj in userMainObj %}
+                {{ myMainObj }}
+            {% endfor %}
+        {% endfor %}
+
+
+        <h2>Les autres utilisateurs</h2>
+
+
+            {% if otherUserWithSameObjectives is not empty %}
+            {% for user in otherUserWithSameObjectives %}
+
+                <a href="#">
+                    {{ user.getEmail() }} :
+
+                </a>
+
+            {% else %}
+                  <span>Vide</span>
+            {% endfor %}
+        {% endif %}
+
+        #}
+
+        {% for organizationP in organization.organizationPreferences %}
+
+            {{ organizationP }},
+        {% endfor %}
+
+    </section>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+{% block stylesheets %}
+    <style>
+        a {
+            display: block;
+            color: black;
+            text-decoration: none;
+        }
+    </style>
+{% endblock %}

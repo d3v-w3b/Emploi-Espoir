@@ -55,6 +55,17 @@
                     'label' => 'Nom de l\'organisation'
                 ])
 
+                ->add('organizationPreferences', ChoiceType::class, [
+                    'label' => 'Préférences de l\'entreprise',
+                    'choices' => [
+                        'Trouver un premier emploi' => 'Trouver un premier emploi',
+                        'Trouver une alternance' => 'Trouver une alternance'
+                    ],
+                    'expanded' => true,
+                    'multiple' => true,
+                    'required' => true
+                ])
+
                 ->add('organizationRegistrationNumber', TextType::class, [
                     'label' => 'Matricule Fiscal',
                     'attr' => [

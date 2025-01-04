@@ -6,10 +6,14 @@
 
     class OrganizationBasicsInfosFields
     {
+        #[Assert\NotBlank]
         private ?string $town = null;
 
         #[Assert\NotBlank]
         private ?string $organizationName = null;
+
+        #[Assert\NotBlank(message: 'Ajouter une préférence pour l\'entreprise')]
+        private ?array $organizationPreferences = null;
 
         #[Assert\Regex(
             pattern: '/^[A-Z]{2}-\d{9}-[A-Z0-9]$/',
@@ -32,6 +36,11 @@
             return $this;
         }
 
+        public function setOrganizationPreferences(?array $organizationPreferences): void
+        {
+            $this->organizationPreferences = $organizationPreferences;
+        }
+
         public function setOrganizationRegistrationNumber(string $organizationRegistrationNumber): static
         {
             $this->organizationRegistrationNumber = $organizationRegistrationNumber;
@@ -50,6 +59,11 @@
         public function getOrganizationName(): ?string
         {
             return $this->organizationName;
+        }
+
+        public function getOrganizationPreferences(): ?array
+        {
+            return $this->organizationPreferences;
         }
 
         public function getOrganizationRegistrationNumber(): ?string

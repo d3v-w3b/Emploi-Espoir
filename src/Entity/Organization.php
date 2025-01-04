@@ -25,6 +25,9 @@
         #[ORM\Column(length: 128, nullable: true)]
         private ?string $numberOfCollaborator = null;
 
+        #[ORM\Column(type: 'json', nullable: true)]
+        private ?array $organizationPreferences = null;
+
         #[ORM\Column(length: 255, nullable: true)]
         private ?string $need = null;
 
@@ -62,6 +65,11 @@
             $this->numberOfCollaborator = $numberOfCollaborator;
 
             return $this;
+        }
+
+        public function setOrganizationPreferences(?array $organizationPreferences): void
+        {
+            $this->organizationPreferences = $organizationPreferences;
         }
 
         public function setNeed(string $need): static
@@ -111,6 +119,11 @@
         public function getNumberOfCollaborator(): ?string
         {
             return $this->numberOfCollaborator;
+        }
+
+        public function getOrganizationPreferences(): ?array
+        {
+            return $this->organizationPreferences;
         }
 
         public function getNeed(): ?string

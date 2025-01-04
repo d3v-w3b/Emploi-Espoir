@@ -4,11 +4,11 @@
  * if an element contain a border, it will be flush in DB
  *
  */
-const alternanceInput = document.getElementById('main_objectives_alternance_0');
-const alternanceLabel = document.querySelector('label[for="main_objectives_alternance_0"]');
+const alternanceInput = document.getElementById('main_objectives_mainObjectives_0');
+const alternanceLabel = document.querySelector('label[for="main_objectives_mainObjectives_0"]');
 
-const jobInput = document.getElementById('main_objectives_job_0');
-const jobLabel = document.querySelector('label[for="main_objectives_job_0"]');
+const jobInput = document.getElementById('main_objectives_mainObjectives_1');
+const jobLabel = document.querySelector('label[for="main_objectives_mainObjectives_1"]');
 
 const btn = document.querySelector('button');
 

@@ -2,11 +2,15 @@
 
 {% block title %}Expériences professionnelles - Emploi Espoir{% endblock %}
 
+{% block javascripts %}
+    <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
+{% endblock %}
+
 {% block body %}
     {# message if experiences has been changed #}
     {% if app.flashes('experiences_saved') is defined %}
         {% for experienceSavedMsg in app.flashes('experiences_saved') %}
-            {{ experienceSavedMsg }}
+            <span id="hide-flashMsg">{{ experienceSavedMsg }}</span>
         {% endfor %}
     {% endif %}
 

@@ -12,23 +12,34 @@
     {
         public function buildForm(FormBuilderInterface $builder, array $options): void
         {
-            $builder
-                ->add('alternance', ChoiceType::class, [
-                    'choices' => [
-                        'Trouver une alternance' => 'Trouver une alternance',
-                    ],
-                    'expanded' => true,
-                    'multiple' => true
-                ])
-
-                ->add('job', ChoiceType::class, [
-                    'choices' => [
-                        'Trouver un premier emploi' => 'Trouver un premier emploi',
-                    ],
-                    'expanded' => true,
-                    'multiple' => true
-                ])
-            ;
+            /**
+             * $builder
+             * ->add('alternance', ChoiceType::class, [
+             * 'choices' => [
+             * 'Trouver une alternance' => 'Trouver une alternance',
+             * ],
+             * 'expanded' => true,
+             * 'multiple' => true
+             * ])
+             *
+             * ->add('job', ChoiceType::class, [
+             * 'choices' => [
+             * 'Trouver un premier emploi' => 'Trouver un premier emploi',
+             * ],
+             * 'expanded' => true,
+             * 'multiple' => true
+             * ])
+             * ;
+             */
+            $builder->add('mainObjectives', ChoiceType::class, [
+                'choices' => [
+                    'Trouver une alternance' => 'Trouver une alternance',
+                    'Trouver un premier emploi' => 'Trouver un premier emploi',
+                ],
+                'expanded' => true,
+                'multiple' => true
+            ]);
+            
         }
 
 

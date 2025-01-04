@@ -43,7 +43,7 @@
             // redirect to organization dashboard if a user is associated to
             // an organization and user phone exist
             if($user->getOrganization() !== null && $user->getPhone() !== null) {
-                return $this->redirectToRoute('organization_dashboard');
+                return $this->redirectToRoute('organization_candidates_list');
             }
 
             $organizationAddType = $this->createForm(OrganizationBasicsInfosType::class, $organizationAddFields);
@@ -57,6 +57,7 @@
 
                 $organizationEntity->setTown($organizationAddFields->getTown());
                 $organizationEntity->setOrganizationName($organizationAddFields->getOrganizationName());
+                $organizationEntity->setOrganizationPreferences($organizationAddFields->getOrganizationPreferences());
                 $organizationEntity->setOrganizationRegistrationNumber($organizationAddFields->getOrganizationRegistrationNumber());
 
                 $this->entityManager->persist($organizationEntity);

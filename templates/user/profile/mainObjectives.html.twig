@@ -21,13 +21,17 @@
             {{ form_start(mainObjectivesForm) }}
                 <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
 
+                    {#
                     <div>
-                        {{ form_widget(mainObjectivesForm.alternance) }}
-                    </div>
+                    {{ form_widget(mainObjectivesForm.alternance) }}
+                </div>
 
-                    <div>
-                        {{ form_widget(mainObjectivesForm.job) }}
-                    </div>
+                <div>
+                    {{ form_widget(mainObjectivesForm.job) }}
+                </div>
+                    #}
+                    {{ form_widget(mainObjectivesForm.mainObjectives) }}
+
 
                     <button type="submit" disabled>Valider</button>
                 </div>

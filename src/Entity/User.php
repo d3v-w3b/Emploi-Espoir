@@ -43,7 +43,7 @@
         #[ORM\Column(nullable: true)]
         private ?string $address = null;
 
-        #[ORM\Column(nullable: true)]
+        #[ORM\Column(type: 'json', nullable: true)]
         private ?array $mainObjectives = null;
 
         #[ORM\Column(nullable: true)]
