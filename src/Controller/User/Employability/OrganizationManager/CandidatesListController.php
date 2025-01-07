@@ -31,45 +31,44 @@
                 throw $this->createAccessDeniedException('Utilisateur invalide');
             }
 
-            /**
-             *
-             * if ($currentUserMainObjectives) {
-             * $allUsers = $this->entityManager->getRepository(User::class)->findAll();
-             *
-             * foreach ($allUsers as $candidate) {
-             * // remove current user if it found in the result
-             * if($candidate->getId() === $user->getId()) {
-             * continue;
-             * }
-             *
-             * $candidateObjectives = $candidate->getMainObjectives();
-             *
-             * foreach ($currentUserMainObjectives as $currentUserObjective) {
-             * if (in_array($currentUserObjective, $candidateObjectives, true)) {
-             * $usersWithSameObjectives[] = $candidate;
-             * break;
-             * }
-             * }
-             * }
-             * }
-             *
-             * $currentUserMainObjectives = $user->getMainObjectives();
-             * $usersWithSameObjectives = [];
-             */
-            // get current organizations preferences
+            // get current organizations
             $organization = $this->entityManager->getRepository(Organization::class)->findOneBy([
                 'organizationName' => $user->getOrganization()->getOrganizationName(),
             ]);
 
+            // get current organization preferences
             $organizationPreferences = $organization->getOrganizationPreferences();
 
             $allUsers = $this->entityManager->getRepository(User::class)->findAll();
 
+            $usersWithSameObjectives = [];
+            foreach ($allUsers as $candidate) {
+                $candidateObjectives = $candidate->getMainObjectives();
+
+                // remove current user in the list if, this is in the list
+                if($candidate->getId() === $user->getId()) {
+                    continue;
+                }
+
+                /**
+                 * $candidateObjectif manage an objectif of a user
+                 *
+                 * if a user has no objectif, foreach() contain a null value
+                 * avoid this null value with the if
+                 */
+                if($candidateObjectives !== null) {
+                    foreach ($candidateObjectives as $objective) {
+                        if (in_array($objective, $organizationPreferences, true)) {
+                            $usersWithSameObjectives[] = $candidate;
+                            break; // Ajoute le candidat et sort de la boucle interne
+                        }
+                    }
+                }
+            }
+
             return $this->render('user/employability/organizationManager/candidatesList.html.twig', [
-                //'userWithSameObjectivesList' => $usersWithSameObjectives
-                //'userMainObjectives' => $currentUserMainObjectives,
-                //'otherUserWithSameObjectives' => $usersWithSameObjectives
                 'organization' => $organization,
+                'userWithSameObjectives' => $usersWithSameObjectives,
             ]);
         }
     }

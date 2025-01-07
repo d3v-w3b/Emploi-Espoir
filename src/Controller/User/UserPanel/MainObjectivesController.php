@@ -1,15 +1,15 @@
 <?php
 
-    namespace App\Controller\User\Profile;
+    namespace App\Controller\User\UserPanel;
 
     use App\Entity\User;
-    use Doctrine\ORM\EntityManagerInterface;
-    use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-    use Symfony\Component\HttpFoundation\Response;
-    use Symfony\Component\Routing\Annotation\Route;
     use App\Form\Fields\Users\Profile\MainObjectivesFields;
     use App\Form\Types\Users\Profile\MainObjectivesType;
+    use Doctrine\ORM\EntityManagerInterface;
+    use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\RequestStack;
+    use Symfony\Component\HttpFoundation\Response;
+    use Symfony\Component\Routing\Annotation\Route;
     use Symfony\Component\Security\Http\Attribute\IsGranted;
 
     class MainObjectivesController extends AbstractController
@@ -54,7 +54,7 @@
                 return $this->redirectToRoute('user_dashboard');
             }
 
-            return $this->render('user/profile/mainObjectives.html.twig', [
+            return $this->render('user/userPanel/mainObjectives.html.twig', [
                 'mainObjectivesForm' => $objectifTypes->createView(),
             ]);
         }

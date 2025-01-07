@@ -39,10 +39,26 @@
 
         #}
 
+        {#
+            preferences des organizations
         {% for organizationP in organization.organizationPreferences %}
 
-            {{ organizationP }},
-        {% endfor %}
+    {{ organizationP }},
+{% endfor %}
+        #}
+
+
+        <div>
+            <h2>Liste des candidats avec les memes objectifs que ceux de l'entreprise actuelle</h2>
+            {% for user in userWithSameObjectives %}
+                <a href="#">
+                    {{ user.email }}
+                </a>
+
+            {% else %}
+                <span>Aucun candidats disponible pour le moment</span>
+            {% endfor %}
+        </div>
 
     </section>
 {% endblock %}

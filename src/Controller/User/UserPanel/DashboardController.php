@@ -1,6 +1,6 @@
 <?php
 
-    namespace App\Controller\User\Profile;
+    namespace App\Controller\User\UserPanel;
 
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +13,6 @@
         #[isGranted('ROLE_USER')]
         public function dashboard(): Response
         {
-            return $this->render('user/profile/dashboard.html.twig');
+            return $this->render('user/userPanel/dashboard.html.twig');
         }
     }

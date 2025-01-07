@@ -49,6 +49,9 @@
         #[ORM\Column(nullable: true)]
         private ?string $currentProfessionalSituation = null;
 
+        #[ORM\Column(nullable: true)]
+        private ?string $profilPic = null;
+
         #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
         private ?JobAndAlternation $jobAndAlternation = null;
 
@@ -113,6 +116,11 @@
         public function setCurrentProfessionalSituation(?string $currentProfessionalSituation): void
         {
             $this->currentProfessionalSituation = $currentProfessionalSituation;
+        }
+
+        public function setProfilPic(?string $profilPic): void
+        {
+            $this->profilPic = $profilPic;
         }
 
         public function setMainObjectives(?array $mainObjectives): void
@@ -238,6 +246,11 @@
         public function getCurrentProfessionalSituation(): ?string
         {
             return $this->currentProfessionalSituation;
+        }
+        
+        public function getProfilPic(): ?string
+        {
+            return $this->profilPic;
         }
 
         public function getGender(): ?string
