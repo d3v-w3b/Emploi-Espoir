@@ -12,44 +12,10 @@
 
         <h1>Liste des candidats</h1>
 
-        {#
-        <h2>Objectif de l'utilisateur actuel</h2>
-        {% for userMainObj in userMainObjectives %}
-            {% for myMainObj in userMainObj %}
-                {{ myMainObj }}
-            {% endfor %}
-        {% endfor %}
-
-
-        <h2>Les autres utilisateurs</h2>
-
-
-            {% if otherUserWithSameObjectives is not empty %}
-            {% for user in otherUserWithSameObjectives %}
-
-                <a href="#">
-                    {{ user.getEmail() }} :
-
-                </a>
-
-            {% else %}
-                  <span>Vide</span>
-            {% endfor %}
-        {% endif %}
-
-        #}
-
-        {#
-            preferences des organizations
-        {% for organizationP in organization.organizationPreferences %}
-
-    {{ organizationP }},
-{% endfor %}
-        #}
 
 
         <div>
-            <h2>Liste des candidats avec les memes objectifs que ceux de l'entreprise actuelle</h2>
+            {# this list contain users who are the same main objectives that the current organization #}
             {% for user in userWithSameObjectives %}
                 <a href="#">
                     {{ user.email }}

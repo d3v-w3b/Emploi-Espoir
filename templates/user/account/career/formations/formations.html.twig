@@ -10,7 +10,7 @@
     {# message if information about formation has been done #}
     {% if app.flashes('formation_information_saved') is defined %}
         {% for formationSavedMsg in app.flashes('formation_information_saved') %}
-            <span id="hide-flashMsg"></span>{{ formationSavedMsg }}
+            <span id="hide-flashMsg">{{ formationSavedMsg }}</span>
         {% endfor %}
     {% endif %}
 

@@ -2,9 +2,48 @@
 
 {% block title %}Profil - Emploi Espoir{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
+{% endblock %}
+
 {% block body %}
+    {# message if a profile pic has been saved #}
+    {% if app.flashes('profile_pic_saved') is defined %}
+        {% for profilPicSavedMsg in app.flashes('profile_pic_saved') %}
+            <span id="hide-flashMsg">{{ profilPicSavedMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
+    <div>
+        <h1>
+            <a href="{{ path('user_profile') }}">Profile</a>
+        </h1>
+
+        <h1>
+            <a href="{{ path('user_profile_settings_edit') }}">Paramètres</a>
+        </h1>
+    </div>
+
     <section>
 
-        <h1>{{ app.user.firstName }} {{ app.user.lastName }}</h1>
+        <div>
+            {% if app.user.profilPic is not null %}
+                <img src="{{ asset('user/profile/avatar/' ~ app.user.profilPic) }}" alt="Emploi_Espoir_profile_pic_{{ app.user.firstName }}" width="300">
+            {% else %}
+                <div>
+                    <span class="bi bi-person-circle" style="font-size: 3em;"></span>
+                </div>
+            {% endif %}
+            <h1>
+                {{ app.user.firstName }} {{ app.user.lastName }}
+            </h1>
+        </div>
+
+
+        <p>
+            <a href="{{ path('user_profile_avatar_edit') }}">Modifier</a>
+        </p>
     </section>
 {% endblock %}

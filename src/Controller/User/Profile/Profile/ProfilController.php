@@ -13,6 +13,10 @@
         #[IsGranted('ROLE_USER')]
         public function profile(): Response
         {
-            return $this->render('user/profile/profile/profil.html.twig');
+            $user = $this->getUser();
+
+            return $this->render('user/profile/profile/profil.html.twig', [
+                'user' => $user,
+            ]);
         }
     }

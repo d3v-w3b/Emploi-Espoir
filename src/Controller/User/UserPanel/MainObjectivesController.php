@@ -3,8 +3,8 @@
     namespace App\Controller\User\UserPanel;
 
     use App\Entity\User;
-    use App\Form\Fields\Users\Profile\MainObjectivesFields;
-    use App\Form\Types\Users\Profile\MainObjectivesType;
+    use App\Form\Fields\Users\UserPanel\MainObjectivesFields;
+    use App\Form\Types\Users\UserPanel\MainObjectivesType;
     use Doctrine\ORM\EntityManagerInterface;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\RequestStack;
