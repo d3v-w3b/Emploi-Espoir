@@ -14,7 +14,7 @@
             </p>
         </details>
 
-        {% if app.user  %}
+        {% if app.user %}
             <div>
                 <p>
                     <a href="{{ path('account') }}">Compte et paramètres</a>
@@ -30,6 +30,10 @@
                             {% endif %}
                         </span>
                     </a>
+                </p>
+
+                <p>
+                    <a href="{{ path('user_dashboard') }}">Tableau de bord</a>
                 </p>
 
                 <p>
@@ -49,7 +53,7 @@
                 </p>
 
                 <p>
-                    <a href="#">Explorer l'espace employeur</a>
+                    <a href="{{ path('organization_dashboard_preview') }}">Explorer l'espace employeur</a>
                 </p>
             </div>
         {% endif %}

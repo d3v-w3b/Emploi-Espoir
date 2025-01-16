@@ -11,4 +11,23 @@
     <p>
         <a href="{{ path('user_logout') }}" style="color: red">Déconnexion</a>
     </p>
+
+    <div>
+
+        {# this line represents the user's choices #}
+        <p>
+            {% for userChoice in user.mainObjectives %}
+                {{ userChoice }}
+            {% endfor %}
+        </p>
+
+        {# this line represents organization with same objectives that the current user #}
+        <div>
+            {% for organization in organizationPreferences %}
+                <p>{{ organization.organizationName }}</p>
+            {% else %}
+                <p>Aucune organisation trouvée correspondant à vos préférences.</p>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

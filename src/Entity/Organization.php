@@ -3,6 +3,8 @@
     namespace App\Entity;
 
     use App\Repository\OrganizationRepository;
+    use Doctrine\Common\Collections\ArrayCollection;
+    use Doctrine\Common\Collections\Collection;
     use Doctrine\ORM\Mapping as ORM;
 
     #[ORM\Entity(repositoryClass: OrganizationRepository::class)]
@@ -28,6 +30,9 @@
         #[ORM\Column(type: 'json', nullable: true)]
         private ?array $organizationPreferences = null;
 
+        #[ORM\Column(nullable: true)]
+        private ?array $sectorOfActivity = null;
+
         #[ORM\Column(length: 255, nullable: true)]
         private ?string $need = null;
 
@@ -37,6 +42,14 @@
         #[ORM\OneToOne(inversedBy: 'organization', cascade: ['persist', 'remove'])]
         #[ORM\JoinColumn(nullable: false)]
         private ?User $user = null;
+
+        #[ORM\OneToMany(targetEntity: JobOffers::class, mappedBy: 'organization')]
+        private Collection $jobOffers;
+
+        public function __construct()
+        {
+            $this->jobOffers = new ArrayCollection();
+        }
 
 
 
@@ -53,11 +66,9 @@
             return $this;
         }
 
-        public function setOrganizationRegistrationNumber(string $organizationRegistrationNumber): static
+        public function setOrganizationRegistrationNumber(?string $organizationRegistrationNumber): void
         {
             $this->organizationRegistrationNumber = $organizationRegistrationNumber;
-
-            return $this;
         }
 
         public function setNumberOfCollaborator(?string $numberOfCollaborator): static
@@ -70,6 +81,11 @@
         public function setOrganizationPreferences(?array $organizationPreferences): void
         {
             $this->organizationPreferences = $organizationPreferences;
+        }
+
+        public function setSectorOfActivity(?array $sectorOfActivity): void
+        {
+            $this->sectorOfActivity = $sectorOfActivity;
         }
 
         public function setNeed(string $need): static
@@ -126,6 +142,11 @@
             return $this->organizationPreferences;
         }
 
+        public function getSectorOfActivity(): ?array
+        {
+            return $this->sectorOfActivity;
+        }
+
         public function getNeed(): ?string
         {
             return $this->need;
@@ -139,5 +160,35 @@
         public function getUser(): ?User
         {
             return $this->user;
+        }
+
+        /**
+         * @return Collection<int, JobOffers>
+         */
+        public function getJobOffers(): Collection
+        {
+            return $this->jobOffers;
+        }
+
+        public function addJobOffer(JobOffers $jobOffer): static
+        {
+            if (!$this->jobOffers->contains($jobOffer)) {
+                $this->jobOffers->add($jobOffer);
+                $jobOffer->setOrganization($this);
+            }
+
+            return $this;
+        }
+
+        public function removeJobOffer(JobOffers $jobOffer): static
+        {
+            if ($this->jobOffers->removeElement($jobOffer)) {
+                // set the owning side to null (unless already changed)
+                if ($jobOffer->getOrganization() === $this) {
+                    $jobOffer->setOrganization(null);
+                }
+            }
+
+            return $this;
         }
     }

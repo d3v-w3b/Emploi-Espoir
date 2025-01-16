@@ -66,11 +66,55 @@
                     'required' => true
                 ])
 
+                ->add('sectorOfActivity', ChoiceType::class, [
+                    'label' => 'secteurs d\'activités de l\'entreprise',
+
+                    // array_flip() allow to change key in value and value in key
+                    'choices' => array_flip(
+                        [
+                            'Agriculture' => 'Agriculture et agro-industrie',
+                            'Commerce' => 'Commerce et distribution',
+                            'Informatique' => 'Informatique et nouvelles technologies',
+                            'Communication' => 'Communication, marketing et publicité',
+                            'Finance' => 'Banque, finance et assurance',
+                            'Santé' => 'Santé et services médicaux',
+                            'Éducation' => 'Éducation et formation',
+                            'BTP' => 'Bâtiments et travaux publics (BTP)',
+                            'Transport' => 'Transport et logistique',
+                            'Énergie' => 'Énergie et mines',
+                            'Tourisme' => 'Tourisme et hôtellerie',
+                            'Textile' => 'Textile et industrie de la mode',
+                            'Artisanat' => 'Artisanat et métiers locaux',
+                            'Industrie' => 'Industrie manufacturière',
+                            'Immobilier' => 'Immobilier et gestion foncière',
+                            'Culture' => 'Arts, culture et divertissement',
+                            'Environnement' => 'Environnement et gestion des déchets',
+                            'Services' => 'Services divers aux entreprises et particuliers',
+                        ],
+                    ),
+                    //'expanded' => true,
+                    'multiple' => true,
+                ])
+
+                // this type in not a field mapped with the database. It allows to make a choice
+                // in case organization has a registration number
+                ->add('registrationNumberChoice', ChoiceType::class, [
+                    'label' => 'Possédez-vous un Matricule Fiscal ?',
+                    'choices' => [
+                        'Oui' => 'oui',
+                        'Non' => 'non'
+                    ],
+                    'expanded' => true,
+                    'multiple' => false,
+                    'mapped' => false
+                ])
+
                 ->add('organizationRegistrationNumber', TextType::class, [
                     'label' => 'Matricule Fiscal',
                     'attr' => [
                         'placeholder' => 'EX : CI-123456789-R'
-                    ]
+                    ],
+                    'required' => false,
                 ])
             ;
         }

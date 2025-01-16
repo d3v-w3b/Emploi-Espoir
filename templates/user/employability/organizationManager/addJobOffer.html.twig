@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une offre d'emploi - Emploi Espoir{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/user/employability/organizationManager/jobOfferFieldsOfMissionsManager.js') }}" defer></script>
+{% endblock %}
+
+{% block body %}
+
+    <h1>Créer une offre d'emploi</h1>
+
+    {{ form_start(job_offer_form) }}
+        <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
+            <div>
+                {{ form_label(job_offer_form.jobTitle) }}<br >
+                {{ form_widget(job_offer_form.jobTitle) }}
+                {{ form_errors(job_offer_form.jobTitle) }}
+            </div>
+
+
+            <div>
+                {{ form_label(job_offer_form.typeOfContract) }}<br >
+                {{ form_widget(job_offer_form.typeOfContract) }}
+                {{ form_errors(job_offer_form.typeOfContract) }}
+            </div>
+
+            <div>
+                {{ form_label(job_offer_form.town) }}<br >
+                {{ form_widget(job_offer_form.town) }}
+                {{ form_errors(job_offer_form.town) }}
+            </div>
+
+            <div>
+                {{ form_label(job_offer_form.jobPreferences) }}<br >
+                {{ form_widget(job_offer_form.jobPreferences) }}
+                {{ form_errors(job_offer_form.jobPreferences) }}
+            </div>
+
+            <div>
+                {{ form_label(job_offer_form.organizationAbout) }}<br >
+                {{ form_widget(job_offer_form.organizationAbout) }}
+                {{ form_errors(job_offer_form.organizationAbout) }}
+            </div>
+
+            <div id="missions-input-block">
+                {{ form_label(job_offer_form.missions) }}<br >
+                {{ form_widget(job_offer_form.missions) }}
+                {{ form_errors(job_offer_form.missions) }}
+            </div>
+
+            <div>
+                {{ form_label(job_offer_form.profilSought) }}<br >
+                {{ form_widget(job_offer_form.profilSought) }}
+                {{ form_errors(job_offer_form.profilSought) }}
+            </div>
+
+            <div>
+                {{ form_label(job_offer_form.whatWeOffer) }}<br >
+                {{ form_widget(job_offer_form.whatWeOffer) }}
+                {{ form_errors(job_offer_form.whatWeOffer) }}
+            </div>
+
+            <div>
+                {{ form_label(job_offer_form.docsToProvide) }}<br >
+                {{ form_widget(job_offer_form.docsToProvide) }}
+                {{ form_errors(job_offer_form.docsToProvide) }}
+            </div>
+
+            <div>
+                {{ form_label(job_offer_form.expirationDate) }}<br >
+                {{ form_widget(job_offer_form.expirationDate) }}
+                {{ form_errors(job_offer_form.expirationDate) }}
+            </div>
+
+            <button type="submit">Émettre une offre</button>
+        </div>
+    {{ form_end(job_offer_form) }}
+{% endblock %}

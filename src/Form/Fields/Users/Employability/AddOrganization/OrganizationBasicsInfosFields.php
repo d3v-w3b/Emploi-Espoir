@@ -15,11 +15,13 @@
         #[Assert\NotBlank(message: 'Ajouter une préférence pour l\'entreprise')]
         private ?array $organizationPreferences = null;
 
+        #[Assert\NotBlank]
+        private ?array $sectorOfActivity = null;
+
         #[Assert\Regex(
             pattern: '/^[A-Z]{2}-\d{9}-[A-Z0-9]$/',
             message: 'Le numéro d\'enregistrement doit respecter le format XX-XXXXXXXXX-Z'
         )]
-        #[Assert\NotBlank]
         private ?string $organizationRegistrationNumber = null;
 
 
@@ -39,6 +41,11 @@
         public function setOrganizationPreferences(?array $organizationPreferences): void
         {
             $this->organizationPreferences = $organizationPreferences;
+        }
+
+        public function setSectorOfActivity(?array $sectorOfActivity): void
+        {
+            $this->sectorOfActivity = $sectorOfActivity;
         }
 
         public function setOrganizationRegistrationNumber(string $organizationRegistrationNumber): static
@@ -64,6 +71,11 @@
         public function getOrganizationPreferences(): ?array
         {
             return $this->organizationPreferences;
+        }
+
+        public function getSectorOfActivity(): ?array
+        {
+            return $this->sectorOfActivity;
         }
 
         public function getOrganizationRegistrationNumber(): ?string

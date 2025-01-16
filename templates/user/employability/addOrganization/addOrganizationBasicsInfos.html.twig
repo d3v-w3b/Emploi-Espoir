@@ -2,6 +2,17 @@
 
 {% block title %}Créer votre organisation - Emploi Espoir{% endblock %}
 
+{% block stylesheets %}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{{ asset('js/user/employability/addOrganization/organizationSectorsOfActivitySelectTag.js') }}" defer></script>
+    <script src="{{ asset('js/user/employability/addOrganization/registrationNumberDisplayingManager.js') }}" defer></script>
+{% endblock %}
+
 {% block body %}
     <section>
         <h1>Créez votre espace employeur</h1>
@@ -27,6 +38,18 @@
                 </div>
 
                 <div>
+                    {{ form_label(add_organization_form.sectorOfActivity) }}<br >
+                    {{ form_widget(add_organization_form.sectorOfActivity) }}
+                    {{ form_errors(add_organization_form.sectorOfActivity) }}
+                </div>
+
+                <div>
+                    {{ form_label(add_organization_form.registrationNumberChoice) }}<br >
+                    {{ form_widget(add_organization_form.registrationNumberChoice) }}
+                    {{ form_errors(add_organization_form.registrationNumberChoice) }}
+                </div>
+
+                <div id="registrationNumberInputBlock" style="display: none;">
                     {{ form_label(add_organization_form.organizationRegistrationNumber) }}<br >
                     {{ form_widget(add_organization_form.organizationRegistrationNumber) }}
                     {{ form_errors(add_organization_form.organizationRegistrationNumber) }}
