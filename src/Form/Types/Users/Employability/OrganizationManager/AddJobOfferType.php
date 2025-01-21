@@ -4,7 +4,6 @@
 
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-    use Symfony\Component\Form\Extension\Core\Type\CollectionType;
     use Symfony\Component\Form\Extension\Core\Type\DateType;
     use Symfony\Component\Form\Extension\Core\Type\TextareaType;
     use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -55,18 +54,35 @@
                     ]
                 ])
 
-                ->add('missions', TextType::class, [
-                    'label' => 'Missions du poste',
-                    //'entry_type' => TextType::class,        // Chaque mission est un champ de texte
+                ->add('missions', TextareaType::class, [
+                    'label' => 'Missions',
+                    'help' => 'Séparer chaque missions par une virgule',
+                    'attr' => [
+                        'cols' => 50,
+                        'rows' => 4,
+                        'placeholder' => 'Ex : mission 1, mission, 2, mission 3',
+                    ]
                 ])
 
-                ->add('profilSought', TextType::class, [
-                    'label' => 'Profils recherchés'
+                ->add('profilSought', TextareaType::class, [
+                    'label' => 'Profils recherchés',
+                    'help' => 'Séparer chaque profil par une virgule',
+                    'attr' => [
+                        'cols' => 50,
+                        'rows' => 4,
+                        'placeholder' => 'Ex: profil 1, profil 1, profil 3'
+                    ]
                 ])
 
-                ->add('whatWeOffer', TextType::class, [
+                ->add('whatWeOffer', TextareaType::class, [
                     'label' => 'Ce que nous offrons',
                     'required' => false,
+                    'help' => 'Séparer vos offres par une virgule',
+                    'attr' => [
+                        'cols' => 50,
+                        'rows' => 4,
+                        'placeholder' => 'offre 1, offre 2, offre 3'
+                    ]
                 ])
 
                 ->add('docsToProvide', ChoiceType::class, [

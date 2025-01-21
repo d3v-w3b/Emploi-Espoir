@@ -8,7 +8,12 @@
         <a href="{{ path('organization_dashboard_preview') }}">Aperçu</a><br>
         <a href="{{ path('organization_candidates_list') }}">Liste des candidats</a><br>
         <a href="{{ path('organization_add_job_offer') }}">Émettre une offre</a><br>
-        <a href="#">Voir mes offres</a>
+        {% if organization is defined %}
+            <p>{{ organization.name }}</p>
+        {% else %}
+            <p>L'organisation n'est pas définie.</p>
+        {% endif %}
+        {# <a href="{{ path('organization_my_offers', {'id' : organization.id}) }}">Voir mes offres</a>  #}
     </div>
 
     <section>

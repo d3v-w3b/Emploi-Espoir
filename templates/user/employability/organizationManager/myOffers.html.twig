@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes offres - Emploi Espoir{% endblock %}
+
+{% block body %}
+    <h1>Mes offres</h1>
+
+    {% if my_offers|length > 0 %}
+        <ul>
+            {% for offer in my_offers %}
+                <li>
+                    <strong>{{ offer.jobTitle }}</strong><br>
+                    Type de contrat : {{ offer.typeOfContract }}<br>
+                    Ville : {{ offer.town }}<br>
+                    Date de publication : {{ offer.dateOfPublication ? offer.dateOfPublication|date('d/m/Y') : 'Non spécifiée' }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucune offre d'emploi disponible pour cette organisation.</p>
+    {% endif %}
+{% endblock %}

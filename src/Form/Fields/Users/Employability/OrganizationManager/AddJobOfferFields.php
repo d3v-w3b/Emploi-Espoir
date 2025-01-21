@@ -30,12 +30,12 @@
         private ?string $organizationAbout = null;
 
         #[Assert\NotBlank]
-        private ?array $missions = null;
+        private ?string $missions = null;
 
         #[Assert\NotBlank]
-        private ?array $profilSought = null;
+        private ?string $profilSought = null;
 
-        private ?array $whatWeOffer = null;
+        private ?string $whatWeOffer = null;
 
         #[Assert\NotBlank]
         private ?array $docsToProvide = null;
@@ -81,25 +81,20 @@
             return $this;
         }
 
-        public function setMissions(?array $missions): static
+        public function setMissions(?string $missions): void
         {
             $this->missions = $missions;
-
-            return $this;
         }
 
-        public function setProfilSought(?array $profilSought): static
+        public function setProfilSought(?string $profilSought): void
         {
             $this->profilSought = $profilSought;
-
-            return $this;
         }
 
-        public function setWhatWeOffer(?array $whatWeOffer): static
+
+        public function setWhatWeOffer(?string $whatWeOffer): void
         {
             $this->whatWeOffer = $whatWeOffer;
-
-            return $this;
         }
 
         public function setDocsToProvide(?array $docsToProvide): static
@@ -139,22 +134,24 @@
             return $this->jobPreferences;
         }
 
+
         public function getOrganizationAbout(): ?string
         {
             return $this->organizationAbout;
         }
 
-        public function getMissions(): ?array
+
+        public function getMissions(): ?string
         {
             return $this->missions;
         }
 
-        public function getProfilSought(): ?array
+        public function getProfilSought(): ?string
         {
             return $this->profilSought;
         }
 
-        public function getWhatWeOffer(): ?array
+        public function getWhatWeOffer(): ?string
         {
             return $this->whatWeOffer;
         }

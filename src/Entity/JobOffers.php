@@ -88,11 +88,9 @@
             return $this;
         }
 
-        public function setMissions(?array $missions): static
+        public function setMissions(?array $missions): void
         {
             $this->missions = $missions;
-
-            return $this;
         }
 
         public function setProfilSought(?array $profilSought): static
