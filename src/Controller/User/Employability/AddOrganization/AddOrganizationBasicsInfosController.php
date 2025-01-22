@@ -43,7 +43,9 @@
             // redirect to organization dashboard if a user is associated to
             // an organization and user phone exist
             if($user->getOrganization() !== null && $user->getPhone() !== null) {
-                return $this->redirectToRoute('organization_dashboard_preview');
+                return $this->redirectToRoute('organization_dashboard_preview', [
+                    'id' => $user->getOrganization()->getId()
+                ]);
             }
 
             $organizationAddType = $this->createForm(OrganizationBasicsInfosType::class, $organizationAddFields);

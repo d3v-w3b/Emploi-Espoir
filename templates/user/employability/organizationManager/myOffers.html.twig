@@ -6,16 +6,20 @@
     <h1>Mes offres</h1>
 
     {% if my_offers|length > 0 %}
-        <ul>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 15px;">
             {% for offer in my_offers %}
-                <li>
+
+                <div>
                     <strong>{{ offer.jobTitle }}</strong><br>
                     Type de contrat : {{ offer.typeOfContract }}<br>
                     Ville : {{ offer.town }}<br>
                     Date de publication : {{ offer.dateOfPublication ? offer.dateOfPublication|date('d/m/Y') : 'Non spécifiée' }}
-                </li>
+                </div>
+
             {% endfor %}
-        </ul>
+        </div>
+
     {% else %}
         <p>Aucune offre d'emploi disponible pour cette organisation.</p>
     {% endif %}

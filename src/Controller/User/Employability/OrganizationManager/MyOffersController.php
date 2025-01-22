@@ -29,7 +29,8 @@
             }
 
             $myOffers = $this->entityManager->getRepository(JobOffers::class)->findBy(
-                ['organization' => $organization]
+                ['organization' => $organization],
+                ['dateOfPublication' => 'DESC']
             );
 
             return $this->render('user/employability/organizationManager/myOffers.html.twig', [

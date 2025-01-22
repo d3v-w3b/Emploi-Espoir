@@ -74,6 +74,7 @@
                     // display error in the view
                     return $this->render('user/employability/organizationManager/addJobOffer.html.twig', [
                         'job_offer_form' => $jobOfferForm->createView(),
+                        'organization' => $organization,
                     ]);
                 }
 

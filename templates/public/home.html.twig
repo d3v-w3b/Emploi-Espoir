@@ -53,11 +53,41 @@
                 </p>
 
                 <p>
-                    <a href="{{ path('organization_dashboard_preview') }}">Explorer l'espace employeur</a>
+
+                    <a href="{{ path('organization_add')}}">Explorer l'espace employeur</a>
                 </p>
             </div>
         {% endif %}
 
     </div>
 
+
+    <section>
+        <h1>Offres d'emplois</h1>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 20px">
+            {% for job in job_offers %}
+                <a href="#" style="display: block; text-decoration: none; border: 1px solid black">
+                    {{ job.jobTitle }}<br>
+                    {{ job.organization.organizationName }}<br>
+                    Expire le : {{ job.expirationDate|date('d - m - Y') }}
+                </a>
+            {% endfor %}
+        </div>
+
+    </section>
+
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
