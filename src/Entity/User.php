@@ -64,6 +64,9 @@
         #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
         private ?Organization $organization = null;
 
+        #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+        private ?Applicant $applicant = null;
+
 
 
         //setters
@@ -191,6 +194,18 @@
             return $this;
         }
 
+        public function setApplicant(Applicant $applicant): static
+        {
+            // set the owning side of the relation if necessary
+            if ($applicant->getUser() !== $this) {
+                $applicant->setUser($this);
+            }
+
+            $this->applicant = $applicant;
+
+            return $this;
+        }
+
 
 
         //getters
@@ -292,5 +307,10 @@
         public function getOrganization(): ?Organization
         {
             return $this->organization;
+        }
+
+        public function getApplicant(): ?Applicant
+        {
+            return $this->applicant;
         }
     }

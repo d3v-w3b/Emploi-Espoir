@@ -3,7 +3,20 @@
 {# todo: changer le titre si possible pour le référencement #}
 {% block title %}Emploi Espoir{% endblock %}
 
+
+{% block javascripts %}
+    <script src="{{ asset('js/public/showJobInModalManager.js') }}" defer></script>
+    <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
+{% endblock %}
+
+
 {% block body %}
+    {# flash message if a candidacy has been send #}
+    {% if app.flashes('candidacy_send_successfully') is defined %}
+        {% for candidacySendSuccessfullyMsg in app.flashes('candidacy_send_successfully') %}
+            <span id="hide-flashMsg">{{ candidacySendSuccessfullyMsg }}</span>
+        {% endfor %}
+    {% endif %}
 
     <div>
         <details>
@@ -67,7 +80,12 @@
 
         <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 20px">
             {% for job in job_offers %}
-                <a href="#" style="display: block; text-decoration: none; border: 1px solid black">
+                <a href="#" style="display: block; text-decoration: none; border: 1px solid black" class="job-link"
+                   data-title="{{ job.jobTitle }}"
+                   data-organization="{{ job.organization.organizationName }}"
+                   data-expiration="{{ job.expirationDate|date('d - m - Y') }}"
+                   data-id="{{ job.id }}"
+                >
                     {{ job.jobTitle }}<br>
                     {{ job.organization.organizationName }}<br>
                     Expire le : {{ job.expirationDate|date('d - m - Y') }}
@@ -76,6 +94,20 @@
         </div>
 
     </section>
+
+
+
+    <!-- Modal structure -->
+    <div id="job-modal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid black; z-index: 1000;">
+        <h2 id="modal-job-title"></h2>
+        <p><strong>Organisation :</strong> <span id="modal-organization-name"></span></p>
+        <p><strong>Date d'expiration :</strong> <span id="modal-expiration-date"></span></p>
+        <button id="close-modal" style="margin-top: 10px;">Fermer</button>
+        <a href="#" id="apply-link"></a>
+    </div>
+
+    <!-- Modal backdrop -->
+    <div id="modal-backdrop" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
 
 {% endblock %}
 

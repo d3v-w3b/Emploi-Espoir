@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Postuler à une offre | Emploi Espoir {% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/user/employability/organizationManager/inputFileManagerApplyForAJob.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% endblock %}
+
+{% block body %}
+    <h1>Postuler pour l'offre <em>{{ job_offer.jobTitle }}</em></h1>
+
+    {{ form_start(apply_job_offer_form) }}
+        <div>
+            <div>
+                {{ form_label(apply_job_offer_form.lastName) }}<br>
+                {{ form_widget(apply_job_offer_form.lastName) }}
+                {{ form_errors(apply_job_offer_form.lastName) }}
+            </div>
+
+            <div>
+                {{ form_label(apply_job_offer_form.firstName) }}<br>
+                {{ form_widget(apply_job_offer_form.firstName) }}
+                {{ form_errors(apply_job_offer_form.firstName) }}
+            </div>
+
+            <div>
+                {{ form_label(apply_job_offer_form.email) }}<br>
+                {{ form_widget(apply_job_offer_form.email) }}
+                {{ form_errors(apply_job_offer_form.email) }}
+            </div>
+
+            <div>
+                {{ form_label(apply_job_offer_form.phone) }}<br>
+                {{ form_widget(apply_job_offer_form.phone) }}
+                {{ form_errors(apply_job_offer_form.phone) }}
+            </div>
+
+            <div>
+                {{ form_label(apply_job_offer_form.docsToProvide) }}
+                (<span>
+                    {% for doc in job_offer.docsToProvide %}
+                        {{ doc }},
+                    {% endfor %}
+                </span>)
+                <br>
+                {{ form_widget(apply_job_offer_form.docsToProvide) }}
+                {{ form_errors(apply_job_offer_form.docsToProvide) }}
+            </div>
+
+            <div>
+                <div class="inputForFile">
+                    <span>Sélectionnez vos fichiers ici au format .pdf</span>
+                </div>
+
+                <div class="files-placeholder">
+
+                </div>
+            </div>
+
+            <button type="submit">Postuler</button>
+        </div>
+    {{ form_end(apply_job_offer_form) }}
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% block stylesheets %}
+    <style>
+        input[type="file"] {
+            display: none;
+        }
+
+        .inputForFile {
+            border: 1px dashed black;
+            cursor: pointer;
+        }
+    </style>
+{% endblock %}
