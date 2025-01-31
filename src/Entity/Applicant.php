@@ -33,9 +33,13 @@
         #[ORM\ManyToMany(targetEntity: JobOffers::class, inversedBy: 'applicants')]
         private Collection $jobOffer;
 
-        #[ORM\OneToOne(inversedBy: 'applicant', cascade: ['persist', 'remove'])]
+        #[ORM\ManyToOne(inversedBy: 'applicants')]
         #[ORM\JoinColumn(nullable: false)]
         private ?User $user = null;
+
+        //#[ORM\OneToOne(inversedBy: 'applicant', cascade: ['persist', 'remove'])]
+        //#[ORM\JoinColumn(nullable: false)]
+        //private ?User $user = null;
 
         public function __construct()
         {
@@ -78,6 +82,27 @@
         {
             $this->docsToProvide = $docsToProvide;
         }
+
+        public function setUser(?User $user): static
+        {
+            $this->user = $user;
+
+            return $this;
+        }
+
+
+        /**
+         * @param User $user
+         * @return $this
+         *
+         * public function setUser(User $user): static
+         * {
+         * $this->user = $user;
+         *
+         * return $this;
+         * }
+         */
+
 
 
 
@@ -134,15 +159,18 @@
             return $this;
         }
 
+
+        /**
+         * @return User|null
+         *
+         * public function getUser(): ?User
+         * {
+         * return $this->user;
+         * }
+         */
+
         public function getUser(): ?User
         {
             return $this->user;
-        }
-
-        public function setUser(User $user): static
-        {
-            $this->user = $user;
-
-            return $this;
         }
     }

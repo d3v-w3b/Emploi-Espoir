@@ -48,7 +48,9 @@
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
 
-                return $this->redirectToRoute('organization_dashboard_preview');
+                return $this->redirectToRoute('organization_dashboard_preview', [
+                    'id' => $user->getOrganization()->getId(),
+                ]);
             }
 
             return $this->render('user/employability/addOrganization/addOrganizationEmployerPhoneNumber.html.twig', [

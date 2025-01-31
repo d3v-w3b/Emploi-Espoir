@@ -23,12 +23,15 @@
        private ?string $phone = null;
 
        #[Assert\NotBlank]
-       #[Assert\File(
-           maxSize: '5M',
-           mimeTypes: ['application/pdf'],
-           maxSizeMessage: 'Les fichiers doivent être inférieur à 5 Mo',
-           mimeTypesMessage: 'Seul les fichiers PDF sont autorisés.'
-       )]
+       /**
+        * #[Assert\File(
+        * maxSize: '5M',
+        * mimeTypes: ['application/pdf'],
+        * maxSizeMessage: 'Les fichiers doivent être inférieur à 5 Mo',
+        * mimeTypesMessage: 'Seul les fichiers PDF sont autorisés.'
+        * )]
+        */
+
        private ?array $docsToProvide = null;
 
 

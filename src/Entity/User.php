@@ -3,6 +3,8 @@
     namespace App\Entity;
 
     use App\Repository\UserRepository;
+    use Doctrine\Common\Collections\ArrayCollection;
+    use Doctrine\Common\Collections\Collection;
     use Doctrine\ORM\Mapping as ORM;
     use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
     use Symfony\Component\Security\Core\User\UserInterface;
@@ -64,8 +66,16 @@
         #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
         private ?Organization $organization = null;
 
-        #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
-        private ?Applicant $applicant = null;
+        #[ORM\OneToMany(targetEntity: Applicant::class, mappedBy: 'user')]
+        private Collection $applicants;
+
+        public function __construct()
+        {
+            $this->applicants = new ArrayCollection();
+        }
+
+        //#[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+        //private ?Applicant $applicant = null;
 
 
 
@@ -194,17 +204,34 @@
             return $this;
         }
 
-        public function setApplicant(Applicant $applicant): static
+        public function addApplicant(Applicant $applicant): static
         {
-            // set the owning side of the relation if necessary
-            if ($applicant->getUser() !== $this) {
+            if (!$this->applicants->contains($applicant)) {
+                $this->applicants->add($applicant);
                 $applicant->setUser($this);
             }
 
-            $this->applicant = $applicant;
-
             return $this;
         }
+
+
+        /**
+         * @param Applicant $applicant
+         * @return $this
+         *
+         * public function setApplicant(Applicant $applicant): static
+         * {
+         * // set the owning side of the relation if necessary
+         * if ($applicant->getUser() !== $this) {
+         * $applicant->setUser($this);
+         * }
+         *
+         * $this->applicant = $applicant;
+         *
+         * return $this;
+         * }
+         */
+
 
 
 
@@ -262,7 +289,7 @@
         {
             return $this->currentProfessionalSituation;
         }
-        
+
         public function getProfilPic(): ?string
         {
             return $this->profilPic;
@@ -309,8 +336,34 @@
             return $this->organization;
         }
 
-        public function getApplicant(): ?Applicant
+
+        /**
+         * @return Applicant|null
+         *
+         * public function getApplicant(): ?Applicant
+         * {
+         * return $this->applicant;
+         * }
+         */
+
+        /**
+         * @return Collection<int, Applicant>
+         */
+        public function getApplicants(): Collection
         {
-            return $this->applicant;
+            return $this->applicants;
         }
+
+        public function removeApplicant(Applicant $applicant): static
+        {
+            if ($this->applicants->removeElement($applicant)) {
+                // set the owning side to null (unless already changed)
+                if ($applicant->getUser() === $this) {
+                    $applicant->setUser(null);
+                }
+            }
+
+            return $this;
+        }
+
     }

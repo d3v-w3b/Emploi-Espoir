@@ -48,8 +48,9 @@
 
             if($applyJobOfferForm->isSubmitted() && $applyJobOfferForm->isValid()) {
                 // Connect entities
-                $user->setApplicant($applicantEntity);
+                $user->addApplicant($applicantEntity);
                 $applicantEntity->setUser($user);
+                $applicantEntity->addJobOffer($jobOffer);
 
                 $applicantEntity->setEmail($applyJobOfferFields->getEmail());
                 $applicantEntity->setPhone($applyJobOfferFields->getPhone());

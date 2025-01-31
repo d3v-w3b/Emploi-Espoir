@@ -3,6 +3,10 @@
 {% block title %}Bienvenue sur votre espace employeur - Emploi Espoir{% endblock %}
 
 {% block body %}
+    <header>
+        {% include 'navbar.html.twig' %}
+    </header>
+
     {# this block will be side during style #}
     <div>
         <a href="{{ path('organization_dashboard_preview', {'id' : organization.id}) }}">Aperçu</a><br>

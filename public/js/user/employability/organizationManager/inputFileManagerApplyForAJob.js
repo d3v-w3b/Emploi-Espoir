@@ -17,7 +17,18 @@ inputFile.addEventListener('change', (event) => {
     // user Array for convert this FileList to array
     let filesSelected = Array.from(event.target.files);
 
+    if (filesSelected.length === 0) {
+        Swal.fire("Vous devez ajouter au moins un fichier.");
+        return;
+    }
+
+
     filesSelected.forEach(file => {
+        if (!file.type === "application/pdf") {
+            Swal.fire(`Le fichier "${file.name}" n'est pas un fichier PDF.`);
+            return;
+        }
+
         if (selectedFiles.length >= MAX_FILES) {
             //alert(`Vous ne pouvez sélectionner que ${MAX_FILES} fichiers maximum.`);
             Swal.fire(`Vous ne pouvez sélectionner que ${MAX_FILES} fichiers maximum.`);
@@ -40,9 +51,9 @@ inputFile.addEventListener('change', (event) => {
 
 
 function updateFilePlaceholder() {
-    filePlaceholder.innerHTML = selectedFiles
-        .map(file => `${file.name} <a href="#" class="remove-file" data-file="${file.name}">retirer</a>`)
-        .join('<br>');
+    filePlaceholder.innerHTML = selectedFiles.length > 0
+        ? selectedFiles.map(file => `${file.name} <a href="#" class="remove-file" data-file="${file.name}">retirer</a>`).join('<br>')
+        :"<p>Aucun fichier sélectionné.</p>";
 
     // Gestion de la suppression des fichiers
     document.querySelectorAll('.remove-file').forEach(link => {
