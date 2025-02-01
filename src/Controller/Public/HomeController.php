@@ -31,10 +31,15 @@
 
             $jobOffers = $this->entityManager->getRepository(JobOffers::class)->findBy([]);
 
+            // remove offer from view when expiration date === current date
+            $validJobOffers = array_filter($jobOffers, function($jobOffer) {
+                return $jobOffer->getExpirationDate()->format('Y-m-d') > (new \DateTimeImmutable())->format('Y-m-d');
+            });
+
 
             return $this->render('public/home.html.twig', [
                 'organization' => $organizationEntity,
-                'job_offers' => $jobOffers
+                'job_offers' => $validJobOffers,
             ]);
         }
     }

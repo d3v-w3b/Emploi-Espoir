@@ -14,7 +14,25 @@
                     <strong>{{ offer.jobTitle }}</strong><br>
                     Type de contrat : {{ offer.typeOfContract }}<br>
                     Ville : {{ offer.town }}<br>
-                    Date de publication : {{ offer.dateOfPublication ? offer.dateOfPublication|date('d/m/Y') : 'Non spécifiée' }}
+                    Date de publication : {{ offer.dateOfPublication ? offer.dateOfPublication|date('d/m/Y') : 'Non spécifiée' }}<br>
+                    ex : {{ offer.expirationDate|date('d/m/Y') }}<br>
+                    Status :
+                    <span>
+                        {% set currentDate = 'now'|date('d/m/Y') %}
+                        {% set offerExpirationDate = offer.expirationDate|date('d/m/Y') %}
+
+                        {% if currentDate == offerExpirationDate %}
+                            {# todo: mettre un indicateur de connexion. vert si connecté, rouge si déconnecté #}
+                            Pas en cours
+                        {% else %}
+                            En cours
+                        {% endif %}
+                    </span>
+
+                    <p>
+                        <a href="{{ path('organization_edit_offer', {'id' : offer.organization.id, 'offerId' : offer.id}) }}">Réactiver ou modifier l'offre</a> | <a href="#">Supprimer l'offre</a>
+                    </p>
+
                 </div>
 
             {% endfor %}

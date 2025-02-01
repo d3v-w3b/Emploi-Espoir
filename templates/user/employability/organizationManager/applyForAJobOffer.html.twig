@@ -10,7 +10,7 @@
 {% block body %}
     <h1>Postuler pour l'offre <em>{{ job_offer.jobTitle }}</em></h1>
 
-    {{ form_start(apply_job_offer_form) }}
+    {{ form_start(apply_job_offer_form, {'attr' : {'novalidate' : 'novalidate'}}) }}
         <div>
             <div>
                 {{ form_label(apply_job_offer_form.lastName) }}<br>
