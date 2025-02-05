@@ -4,8 +4,11 @@
 
     use App\Entity\JobOffers;
     use App\Entity\Organization;
+    use App\Form\Fields\Users\Employability\OrganizationManager\AddJobOfferFields;
+    use App\Form\Types\Users\Employability\OrganizationManager\JobOfferEditType;
     use Doctrine\ORM\EntityManagerInterface;
     use Symfony\Component\Finder\Exception\AccessDeniedException;
+    use Symfony\Component\HttpFoundation\RequestStack;
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\Routing\Annotation\Route;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,7 +17,8 @@
     class OfferEditController extends AbstractController
     {
         public function __construct(
-            private readonly EntityManagerInterface $entityManager
+            private readonly EntityManagerInterface $entityManager,
+            private readonly RequestStack $requestStack
         ){}
 
 
@@ -30,8 +34,42 @@
 
             $jobOffer = $this->entityManager->getRepository(JobOffers::class)->find($offerId);
 
+            $offerEditFields = new AddJobOfferFields();
+
+            // Pre-filed fields for see current datas
+            $offerEditFields->setJobTitle($jobOffer->getJobTitle());
+            $offerEditFields->setTypeOfContract($jobOffer->getTypeOfContract());
+            $offerEditFields->setWhatWeOffer(implode(', ', $jobOffer->getWhatWeOffer()));
+            $offerEditFields->setMissions(implode(', ', $jobOffer->getMissions()));
+            $offerEditFields->setOrganizationAbout($jobOffer->getOrganizationAbout());
+            $offerEditFields->setTown($jobOffer->getTown());
+            $offerEditFields->setJobPreferences($jobOffer->getJobPreferences());
+            $offerEditFields->setDocsToProvide($jobOffer->getDocsToProvide());
+            $offerEditFields->setExpirationDate($jobOffer->getExpirationDate());
+            $offerEditFields->setProfilSought(implode(', ', $jobOffer->getProfilSought()));
+
+            $offerEditForm = $this->createForm(JobOfferEditType::class, $offerEditFields);
+            $offerEditForm->handleRequest($this->requestStack->getCurrentRequest());
+
+            if($offerEditForm->isSubmitted() && $offerEditForm->isValid()) {
+                $jobOffer->setTypeOfContract($offerEditFields->getTypeOfContract());
+                $jobOffer->setJobPreferences($offerEditFields->getJobPreferences());
+                $jobOffer->setMissions(explode(', ', $offerEditFields->getMissions()));
+                $jobOffer->setProfilSought(explode(', ', $offerEditFields->getProfilSought()));
+                $jobOffer->setExpirationDate($offerEditFields->getExpirationDate());
+
+                $this->entityManager->flush();
+
+                $this->addFlash('offer_updating_success', 'Une offre vient d\'être modifié');
+
+                return $this->redirectToRoute('organization_my_offers', [
+                    'id' => $organization->getId(),
+                ]);
+            }
+
             return $this->render('user/employability/organizationManager/offerEdit.html.twig', [
                 'job_offer' => $jobOffer,
+                'offer_edit_form' => $offerEditForm->createView(),
             ]);
         }
     }

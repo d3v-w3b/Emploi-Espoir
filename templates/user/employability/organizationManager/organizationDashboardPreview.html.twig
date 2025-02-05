@@ -2,7 +2,18 @@
 
 {% block title %}Bienvenue sur votre espace employeur - Emploi Espoir{% endblock %}
 
+{% block javascripts %}
+    <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
+{% endblock %}
+
 {% block body %}
+    {# message if a job offer has been added succesfully #}
+    {% if app.flashes('add_job_offer_success') is defined %}
+        {% for addJobOfferMsg in app.flashes('add_job_offer_success') %}
+            <span id="hide-flashMsg">{{ addJobOfferMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
     <header>
         {% include 'navbar.html.twig' %}
     </header>

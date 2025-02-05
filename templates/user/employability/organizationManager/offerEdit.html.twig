@@ -5,4 +5,74 @@
 {% block body %}
 
     <h1>Modifier l'offre {{ job_offer.jobTitle }}</h1>
+
+    {{ form_start(offer_edit_form) }}
+        <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
+        <div>
+            {{ form_label(offer_edit_form.jobTitle) }}<br >
+            {{ form_widget(offer_edit_form.jobTitle) }}
+            {{ form_errors(offer_edit_form.jobTitle) }}
+        </div>
+
+
+        <div>
+            {{ form_label(offer_edit_form.typeOfContract) }}<br >
+            {{ form_widget(offer_edit_form.typeOfContract) }}
+            {{ form_errors(offer_edit_form.typeOfContract) }}
+        </div>
+
+        <div>
+            {{ form_label(offer_edit_form.town) }}<br >
+            {{ form_widget(offer_edit_form.town) }}
+            {{ form_errors(offer_edit_form.town) }}
+        </div>
+
+        <div>
+            {{ form_label(offer_edit_form.jobPreferences) }}<br >
+            {{ form_widget(offer_edit_form.jobPreferences) }}
+            {{ form_errors(offer_edit_form.jobPreferences) }}
+        </div>
+
+        <div>
+            {{ form_label(offer_edit_form.organizationAbout) }}<br >
+            {{ form_widget(offer_edit_form.organizationAbout) }}
+            {{ form_errors(offer_edit_form.organizationAbout) }}
+        </div>
+
+        <div>
+            {{ form_label(offer_edit_form.missions) }}<br >
+            {{ form_widget(offer_edit_form.missions) }}
+            {{ form_help(offer_edit_form.missions) }}
+            {{ form_errors(offer_edit_form.missions) }}
+        </div>
+
+        <div>
+            {{ form_label(offer_edit_form.profilSought) }}<br >
+            {{ form_widget(offer_edit_form.profilSought) }}
+            {{ form_help(offer_edit_form.profilSought) }}
+            {{ form_errors(offer_edit_form.profilSought) }}
+        </div>
+
+        <div>
+            {{ form_label(offer_edit_form.whatWeOffer) }}<br >
+            {{ form_widget(offer_edit_form.whatWeOffer) }}
+            {{ form_help(offer_edit_form.whatWeOffer) }}
+            {{ form_errors(offer_edit_form.whatWeOffer) }}
+        </div>
+
+        <div>
+            {{ form_label(offer_edit_form.docsToProvide) }}<br >
+            {{ form_widget(offer_edit_form.docsToProvide) }}
+            {{ form_errors(offer_edit_form.docsToProvide) }}
+        </div>
+
+        <div>
+            {{ form_label(offer_edit_form.expirationDate) }}<br >
+            {{ form_widget(offer_edit_form.expirationDate) }}
+            {{ form_errors(offer_edit_form.expirationDate) }}
+        </div>
+
+        <button type="submit">Modifier une offre</button>
+    </div>
+    {{ form_end(offer_edit_form) }}
 {% endblock %}

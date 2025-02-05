@@ -81,14 +81,15 @@
                 $this->entityManager->persist($jobOfferEntity);
                 $this->entityManager->flush();
 
-                return $this->redirectToRoute('organization_my_offers', [
+                $this->addFlash('add_job_offer_success', 'Une offre d\'emploi vient d\'être ajouté');
+
+                return $this->redirectToRoute('organization_dashboard_preview', [
                     'id' => $organization->getId(),
                 ]);
             }
 
             return $this->render('user/employability/organizationManager/addJobOffer.html.twig', [
                 'job_offer_form' => $jobOfferForm->createView(),
-                'organization' => $organization,
             ]);
         }
     }

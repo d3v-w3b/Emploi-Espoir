@@ -1,7 +1,14 @@
 <?php
+/**
+ * this class used a class of fields which has already by another
+ * class of type.
+ *
+ * AddJobOfferFields.php
+ */
 
     namespace App\Form\Types\Users\Employability\OrganizationManager;
 
+    use App\Form\Fields\Users\Employability\OrganizationManager\AddJobOfferFields;
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
     use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -9,15 +16,17 @@
     use Symfony\Component\Form\Extension\Core\Type\TextType;
     use Symfony\Component\Form\FormBuilderInterface;
     use Symfony\Component\OptionsResolver\OptionsResolver;
-    use App\Form\Fields\Users\Employability\OrganizationManager\AddJobOfferFields;
 
-    class AddJobOfferType extends AbstractType
+    class JobOfferEditType extends AbstractType
     {
         public function buildForm(FormBuilderInterface $builder, array $options): void
         {
             $builder
                 ->add('jobTitle', TextType::class, [
-                    'label' => 'Intitulé du poste'
+                    'label' => 'Intitulé du poste',
+                    'attr' => [
+                        'readonly' => true
+                    ]
                 ])
 
                 ->add('typeOfContract', ChoiceType::class, [
@@ -34,7 +43,10 @@
                 ])
 
                 ->add('town', TextType::class, [
-                    'label' => 'Lieu de travail'
+                    'label' => 'Lieu de travail',
+                    'attr' => [
+                        'readonly' => true
+                    ]
                 ])
 
                 ->add('jobPreferences', ChoiceType::class, [
@@ -51,7 +63,8 @@
                 ->add('organizationAbout', TextareaType::class, [
                     'label' => 'Qui sommes-nous ?',
                     'attr' => [
-                        'max' => 400
+                        'max' => 400,
+                        'readonly' => true,
                     ]
                 ])
 
@@ -82,7 +95,8 @@
                     'attr' => [
                         'cols' => 50,
                         'rows' => 4,
-                        'placeholder' => 'offre 1, offre 2, offre 3'
+                        'placeholder' => 'offre 1, offre 2, offre 3',
+                        'readonly' => true,
                     ]
                 ])
 
@@ -95,6 +109,7 @@
                     ],
                     'expanded' => true,
                     'multiple' => true,
+                    'disabled' => true
                 ])
 
                 ->add('expirationDate', DateType::class, [
