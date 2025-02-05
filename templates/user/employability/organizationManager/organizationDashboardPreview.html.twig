@@ -21,11 +21,9 @@
     {# this block will be side during style #}
     <div>
         <a href="{{ path('organization_dashboard_preview', {'id' : organization.id}) }}">Aperçu</a><br>
-        <a href="{{ path('organization_candidates_list') }}">Liste des candidats</a><br>
+        <a href="{{ path('organization_candidates_list') }}">Candidatures</a><br>
         <a href="{{ path('organization_add_job_offer') }}">Émettre une offre</a><br>
-        <a href="{{ path('organization_my_offers', {'id' : organization.id}) }}">
-            Mes offres {{ organization.jobOffers|length }}
-        </a>
+        <a href="{{ path('organization_my_offers', {'id' : organization.id}) }}">Mes offres et candidatures</a>
     </div>
 
     <section>

@@ -4,8 +4,6 @@
 
     use App\Entity\JobOffers;
     use App\Entity\Organization;
-    use App\Form\Fields\Users\Employability\OrganizationManager\RemoveOfferFields;
-    use App\Form\Types\Users\Employability\OrganizationManager\RemoveOfferType;
     use Doctrine\ORM\EntityManagerInterface;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\Finder\Exception\AccessDeniedException;
@@ -35,13 +33,9 @@
                 ['dateOfPublication' => 'DESC']
             );
 
-            $removeOfferFields = new RemoveOfferFields();
-            $removeOfferForm = $this->createForm(RemoveOfferType::class, $removeOfferFields);
-
             return $this->render('user/employability/organizationManager/myOffers.html.twig', [
                 'my_offers' => $myOffers,
                 'organization' => $organization,
-                'remove_offer_form' => $removeOfferForm->createView()
             ]);
         }
     }
