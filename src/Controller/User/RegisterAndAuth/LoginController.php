@@ -22,9 +22,9 @@
         #[Route(path: '/login/password', name: 'user_login')]
         public function login(AuthenticationUtils $authenticationUtils): Response
         {
-            // if ($this->getUser()) {
-            //     return $this->redirectToRoute('target_path');
-            // }
+            if ($this->getUser()) {
+                return $this->redirectToRoute('user_dashboard');
+            }
 
             // get session
             $session = $this->requestStack->getSession();

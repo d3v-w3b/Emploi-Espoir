@@ -76,7 +76,7 @@
 
                     <p>
                         <a href="{{ path('organization_edit_offer', {'id' : offer.organization.id, 'offerId' : offer.id}) }}">Réactiver ou modifier l'offre</a> |
-                        <a href="{{ path('offer_applications', {'id' : offer.organization.id, 'offerId' : offer.id}) }}">
+                        <a href="{{ path('offer_applications_list', {'id' : offer.organization.id, 'offerId' : offer.id}) }}">
                             Voir les candidatures
                             {% if offer.applicants|length > 0 %}
                                 <sup>({{ offer.applicants|length }})</sup>

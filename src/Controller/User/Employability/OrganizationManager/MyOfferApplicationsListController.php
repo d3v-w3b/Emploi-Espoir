@@ -17,7 +17,7 @@
         ){}
 
 
-        #[Route(path: '/organization/{id}/offer/{offerId}/applications', name: 'offer_applications')]
+        #[Route(path: '/organization/{id}/offer/{offerId}/applications-list', name: 'offer_applications_list')]
         #[IsGranted('ROLE_USER')]
         public function myOfferApplicationList(Organization $organization, int $offerId): Response
         {

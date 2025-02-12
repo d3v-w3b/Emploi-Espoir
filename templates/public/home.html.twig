@@ -10,6 +10,10 @@
 {% block javascripts %}
     <script src="{{ asset('js/public/showJobInModalManager.js') }}" defer></script>
     <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
+    <script src="{{ asset('js/user/employability/organizationManager/prohibitUserToApplyTheSameOfferManager.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {# la ligne ci-dessous permet de soumettre un formulaire sans appuyer sur le bouton submit.  #}
+    {# Ligne à décommenter #}
     {#  <script src="{{ asset('js/public/typeOfContractInputsManager.js') }}" defer></script> #}
 {% endblock %}
 
@@ -21,6 +25,16 @@
             <span id="hide-flashMsg">{{ candidacySendSuccessfullyMsg }}</span>
         {% endfor %}
     {% endif %}
+
+
+    {# flash msg if a user try to apply the same offer #}
+    {% if app.flashes('already_apply') is defined %}
+        {% for alreadyApplyMsg in app.flashes('already_apply') %}
+            <span class="already-apply" style="display: none">{{ alreadyApplyMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
+
 
     <div>
 

@@ -13,9 +13,9 @@
     <h1>Adresse et contact</h1>
 
     <div>
-        <a href="#">
+        <p>
             <strong>E-mail : </strong> {{ user.email }}
-        </a>
+        </p>
 
         <a href="{{ path('account_address_contact_phone') }}">
             <strong>Numéro de téléphone : </strong>
@@ -28,7 +28,7 @@
             </span>
         </a>
 
-        <a href="#">
+        <a href="{{ path('account_address_contact_address') }}">
             <strong>Adresse : </strong>
             <span>
                 {% if user.address is not null %}

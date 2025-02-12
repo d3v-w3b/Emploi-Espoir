@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Details du candidat | Emploi Espoir{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+{% endblock %}
+
+{% block body %}
+    <section>
+        <div>
+            <span>
+                {% if applicant.user.profilPic is not null %}
+                    <img src="{{ asset('user/profile/avatar/' ~ applicant.user.profilPic) }}" alt="Emploi_Espoir_applicant_profile_pic" width="150">
+                {% else %}
+                    <i class="bi bi-person-circle" style="font-size: 3em"></i>
+                {% endif %}
+            </span>
+        </div>
+
+        <div>
+            <h1>{{ applicant.firstName }} {{ applicant.lastName}} </h1>
+        </div>
+    </section>
+{% endblock %}

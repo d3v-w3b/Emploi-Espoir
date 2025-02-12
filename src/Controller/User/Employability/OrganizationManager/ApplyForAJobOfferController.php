@@ -35,6 +35,17 @@
                 throw $this->createAccessDeniedException('Vous n\'avez pas accès à cette offre');
             }
 
+            /**
+             * Get the current application for a user
+             *
+             * This line allows to get the current user and the current offer,
+             * to prohibit users apply to the same offer
+             */
+            $currentApplicant = $this->entityManager->getRepository(Applicant::class)->findOneBy([
+                'email' => $user->getEmail(),
+                'offer' => $jobOffer->getJobTitle()
+            ]);
+
             $applyJobOfferFields = new ApplyForAJobOfferFields();
             $applyJobOfferFields->setFirstName($user->getFirstName());
             $applyJobOfferFields->setLastName($user->getLastName());
@@ -47,6 +58,12 @@
             $applyJobOfferForm->handleRequest($this->requestStack->getCurrentRequest());
 
             if($applyJobOfferForm->isSubmitted() && $applyJobOfferForm->isValid()) {
+                // Prohibit users to apply to the same offer
+                if($currentApplicant) {
+                    $this->addFlash('already_apply', 'Vous avez déjà postuler pour cette offre');
+                    return $this->redirectToRoute('home');
+                }
+
                 // Connect entities
                 $user->addApplicant($applicantEntity);
                 $applicantEntity->setUser($user);
@@ -56,6 +73,7 @@
                 $applicantEntity->setPhone($applyJobOfferFields->getPhone());
                 $applicantEntity->setLastName($applyJobOfferFields->getLastName());
                 $applicantEntity->setFirstName($applyJobOfferFields->getFirstName());
+                $applicantEntity->setOffer($jobOffer->getJobTitle());
 
                 // Docs to provide manager
                 $docsFiles = $applyJobOfferFields->getDocsToProvide();

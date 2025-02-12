@@ -30,12 +30,17 @@
         #[ORM\Column(type: 'json')]
         private ?array $docsToProvide = null;
 
+        #[ORM\Column(length: 128, nullable: true)]
+        private ?string $offer = null;
+
         #[ORM\ManyToMany(targetEntity: JobOffers::class, inversedBy: 'applicants')]
         private Collection $jobOffer;
 
         #[ORM\ManyToOne(inversedBy: 'applicants')]
         #[ORM\JoinColumn(nullable: false)]
         private ?User $user = null;
+
+
 
 
         public function __construct()
@@ -83,6 +88,13 @@
         public function setUser(?User $user): static
         {
             $this->user = $user;
+
+            return $this;
+        }
+
+        public function setOffer(?string $offer): static
+        {
+            $this->offer = $offer;
 
             return $this;
         }
@@ -147,5 +159,10 @@
         public function getUser(): ?User
         {
             return $this->user;
+        }
+
+        public function getOffer(): ?string
+        {
+            return $this->offer;
         }
     }
