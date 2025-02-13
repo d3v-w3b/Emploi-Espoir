@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Présentation - Emploi Espoir{% endblock %}
+
+{% block body %}
+    <section>
+        <h1>Présentation</h1>
+
+        {{ form_start(aboutMeForm) }}
+            <div>
+                {{ form_label(aboutMeForm.aboutMe) }}<br >
+                <span>Présentez-vous en quelques mots, ainsi que vos motivations et votre projet professionnel.</span><br>
+                {{ form_widget(aboutMeForm.aboutMe) }}
+                {{ form_help(aboutMeForm.aboutMe) }}
+                {{ form_errors(aboutMeForm.aboutMe) }}
+            </div>
+
+            <button type="submit">Enregistrer</button>
+        {{ form_end(aboutMeForm) }}
+    </section>
+{% endblock %}

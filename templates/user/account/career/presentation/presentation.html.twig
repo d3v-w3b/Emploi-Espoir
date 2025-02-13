@@ -2,12 +2,34 @@
 
 {% block title %}Présentation - Emploi Espoir{% endblock %}
 
+{% block javascripts %}
+    <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
+{% endblock %}
+
 {% block body %}
+    {# message if an about to you has been done #}
+    {% if app.flashes('about_me_added') is defined %}
+        {% for aboutMeMsg in app.flashes('about_me_added') %}
+            <span id="hide-flashMsg">{{ aboutMeMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
+
+    {# message if a cv has been saved successfully #}
+    {% if app.flashes('cv_saved') is defined %}
+        {% for cvSavedMsg in app.flashes('cv_saved') %}
+            <span id="hide-flashMsg">{{ cvSavedMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
+
+
+
     <section>
         <h1>Présentation</h1>
 
         <div>
-            <a href="#">
+            <a href="{{ path('account_presentation_about_me') }}">
                 <strong>A propose de vous : </strong>
 
                 <span>
@@ -19,7 +41,8 @@
                 </span>
             </a>
 
-            <a href="#">
+
+            <a href="{{ path('account_presentation_cv') }}">
                 <strong>CV: </strong>
 
                 <span>

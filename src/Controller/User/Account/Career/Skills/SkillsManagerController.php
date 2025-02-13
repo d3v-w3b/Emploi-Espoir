@@ -3,6 +3,7 @@
     namespace App\Controller\User\Account\Career\Skills;
 
     use App\Entity\Career;
+    use App\Entity\User;
     use App\Form\Fields\Users\Account\Career\Skills\SkillsManagerFields;
     use App\Form\Types\Users\Account\Career\Skills\SkillsManagerType;
     use Doctrine\ORM\EntityManagerInterface;
@@ -31,6 +32,10 @@
         {
             //get current user
             $user = $this->getUser();
+
+            if(!$user instanceof User) {
+                throw $this->createAccessDeniedException('Utilisateur invalide');
+            }
 
             $skillsManagerFields = new SkillsManagerFields();
             $skillsEntity = $user->getCareer() ?? new Career();

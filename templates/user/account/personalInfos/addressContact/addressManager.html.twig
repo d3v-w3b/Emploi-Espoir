@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adresse et contact - Emploi Espoir{% endblock %}
+
+{% block body %}
+    <section>
+
+        <h1>Adresse</h1>
+
+        {{ form_start(addressForm) }}
+            <div>
+                {{ form_label(addressForm.address) }}<br >
+                {{ form_widget(addressForm.address) }}
+                {{ form_errors(addressForm.address) }}
+            </div>
+
+            <button type="submit">Enregistrer</button>
+        {{ form_end(addressForm) }}
+    </section>
+{% endblock %}

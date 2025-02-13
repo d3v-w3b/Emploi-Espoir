@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CV - Emploi Espoir{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/user/account/career/presentation/cvInputManager.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% endblock %}
+
+{% block body %}
+    <section>
+        <h1>Presentation</h1>
+
+        {{ form_start(cvForm) }}
+
+            <div>
+                {{ form_label(cvForm.cv) }}<br >
+                {{ form_widget(cvForm.cv) }}
+
+
+                {# this block replaces the input file #}
+                <div>
+                    <div class="inputForFile">
+                        <span>Sélectionnez vos fichiers ici</span>
+                    </div>
+
+                    <div class="files-placeholder">
+
+                    </div>
+                </div>
+
+            </div>
+
+            {{ form_errors(cvForm.cv) }}
+            {{ form_help(cvForm.cv) }}
+
+            <button type="submit">Enregistrer</button>
+        {{ form_end(cvForm) }}
+    </section>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% block stylesheets %}
+    <style>
+        input[type="file"] {
+            display: none;
+        }
+
+        .inputForFile {
+            border: 1px dashed black;
+            cursor: pointer;
+        }
+    </style>
+{% endblock %}

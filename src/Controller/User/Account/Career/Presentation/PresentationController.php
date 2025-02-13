@@ -2,6 +2,7 @@
 
     namespace App\Controller\User\Account\Career\Presentation;
 
+    use App\Entity\User;
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\Routing\Annotation\Route;
@@ -14,6 +15,10 @@
         public function presentation(): Response
         {
             $user = $this->getUser();
+
+            if(!$user instanceof User) {
+                throw $this->createAccessDeniedException('Utilisateur invalide');
+            }
 
             //get career entity for current user logged
             $career = $user->getCareer();

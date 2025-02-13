@@ -2,6 +2,10 @@
 
 {% block title %}Adresse et contact - Emploi Espoir{% endblock %}
 
+{% block javascripts %}
+    <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
+{% endblock %}
+
 {% block body %}
     {# message if a phone number has been saved #}
     {% if app.flashes('phone_number_saved') is defined %}
@@ -9,6 +13,16 @@
             {{ phoneSavedMsg }}
         {% endfor %}
     {% endif %}
+
+
+    {# message if an address has been saved #}
+    {% if app.flashes('address_saved') is defined %}
+        {% for addressSavedMsg in app.flashes('address_saved') %}
+            <span id="hide-flashMsg">{{ addressSavedMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
+
 
     <h1>Adresse et contact</h1>
 

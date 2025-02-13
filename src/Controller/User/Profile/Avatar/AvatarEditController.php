@@ -44,7 +44,7 @@
                     $avatarData->move($this->getParameter('user/profile/avatar'), $avatarName);
                 }
 
-                $userEntity->setProfilPic($avatarName);
+                $userEntity->setProfilPic($avatarName ?? null);
 
                 $this->entityManager->persist($userEntity);
                 $this->entityManager->flush();

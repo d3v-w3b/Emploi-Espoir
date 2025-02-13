@@ -21,5 +21,42 @@
         <div>
             <h1>{{ applicant.firstName }} {{ applicant.lastName}} </h1>
         </div>
+
+        <div>
+            {{ applicant.user.address }}
+        </div>
+
+        <div>
+            {% for userObjectives in applicant.user.mainObjectives %}
+                {{ userObjectives }}
+            {% endfor %}
+        </div>
+    </section>
+
+
+    <section>
+        <h1>Présentation</h1>
+
+        <div>
+             <p>
+                 <strong>A propos de vous </strong><br>
+
+                 <span>
+                     {% if applicant.user.career.aboutYou is null %}
+                        <em>Informations non fournies</em>
+                     {% else %}
+                         {{ applicant.user.career.aboutYou }}
+                     {% endif %}
+                 </span>
+             </p>
+
+            <p>
+                <strong>Documents</strong><br >
+
+                {% for docs in applicant.docsToProvide %}
+                    <a href="{{ asset(docs) }}">Voir le Cv</a>
+                {% endfor %}
+            </p>
+        </div>
     </section>
 {% endblock %}
