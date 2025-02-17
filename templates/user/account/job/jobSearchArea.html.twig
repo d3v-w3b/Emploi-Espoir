@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Zone de recherche d'emploi - Emploi Espoir{% endblock %}
+
+{% block body %}
+    <section>
+        <h1>Emploi</h1>
+
+        {{ form_start(jobAreaForm) }}
+            <div>
+                {{ form_label(jobAreaForm.jobArea) }}<br >
+                {{ form_widget(jobAreaForm.jobArea) }}
+                {{ form_errors(jobAreaForm.jobArea) }}
+            </div>
+
+            <div>
+                <button type="submit">Enregistrer</button>
+            </div>
+        {{ form_end(jobAreaForm) }}
+    </section>
+{% endblock %}

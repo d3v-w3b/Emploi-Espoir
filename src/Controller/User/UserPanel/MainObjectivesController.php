@@ -31,12 +31,12 @@
         {
             $objectifFields = new MainObjectivesFields();
 
-            $objectifTypes = $this->createForm(MainObjectivesType::class, $objectifFields);
+            $objectifForm = $this->createForm(MainObjectivesType::class, $objectifFields);
 
             $request = $this->requestStack->getCurrentRequest();
-            $objectifTypes->handleRequest($request);
+            $objectifForm->handleRequest($request);
 
-            if($objectifTypes->isSubmitted() && $objectifTypes->isValid()) {
+            if($objectifForm->isSubmitted() && $objectifForm->isValid()) {
                 //get current user
                 $user = $this->entityManager->getRepository(User::class)->findOneBy([
                     'email' => $this->getUser()->getUserIdentifier(),
@@ -46,6 +46,7 @@
                 // for this user
                 if($user) {
                     $user->setMainObjectives($objectifFields->getMainObjectives());
+                    $user->setFieldsOfInterest($objectifFields->getFields());
                 }
 
                 $this->entityManager->persist($user);
@@ -55,7 +56,7 @@
             }
 
             return $this->render('user/userPanel/mainObjectives.html.twig', [
-                'mainObjectivesForm' => $objectifTypes->createView(),
+                'mainObjectivesForm' => $objectifForm->createView(),
             ]);
         }
     }

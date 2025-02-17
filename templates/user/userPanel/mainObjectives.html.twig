@@ -9,44 +9,31 @@
 
 {% block body %}
     <section>
-        <h1>Quel sont vos objectifs ?</h1>
-
-        <div class="for-students">
-            {#
-                <p class="alternance">Trouver une alternance</p>
-
-                <p class="job">Trouver un premier emploi</p>
-            #}
-
-            {{ form_start(mainObjectivesForm) }}
-                <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
-
-                    {#
-                    <div>
-                    {{ form_widget(mainObjectivesForm.alternance) }}
-                </div>
-
-                <div>
-                    {{ form_widget(mainObjectivesForm.job) }}
-                </div>
-                    #}
-                    {{ form_widget(mainObjectivesForm.mainObjectives) }}
 
 
-                    <button type="submit" disabled>Valider</button>
-                </div>
 
-            {{ form_end(mainObjectivesForm) }}
-        </div>
+        {{ form_start(mainObjectivesForm) }}
+            <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
+                <h1>Quels sont vos objectifs ?</h1>
+
+                {{ form_widget(mainObjectivesForm.mainObjectives) }}
+
+            </div>
+
+            <div>
+                <h1>Quels sont les domaines qui vous intéressent ?</h1>
+
+                {{ form_widget(mainObjectivesForm.fields) }}
+            </div>
+
+            <div>
+                <button type="submit" disabled>Valider</button>
+            </div>
 
 
-        {#
-            pour le mode employer nouc aurons :
+        {{ form_end(mainObjectivesForm) }}
 
-            <p>Recruter en alternance</p>
 
-            <p>Recruter un diplomé </p>
-        #}
     </section>
 {% endblock %}
 
@@ -77,6 +64,12 @@
         label {
             border: 1px solid grey;
             cursor: pointer;
+        }
+
+        .selected-label {
+            border: 2px solid blue;
+            border-radius: 5px;
+            padding: 2px 5px;
         }
     </style>
 {% endblock %}

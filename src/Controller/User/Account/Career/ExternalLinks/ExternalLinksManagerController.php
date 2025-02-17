@@ -3,6 +3,7 @@
     namespace App\Controller\User\Account\Career\ExternalLinks;
 
     use App\Entity\Career;
+    use App\Entity\User;
     use App\Form\Fields\Users\Account\Career\ExternalLinks\ExternalLinksManagerFields;
     use App\Form\Types\Users\Account\Career\ExternalLinks\ExternalLinksManagerType;
     use Doctrine\ORM\EntityManagerInterface;
@@ -30,6 +31,10 @@
         public function externalLinksManager(): Response
         {
             $user = $this->getUser();
+
+            if(!$user instanceof User) {
+                throw $this->createAccessDeniedException('Vous n\'avez pas accès à cette page');
+            }
 
             $externalLinkFields = new ExternalLinksManagerFields();
             $careerEntity = $user->getCareer() ?? new Career();

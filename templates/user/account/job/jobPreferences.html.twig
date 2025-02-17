@@ -2,11 +2,23 @@
 
 {% block title %}Job - Emploi Espoir{% endblock %}
 
+{% block javascripts %}
+    <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
+{% endblock %}
+
 {% block body %}
     {# message if changing has been make about job preferences #}
     {% if app.flashes('job_preference_saved') is defined %}
         {% for jobPreferenceMsg in app.flashes('job_preference_saved') %}
-            {{ jobPreferenceMsg }}
+            <span id="hide-flashMsg">{{ jobPreferenceMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
+
+    {# message if changing has been make about job area #}
+    {% if app.flashes('jobArea_saved') is defined %}
+        {% for jobAreaMsg in app.flashes('jobArea_saved') %}
+            <span id="hide-flashMsg">{{ jobAreaMsg }}</span>
         {% endfor %}
     {% endif %}
 
@@ -14,7 +26,7 @@
         <h1>Emploi</h1>
 
         <div>
-            <a href="#">
+            <a href="{{ path('account_job_preference_search_area') }}">
                 <strong>Zone de recherche d'emploi : </strong>
                 <span>
                     {% if job_preferences is not null and job_preferences.employmentArea is not null %}

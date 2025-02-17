@@ -47,6 +47,7 @@
                 // CV file manager
                 $destination = $this->getParameter('user/career/presentation/cv');
                 $fileName = uniqid(). '.' .$cvFile->guessExtension();
+                $cvFile->move($destination, $fileName);
 
                 $cv = $destination. '/' . $fileName;
 

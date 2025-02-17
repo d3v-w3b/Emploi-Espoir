@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil - Emploi Espoir{% endblock %}
+
+{% block body %}
+
+    <section>
+        <div>
+            <h1>Votre profil vu par un employeur</h1>
+        </div>
+
+        <div>
+            <p>
+                <img src="{{ asset('user/profile/avatar/' ~ app.user.profilPic) }}" alt="Emploi_Espoir_profil_pic" width="200"><br>
+                <a href="{{ path('user_profile_avatar_edit') }}">Modifier</a>
+            </p>
+        </div>
+
+        <div>
+            <h1>{{ app.user.firstName }} {{ app.user.lastName }}</h1>
+
+            <p>{{ app.user.email }}</p>
+            {% if app.user.phone is not null %}
+                <p>{{ app.user.phone }}</p>
+            {% else %}
+                <p>
+                    <em>Information non fournie</em>
+                </p>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

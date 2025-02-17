@@ -49,6 +49,9 @@
         private ?array $mainObjectives = null;
 
         #[ORM\Column(nullable: true)]
+        private ?array $fieldsOfInterest = null;
+
+        #[ORM\Column(nullable: true)]
         private ?string $currentProfessionalSituation = null;
 
         #[ORM\Column(nullable: true)]
@@ -139,6 +142,11 @@
         public function setMainObjectives(?array $mainObjectives): void
         {
             $this->mainObjectives = $mainObjectives;
+        }
+
+        public function setFieldsOfInterest(?array $fieldsOfInterest): void
+        {
+            $this->fieldsOfInterest = $fieldsOfInterest;
         }
 
         public function setPhone(?string $phone): void
@@ -303,6 +311,11 @@
         public function getMainObjectives(): ?array
         {
             return $this->mainObjectives;
+        }
+
+        public function getFieldsOfInterest(): ?array
+        {
+            return $this->fieldsOfInterest;
         }
 
         public function getPhone(): ?string

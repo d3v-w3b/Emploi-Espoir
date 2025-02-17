@@ -3,6 +3,7 @@
     namespace App\Controller\User\Account\Job;
 
     use App\Entity\JobAndAlternation;
+    use App\Entity\User;
     use Doctrine\ORM\EntityManagerInterface;
     use Symfony\Component\HttpFoundation\RequestStack;
     use Symfony\Component\HttpFoundation\Response;
@@ -29,6 +30,13 @@
         #[IsGranted('ROLE_USER')]
         public function jobPreferenceManager(): Response
         {
+            // get current user
+            $user = $this->getUser();
+
+            if(!$user instanceof User) {
+                throw $this->createAccessDeniedException('Vous n\'avez pas accès à cette page');
+            }
+
             $jobPreferenceFields = new JobPreferencesManagerFields();
 
             $jobPreferenceType = $this->createForm(JobPreferencesManagerType::class, $jobPreferenceFields);
@@ -36,8 +44,6 @@
             $jobPreferenceType->handleRequest($this->requestStack->getCurrentRequest());
 
             if($jobPreferenceType->isSubmitted() && $jobPreferenceType->isValid()) {
-                // get current user
-                $user = $this->getUser();
 
                 // check if user has already preferences
                 $jobPreferenceEntity = $user->getJobAndAlternation() ?? new JobAndAlternation();
