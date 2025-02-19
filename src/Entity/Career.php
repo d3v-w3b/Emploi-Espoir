@@ -47,12 +47,6 @@
         #[ORM\Column(type: 'text', nullable: true)]
         private ?string $jobDescription = null;
 
-        #[ORM\Column(length: 128, nullable: true)]
-        private ?string $frenchLevel = null;
-
-        #[ORM\Column(length: 128, nullable: true)]
-        private ?string $englishLevel = null;
-
         #[ORM\OneToOne(inversedBy: 'career', cascade: ['persist', 'remove'])]
         #[ORM\JoinColumn(nullable: false)]
         private ?User $user = null;
@@ -135,19 +129,6 @@
             return $this;
         }
 
-        public function setFrenchLevel(?string $frenchLevel): static
-        {
-            $this->frenchLevel = $frenchLevel;
-
-            return $this;
-        }
-
-        public function setEnglishLevel(?string $englishLevel): static
-        {
-            $this->englishLevel = $englishLevel;
-
-            return $this;
-        }
 
         public function setUser(?User $user): static
         {
@@ -158,20 +139,11 @@
 
 
 
+
         //getters
         public function getUser(): ?User
         {
             return $this->user;
-        }
-
-        public function getEnglishLevel(): ?string
-        {
-            return $this->englishLevel;
-        }
-
-        public function getFrenchLevel(): ?string
-        {
-            return $this->frenchLevel;
         }
 
         public function getJobDescription(): ?string

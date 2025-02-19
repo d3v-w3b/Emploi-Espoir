@@ -72,13 +72,19 @@
         #[ORM\OneToMany(targetEntity: Applicant::class, mappedBy: 'user')]
         private Collection $applicants;
 
+        /**
+         * @var Collection<int, Language>
+         */
+        #[ORM\OneToMany(targetEntity: Language::class, mappedBy: 'user')]
+        private Collection $languages;
+
         public function __construct()
         {
             $this->applicants = new ArrayCollection();
+            $this->languages = new ArrayCollection();
         }
 
-        //#[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
-        //private ?Applicant $applicant = null;
+
 
 
 
@@ -217,6 +223,16 @@
             if (!$this->applicants->contains($applicant)) {
                 $this->applicants->add($applicant);
                 $applicant->setUser($this);
+            }
+
+            return $this;
+        }
+
+        public function addLanguage(Language $language): static
+        {
+            if (!$this->languages->contains($language)) {
+                $this->languages->add($language);
+                $language->setUser($this);
             }
 
             return $this;
@@ -373,6 +389,26 @@
                 // set the owning side to null (unless already changed)
                 if ($applicant->getUser() === $this) {
                     $applicant->setUser(null);
+                }
+            }
+
+            return $this;
+        }
+
+        /**
+         * @return Collection<int, Language>
+         */
+        public function getLanguages(): Collection
+        {
+            return $this->languages;
+        }
+
+        public function removeLanguage(Language $language): static
+        {
+            if ($this->languages->removeElement($language)) {
+                // set the owning side to null (unless already changed)
+                if ($language->getUser() === $this) {
+                    $language->setUser(null);
                 }
             }
 

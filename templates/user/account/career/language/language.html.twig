@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Niveau de langue - Emploi Espoir{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
+{% endblock %}
+
+{% block body %}
+    {# message if a language has been added #}
+    {% if app.flashes('languageSaved') is defined %}
+        {% for languageSavedMsg in app.flashes('languageSaved') %}
+            <span id="hide-flashMsg">{{ languageSavedMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
+    <h1>Niveau de langues</h1>
+
+    <div>
+        <p>
+            <a href="{{ path('account_languages_language_level') }}">Ajouter</a>
+        </p>
+    </div>
+{% endblock %}
