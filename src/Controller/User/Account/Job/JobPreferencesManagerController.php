@@ -37,23 +37,25 @@
                 throw $this->createAccessDeniedException('Vous n\'avez pas accès à cette page');
             }
 
+            // check if user has already preferences
+            $jobPreferenceEntity = $user->getJobAndAlternation() ?? new JobAndAlternation();
+
+            $alternationPreferences = $user->getJobAndAlternation()?->getAlternationPreference() ?? [];
+
             $jobPreferenceFields = new JobPreferencesManagerFields();
+            $jobPreferenceFields->setJobPreferences($alternationPreferences);
 
             $jobPreferenceType = $this->createForm(JobPreferencesManagerType::class, $jobPreferenceFields);
 
             $jobPreferenceType->handleRequest($this->requestStack->getCurrentRequest());
 
             if($jobPreferenceType->isSubmitted() && $jobPreferenceType->isValid()) {
-
-                // check if user has already preferences
-                $jobPreferenceEntity = $user->getJobAndAlternation() ?? new JobAndAlternation();
-
-                // update preferences
-                $jobPreferenceEntity->setEmploymentPreference($jobPreferenceFields->getJobPreferences());
-
                 // connect entities
                 $user->setJobAndAlternation($jobPreferenceEntity);
                 $jobPreferenceEntity->setUser($user);
+
+                // update preferences
+                $jobPreferenceEntity->setEmploymentPreference($jobPreferenceFields->getJobPreferences());
 
                 $this->entityManager->persist($jobPreferenceEntity);
                 $this->entityManager->flush();

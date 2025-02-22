@@ -2,14 +2,35 @@
 
     namespace App\Form\Fields\Users\Account\Career\Experiences;
 
+    use Symfony\Component\Validator\Constraints as Assert;
+
     class ProfessionalExperiencesManagerFields
     {
+        #[Assert\Length(
+            min: 3,
+            max: 80
+        )]
         private ?string $jobTitle = null;
+
+        #[Assert\NotBlank]
         private ?array $jobField = null;
+
+        #[Assert\NotBlank]
         private ?string $town = null;
+
+        #[Assert\NotBlank]
         private ?string $enterpriseName = null;
+
+        #[Assert\NotBlank]
         private ?\DateTimeImmutable $startDate = null;
+
+        #[Assert\GreaterThan(
+            propertyPath: 'startDate',
+            message: 'Cette valeur doit être supérieur à la date de debut'
+        )]
         private ?\DateTimeImmutable $endDate = null;
+
+        #[Assert\NotBlank]
         private ?string $jobDescription = null;
 
 

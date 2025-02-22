@@ -3,6 +3,7 @@
     namespace App\Controller\User\Employability\OrganizationManager;
 
     use App\Entity\JobOffers;
+    use App\Entity\User;
     use App\Form\Fields\Users\Employability\OrganizationManager\AddJobOfferFields;
     use App\Form\Types\Users\Employability\OrganizationManager\AddJobOfferType;
     use Doctrine\ORM\EntityManagerInterface;
@@ -26,6 +27,10 @@
         public function addJobOffer(): Response
         {
             $user = $this->getUser();
+
+            if(!$user instanceof User) {
+                throw $this->createAccessDeniedException('Vous n\'avez pas accès à cette page');
+            }
 
             // Get current organization
             $organization = $user->getOrganization();

@@ -1,11 +1,11 @@
 let selectTag = document.getElementById('external_links_manager_linkType');
 let form = document.querySelector('form');
 
-let linkedInInput = document.getElementById('external_links_manager_linkedInLink');
+let linkedInInput = document.getElementById('external_links_manager_linkedInUrl');
 let linkedInBlock = document.getElementById('linkedIn-block');
-let githubInput = document.getElementById('external_links_manager_githubLink');
+let githubInput = document.getElementById('external_links_manager_githubUrl');
 let githubBlock = document.getElementById('github-block');
-let urlInput = document.getElementById('external_links_manager_url');
+let urlInput = document.getElementById('external_links_manager_websiteUrl');
 let urlBlock = document.getElementById('url-block');
 
 // inputs error
@@ -14,7 +14,7 @@ const githubFormatErrorSpan = document.querySelector('.githubFormat-error');
 const urlFormatErrorSpan = document.querySelector('.urlFormat-error');
 
 // regex inputs
-const linkedFormatRegex = /^https:\/\/www\.linkedin\.com\/in\/[a-zA-Z0-9-]+\/?$/;
+const linkedFormatRegex = /^https:\/\/www\.linkedin\.com\/in\/[a-zA-Z0-9%_\-]+\/?$/;
 const githubFormatRegex = /^https:\/\/github\.com\/[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/;
 const urlFormatRegex = /^https?:\/\/(www\.)?[a-zA-Z0-9-]+(\.[a-zA-Z]{2,})(\/[a-zA-Z0-9._~:\/?#\[\]@!$&'()*+,;=-]*)?$/;
 

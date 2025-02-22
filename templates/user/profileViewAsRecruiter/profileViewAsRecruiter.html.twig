@@ -2,11 +2,19 @@
 
 {% block title %}Profil - Emploi Espoir{% endblock %}
 
-{% block javascripts %}
-    <script src="{{ asset('js/user/profilViewAsRecruiter/redirectToModal.js') }}" defer></script>
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 {% endblock %}
 
+{#
+{% block javascripts %}
+<script src="{{ asset('js/user/profilViewAsRecruiter/redirectToModal.js') }}" defer></script>
+{% endblock %}
+#}
+
+
 {% block body %}
+
 
     <section>
         <div>
@@ -15,7 +23,14 @@
 
         <div>
             <p>
-                <img src="{{ asset('user/profile/avatar/' ~ app.user.profilPic) }}" alt="Emploi_Espoir_profil_pic" width="200"><br>
+                <span>
+                    {% if app.user.profilPic is not null %}
+                        <img src="{{ asset('user/profile/avatar/' ~ app.user.profilPic) }}" alt="Emploi_Espoir_profil_pic" width="200"><br>
+                    {% else %}
+                        <span class="bi bi-person-circle" style="font-size: 3em;"></span>
+                    {% endif %}
+                </span>
+
                 <a href="{{ path('user_profile_avatar_edit') }}">Modifier</a>
             </p>
         </div>
@@ -37,7 +52,7 @@
 
         <div>
             {# employement area #}
-            {% if app.user.jobAndAlternation.employmentArea is not null %}
+            {% if app.user.jobAndAlternation is not null %}
                 <p>
                     <a href="{{ path('account_job_preference_search_area') }}">
                         {{ app.user.jobAndAlternation.employmentArea }}
@@ -49,56 +64,129 @@
                 </a>
             {% endif %}
         </div>
+
+
+        <div>
+            {# employment preferences #}
+            <a href="{{ path('account_job_preferences_preference') }}">
+                <strong>Préférence relative au télétravail : </strong>
+                <span>
+                    {% if app.user.jobAndAlternation is not null %}
+                        {% for jobPreferences in app.user.jobAndAlternation.employmentPreference %}
+                            {{ jobPreferences }},
+                        {% endfor %}
+                    {% else  %}
+                        <em>Information non fournie</em>
+                    {% endif %}
+                </span>
+            </a>
+        </div>
+
     </section>
 
 
-    <!-- Modal structure -->
-    <div id="employmentAreaModal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <span id="closeModal" class="close">&times;</span>
-            <h2>Employment Area Details</h2>
-            <p id="modalContent"></p>
+
+    <section>
+        <h1>Présentation</h1>
+
+        <p>
+            <a href="{{ path('account_presentation_about_me') }}">
+            <span>
+                <strong>A propos de vous : </strong>
+                {% if app.user.career is not null %}
+                    {{ app.user.career.aboutYou }}
+                {% endif %}
+            </span>
+            </a>
+        </p>
+
+        <p>
+            <span>CV</span>
+            {% if app.user.career is not null and app.user.career.cv is not empty %}
+                <a href="{{ asset(app.user.career.cv) }}">Voir le cv</a>
+            {% else %}
+                <a href="{{ path('account_presentation_cv') }}">
+                    <em>Information non fournie</em>
+                </a>
+
+            {% endif %}
+        </p>
+    </section>
+
+
+    <section>
+        <h1>Compétences</h1>
+
+        <div>
+            <a href="{{ path('account_skills_manager') }}">
+                <span>Compétence principale : </span>
+                {% if app.user.career is not null and app.user.career.skills is not null %}
+                    {% for careerSkills in app.user.career.skills %}
+                        {{ careerSkills }},
+                    {% endfor %}
+                {% else %}
+                    <em>Informations non fournie</em>
+                {% endif %}
+            </a>
         </div>
-    </div>
-{% endblock %}
+    </section>
 
 
-{% block stylesheets %}
-    <style>
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0,0.4);
-        }
 
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-        }
+    <section>
+        <h1>Liens externes</h1>
+        <div>
+            <p>
+                {% if app.user.career is not null and app.user.career.linkedInUrl is not null %}
+                    <a href="#">
+                        <span>LinkedIn : {{ app.user.career.linkedInUrl }}</span>
+                    </a>
+                {% endif %}
+            </p>
 
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
 
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
+            <p>
+                {% if app.user.career is not null and app.user.career.githubUrl is not null %}
+                    <a href="#">
+                        <span>Github : {{ app.user.career.githubUrl }}</span>
+                    </a>
+                {% endif %}
+            </p>
 
-    </style>
+
+            <p>
+
+                {% if app.user.career is not null and app.user.career.websiteUrl is not null %}
+                    <a href="#">
+                        <span>Autre (site web, portfolio de projets) : {{ app.user.career.websiteUrl }}</span>
+                    </a>
+                {% endif %}
+
+            </p>
+        </div>
+
+        <p>
+            <a href="{{ path('account_external_links_link') }}">Ajouter</a>
+        </p>
+    </section>
+
+
+
+    <section>
+        <h1>Expériences professionnelles</h1>
+
+        {% if app.user.experiences is not null %}
+            {% for experience in app.user.experiences %}
+                <div>
+                    <h2>{{ experience.jobTitle }}</h2>
+                </div>
+
+            {% endfor %}
+        {% endif %}
+
+        <p>
+            <a href="{{ path('account_professional_experience_manager') }}">Ajouter</a>
+        </p>
+    </section>
+    
 {% endblock %}

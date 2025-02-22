@@ -21,25 +21,24 @@
             </div>
 
             <div style="display: none;" id="linkedIn-block">
-                {{ form_label(external_link_form.linkedInLink) }}<br >
-                {{ form_widget(external_link_form.linkedInLink) }}
-                {{ form_errors(external_link_form.linkedInLink) }}
-                {{ form_help(external_link_form.linkedInLink) }}<br>
+                {{ form_label(external_link_form.linkedInUrl) }}<br >
+                {{ form_widget(external_link_form.linkedInUrl) }}
+                {{ form_errors(external_link_form.linkedInUrl) }}<br>
                 <span class="linkedFormat-error" style="color: red; display: none;">Le lien de votre profil LinkedIn doit ressembler à ça : https://www.linkedin.com/in/votrenom</span>
             </div>
 
             <div style="display: none;" id="github-block">
-                {{ form_label(external_link_form.githubLink) }}<br >
-                {{ form_widget(external_link_form.githubLink) }}
-                {{ form_errors(external_link_form.githubLink) }}<br >
+                {{ form_label(external_link_form.githubUrl) }}<br >
+                {{ form_widget(external_link_form.githubUrl) }}
+                {{ form_errors(external_link_form.githubUrl) }}<br >
                 <span class="githubFormat-error" style="color: red; display: none;">Le lien de votre github doit ressembler à ça : https://github.com/username</span>
 
             </div>
 
             <div style="display: none;" id="url-block">
-                {{ form_label(external_link_form.url) }}<br >
-                {{ form_widget(external_link_form.url) }}
-                {{ form_errors(external_link_form.url) }}<br >
+                {{ form_label(external_link_form.websiteUrl) }}<br >
+                {{ form_widget(external_link_form.websiteUrl) }}
+                {{ form_errors(external_link_form.websiteUrl) }}<br >
                 <span class="urlFormat-error" style="color: red; display: none;">Vérifier le lien. Il doit ressembler à ça : https://www.url.com</span>
 
             </div>

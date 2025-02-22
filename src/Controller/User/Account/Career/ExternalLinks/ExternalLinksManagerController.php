@@ -48,7 +48,9 @@
                 $careerEntity->setUser($user);
                 $user->setCareer($careerEntity);
 
-                $careerEntity->setExternalLink($externalLinkFields->getLinkedInLink() ?? $externalLinkFields->getGithubLink() ?? $externalLinkFields->getUrl());
+                $careerEntity->setLinkedInUrl($externalLinkFields->getLinkedInUrl() ?? $user->getCareer()->getLinkedInUrl());
+                $careerEntity->setGithubUrl($externalLinkFields->getGithubUrl() ?? $user->getCareer()->getGithubUrl());
+                $careerEntity->setWebsiteUrl($externalLinkFields->getWebsiteUrl() ?? $user->getCareer()->getWebsiteUrl());
 
                 $this->entityManager->persist($careerEntity);
                 $this->entityManager->flush();

@@ -78,10 +78,17 @@
         #[ORM\OneToMany(targetEntity: Language::class, mappedBy: 'user')]
         private Collection $languages;
 
+        /**
+         * @var Collection<int, Experiences>
+         */
+        #[ORM\OneToMany(targetEntity: Experiences::class, mappedBy: 'user')]
+        private Collection $experiences;
+
         public function __construct()
         {
             $this->applicants = new ArrayCollection();
             $this->languages = new ArrayCollection();
+            $this->experiences = new ArrayCollection();
         }
 
 
@@ -238,24 +245,15 @@
             return $this;
         }
 
+        public function addExperience(Experiences $experience): static
+        {
+            if (!$this->experiences->contains($experience)) {
+                $this->experiences->add($experience);
+                $experience->setUser($this);
+            }
 
-        /**
-         * @param Applicant $applicant
-         * @return $this
-         *
-         * public function setApplicant(Applicant $applicant): static
-         * {
-         * // set the owning side of the relation if necessary
-         * if ($applicant->getUser() !== $this) {
-         * $applicant->setUser($this);
-         * }
-         *
-         * $this->applicant = $applicant;
-         *
-         * return $this;
-         * }
-         */
-
+            return $this;
+        }
 
 
 
@@ -367,15 +365,6 @@
 
 
         /**
-         * @return Applicant|null
-         *
-         * public function getApplicant(): ?Applicant
-         * {
-         * return $this->applicant;
-         * }
-         */
-
-        /**
          * @return Collection<int, Applicant>
          */
         public function getApplicants(): Collection
@@ -409,6 +398,26 @@
                 // set the owning side to null (unless already changed)
                 if ($language->getUser() === $this) {
                     $language->setUser(null);
+                }
+            }
+
+            return $this;
+        }
+
+        /**
+         * @return Collection<int, Experiences>
+         */
+        public function getExperiences(): Collection
+        {
+            return $this->experiences;
+        }
+
+        public function removeExperience(Experiences $experience): static
+        {
+            if ($this->experiences->removeElement($experience)) {
+                // set the owning side to null (unless already changed)
+                if ($experience->getUser() === $this) {
+                    $experience->setUser(null);
                 }
             }
 

@@ -35,7 +35,7 @@
             $aboutMeFields = new AboutMeFields();
 
             // Pre-file text area field with the current value of $aboutYou
-            $aboutMeFields->setAboutMe($user->getCareer()->getAboutYou());
+            $aboutMeFields->setAboutMe($user->getCareer()?->getAboutYou() ?? '');
 
             $aboutMeForm = $this->createForm(AboutMeType::class, $aboutMeFields);
             $aboutMeForm->handleRequest($this->requestStack->getCurrentRequest());

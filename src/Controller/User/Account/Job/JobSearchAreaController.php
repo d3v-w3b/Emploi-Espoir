@@ -35,12 +35,22 @@
             $jobAreaEntity = $user->getJobAndAlternation() ?? new JobAndAlternation();
 
             $jobAreaFields = new JobSearchAreaFields();
-            $jobAreaFields->setJobArea($user->getJobAndAlternation()->getEmploymentArea());
+            if($user->getJobAndAlternation() !== null) {
+                $jobAreaFields->setJobArea($user->getJobAndAlternation()->getEmploymentArea());
+            }
+            else {
+                $jobAreaFields->setJobArea('');
+            }
+
 
             $jobAreaForm = $this->createForm(JobSearchAreaType::class, $jobAreaFields);
             $jobAreaForm->handleRequest($this->requestStack->getCurrentRequest());
 
             if($jobAreaForm->isSubmitted() && $jobAreaForm->isValid()) {
+                // connect entities
+                $user->setJobAndAlternation($jobAreaEntity);
+                $jobAreaEntity->setUser($user);
+
                 $jobAreaEntity->setEmploymentArea($jobAreaFields->getJobArea());
 
                 $this->entityManager->persist($jobAreaEntity);

@@ -2,7 +2,8 @@
 
     namespace App\Controller\User\Account\Career\Experiences;
 
-    use App\Entity\Career;
+    use App\Entity\Experiences;
+    use App\Entity\User;
     use App\Form\Fields\Users\Account\Career\Experiences\ProfessionalExperiencesManagerFields;
     use App\Form\Types\Users\Account\Career\Experiences\ProfessionalExperiencesManagerType;
     use Doctrine\ORM\EntityManagerInterface;
@@ -31,17 +32,21 @@
         {
             $user = $this->getUser();
 
+            if(!$user instanceof User) {
+                throw $this->createAccessDeniedException('Vous n\'avez pas accès à cette page');
+            }
+
             $experienceFields = new ProfessionalExperiencesManagerFields();
-            $experienceEntity = $user->getCareer() ?? new Career();
+            $experienceEntity = new Experiences();
 
-            $experienceType = $this->createForm(ProfessionalExperiencesManagerType::class, $experienceFields);
+            $experienceForm = $this->createForm(ProfessionalExperiencesManagerType::class, $experienceFields);
 
-            $experienceType->handleRequest($this->requestStack->getCurrentRequest());
+            $experienceForm->handleRequest($this->requestStack->getCurrentRequest());
 
-            if($experienceType->isSubmitted() && $experienceType->isValid()) {
+            if($experienceForm->isSubmitted() && $experienceForm->isValid()) {
                 //connect entities
+                $user->addExperience($experienceEntity);
                 $experienceEntity->setUser($user);
-                $user->setCareer($experienceEntity);
 
                 $experienceEntity->setJobTitle($experienceFields->getJobTitle());
                 $experienceEntity->setJobField($experienceFields->getJobField());
@@ -60,7 +65,7 @@
             }
 
             return $this->render('user/account/career/experiences/professionalExperiencesManager.html.twig', [
-                'experience_form' => $experienceType->createView(),
+                'experience_form' => $experienceForm->createView(),
             ]);
         }
     }

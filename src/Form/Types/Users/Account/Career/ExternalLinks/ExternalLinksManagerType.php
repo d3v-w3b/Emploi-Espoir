@@ -26,7 +26,7 @@
                     //'required' => false,
                 ])
 
-                ->add('linkedInLink', TextType::class, [
+                ->add('linkedInUrl', TextType::class, [
                     'label' => 'Lien de votre profil LinkedIn',
                     'required' => false,
                     'attr' => [
@@ -34,7 +34,7 @@
                     ]
                 ])
 
-                ->add('githubLink', TextType::class, [
+                ->add('githubUrl', TextType::class, [
                     'label' => 'Lien de votre profil Github',
                     'required' => false,
                     'attr' => [
@@ -42,7 +42,7 @@
                     ]
                 ])
 
-                ->add('url', TextType::class, [
+                ->add('websiteUrl', TextType::class, [
                     'label' => 'Lien',
                     'required' => false,
                     'attr' => [

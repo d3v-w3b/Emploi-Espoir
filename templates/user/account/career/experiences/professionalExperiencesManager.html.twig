@@ -21,42 +21,50 @@
             <div style="display: grid; grid-template-columns: 1fr; gap: 20px">
                 <div>
                     {{ form_label(experience_form.jobTitle) }}<br>
-                    {{ form_widget(experience_form.jobTitle) }}
+                    {{ form_widget(experience_form.jobTitle) }}<br>
+                    {{ form_errors(experience_form.jobTitle) }}
                 </div>
 
                 <div>
                     {{ form_label(experience_form.jobField) }}<br>
-                    {{ form_widget(experience_form.jobField) }}
+                    {{ form_widget(experience_form.jobField) }}<br>
+                    {{ form_errors(experience_form.jobField) }}
                 </div>
 
                 <div>
                     {{ form_label(experience_form.town) }}<br>
-                    {{ form_widget(experience_form.town) }}
+                    {{ form_widget(experience_form.town) }}<br >
+                    {{ form_errors(experience_form.town) }}
                 </div>
 
                 <div>
                     {{ form_label(experience_form.enterpriseName) }}<br>
-                    {{ form_widget(experience_form.enterpriseName) }}
+                    {{ form_widget(experience_form.enterpriseName) }}<br>
+                    {{ form_errors(experience_form.enterpriseName) }}
                 </div>
 
                 <div>
                     {{ form_label(experience_form.endDateCheckbox) }}<br>
-                    {{ form_widget(experience_form.endDateCheckbox) }}
+                    {{ form_widget(experience_form.endDateCheckbox) }}<br>
+                    {{ form_errors(experience_form.endDateCheckbox) }}
                 </div>
 
                 <div>
                     {{ form_label(experience_form.startDate) }}<br>
                     {{ form_widget(experience_form.startDate) }}
+                    {{ form_errors(experience_form.startDate) }}
                 </div>
 
                 <div style="display: none" class="end-date">
                     {{ form_label(experience_form.endDate) }}<br>
                     {{ form_widget(experience_form.endDate) }}
+                    {{ form_errors(experience_form.endDate) }}
                 </div>
 
                 <div>
                     {{ form_label(experience_form.jobDescription) }}<br>
                     {{ form_widget(experience_form.jobDescription) }}
+                    {{ form_errors(experience_form.jobDescription) }}
                 </div>
 
                 <button type="submit">Enregistrer</button>
