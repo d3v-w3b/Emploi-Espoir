@@ -3,6 +3,7 @@
     namespace App\Controller\User\Account\Career\Formations;
 
     use App\Entity\Formation;
+    use App\Entity\User;
     use App\Form\Fields\Users\Account\Career\Formation\FormationManagerFields;
     use App\Form\Types\Users\Account\Career\Formation\FormationManagerTypes;
     use Doctrine\ORM\EntityManagerInterface;
@@ -32,8 +33,12 @@
             // get current user
             $user = $this->getUser();
 
+            if(!$user instanceof User) {
+                throw $this->createAccessDeniedException('vous n\'avez pas accès à cette page');
+            }
+
             $formationManagerFields = new FormationManagerFields();
-            $formationEntity = $user->getFormation() ?? new Formation();
+            $formationEntity = new Formation();
 
             $formationManagerType = $this->createForm(FormationManagerTypes::class, $formationManagerFields);
 
@@ -65,8 +70,8 @@
                 $formationEntity->setDiploma($diploma);
 
                 // connect entities
-                $user->setFormation($formationEntity);
-                $formationEntity->setUser($user);
+                $user->addFormation($formationEntity);
+                $formationEntity->addUser($user);
 
                 $this->entityManager->persist($formationEntity);
                 $this->entityManager->flush();

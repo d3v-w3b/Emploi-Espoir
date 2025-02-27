@@ -5,6 +5,8 @@
     use App\Enum\User\Account\Career\Formation\DiplomaSpeciality;
     use App\Enum\User\Account\Career\Formation\Months;
     use App\Repository\FormationRepository;
+    use Doctrine\Common\Collections\ArrayCollection;
+    use Doctrine\Common\Collections\Collection;
     use Doctrine\ORM\Mapping as ORM;
 
     #[ORM\Entity(repositoryClass: FormationRepository::class)]
@@ -39,9 +41,15 @@
         #[ORM\Column(type: 'json', nullable: true)]
         private ?array $diploma = null;
 
-        #[ORM\OneToOne(inversedBy: 'formation', cascade: ['persist', 'remove'])]
-        #[ORM\JoinColumn(nullable: false)]
-        private ?User $user = null;
+        #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'formations')]
+        private Collection $user;
+
+        public function __construct()
+        {
+            $this->user = new ArrayCollection();
+        }
+
+
 
 
 
@@ -96,12 +104,16 @@
             return $this;
         }
 
-        public function setUser(User $user): static
+        public function addUser(User $user): static
         {
-            $this->user = $user;
+            if (!$this->user->contains($user)) {
+                $this->user->add($user);
+            }
 
             return $this;
         }
+
+
 
 
 
@@ -151,8 +163,21 @@
             return $this->diploma;
         }
 
-        public function getUser(): ?User
+        /**
+         * @return Collection<int, User>
+         */
+        public function getUser(): Collection
         {
             return $this->user;
         }
+
+
+        public function removeUser(User $user): static
+        {
+            $this->user->removeElement($user);
+
+            return $this;
+        }
+
+
     }

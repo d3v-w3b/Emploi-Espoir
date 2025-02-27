@@ -63,8 +63,8 @@
         #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
         private ?Career $career = null;
 
-        #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
-        private ?Formation $formation = null;
+        #[ORM\ManyToMany(targetEntity: Formation::class, mappedBy: 'user')]
+        private Collection $formations;
 
         #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
         private ?Organization $organization = null;
@@ -84,11 +84,14 @@
         #[ORM\OneToMany(targetEntity: Experiences::class, mappedBy: 'user')]
         private Collection $experiences;
 
+
+
         public function __construct()
         {
             $this->applicants = new ArrayCollection();
             $this->languages = new ArrayCollection();
             $this->experiences = new ArrayCollection();
+            $this->formations = new ArrayCollection();
         }
 
 
@@ -201,17 +204,7 @@
             return $this;
         }
 
-        public function setFormation(Formation $formation): static
-        {
-            // set the owning side of the relation if necessary
-            if ($formation->getUser() !== $this) {
-                $formation->setUser($this);
-            }
 
-            $this->formation = $formation;
-
-            return $this;
-        }
 
         public function setOrganization(Organization $organization): static
         {
@@ -250,6 +243,17 @@
             if (!$this->experiences->contains($experience)) {
                 $this->experiences->add($experience);
                 $experience->setUser($this);
+            }
+
+            return $this;
+        }
+
+
+        public function addFormation(Formation $formation): static
+        {
+            if (!$this->formations->contains($formation)) {
+                $this->formations->add($formation);
+                $formation->addUser($this);
             }
 
             return $this;
@@ -353,10 +357,7 @@
             return $this->career;
         }
 
-        public function getFormation(): ?Formation
-        {
-            return $this->formation;
-        }
+        
 
         public function getOrganization(): ?Organization
         {
@@ -419,6 +420,24 @@
                 if ($experience->getUser() === $this) {
                     $experience->setUser(null);
                 }
+            }
+
+            return $this;
+        }
+
+        /**
+         * @return Collection<int, Formation>
+         */
+        public function getFormations(): Collection
+        {
+            return $this->formations;
+        }
+
+
+        public function removeFormation(Formation $formation): static
+        {
+            if ($this->formations->removeElement($formation)) {
+                $formation->removeUser($this);
             }
 
             return $this;
