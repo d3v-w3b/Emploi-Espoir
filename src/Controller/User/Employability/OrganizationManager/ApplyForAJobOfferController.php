@@ -50,7 +50,12 @@
             $applyJobOfferFields->setFirstName($user->getFirstName());
             $applyJobOfferFields->setLastName($user->getLastName());
             $applyJobOfferFields->setEmail($user->getEmail());
-            $applyJobOfferFields->setPhone($user->getPhone() ?? '');
+
+            $phone = null;
+            foreach ($user->getApplicants() as $phoneNumber) {
+                $phone = $phoneNumber->getPhone();
+            }
+            $applyJobOfferFields->setPhone($user->getPhone() ?? $phone);
 
             $applicantEntity = new Applicant();
 

@@ -4,6 +4,7 @@
 
 {% block javascripts %}
     <script src="{{ asset('js/user/employability/organizationManager/inputFileManagerApplyForAJob.js') }}" defer></script>
+    <script src="{{ asset('js/user/employability/organizationManager/profilViewByRecruiterManager.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 {% endblock %}
 
@@ -11,7 +12,7 @@
     <h1>Postuler pour l'offre <em>{{ job_offer.jobTitle }}</em></h1>
 
     <h3>
-        <a href="#">Voir mon profil en tant qu'entreprise</a>
+        <a href="#" id="open-modal">Voir mon profil en tant qu'entreprise</a>
     </h3>
 
     {{ form_start(apply_job_offer_form, {'attr' : {'novalidate' : 'novalidate'}}) }}
@@ -66,6 +67,197 @@
         </div>
     {{ form_end(apply_job_offer_form) }}
 
+
+
+
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+
+            {# profile pic block #}
+            <section>
+                <p>
+                    <span>
+                        {% if app.user.profilPic is not null %}
+                            <img src="{{ asset('user/profile/avatar/' ~ app.user.profilPic) }}" alt="Emploi_Espoir_profil_pic" width="200"><br>
+                        {% else %}
+                            <span class="bi bi-person-circle" style="font-size: 3em;"></span>
+                        {% endif %}
+                    </span>
+
+                    {# <a href="{{ path('user_profile_avatar_edit') }}">Modifier</a> #}
+                </p>
+            </section>
+
+
+            {# user info block #}
+            <section>
+                <h1>{{ app.user.firstName }} {{ app.user.lastName }}</h1>
+
+                <p>{{ app.user.email }}</p>
+                {% if app.user.phone is not null %}
+                    <p>{{ app.user.phone }}</p>
+                {% else %}
+                    <p>
+                        <em>Information non fournie</em>
+                    </p>
+                {% endif %}
+            </section>
+
+
+            {# employement area block #}
+            <section>
+                <p>
+                    {% if app.user.jobAndAlternation is not null and app.user.jobAndAlternation.employmentArea is not null %}
+                        <span>{{ app.user.jobAndAlternation.employmentArea }}</span>
+                    {% else %}
+                        <span>
+                            <em>Informations non fournie</em>
+                        </span>
+                    {% endif %}
+                </p>
+            </section>
+
+
+            {# employment preferences block #}
+            <section>
+                <p>
+                    <strong>Préférence relative au télétravail : </strong>
+                    <span>
+                        {% if app.user.jobAndAlternation is not null %}
+                            {% for jobPreferences in app.user.jobAndAlternation.employmentPreference %}
+                                {{ jobPreferences }},
+                            {% endfor %}
+                        {% else  %}
+                            <em>Information non fournie</em>
+                        {% endif %}
+                    </span>
+                </p>
+            </section>
+
+
+            {# about user block #}
+            <section>
+                <h1>Présentation</h1>
+
+                <p>
+                    <span>
+                        <strong>A propos de vous : </strong>
+                        {% if app.user.career is not null %}
+                            {{ app.user.career.aboutYou }}
+                        {% endif %}
+                    </span>
+                </p>
+
+                <p>
+                    <span>CV</span>
+                    {% if app.user.career is not null and app.user.career.cv is not empty %}
+                        <a href="{{ asset(app.user.career.cv) }}">Voir le cv</a>
+                    {% else %}
+                        <span>
+                            <em>Information non fournie</em>
+                        </span>
+                    {% endif %}
+                </p>
+            </section>
+
+
+            <section>
+                <h1>Compétences</h1>
+
+                <div>
+                    <p>
+                        <span>Compétence principale : </span>
+                        {% if app.user.career is not null and app.user.career.skills is not null %}
+                            {% for careerSkills in app.user.career.skills %}
+                                {{ careerSkills }},
+                            {% endfor %}
+                        {% else %}
+                            <em>Informations non fournie</em>
+                        {% endif %}
+                    </p>
+                </div>
+            </section>
+
+
+
+            <section>
+                <h1>Liens externes</h1>
+                <div>
+                    <p>
+                        {% if app.user.career is not null and app.user.career.linkedInUrl is not null %}
+                            <span>
+                                <span>LinkedIn : {{ app.user.career.linkedInUrl }}</span>
+                            </span>
+                        {% endif %}
+                    </p>
+
+
+                    <p>
+                        {% if app.user.career is not null and app.user.career.githubUrl is not null %}
+                            <span>
+                                <span>Github : {{ app.user.career.githubUrl }}</span>
+                            </span>
+                        {% endif %}
+                    </p>
+
+
+                    <p>
+
+                        {% if app.user.career is not null and app.user.career.websiteUrl is not null %}
+                            <span>
+                                <span>Autre (site web, portfolio de projets) : {{ app.user.career.websiteUrl }}</span>
+                            </span>
+                        {% endif %}
+
+                    </p>
+                </div>
+
+            </section>
+
+
+
+            <section>
+                <h1>Expériences professionnelles</h1>
+
+                {% if app.user.experiences is not null %}
+                    {% for experience in app.user.experiences %}
+                        <div>
+                            <h3>{{ experience.jobTitle }}</h3>
+                        </div>
+
+                        <div>
+                            {{ experience.enterpriseName }} | {{ experience.town }} | {{ experience.startDate|date('m/Y') }} - Aujourd'hui {# ici marquer la date genre 3ans quelques mois #}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </section>
+
+
+            <section>
+                <h1>Niveau de langues</h1>
+
+                {% if app.user.languages is not null and app.user.languages|length > 0 %}
+
+                    {% for language in app.user.languages %}
+                        <div>
+                            <p>
+                                <span>{{ language.language }}</span> | <span>{{ language.languageLevel }}</span>
+                            </p>
+                        </div>
+                    {% endfor %}
+
+                {% endif %}
+            </section>
+
+
+            <p>
+                <a href="{{ path('user_profile_view_as_recruiter') }}">Modifier mes informations</a>
+            </p>
+
+        </div>
+    </div>
+
 {% endblock %}
 
 
@@ -108,6 +300,38 @@
 
         .inputForFile {
             border: 1px dashed black;
+            cursor: pointer;
+        }
+
+
+        .modal {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: -10px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Fond sombre semi-transparent */
+        }
+
+        .modal-content {
+            max-height: 80vh; /* Limite la hauteur à 80% de la fenêtre */
+            overflow-y: auto; /* Active le défilement vertical */
+            padding: 20px; /* Ajoute un peu d'espace intérieur */
+            background: white; /* Assure un bon contraste */
+            border-radius: 10px; /* Coins arrondis pour un look propre */
+        }
+        .modal-content::-webkit-scrollbar {
+            display: none;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 25px;
             cursor: pointer;
         }
     </style>

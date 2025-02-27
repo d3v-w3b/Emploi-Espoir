@@ -52,17 +52,18 @@
 
         <div>
             {# employement area #}
-            {% if app.user.jobAndAlternation is not null %}
-                <p>
-                    <a href="{{ path('account_job_preference_search_area') }}">
+            <a href="{{ path('account_job_preference_search_area') }}">
+                {% if app.user.jobAndAlternation is not null and app.user.jobAndAlternation.employmentArea is not null %}
+                    <span>
                         {{ app.user.jobAndAlternation.employmentArea }}
-                    </a>
-                </p>
-            {% else %}
-                <a href="{{ path('account_job_preference_search_area') }}">
-                    <em>Information non fournie</em>
-                </a>
-            {% endif %}
+                    </span>
+                {% else %}
+                    <span>
+                        <em>Information non fournie</em>
+                    </span>
+                {% endif %}
+            </a>
+
         </div>
 
 
@@ -178,14 +179,39 @@
         {% if app.user.experiences is not null %}
             {% for experience in app.user.experiences %}
                 <div>
-                    <h2>{{ experience.jobTitle }}</h2>
+                    <h3>{{ experience.jobTitle }}</h3>
                 </div>
 
+                <div>
+                    {{ experience.enterpriseName }} | {{ experience.town }} | {{ experience.startDate|date('m/Y') }} - Aujourd'hui {# ici marquer la date genre 3ans quelques mois #}
+                </div>
             {% endfor %}
         {% endif %}
 
         <p>
             <a href="{{ path('account_professional_experience_manager') }}">Ajouter</a>
+        </p>
+    </section>
+
+
+
+    <section>
+        <h1>Niveau de langues</h1>
+
+        {% if app.user.languages is not null and app.user.languages|length > 0 %}
+
+            {% for language in app.user.languages %}
+                <div>
+                    <a href="#">
+                        <span>{{ language.language }}</span> | <span>{{ language.languageLevel }}</span>
+                    </a>
+                </div>
+            {% endfor %}
+
+        {% endif %}
+
+        <p>
+            <a href="{{ path('account_languages_language_level') }}">Ajouter</a>
         </p>
     </section>
     

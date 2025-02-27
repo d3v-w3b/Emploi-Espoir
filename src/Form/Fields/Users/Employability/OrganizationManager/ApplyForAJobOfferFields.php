@@ -37,11 +37,13 @@
 
 
        //setters
-       public function setLastName(string $lastName): static
+
+       /**
+        * @param string|null $lastName
+        */
+       public function setLastName(?string $lastName): void
        {
            $this->lastName = $lastName;
-
-           return $this;
        }
 
        public function setFirstName(?string $firstName): void
@@ -49,19 +51,18 @@
            $this->firstName = $firstName;
        }
 
-       public function setEmail(string $email): static
+
+       public function setEmail(?string $email): void
        {
            $this->email = $email;
-
-           return $this;
        }
 
-       public function setPhone(string $phone): static
+
+       public function setPhone(?string $phone): void
        {
            $this->phone = $phone;
-
-           return $this;
        }
+
 
        public function setDocsToProvide(?array $docsToProvide): void
        {
