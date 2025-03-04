@@ -178,13 +178,15 @@
 
         {% if app.user.experiences is not null %}
             {% for experience in app.user.experiences %}
-                <div>
-                    <h3>{{ experience.jobTitle }}</h3>
-                </div>
+                <a href="#">
+                    <div>
+                        <h3>{{ experience.jobTitle }}</h3>
+                    </div>
 
-                <div>
-                    {{ experience.enterpriseName }} | {{ experience.town }} | {{ experience.startDate|date('m/Y') }} - Aujourd'hui {# ici marquer la date genre 3ans quelques mois #}
-                </div>
+                    <div>
+                        {{ experience.enterpriseName }} | {{ experience.town }} | {{ experience.startDate|date('m/Y') }} - Aujourd'hui {# ici marquer la date genre 3ans quelques mois #}
+                    </div>
+                </a>
             {% endfor %}
         {% endif %}
 
@@ -198,7 +200,30 @@
     <section>
         <h1>Formation</h1>
 
+        {% if app.user.formations is not empty %}
+            {% for formation in app.user.formations %}
+                <a href="#">
+                    <div>
+                        <h3>{{ formation.diplomaName }}</h3>
+                    </div>
 
+                    <div>
+                        {{ formation.universityName }} | {{ formation.diplomaTown }} | {{ formation.diplomaLevel }} | {{ formation.diplomaMonth.value }}/{{ formation.diplomaYear }}
+                    </div>
+                </a>
+
+            {% endfor %}
+        {% else %}
+            <p>
+                Information non fournie
+            </p>
+        {% endif %}
+
+        <p>
+            <a href="{{ path('account_formation_add') }}">
+                Ajouter
+            </a>
+        </p>
     </section>
 
 
@@ -214,7 +239,10 @@
                     </a>
                 </div>
             {% endfor %}
-
+        {% else %}
+            <p>
+                Information non fournie
+            </p>
         {% endif %}
 
         <p>

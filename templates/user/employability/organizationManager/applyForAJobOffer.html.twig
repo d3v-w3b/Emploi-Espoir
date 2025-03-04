@@ -2,6 +2,7 @@
 
 {% block title %}Postuler à une offre | Emploi Espoir {% endblock %}
 
+
 {% block javascripts %}
     <script src="{{ asset('js/user/employability/organizationManager/inputFileManagerApplyForAJob.js') }}" defer></script>
     <script src="{{ asset('js/user/employability/organizationManager/profilViewByRecruiterManager.js') }}" defer></script>
@@ -150,7 +151,7 @@
                 </p>
 
                 <p>
-                    <span>CV</span>
+                    <span>CV : </span>
                     {% if app.user.career is not null and app.user.career.cv is not empty %}
                         <a href="{{ asset(app.user.career.cv) }}">Voir le cv</a>
                     {% else %}
@@ -167,10 +168,9 @@
 
                 <div>
                     <p>
-                        <span>Compétence principale : </span>
                         {% if app.user.career is not null and app.user.career.skills is not null %}
                             {% for careerSkills in app.user.career.skills %}
-                                {{ careerSkills }},
+                                Compétence principale : {{ careerSkills }},
                             {% endfor %}
                         {% else %}
                             <em>Informations non fournie</em>
@@ -220,7 +220,8 @@
             <section>
                 <h1>Expériences professionnelles</h1>
 
-                {% if app.user.experiences is not null %}
+                {% if app.user.experiences is not null and app.user.experiences|length > 0 %}
+
                     {% for experience in app.user.experiences %}
                         <div>
                             <h3>{{ experience.jobTitle }}</h3>
@@ -230,6 +231,36 @@
                             {{ experience.enterpriseName }} | {{ experience.town }} | {{ experience.startDate|date('m/Y') }} - Aujourd'hui {# ici marquer la date genre 3ans quelques mois #}
                         </div>
                     {% endfor %}
+
+                {% else %}
+                    <p>
+                        <em>Information non fournie</em>
+                    </p>
+                {% endif %}
+            </section>
+
+
+            <section>
+                <h1>Formation</h1>
+
+                {% if app.user.formations is not empty %}
+
+                    {% for formation in app.user.formations %}
+
+                        <div>
+                            <h3>{{ formation.diplomaName }}</h3>
+                        </div>
+
+                        <div>
+                            {{ formation.universityName }} | {{ formation.diplomaTown }} | {{ formation.diplomaLevel }} | {{ formation.diplomaMonth.value }}/{{ formation.diplomaYear }}
+                        </div>
+
+                    {% endfor %}
+
+                {% else %}
+                    <p>
+                        <em>Information non fournie</em>
+                    </p>
                 {% endif %}
             </section>
 
@@ -247,6 +278,10 @@
                         </div>
                     {% endfor %}
 
+                {% else %}
+                    <p>
+                        <em>Information non fournie</em>
+                    </p>
                 {% endif %}
             </section>
 
@@ -293,6 +328,11 @@
 
 
 {% block stylesheets %}
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+
+
     <style>
         input[type="file"] {
             display: none;

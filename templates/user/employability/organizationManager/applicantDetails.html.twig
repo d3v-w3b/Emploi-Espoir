@@ -42,16 +42,16 @@
                  <strong>A propos de vous </strong><br>
 
                  <span>
-                     {% if applicant.user.career.aboutYou is null %}
-                        <em>Informations non fournies</em>
-                     {% else %}
+                     {% if applicant.user.career is not null and applicant.user.career.aboutYou is not null %}
                          {{ applicant.user.career.aboutYou }}
+                     {% else %}
+                         <em>Informations non fournies</em>
                      {% endif %}
                  </span>
              </p>
 
             <p>
-                <strong>Documents</strong><br >
+                <strong>CV</strong><br >
 
                 {% for docs in applicant.docsToProvide %}
                     <a href="{{ asset(docs) }}">Voir le Cv</a>
@@ -59,4 +59,125 @@
             </p>
         </div>
     </section>
+
+
+
+    <section>
+        <h1>Compétences</h1>
+
+        {% if applicant.user.career is not null %}
+            <p>
+                <span>Compétences principales : </span>
+                {% for skill in applicant.user.career.skills %}
+                    {{ skill }}
+                {% endfor %}
+            </p>
+
+        {% else %}
+            <p>
+                <em>Information non fournie</em>
+            </p>
+        {% endif %}
+    </section>
+
+
+
+    <section>
+        <h1>Liens externes</h1>
+
+        {% if applicant.user.career is not null and applicant.user.career.linkedInUrl is not null %}
+            <p>
+                LinkedIn : {{ applicant.user.career.linkedInUrl }}
+            </p>
+        {% endif %}
+
+
+        {% if applicant.user.career is not null and applicant.user.career.githubUrl is not null %}
+            <p>
+                Github : {{ applicant.user.career.githubUrl }}
+            </p>
+        {% endif %}
+
+
+        {% if applicant.user.career is not null and applicant.user.career.websiteUrl is not null %}
+            <p>
+                Autre (site web, portfolio, ...) : {{ applicant.user.career.websiteUrl }}
+            </p>
+        {% endif %}
+    </section>
+
+
+
+    <section>
+        <h1>Expériences professionnelles</h1>
+
+
+        {% if applicant.user.experiences is not null and applicant.user.experiences|length > 0 %}
+
+            {% for experience in applicant.user.experiences %}
+                <div>
+                    <h3>{{ experience.jobTitle }}</h3>
+                </div>
+
+                <div>
+                    {{ experience.enterpriseName }} | {{ experience.town }} | {{ experience.startDate|date('m/Y') }} - Aujourd'hui {# ici marquer la date genre 3ans quelques mois #}
+                </div>
+            {% endfor %}
+
+        {% else %}
+            <p>
+                <em>Information non fournie</em>
+            </p>
+        {% endif %}
+    </section>
+
+
+
+    <section>
+        <h1>Formations</h1>
+
+        {% if applicant.user.formations is not null and applicant.user.formations|length > 0 %}
+
+            {% for formation in applicant.user.formations %}
+
+                <div>
+                    <h3>{{ formation.diplomaName }}</h3>
+                </div>
+
+                <div>
+                    {{ formation.universityName }} | {{ formation.diplomaTown }} | {{ formation.diplomaLevel }} | {{ formation.diplomaMonth.value }}/{{ formation.diplomaYear }}
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+            <p>
+                <em>Information non fournie</em>
+            </p>
+        {% endif %}
+    </section>
+
+
+
+    <section>
+        <h1>Niveau de langues</h1>
+
+        {% if applicant.user.languages is not null and applicant.user.languages|length > 0 %}
+
+            {% for language in applicant.user.languages %}
+                <div>
+                    <p>
+                        <span>{{ language.language }}</span> | <span>{{ language.languageLevel }}</span>
+                    </p>
+                </div>
+            {% endfor %}
+
+        {% else %}
+            <p>
+                <em>Information non fournie</em>
+            </p>
+        {% endif %}
+    </section>
+
+    
 {% endblock %}

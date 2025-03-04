@@ -22,9 +22,12 @@
         public function applicantDetails(int $applicantId): Response
         {
             $applicant = $this->entityManager->getRepository(Applicant::class)->find($applicantId);
+            //$applicantCareer = $applicant->getUser()->getCareer();
+
 
             return $this->render('user/employability/organizationManager/applicantDetails.html.twig', [
-                'applicant' => $applicant
+                'applicant' => $applicant,
+                //'applicantCareer' => $applicantCareer
             ]);
         }
     }

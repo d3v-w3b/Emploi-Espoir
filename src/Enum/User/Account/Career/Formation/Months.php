@@ -2,20 +2,20 @@
 
     namespace App\Enum\User\Account\Career\Formation;
 
-    enum Months: string
+    enum Months: int
     {
-        case January = 'January';
-        case February = 'February';
-        case March = 'March';
-        case April = 'April';
-        case May = 'May';
-        case June = 'June';
-        case July = 'July';
-        case August = 'August';
-        case September = 'September';
-        case October = 'October';
-        case November = 'November';
-        case December = 'December';
+        case January = 1;
+        case February = 2;
+        case March = 3;
+        case April = 4;
+        case May = 5;
+        case June = 6;
+        case July = 7;
+        case August = 8;
+        case September = 9;
+        case October = 10;
+        case November = 11;
+        case December = 12;
 
 
         public function getLabel(): string

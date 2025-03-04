@@ -17,6 +17,29 @@
     <section>
         <h1>Formations</h1>
 
+        <div>
+            {% if app.user.formations is not null and app.user.formations|length > 0 %}
+
+                {% for formation in app.user.formations %}
+
+                    <a href="#">
+                        <div>
+                            <h3>{{ formation.diplomaName }}</h3>
+                        </div>
+
+                        <div>
+                            {{ formation.universityName }} | {{ formation.diplomaTown }} | {{ formation.diplomaLevel }} | {{ formation.diplomaMonth.value }}/{{ formation.diplomaYear }}
+                        </div>
+                    </a>
+                {% endfor %}
+
+            {% else %}
+                <p>
+                    Vous n'avez pas encore ajouté de formation
+                </p>
+            {% endif %}
+        </div>
+
         <a href="{{ path('account_formation_add') }}">Ajouter</a>
     </section>
 {% endblock %}

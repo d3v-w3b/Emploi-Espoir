@@ -8,13 +8,28 @@
 
     class FormationManagerFields
     {
+        #[Assert\NotBlank]
         private ?string $diplomaLevel = null;
+
+        #[Assert\NotBlank]
         private ?string $diplomaName = null;
+
+        #[Assert\NotBlank]
         private ?DiplomaSpeciality $diplomaSpeciality = null;
+
+        #[Assert\NotBlank]
         private ?string $universityName = null;
+
+        #[Assert\NotBlank]
         private ?string $diplomaTown = null;
+
+        #[Assert\NotBlank]
         private ?Months $diplomaMonth = null;
+
+        #[Assert\NotBlank]
         private ?string $diplomaYear = null;
+
+        #[Assert\NotBlank]
         private ?array $diploma = null;
 
 

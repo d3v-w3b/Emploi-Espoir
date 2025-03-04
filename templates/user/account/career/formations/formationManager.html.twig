@@ -13,7 +13,7 @@
     <h1>Formations</h1>
 
     <div>
-        {{ form_start(formation_form) }}
+        {{ form_start(formation_form, {'attr' : {'novalidate' : 'novalidate'}}) }}
             <div style="display: grid; grid-template-columns: 1fr; gap: 20px">
                 <div>
                     {{ form_label(formation_form.diplomaLevel) }}<br >
@@ -73,6 +73,8 @@
                             <div class="inputForFile">
                                 <span>Sélectionnez vos fichiers ici</span>
                             </div>
+
+                            {{ form_help(formation_form.diploma) }}
 
                             <div class="files-placeholder">
 
