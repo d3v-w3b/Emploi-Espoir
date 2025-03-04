@@ -2,9 +2,8 @@ let selectTag = document.getElementById('formation_manager_types_diplomaLevel');
 let diplomaDetails = document.getElementById('diploma-details')
 
 // on page load, hide the #diploma-details block
-if(selectTag.value !== 'Aucun diplôme') {
-    diplomaDetails.style.display = 'grid';
-}
+diplomaDetails.style.display = selectTag.value === 'Aucun diplôme' ? 'none' : 'grid';
+
 
 selectTag.addEventListener('change', (event) => {
 
