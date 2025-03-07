@@ -25,6 +25,12 @@
         <div>
             {% for organization in organizationPreferences %}
                 <p>{{ organization.organizationName }}</p>
+
+                {% for preference in organization.organizationPreferences %}
+                    <p>
+                        <em>{{ preference }}</em>
+                    </p>
+                {% endfor %}
             {% else %}
                 <p>Aucune organisation trouvée correspondant à vos préférences.</p>
             {% endfor %}

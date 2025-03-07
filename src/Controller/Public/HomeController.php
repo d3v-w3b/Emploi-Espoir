@@ -12,12 +12,14 @@
     use Symfony\Component\HttpFoundation\RequestStack;
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\Routing\Annotation\Route;
+    use Knp\Component\Pager\PaginatorInterface;
 
     class HomeController extends AbstractController
     {
         public function __construct(
             private readonly EntityManagerInterface $entityManager,
-            private readonly RequestStack $requestStack
+            private readonly RequestStack $requestStack,
+            private readonly PaginatorInterface $paginator
         ){}
 
 
@@ -76,9 +78,16 @@
                 return $jobOffer->getExpirationDate()->format('Y-m-d') > (new \DateTimeImmutable())->format('Y-m-d');
             });
 
+            // Pagination
+            $pagination = $this->paginator->paginate(
+                $qb,
+                $this->requestStack->getCurrentRequest()->query->getInt('page', 1),
+                5
+            );
+
             return $this->render('public/home.html.twig', [
                 'organization' => $organizationEntity,
-                'job_offers' => $validJobOffers,
+                'job_offers' => $pagination,
                 'filter_by_type_of_contract' => $filterByTypeOfContractForm->createView(),
                 'filter_by_organization_fields' => $filterByOrganizationForm->createView()
             ]);

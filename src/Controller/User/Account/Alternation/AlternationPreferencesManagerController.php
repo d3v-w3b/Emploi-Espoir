@@ -2,6 +2,7 @@
 
     namespace App\Controller\User\Account\Alternation;
 
+    use App\Entity\User;
     use Doctrine\ORM\EntityManagerInterface;
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\Routing\Annotation\Route;
@@ -31,6 +32,10 @@
         {
             // get current user
             $user = $this->getUser();
+
+            if(!$user instanceof User) {
+                throw $this->createAccessDeniedException('Utilisateur invalide');
+            }
 
             // get alternations preferences if they exist
             $alternationPreferences = $user->getJobAndAlternation();
