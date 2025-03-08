@@ -3,6 +3,7 @@
     namespace App\Controller\User\Employability\AddOrganization;
 
     use App\Entity\Organization;
+    use App\Entity\User;
     use App\Form\Fields\Users\Employability\AddOrganization\OrganizationBasicsInfosFields;
     use App\Form\Types\Users\Employability\AddOrganization\OrganizationBasicsInfosType;
     use Doctrine\ORM\EntityManagerInterface;
@@ -30,6 +31,10 @@
         public function addOrganization(): Response
         {
             $user = $this->getUser();
+
+            if(!$user instanceof User) {
+                throw $this->createAccessDeniedException('Utilisateur invalid');
+            }
 
             $organizationAddFields = new OrganizationBasicsInfosFields();
             $organizationEntity = $user->getOrganization() ?? new Organization();

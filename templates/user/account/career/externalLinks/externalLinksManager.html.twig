@@ -10,6 +10,11 @@
 {% endblock %}
 
 {% block body %}
+
+    <header>
+        {% include 'navbar.html.twig' %}
+    </header>
+
     <h1>Liens externes</h1>
 
     {{ form_start(external_link_form) }}

@@ -4,6 +4,11 @@
 {% block title %}Emploi Espoir{% endblock %}
 
 {% block body %}
+
+    <header>
+        {% include 'navbar.html.twig' %}
+    </header>
+
     <section>
         <h1>
             {{ user.firstName }} {{ user.lastName }}<br>

@@ -22,6 +22,11 @@
         {% endfor %}
     {% endif %}
 
+    <header>
+        {% include 'navbar.html.twig' %}
+    </header>
+
+
     <p>
         <a href="{{ path('user_profile_view_as_recruiter') }}">Profil</a>
     </p>

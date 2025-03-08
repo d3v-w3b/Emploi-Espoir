@@ -18,6 +18,9 @@
         {% include 'navbar.html.twig' %}
     </header>
 
+
+    <h2>{{ organization.organizationName }}</h2>
+
     {# this block will be side during style #}
     <div>
         <a href="{{ path('organization_dashboard_preview', {'id' : organization.id}) }}">Aperçu</a><br>
