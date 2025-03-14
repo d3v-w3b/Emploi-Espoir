@@ -7,6 +7,7 @@
     use App\Form\Fields\Public\Home\FilterByTypeOfContractFields;
     use App\Form\Types\Public\Home\FilterByOrganizationFieldType;
     use App\Form\Types\Public\Home\FilterByTypeOfContractType;
+    use App\Form\Types\Public\Home\FilterJobOfferType;
     use Doctrine\ORM\EntityManagerInterface;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\RequestStack;
@@ -36,47 +37,73 @@
                 $organizationEntity = $user->getOrganization();
             }
 
-            // Filters offers by type of contract
-            $filterByTypeOfContractFields = new FilterByTypeOfContractFields();
-
-            $filterByTypeOfContractForm = $this->createForm(FilterByTypeOfContractType::class, $filterByTypeOfContractFields);
-            $filterByTypeOfContractForm->handleRequest($this->requestStack->getCurrentRequest());
-
-            // Filter by organization fields
-            $filterByOrganizationFields = new FilterByOrganizationFieldFields();
-
-            $filterByOrganizationForm = $this->createForm(FilterByOrganizationFieldType::class , $filterByOrganizationFields);
-            $filterByOrganizationForm->handleRequest($this->requestStack->getCurrentRequest());
+            /**
+             *
+             * // Filters offers by type of contract
+             * $filterByTypeOfContractFields = new FilterByTypeOfContractFields();
+             *
+             * $filterByTypeOfContractForm = $this->createForm(FilterByTypeOfContractType::class, $filterByTypeOfContractFields);
+             * $filterByTypeOfContractForm->handleRequest($this->requestStack->getCurrentRequest());
+             *
+             * // Filter by organization fields
+             * $filterByOrganizationFields = new FilterByOrganizationFieldFields();
+             *
+             * $filterByOrganizationForm = $this->createForm(FilterByOrganizationFieldType::class , $filterByOrganizationFields);
+             * $filterByOrganizationForm->handleRequest($this->requestStack->getCurrentRequest());
+             *
+             * // Création de la requête avec QueryBuilder
+             * $qb = $this->entityManager->getRepository(JobOffers::class)->createQueryBuilder('job')
+             * ->leftJoin('job.organization', 'org');
+             *
+             *
+             * if ($filterByTypeOfContractForm->isSubmitted() && $filterByTypeOfContractForm->isValid()) {
+             * $typeOfContract = $filterByTypeOfContractFields->getTypeOfContract();
+             * if ($typeOfContract) {
+             * $qb->andWhere('job.typeOfContract = :typeOfContract')
+             * ->setParameter('typeOfContract', $typeOfContract);
+             * }
+             * }
+             *
+             * if ($filterByOrganizationForm->isSubmitted() && $filterByOrganizationForm->isValid()) {
+             * $selectedSector = $filterByOrganizationFields->getOrganizationField();
+             * if ($selectedSector) {
+             * $qb->andWhere('org.sectorOfActivity LIKE :sector')
+             * ->setParameter('sector', '%'.$selectedSector.'%');
+             * }
+             * }
+             *
+             * // Exécuter la requête
+             * $jobOffers = $qb->getQuery()->getResult();
+             *
+             *
+             * // remove offer from view when expiration date === current date
+             * $validJobOffers = array_filter($jobOffers, function($jobOffer) {
+             * return $jobOffer->getExpirationDate()->format('Y-m-d') > (new \DateTimeImmutable())->format('Y-m-d');
+             * });
+             */
+            // Création du formulaire global
+            $filterForm = $this->createForm(FilterJobOfferType::class);
+            $filterForm->handleRequest($this->requestStack->getCurrentRequest());
 
             // Création de la requête avec QueryBuilder
             $qb = $this->entityManager->getRepository(JobOffers::class)->createQueryBuilder('job')
                 ->leftJoin('job.organization', 'org');
 
+            if ($filterForm->isSubmitted() && $filterForm->isValid()) {
+                $data = $filterForm->getData();
 
-            if ($filterByTypeOfContractForm->isSubmitted() && $filterByTypeOfContractForm->isValid()) {
-                $typeOfContract = $filterByTypeOfContractFields->getTypeOfContract();
-                if ($typeOfContract) {
+                if (!empty($data['typeOfContract'])) {
                     $qb->andWhere('job.typeOfContract = :typeOfContract')
-                        ->setParameter('typeOfContract', $typeOfContract);
+                        ->setParameter('typeOfContract', $data['typeOfContract']);
                 }
-            }
 
-            if ($filterByOrganizationForm->isSubmitted() && $filterByOrganizationForm->isValid()) {
-                $selectedSector = $filterByOrganizationFields->getOrganizationField();
-                if ($selectedSector) {
+                if (!empty($data['organizationField'])) {
                     $qb->andWhere('org.sectorOfActivity LIKE :sector')
-                        ->setParameter('sector', '%'.$selectedSector.'%');
+                        ->setParameter('sector', '%' . $data['organizationField'] . '%');
                 }
             }
 
-            // Exécuter la requête
-            $jobOffers = $qb->getQuery()->getResult();
 
-
-            // remove offer from view when expiration date === current date
-            $validJobOffers = array_filter($jobOffers, function($jobOffer) {
-                return $jobOffer->getExpirationDate()->format('Y-m-d') > (new \DateTimeImmutable())->format('Y-m-d');
-            });
 
             // Pagination
             $pagination = $this->paginator->paginate(
@@ -88,8 +115,9 @@
             return $this->render('public/home.html.twig', [
                 'organization' => $organizationEntity,
                 'job_offers' => $pagination,
-                'filter_by_type_of_contract' => $filterByTypeOfContractForm->createView(),
-                'filter_by_organization_fields' => $filterByOrganizationForm->createView()
+                'filter_form' => $filterForm->createView()
+                //'filter_by_type_of_contract' => $filterByTypeOfContractForm->createView(),
+                //'filter_by_organization_fields' => $filterByOrganizationForm->createView()
             ]);
         }
     }

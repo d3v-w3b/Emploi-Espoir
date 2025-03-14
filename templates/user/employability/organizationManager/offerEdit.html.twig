@@ -4,6 +4,10 @@
 
 {% block body %}
 
+    <header>
+        {% include('navbar.html.twig') %}
+    </header>
+
     <h1>Modifier l'offre {{ job_offer.jobTitle }}</h1>
 
     {{ form_start(offer_edit_form) }}

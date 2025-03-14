@@ -32,7 +32,7 @@
             $mainObjectives = $user->getMainObjectives();
             $fieldsOfInterest = $user->getFieldsOfInterest();
 
-            if($mainObjectives === null || $fieldsOfInterest === null) {
+            if($mainObjectives === null || $fieldsOfInterest === null) { 
                 return $this->redirectToRoute('welcome');
             }
 

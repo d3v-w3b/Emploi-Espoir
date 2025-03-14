@@ -1,0 +1,23 @@
+<nav>
+    <div>
+        <p>
+            <a href="{{ path('home') }}">Emploi Espoir</a>
+        </p>
+    </div>
+
+    <div>
+        <p>
+            <a href="{{ path('user_dashboard') }}" title="Tableau de bord">
+                {% if app.user.profilPic is not null %}
+                    <span>
+                        <img src="{{ asset('user/profile/avatar/' ~ app.user.profilPic) }}" alt="Emploi_Espoir_avatar" width="100">
+                    </span>
+                {% else %}
+                    <span>
+                        <i class="bi bi-person-fill"></i>
+                    </span>
+                {% endif %}
+            </a>
+        </p>
+    </div>
+</nav>

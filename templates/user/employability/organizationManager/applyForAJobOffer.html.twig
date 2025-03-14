@@ -10,6 +10,11 @@
 {% endblock %}
 
 {% block body %}
+
+    <header>
+        {% include('navbar.html.twig') %}
+    </header>
+
     <h1>Postuler pour l'offre <em>{{ job_offer.jobTitle }}</em></h1>
 
     <h3>

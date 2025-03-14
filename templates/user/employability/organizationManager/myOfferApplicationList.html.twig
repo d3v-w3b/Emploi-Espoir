@@ -7,6 +7,11 @@
 {% endblock %}
 
 {% block body %}
+
+    <header>
+        {% include('navbar.html.twig') %}
+    </header>
+
     <h1>Liste des candidatures pour l'offre <em>{{ offer.jobTitle }}</em></h1>
 
     {% for applicant in applications %}

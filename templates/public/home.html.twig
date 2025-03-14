@@ -14,7 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {# la ligne ci-dessous permet de soumettre un formulaire sans appuyer sur le bouton submit.  #}
     {# Ligne à décommenter #}
-    {#  <script src="{{ asset('js/public/typeOfContractInputsManager.js') }}" defer></script> #}
+    <script src="{{ asset('js/public/typeOfContractInputsManager.js') }}" defer></script>
 {% endblock %}
 
 
@@ -46,34 +46,19 @@
     <section>
         <h1>Offres d'emplois</h1>
 
-        {# filter by type of contract #}
-        <details open>
-            <summary>Filtrer par type de contrat</summary>
 
-            <div>
-                {{ form_start(filter_by_type_of_contract, {'attr' : {'id' : 'form_filter'}}) }}
+        <div>
+            {{ form_start(filter_form) }}
+                <h4>Type de contrat</h4>
+                {{ form_widget(filter_form.typeOfContract) }}
 
-                    {{ form_widget(filter_by_type_of_contract.typeOfContract) }}
+                <h4>Domaine d'activité</h4>
+                {{ form_widget(filter_form.organizationField) }}
 
-                    <button type="submit">Filtrer</button>
+                <button type="submit" style="display: none;">Filtrer</button>
+            {{ form_end(filter_form) }}
+        </div>
 
-                {{ form_end(filter_by_type_of_contract) }}
-            </div>
-        </details>
-
-
-        {# filter by organization field #}
-        <details open>
-            <summary>Filter par domaine</summary>
-
-            <div>
-                {{ form_start(filter_by_organization_fields) }}
-                    {{ form_widget(filter_by_organization_fields.organizationField) }}
-
-                    <button type="submit">Filtrer</button>
-                {{ form_end(filter_by_organization_fields) }}
-            </div>
-        </details>
 
 
         <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 20px">

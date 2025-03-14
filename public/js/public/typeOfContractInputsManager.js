@@ -1,10 +1,21 @@
-const form = document.getElementById('form_filter');
-const allRadioBtn = document.querySelectorAll('input[type="radio"]');
+const filterForm = document.querySelector('form');
 
-// when a choice is done, form is submitted automatically for
-// each button
-allRadioBtn.forEach(input => {
-    input.addEventListener('input', () => {
-        form.submit();
+const typeOfContractInputs = document.querySelectorAll('input[name="filter_job_offer[typeOfContract]"]');
+const jobFieldsInputs = document.querySelectorAll('input[name="filter_job_offer[organizationField]"]');
+
+typeOfContractInputs.forEach(contractInput => {
+    contractInput.addEventListener('click', (event) => {
+        if(contractInput.checked) {
+            filterForm.submit();
+        }
+    });
+});
+
+
+jobFieldsInputs.forEach(jobFieldsInput => {
+    jobFieldsInput.addEventListener('click', (event) => {
+        if(jobFieldsInput.checked) {
+            filterForm.submit();
+        }
     });
 });

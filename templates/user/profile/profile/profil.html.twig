@@ -18,6 +18,12 @@
         {% endfor %}
     {% endif %}
 
+
+    <header>
+        {% include('navbar.html.twig') %}
+    </header>
+
+
     <div>
         <h1>
             <a href="{{ path('user_profile') }}">Profile</a>

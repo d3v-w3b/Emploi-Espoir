@@ -5,6 +5,10 @@
 
 {% block body %}
 
+    <header>
+        {% include('navbarWithoutUserDetails.html.twig') %}
+    </header>
+
     <h1>Créer une offre d'emploi</h1>
 
     {{ form_start(job_offer_form) }}

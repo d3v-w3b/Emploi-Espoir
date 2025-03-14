@@ -10,7 +10,9 @@
 {% block body %}
     <section>
 
-
+        <header>
+            {% include('navbarWithoutUserDetails.html.twig') %}
+        </header>
 
         {{ form_start(mainObjectivesForm) }}
             <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
@@ -45,6 +47,8 @@
 
 
 {% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
     <style>
         /* Masque complètement la checkbox native */
         input[type="checkbox"] {
