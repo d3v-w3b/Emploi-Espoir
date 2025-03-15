@@ -2,7 +2,6 @@
 
     namespace App\Controller\User\Employability\AddOrganization;
 
-    use App\Entity\Organization;
     use App\Entity\User;
     use App\Form\Types\Users\Employability\AddOrganization\OrganizationEmployerPhoneNumberType;
     use Doctrine\ORM\EntityManagerInterface;

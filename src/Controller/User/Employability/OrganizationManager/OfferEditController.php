@@ -23,7 +23,7 @@
 
 
         #[Route(path: '/organization/{id}/myOffer/{offerId}/edit', name: 'organization_edit_offer')]
-        #[IsGranted('ROLE_USER')]
+        #[IsGranted('ROLE_ENT')]
         public function OfferEdit(Organization $organization, int $offerId): Response
         {
             // Check if this current organization belongs to the user logged

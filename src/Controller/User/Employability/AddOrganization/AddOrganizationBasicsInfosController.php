@@ -68,6 +68,9 @@
                 $organizationEntity->setSectorOfActivity($organizationAddFields->getSectorOfActivity());
                 $organizationEntity->setOrganizationRegistrationNumber($organizationAddFields->getOrganizationRegistrationNumber());
 
+                // add ROLE_ENT to the users which create new organization
+                $user->setRoles(array_unique([...$user->getRoles(), 'ROLE_ENT']));
+
                 $this->entityManager->persist($organizationEntity);
                 $this->entityManager->flush();
 

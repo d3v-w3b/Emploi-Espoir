@@ -18,7 +18,7 @@
 
 
         #[Route(path: '/organization/{id}/offer/{offerId}/applications-list', name: 'offer_applications_list')]
-        #[IsGranted('ROLE_USER')]
+        #[IsGranted('ROLE_ENT')]
         public function myOfferApplicationList(Organization $organization, int $offerId): Response
         {
             $offer = $this->entityManager->getRepository(JobOffers::class)->find($offerId);

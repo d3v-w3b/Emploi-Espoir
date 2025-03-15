@@ -20,7 +20,7 @@
 
 
         #[Route(path: '/organization/{id}/offer-remove/{offerId}', name: 'remove_offer', methods: ['POST'])]
-        #[IsGranted('ROLE_USER')]
+        #[IsGranted('ROLE_ENT')]
         public function removeOffer(int $offerId, Organization $organization): RedirectResponse
         {
             if (!$this->isCsrfTokenValid('remove_offer_'.$offerId, $this->requestStack->getCurrentRequest()->get('_token'))) {

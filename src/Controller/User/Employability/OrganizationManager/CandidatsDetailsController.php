@@ -17,7 +17,7 @@
 
 
         #[Route(path: '/organization/candidats/{id}', name: 'organization_candidats_details')]
-        #[IsGranted('ROLE_USER')]
+        #[IsGranted('ROLE_ENT')]
         public function candidatsDetails(int $id): Response
         {
             $user = $this->entityManager->getRepository(User::class)->find($id);

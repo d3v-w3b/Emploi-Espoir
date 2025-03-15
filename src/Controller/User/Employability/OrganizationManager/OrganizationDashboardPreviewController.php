@@ -12,7 +12,7 @@
     class OrganizationDashboardPreviewController extends AbstractController
     {
         #[Route(path: '/organization/dashboard/preview/{id}', name: 'organization_dashboard_preview')]
-        #[IsGranted('ROLE_USER')]
+        #[IsGranted('ROLE_ENT')]
         public function organizationDashboardPreview(Organization $organization): Response
         {
             $user = $this->getUser();

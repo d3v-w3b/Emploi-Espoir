@@ -23,7 +23,7 @@
 
 
         #[Route(path: '/organization/add-job-offer', name: 'organization_add_job_offer')]
-        #[IsGranted('ROLE_USER')]
+        #[IsGranted('ROLE_ENT')]
         public function addJobOffer(): Response
         {
             $user = $this->getUser();

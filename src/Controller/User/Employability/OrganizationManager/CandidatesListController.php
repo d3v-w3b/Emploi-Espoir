@@ -22,7 +22,7 @@
 
 
         #[Route(path:  '/organization/candidates-list', name: 'organization_candidates_list')]
-        #[IsGranted('ROLE_USER')]
+        #[IsGranted('ROLE_ENT')]
         public function candidatesList(): Response
         {
             $user = $this->getUser();
