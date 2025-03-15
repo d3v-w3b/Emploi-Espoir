@@ -2,18 +2,24 @@
 
     namespace App\Controller\User\UserPanel;
 
+    use App\Entity\JobOffers;
     use App\Entity\Organization;
     use App\Entity\User;
+    use App\Form\Types\Users\UserPanel\DashboardOfferFilterType;
     use Doctrine\ORM\EntityManagerInterface;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+    use Symfony\Component\HttpFoundation\RequestStack;
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\Routing\Annotation\Route;
     use Symfony\Component\Security\Http\Attribute\IsGranted;
+    use Knp\Component\Pager\PaginatorInterface;
 
     class DashboardController extends AbstractController
     {
         public function __construct(
-            private readonly EntityManagerInterface $entityManager
+            private readonly EntityManagerInterface $entityManager,
+            private readonly RequestStack $requestStack,
+            private readonly PaginatorInterface $paginator
         ){}
 
 
@@ -54,9 +60,54 @@
                 }
             }
 
+            // Display offers which related to the user's field
+            $offerBasedOnUser = [];
+
+            $allOffers = $this->entityManager->getRepository(JobOffers::class)->findAll();
+
+            foreach ($allOffers as $offer) {
+                // Get sectors of activities for each offer retrieve
+                $offerSectorOfActivity = $offer->getOrganization()->getSectorOfActivity();
+
+                if(!empty(array_intersect($fieldsOfInterest, $offerSectorOfActivity))) {
+                    $offerBasedOnUser[] = $offer;
+                }
+            }
+
+            // Filter offers based on type of contract
+            $filterForm = $this->createForm(DashboardOfferFilterType::class);
+            $filterForm->handleRequest($this->requestStack->getCurrentRequest());
+
+            // create query builder
+            /**
+             * to delete
+             *
+             * $qb = $this->entityManager->getRepository(JobOffers::class)->createQueryBuilder('job');
+             */
+
+
+            if($filterForm->isSubmitted() && $filterForm->isValid()) {
+                $data = $filterForm->getData();
+
+                if (!empty($data['typeOfContract'])) {
+                    $offerBasedOnUser = array_filter($offerBasedOnUser, function ($offer) use ($data) {
+                        return $offer->getTypeOfContract() === $data['typeOfContract'];
+                    });
+                }
+            }
+
+            // Pagination
+            $pagination = $this->paginator->paginate(
+                $offerBasedOnUser,
+                $this->requestStack->getCurrentRequest()->query->getInt('page', 1),
+                5
+            );
+
             return $this->render('user/userPanel/dashboard.html.twig', [
                 'user' => $user,
-                'organizationPreferences' => $organizationPreferences
+                'organizationPreferences' => $organizationPreferences,
+                'offerBasedOnUser' => $pagination,
+                'filterForm' => $filterForm->createView(),
             ]);
         }
     }

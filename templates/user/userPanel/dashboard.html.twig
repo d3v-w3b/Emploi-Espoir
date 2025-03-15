@@ -3,6 +3,11 @@
 {#  todo: changer le title sie possble pour le référencement #}
 {% block title %}Tableau de bord - Emploi Espoir{% endblock %}
 
+{% block javascripts %}
+    <script src="{{ asset('js/user/userPanel/dashboard/typeOfContractManager.js') }}" defer></script>
+    <script src="{{ asset('js/user/userPanel/dashboard/modalForApplyJobManager.js') }}" defer></script>
+{% endblock %}
+
 {% block body %}
 
     <header>
@@ -11,9 +16,6 @@
 
     <h1>Tableau de bord</h1>
 
-    <p>
-        <a href="{{ path('user_logout') }}" style="color: red">Déconnexion</a>
-    </p>
 
     <div>
 
@@ -39,4 +41,68 @@
             {% endfor %}
         </div>
     </div>
+
+
+    <div>
+        <h1>Offres recommandées</h1>
+
+        {% for fieldsOfInterest in app.user.fieldsOfInterest %}
+            <span style="border: 1px solid black;">{{ fieldsOfInterest }}</span>
+        {% endfor %}
+
+        {{ form_start(filterForm) }}
+            {{ form_widget(filterForm.typeOfContract) }}
+
+            <button type="submit" style="display: none">Filtrer</button>
+        {{ form_end(filterForm) }}
+
+        {# display offer based on fields of interest of user #}
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 20px">
+            {% for offer in offerBasedOnUser %}
+                <a href="#" style="display: block; text-decoration: none; border: 1px solid black" class="offer-link"
+                   data-title="{{ offer.jobTitle }}"
+                   data-organization="{{ offer.organization.organizationName }}"
+                   data-expiration="{{ offer.expirationDate|date('d - m - Y') }}"
+                   data-id="{{ offer.id }}"
+                >
+                    {{ offer.jobTitle }}<br>
+                    {{ offer.organization.organizationName }}<br >
+
+                    <span>
+                        <em>
+                            {% for sectorOfActivity in offer.organization.sectorOfActivity %}
+                                {{ sectorOfActivity }}
+                            {% endfor %}
+                        </em>
+                    </span>
+                </a>
+            {% else %}
+                <p>
+                    Aucune offre d'emploi relatif à vos centres d'intérêts ou au type de contrat n'a été publié.
+                </p>
+            {% endfor %}
+        </div>
+
+        <div class="pagination">
+            {{ knp_pagination_render(offerBasedOnUser) }}
+        </div>
+
+    </div>
+
+
+
+
+
+
+    <!-- Modal structure -->
+    <div id="offer-modal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid black; z-index: 1000;">
+        <h2 id="modal-job-title"></h2>
+        <p><strong>Organisation :</strong> <span id="modal-organization-name"></span></p>
+        <p><strong>Date d'expiration :</strong> <span id="modal-expiration-date"></span></p>
+        <button id="close-modal" style="margin-top: 10px;">Fermer</button>
+        <a href="#" id="apply-link"></a>
+    </div>
+
+    <!-- Modal backdrop -->
+    <div id="modal-backdrop" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
 {% endblock %}

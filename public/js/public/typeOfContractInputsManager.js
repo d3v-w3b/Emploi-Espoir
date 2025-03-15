@@ -4,7 +4,7 @@ const typeOfContractInputs = document.querySelectorAll('input[name="filter_job_o
 const jobFieldsInputs = document.querySelectorAll('input[name="filter_job_offer[organizationField]"]');
 
 typeOfContractInputs.forEach(contractInput => {
-    contractInput.addEventListener('click', (event) => {
+    contractInput.addEventListener('input', (event) => {
         if(contractInput.checked) {
             filterForm.submit();
         }
@@ -13,7 +13,7 @@ typeOfContractInputs.forEach(contractInput => {
 
 
 jobFieldsInputs.forEach(jobFieldsInput => {
-    jobFieldsInput.addEventListener('click', (event) => {
+    jobFieldsInput.addEventListener('input', (event) => {
         if(jobFieldsInput.checked) {
             filterForm.submit();
         }

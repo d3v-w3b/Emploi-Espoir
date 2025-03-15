@@ -37,50 +37,7 @@
                 $organizationEntity = $user->getOrganization();
             }
 
-            /**
-             *
-             * // Filters offers by type of contract
-             * $filterByTypeOfContractFields = new FilterByTypeOfContractFields();
-             *
-             * $filterByTypeOfContractForm = $this->createForm(FilterByTypeOfContractType::class, $filterByTypeOfContractFields);
-             * $filterByTypeOfContractForm->handleRequest($this->requestStack->getCurrentRequest());
-             *
-             * // Filter by organization fields
-             * $filterByOrganizationFields = new FilterByOrganizationFieldFields();
-             *
-             * $filterByOrganizationForm = $this->createForm(FilterByOrganizationFieldType::class , $filterByOrganizationFields);
-             * $filterByOrganizationForm->handleRequest($this->requestStack->getCurrentRequest());
-             *
-             * // Création de la requête avec QueryBuilder
-             * $qb = $this->entityManager->getRepository(JobOffers::class)->createQueryBuilder('job')
-             * ->leftJoin('job.organization', 'org');
-             *
-             *
-             * if ($filterByTypeOfContractForm->isSubmitted() && $filterByTypeOfContractForm->isValid()) {
-             * $typeOfContract = $filterByTypeOfContractFields->getTypeOfContract();
-             * if ($typeOfContract) {
-             * $qb->andWhere('job.typeOfContract = :typeOfContract')
-             * ->setParameter('typeOfContract', $typeOfContract);
-             * }
-             * }
-             *
-             * if ($filterByOrganizationForm->isSubmitted() && $filterByOrganizationForm->isValid()) {
-             * $selectedSector = $filterByOrganizationFields->getOrganizationField();
-             * if ($selectedSector) {
-             * $qb->andWhere('org.sectorOfActivity LIKE :sector')
-             * ->setParameter('sector', '%'.$selectedSector.'%');
-             * }
-             * }
-             *
-             * // Exécuter la requête
-             * $jobOffers = $qb->getQuery()->getResult();
-             *
-             *
-             * // remove offer from view when expiration date === current date
-             * $validJobOffers = array_filter($jobOffers, function($jobOffer) {
-             * return $jobOffer->getExpirationDate()->format('Y-m-d') > (new \DateTimeImmutable())->format('Y-m-d');
-             * });
-             */
+
             // Création du formulaire global
             $filterForm = $this->createForm(FilterJobOfferType::class);
             $filterForm->handleRequest($this->requestStack->getCurrentRequest());
@@ -94,12 +51,14 @@
 
                 if (!empty($data['typeOfContract'])) {
                     $qb->andWhere('job.typeOfContract = :typeOfContract')
-                        ->setParameter('typeOfContract', $data['typeOfContract']);
+                        ->setParameter('typeOfContract', $data['typeOfContract'])
+                    ;
                 }
 
                 if (!empty($data['organizationField'])) {
                     $qb->andWhere('org.sectorOfActivity LIKE :sector')
-                        ->setParameter('sector', '%' . $data['organizationField'] . '%');
+                        ->setParameter('sector', '%' . $data['organizationField'] . '%')
+                    ;
                 }
             }
 
@@ -116,8 +75,6 @@
                 'organization' => $organizationEntity,
                 'job_offers' => $pagination,
                 'filter_form' => $filterForm->createView()
-                //'filter_by_type_of_contract' => $filterByTypeOfContractForm->createView(),
-                //'filter_by_organization_fields' => $filterByOrganizationForm->createView()
             ]);
         }
     }
