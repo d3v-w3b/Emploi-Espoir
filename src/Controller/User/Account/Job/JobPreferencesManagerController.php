@@ -60,6 +60,12 @@
                 $this->entityManager->persist($jobPreferenceEntity);
                 $this->entityManager->flush();
 
+                // Make redirect to user profil if it from to user profile
+                if($this->requestStack->getCurrentRequest()->query->get('redirect') === 'user_profile_view_as_recruiter') {
+                    $this->addFlash('information_saved', 'Information sauvegardée');
+                    return $this->redirectToRoute('user_profile_view_as_recruiter');
+                }
+
                 $this->addFlash('job_preference_saved', 'Informations sauvegardée');
 
                 return $this->redirectToRoute('account_job_preference');

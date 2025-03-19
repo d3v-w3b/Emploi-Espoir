@@ -23,9 +23,6 @@
                 ->add('typeOfContract', ChoiceType::class, [
                     'label' => 'Type de contract',
                     'choices' => [
-                        'CDI' => 'CDI',
-                        'CDD' => 'CDD',
-                        'Stage' => 'Stage',
                         'Alternance' => 'Alternance',
                         'Premier emploi' => 'Premier emploi'
                     ],

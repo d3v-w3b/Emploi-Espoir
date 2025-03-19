@@ -2,6 +2,7 @@
 
     namespace App\Controller\User\Account\Alternation;
 
+    use App\Entity\User;
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\Routing\Annotation\Route;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,6 +15,10 @@
         public function alternationPreferences(): Response
         {
             $user = $this->getUser();
+
+            if(!$user instanceof User) {
+                throw $this->createAccessDeniedException('Vous n\'avez pas accès à cette page');
+            }
 
             //get entity jobAndAlternation for current logged user
             $jobAndAlternation = $user->getJobAndAlternation();

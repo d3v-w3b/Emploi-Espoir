@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 {% endblock %}
 
+{% block javascripts %}
+    <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
+{% endblock %}
+
 {#
 {% block javascripts %}
 <script src="{{ asset('js/user/profilViewAsRecruiter/redirectToModal.js') }}" defer></script>
@@ -13,7 +17,26 @@
 #}
 
 
+
 {% block body %}
+
+    {# message if information about formation has been done #}
+    {% if app.flashes('formation_information_saved') is defined %}
+        {% for formationSavedMsg in app.flashes('formation_information_saved') %}
+            <span id="hide-flashMsg">{{ formationSavedMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
+
+    {% if app.flashes('information_saved') is defined %}
+        {% for informationSaved in app.flashes('information_saved') %}
+            <span id="hide-flashMsg">{{ informationSaved }}</span>
+        {% endfor %}
+    {% endif %}
+
+
+
+
 
     <header>
         {% include('navbar.html.twig') %}
@@ -56,7 +79,7 @@
 
         <div>
             {# employement area #}
-            <a href="{{ path('account_job_preference_search_area') }}">
+            <a href="{{ path('account_job_preference_search_area', {redirect : 'user_profile_view_as_recruiter'}) }}">
                 {% if app.user.jobAndAlternation is not null and app.user.jobAndAlternation.employmentArea is not null %}
                     <span>
                         {{ app.user.jobAndAlternation.employmentArea }}
@@ -73,7 +96,7 @@
 
         <div>
             {# employment preferences #}
-            <a href="{{ path('account_job_preferences_preference') }}">
+            <a href="{{ path('account_job_preferences_preference', {redirect : 'user_profile_view_as_recruiter'}) }}">
                 <strong>Préférence relative au télétravail : </strong>
                 <span>
                     {% if app.user.jobAndAlternation is not null %}
@@ -95,7 +118,7 @@
         <h1>Présentation</h1>
 
         <p>
-            <a href="{{ path('account_presentation_about_me') }}">
+            <a href="{{ path('account_presentation_about_me', {redirect : 'user_profile_view_as_recruiter'}) }}">
             <span>
                 <strong>A propos de vous : </strong>
                 {% if app.user.career is not null %}
@@ -110,7 +133,7 @@
             {% if app.user.career is not null and app.user.career.cv is not empty %}
                 <a href="{{ asset(app.user.career.cv) }}">Voir le cv</a>
             {% else %}
-                <a href="{{ path('account_presentation_cv') }}">
+                <a href="{{ path('account_presentation_cv', {redirect : 'user_profile_view_as_recruiter'}) }}">
                     <em>Information non fournie</em>
                 </a>
 
@@ -123,7 +146,7 @@
         <h1>Compétences</h1>
 
         <div>
-            <a href="{{ path('account_skills_manager') }}">
+            <a href="{{ path('account_skills_manager', {redirect : 'user_profile_view_as_recruiter'}) }}">
                 <span>Compétence principale : </span>
                 {% if app.user.career is not null and app.user.career.skills is not null %}
                     {% for careerSkills in app.user.career.skills %}
@@ -171,7 +194,7 @@
         </div>
 
         <p>
-            <a href="{{ path('account_external_links_link') }}">Ajouter</a>
+            <a href="{{ path('account_external_links_link', {redirect : 'user_profile_view_as_recruiter'}) }}">Ajouter</a>
         </p>
     </section>
 
@@ -195,7 +218,7 @@
         {% endif %}
 
         <p>
-            <a href="{{ path('account_professional_experience_manager') }}">Ajouter</a>
+            <a href="{{ path('account_professional_experience_manager', {redirect : 'user_profile_view_as_recruiter'}) }}">Ajouter</a>
         </p>
     </section>
 
@@ -224,7 +247,7 @@
         {% endif %}
 
         <p>
-            <a href="{{ path('account_formation_add') }}">
+            <a href="{{ path('account_formation_add', {redirect : 'user_profile_view_as_recruiter'}) }}">
                 Ajouter
             </a>
         </p>
@@ -250,7 +273,7 @@
         {% endif %}
 
         <p>
-            <a href="{{ path('account_languages_language_level') }}">Ajouter</a>
+            <a href="{{ path('account_languages_language_level', {redirect : 'user_profile_view_as_recruiter'}) }}">Ajouter</a>
         </p>
     </section>
     

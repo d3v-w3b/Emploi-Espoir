@@ -23,7 +23,7 @@
 
 
         #[Route(path: '/organization/job-offer/apply/{id}', name: 'organization_job_offer_apply')]
-        #[IsGranted('ROLE_ENT')]
+        #[IsGranted('ROLE_USER')]
         public function applyForAJobOffer(int $id): Response
         {
             // Get a job offer based on his id

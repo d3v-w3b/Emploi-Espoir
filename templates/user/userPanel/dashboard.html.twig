@@ -29,13 +29,17 @@
         {# this line represents organization with same objectives that the current user #}
         <div>
             {% for organization in organizationPreferences %}
-                <p>{{ organization.organizationName }}</p>
 
-                {% for preference in organization.organizationPreferences %}
-                    <p>
-                        <em>{{ preference }}</em>
-                    </p>
-                {% endfor %}
+                <a href="#">
+                    <p>{{ organization.organizationName }}</p>
+
+                    {% for preference in organization.organizationPreferences %}
+                        <p>
+                            <em>{{ preference }}</em>
+                        </p>
+                    {% endfor %}
+                </a>
+
             {% else %}
                 <p>Aucune organisation trouvée correspondant à vos préférences.</p>
             {% endfor %}

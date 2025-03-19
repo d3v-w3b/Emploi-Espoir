@@ -15,8 +15,8 @@
             $builder
                 ->add('mainObjectives', ChoiceType::class, [
                     'choices' => [
-                        'Trouver une alternance' => 'Trouver une alternance',
-                        'Trouver un premier emploi' => 'Trouver un premier emploi',
+                        'Alternance' => 'Alternance',
+                        'Premier emploi' => 'Premier emploi',
                     ],
                     'expanded' => true,
                     'multiple' => true

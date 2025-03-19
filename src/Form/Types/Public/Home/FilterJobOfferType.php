@@ -14,9 +14,6 @@
             $builder
                 ->add('typeOfContract', ChoiceType::class, [
                     'choices' => [
-                        'CDI' => 'CDI',
-                        'CDD' => 'CDD',
-                        'Stage' => 'Stage',
                         'Alternance' => 'Alternance',
                         'Premier emploi' => 'Premier emploi'
                     ],

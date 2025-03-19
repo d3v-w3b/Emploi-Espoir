@@ -19,8 +19,10 @@
 
                 $organization->setUser($user);
                 $organization->setTown('Abidjan');
-                $organization->setOrganizationName('Emploi Espoir 2.0');
-                $organization->setOrganizationRegistrationNumber('EM-346429943-F');
+                $organization->setOrganizationName($user->getFirstName().' Emploi Espoir 2.0');
+                $organization->setOrganizationRegistrationNumber('EM-' . rand(100000000, 999999999) . '-F');
+
+                $user->setRoles(array_unique([...$user->getRoles(), 'ROLE_ENT']));
                 //$organization->setNumberOfCollaborator();
                 //$organization->setNeed();
                 //$organization->setMessage();

@@ -68,7 +68,7 @@
             $pagination = $this->paginator->paginate(
                 $qb,
                 $this->requestStack->getCurrentRequest()->query->getInt('page', 1),
-                5
+                32
             );
 
             return $this->render('public/home.html.twig', [

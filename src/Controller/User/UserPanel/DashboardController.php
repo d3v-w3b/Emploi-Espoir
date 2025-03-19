@@ -78,14 +78,6 @@
             $filterForm = $this->createForm(DashboardOfferFilterType::class);
             $filterForm->handleRequest($this->requestStack->getCurrentRequest());
 
-            // create query builder
-            /**
-             * to delete
-             *
-             * $qb = $this->entityManager->getRepository(JobOffers::class)->createQueryBuilder('job');
-             */
-
-
             if($filterForm->isSubmitted() && $filterForm->isValid()) {
                 $data = $filterForm->getData();
 

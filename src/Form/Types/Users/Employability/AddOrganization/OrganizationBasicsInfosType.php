@@ -58,8 +58,8 @@
                 ->add('organizationPreferences', ChoiceType::class, [
                     'label' => 'Préférences de l\'entreprise',
                     'choices' => [
-                        'Trouver un premier emploi' => 'Trouver un premier emploi',
-                        'Trouver une alternance' => 'Trouver une alternance'
+                        'Premier emploi' => 'Premier emploi',
+                        'Alternance' => 'Alternance'
                     ],
                     'expanded' => true,
                     'multiple' => true,
