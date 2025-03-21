@@ -17,7 +17,7 @@
 {% block body %}
     <div>
         {#  this block will be side in the view #}
-        
+
     </div>
 
 
@@ -27,14 +27,21 @@
 
     <section>
 
-        <h1>Liste des candidats</h1>
+        <h1>
+            Profil qui pourrait vous intéresser |
+            <em>
+                {% for organizationSector in organization.sectorOfActivity %} 
+                    {{ organizationSector }} 
+                {% endfor %}
+            </em>
+        </h1>
 
 
 
         <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px">
             {# this list contain users who are the same main objectives that the current organization #}
-            {% for user in userWithSameObjectives %}
-                <a href="{{ path('organization_candidats_details', {'id' : user.id}) }}" style="border: 1px solid">
+            {% for user in specific_profil %}
+                <a href="{{ path('organization_specific_profil_details', {'id' : user.id}) }}" style="border: 1px solid">
                     <p>
                         <span>
                             {% if user.profilPic is not null %}
@@ -52,20 +59,18 @@
                         {% endfor %}
                     </p>
 
+                    <p>
+                       {% for fieldOfInterest in user.fieldsOfInterest %}
+                            <em>{{ fieldOfInterest }}</em>
+                        {% endfor %}
+                    </p>
+
                 </a>
 
             {% else %}
-                <span>Aucun candidats disponible pour le moment</span>
+                <span>Aucun profil spécifique n'est disponible pour le moment</span>
             {% endfor %}
         </div>
 
     </section>
 {% endblock %}
-
-
-
-
-
-
-
-

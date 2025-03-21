@@ -92,7 +92,7 @@
             $pagination = $this->paginator->paginate(
                 $offerBasedOnUser,
                 $this->requestStack->getCurrentRequest()->query->getInt('page', 1),
-                5
+                8
             );
 
             return $this->render('user/userPanel/dashboard.html.twig', [

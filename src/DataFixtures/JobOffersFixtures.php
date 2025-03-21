@@ -19,7 +19,7 @@
             $typeOfContract = ['Alternance', 'Premier emploi'];
 
             foreach ($organizations as $organization) {
-                for ($i = 1; $i <= 25; $i++) {
+                for ($i = 1; $i <= 15; $i++) {
 
                     $jobOffer = new JobOffers();
                     $jobOffer->setOrganization($organization);

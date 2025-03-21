@@ -9,20 +9,20 @@
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-    class CandidatsDetailsController extends AbstractController
+    class SpecificProfilDetails extends AbstractController
     {
         public function __construct(
             private readonly EntityManagerInterface $entityManager
         ){}
 
 
-        #[Route(path: '/organization/candidats/{id}', name: 'organization_candidats_details')]
+        #[Route(path: '/organization/specific-profil/{id}', name: 'organization_specific_profil_details')]
         #[IsGranted('ROLE_ENT')]
-        public function candidatsDetails(int $id): Response
+        public function specificProfilDetails(int $id): Response
         {
             $user = $this->entityManager->getRepository(User::class)->find($id);
 
-            return $this->render('user/employability/organizationManager/candidatsDetails.html.twig', [
+            return $this->render('user/employability/organizationManager/specificProfilDetails.html.twig', [
                 'user' => $user,
             ]);
         }

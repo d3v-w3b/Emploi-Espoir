@@ -2,6 +2,7 @@
 
     namespace App\Form\Types\Users\Employability\AddOrganization;
 
+    use App\Form\Fields\Users\Employability\AddOrganization\OrganizationBasicsInfosFields;
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
     use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -92,7 +93,6 @@
                             'Services' => 'Services divers aux entreprises et particuliers',
                         ],
                     ),
-                    //'expanded' => true,
                     'multiple' => true,
                 ])
 
@@ -124,7 +124,7 @@
         public function configureOptions(OptionsResolver $resolver): void
         {
             $resolver->setDefaults([
-                'data_class' => \App\Form\Fields\Users\Employability\AddOrganization\OrganizationBasicsInfosFields::class,
+                'data_class' => OrganizationBasicsInfosFields::class,
             ]);
         }
     }
