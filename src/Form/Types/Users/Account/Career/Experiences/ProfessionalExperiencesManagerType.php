@@ -115,7 +115,13 @@
 
                 ->add('jobDescription', TextareaType::class, [
                     'label' => 'Description du poste',
-                    'required' => false
+                    'help' => 'Présenter brièvement vos missions, responsabilités, résultats obtenus, projet et outils.',
+                    'required' => false,
+                    'attr' => [
+                        'cols' => 60,
+                        'rows' => 6,
+                        'max' => 1000
+                    ]
                 ])
             ;
         }

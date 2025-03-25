@@ -80,8 +80,5 @@ inputFile.addEventListener('change', (event) => {
 
     selectedFile = filesSelected;
 
-    console.log("Fichier sélectionné :", selectedFile);
-    console.log("Placeholder avant mise à jour :", filePlaceholder);
-
     updateFilePlaceholder();
 });

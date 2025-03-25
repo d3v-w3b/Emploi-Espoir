@@ -14,7 +14,8 @@
         {
             $builder->add('cv', FileType::class, [
                 'label' => 'CV',
-                'help' => 'Fichiers acceptés : .pdf, .doc ou .docx'
+                'help' => 'Fichiers acceptés : .pdf, .doc ou .docx',
+                'required' => false
             ]);
         }
 

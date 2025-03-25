@@ -131,7 +131,10 @@
         <p>
             <span>CV</span>
             {% if app.user.career is not null and app.user.career.cv is not empty %}
-                <a href="{{ asset(app.user.career.cv) }}">Voir le cv</a>
+
+                {# here i retrieve files with this form : user/career/presentation/cv/cv.pdf #}
+                {# with ...|split('/')|last, the file is display by her file name (cv.pdf) #}
+                <a href="{{ asset(app.user.career.cv) }}">{{ app.user.career.cv|split('/')|last }}</a>
             {% else %}
                 <a href="{{ path('account_presentation_cv', {redirect : 'user_profile_view_as_recruiter'}) }}">
                     <em>Information non fournie</em>

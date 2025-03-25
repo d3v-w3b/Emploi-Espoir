@@ -50,7 +50,7 @@
 
                 <span>
                     {% if career is not null and career.cv is not null %}
-                        {{ career.cv }}
+                        {{ career.cv|split('/')|last }}
                     {% else %}
                         <em>Informations non fournie</em>
                     {% endif %}
