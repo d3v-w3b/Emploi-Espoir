@@ -12,32 +12,24 @@
     use Symfony\Component\HttpFoundation\RequestStack;
     use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
     use Symfony\Component\Mailer\MailerInterface;
-    use Symfony\Component\Mime\Email;
+    //use Symfony\Component\Mime\Email;
     use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
     use Symfony\Component\Routing\Annotation\Route;
     use Doctrine\ORM\EntityManagerInterface;
     use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
     use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
+    use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
     class SaveUserController extends AbstractController
     {
-        private RequestStack $requestStack;
-        private EntityManagerInterface $entityManager;
-        private UserPasswordHasherInterface $passwordHasher;
-        private MailerInterface $mailer;
-        private UserAuthenticatorInterface $authenticator;
-        private UserAuthenticator $userAuthenticator;
-
-
-        public function __construct(EntityManagerInterface $entityManager, RequestStack $requestStack, UserPasswordHasherInterface $passwordHasher, MailerInterface $mailer, UserAuthenticatorInterface $authenticator, UserAuthenticator $userAuthenticator)
-        {
-            $this->entityManager = $entityManager;
-            $this->requestStack = $requestStack;
-            $this->passwordHasher = $passwordHasher;
-            $this->mailer = $mailer;
-            $this->userAuthenticator = $userAuthenticator;
-            $this->authenticator = $authenticator;
-        }
+        public function __construct(
+            private readonly RequestStack $requestStack,
+            private readonly EntityManagerInterface $entityManager,
+            private readonly UserPasswordHasherInterface $passwordHasher,
+            private readonly MailerInterface $mailer,
+            private readonly UserAuthenticatorInterface $authenticator,
+            private readonly UserAuthenticator $userAuthenticator,
+        ){}
 
 
         #[Route(path: '/registration', name: 'user_registration')]
@@ -90,11 +82,16 @@
                 if($userSaved) {
 
                     try {
-                        $message = (new Email())
+                        $message = (new TemplatedEmail())
                             ->from('EmploiEspoir-Admin@admin.fr')
                             ->to($emailEntered)
                             ->subject('CODE DE VERIFICATION')
-                            ->text('Votre mot de passe est : '.$passwordGeneration)
+                            ->htmlTemplate('emailVerification.html.twig')
+                            ->context([
+                                'password' => $passwordGeneration,
+                                'userEmail' => $emailEntered,
+                                'userLastName' => $userSaved->getLastName(),
+                            ])
                         ;
 
                         $this->mailer->send($message);

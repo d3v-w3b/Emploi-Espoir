@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Emploi Espoir - Identifiant de connexions</title>
+    </head>
+
+    <body>
+
+        <div>
+            <p>
+                Bonjour {{ userLastName }},
+            </p>
+
+            <p>
+                Bienvenue chez Emploi Espoir ! Vous faites désormais partie de la communauté d'étudiants, d'alternants et d'employeurs collaborant pour la facilitation de l'insertion professionnelle.
+            </p>
+
+            <p>
+                Vos identifiants de connexion sont les suivants :
+                <ul>
+                    <li>Email : <a href="mailto:{{ userEmail }}">{{ userEmail }}</a></li>
+                    <li>Mot de passe : {{ password }}</li>
+                </ul>
+            </p>
+
+            <p>
+                Une fois connecté(e), rendez-vous dans vos paramètres pour créer un nouveau mot de passe de votre choix et compléter votre profil.
+            </p>
+        </div>
+    </body>
+</html>
