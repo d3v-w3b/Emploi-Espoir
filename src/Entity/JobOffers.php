@@ -48,6 +48,9 @@
         #[ORM\Column(nullable: true)]
         private ?\DateTimeImmutable $expirationDate = null;
 
+        #[ORM\Column]
+        private bool $statu = true;
+
         #[ORM\ManyToOne(inversedBy: 'jobOffers')]
         #[ORM\JoinColumn(nullable: false)]
         private ?Organization $organization = null;
@@ -138,6 +141,12 @@
             return $this;
         }
 
+
+        public function setStatu(bool $statu): void
+        {
+            $this->statu = $statu;
+        }
+
         public function setOrganization(?Organization $organization): static
         {
             $this->organization = $organization;
@@ -203,10 +212,18 @@
             return $this->dateOfPublication;
         }
 
+
+        public function isStatu(): bool
+        {
+            return $this->statu;
+        }
+
         public function getExpirationDate(): ?\DateTimeImmutable
         {
             return $this->expirationDate;
         }
+
+
 
         public function getOrganization(): ?Organization
         {

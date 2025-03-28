@@ -63,16 +63,27 @@
                     ex : {{ offer.expirationDate|date('d/m/Y') }}<br>
                     Status :
                     <span>
+                        {% if offer.statu == 1 %}
+                            En cours <i class="bi bi-dot" style="font-size: 2.5em; color: #01e801"></i>
+                        {% else %}
+                            Pas en cours<i class="bi bi-dot" style="font-size: 2.5em; color: red"></i>
+                        {% endif %}
+                    </span>
+
+                    {#
+                    <span>
                         {% set currentDate = 'now'|date('Y-m-d') %}
                         {% set offerExpirationDate = offer.expirationDate|date('Y-m-d') %}
 
                         {% if currentDate >= offerExpirationDate %}
-                            {# todo: mettre un indicateur de connexion. vert si connecté, rouge si déconnecté #}
-                            Pas en cours <i class="bi bi-dot" style="font-size: 2.5em; color: red"></i>
-                        {% else %}
-                            En cours <i class="bi bi-dot" style="font-size: 2.5em; color: #01e801"></i>
-                        {% endif %}
+
+                    Pas en cours <i class="bi bi-dot" style="font-size: 2.5em; color: red"></i>
+                    {% else %}
+                        En cours <i class="bi bi-dot" style="font-size: 2.5em; color: #01e801"></i>
+                    {% endif %}
                     </span>
+                    #}
+
 
                     <p>
                         <a href="{{ path('organization_edit_offer', {'id' : offer.organization.id, 'offerId' : offer.id}) }}">Réactiver ou modifier l'offre</a> |

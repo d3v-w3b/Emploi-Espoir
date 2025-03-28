@@ -3,10 +3,6 @@
     namespace App\Controller\Public;
 
     use App\Entity\JobOffers;
-    use App\Form\Fields\Public\Home\FilterByOrganizationFieldFields;
-    use App\Form\Fields\Public\Home\FilterByTypeOfContractFields;
-    use App\Form\Types\Public\Home\FilterByOrganizationFieldType;
-    use App\Form\Types\Public\Home\FilterByTypeOfContractType;
     use App\Form\Types\Public\Home\FilterJobOfferType;
     use Doctrine\ORM\EntityManagerInterface;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -37,14 +33,17 @@
                 $organizationEntity = $user->getOrganization();
             }
 
-
             // Création du formulaire global
             $filterForm = $this->createForm(FilterJobOfferType::class);
             $filterForm->handleRequest($this->requestStack->getCurrentRequest());
 
             // Création de la requête avec QueryBuilder
             $qb = $this->entityManager->getRepository(JobOffers::class)->createQueryBuilder('job')
-                ->leftJoin('job.organization', 'org');
+                ->leftJoin('job.organization', 'org')
+
+                // Filter offers in progress
+                ->andWhere('job.statu = true')
+            ;
 
             if ($filterForm->isSubmitted() && $filterForm->isValid()) {
                 $data = $filterForm->getData();

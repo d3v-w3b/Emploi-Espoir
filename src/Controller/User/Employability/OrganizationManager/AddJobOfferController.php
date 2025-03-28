@@ -67,6 +67,8 @@
                 $jobOfferEntity->setDocsToProvide($jobOfferFields->getDocsToProvide());
                 $jobOfferEntity->setDateOfPublication((new \DateTimeImmutable())->setTime(0, 0, 0));
                 $jobOfferEntity->setExpirationDate($jobOfferFields->getExpirationDate());
+                $jobOfferEntity->setStatu(true);
+
 
                 $expirationDate = $jobOfferFields->getExpirationDate()->format('Y-m-d');
                 $currentDate = (new \DateTimeImmutable())->setTime(0, 0, 0)->format('Y-m-d');

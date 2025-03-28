@@ -8,6 +8,7 @@
     use App\Form\Types\Users\Employability\OrganizationManager\JobOfferEditType;
     use Doctrine\ORM\EntityManagerInterface;
     use Symfony\Component\Finder\Exception\AccessDeniedException;
+    use Symfony\Component\Form\FormError;
     use Symfony\Component\HttpFoundation\RequestStack;
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\Routing\Annotation\Route;
@@ -58,6 +59,38 @@
                 $jobOffer->setProfilSought(explode(', ', $offerEditFields->getProfilSought()));
                 $jobOffer->setExpirationDate($offerEditFields->getExpirationDate());
 
+                $expirationDate = $offerEditFields->getExpirationDate()->format('Y-m-d');
+                $currentDate = (new \DateTimeImmutable())->setTime(0, 0, 0)->format('Y-m-d');
+
+                if ($expirationDate <= $currentDate) {
+                    $jobOffer->setStatu(false); // ou setIsActive(false) si c'est ton champ
+                }
+                else {
+                    $jobOffer->setStatu(true);
+                }
+
+                /**
+                 *
+                 * // Show error if expiration date is less than current date
+                 * $expirationDate = $offerEditFields->getExpirationDate()->format('Y-m-d');
+                 * $currentDate = (new \DateTimeImmutable())->setTime(0, 0, 0)->format('Y-m-d');
+                 *
+                 * // Date comparison
+                 * if($expirationDate <= $currentDate) {
+                 * $offerEditForm->get('expirationDate')->addError(new FormError('Entrez une date d\'expiration valide'));
+                 *
+                 * // If expiration date is greater than or equal to current date,
+                 * // display error in the view
+                 * return $this->render('user/employability/organizationManager/offerEdit.html.twig', [
+                 * 'job_offer' => $jobOffer,
+                 * 'offer_edit_form' => $offerEditForm->createView(),
+                 * ]);
+                 * }
+                 *
+                 */
+
+
+
                 $this->entityManager->flush();
 
                 $this->addFlash('offer_updating_success', 'Une offre vient d\'être modifié');
@@ -66,6 +99,8 @@
                     'id' => $organization->getId(),
                 ]);
             }
+
+
 
             return $this->render('user/employability/organizationManager/offerEdit.html.twig', [
                 'job_offer' => $jobOffer,
