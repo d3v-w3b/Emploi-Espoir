@@ -2,6 +2,10 @@
 
 {% block title %}Présentation - Emploi Espoir{% endblock %}
 
+{% block javascripts %}
+    <script src="{{ asset('js/user/account/career/presentation/wordsCounterForAboutMe.js') }}" defer></script>
+{% endblock %}
+
 {% block body %}
 
     <header>
@@ -16,9 +20,16 @@
                 {{ form_label(aboutMeForm.aboutMe) }}<br >
                 <span>Présentez-vous en quelques mots, ainsi que vos motivations et votre projet professionnel.</span><br>
                 {{ form_widget(aboutMeForm.aboutMe) }}
-                {{ form_help(aboutMeForm.aboutMe) }}
                 {{ form_errors(aboutMeForm.aboutMe) }}
             </div>
+
+            <p>
+                <span>{{ form_help(aboutMeForm.aboutMe) }}</span>
+
+                <span class="words-counter">
+
+                </span>
+            </p>
 
             <button type="submit">Enregistrer</button>
         {{ form_end(aboutMeForm) }}

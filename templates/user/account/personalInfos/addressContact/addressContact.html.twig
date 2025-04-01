@@ -10,7 +10,7 @@
     {# message if a phone number has been saved #}
     {% if app.flashes('phone_number_saved') is defined %}
         {% for phoneSavedMsg in app.flashes('phone_number_saved') %}
-            {{ phoneSavedMsg }}
+            <span id="hide-flashMsg">{{ phoneSavedMsg }}</span>
         {% endfor %}
     {% endif %}
 

@@ -7,14 +7,14 @@
     {# message if authentication has failed #}
     {% if app.flashes('authentication_failed') is defined %}
         {% for autenticationFailedMsg in app.flashes('authentication_failed') %}
-            {{ autenticationFailedMsg }}
+            <span>{{ autenticationFailedMsg }}</span>
         {% endfor %}
     {% endif %}
 
     {# message if authentication contain errors #}
     {% if app.flashes('authentication_error') is defined %}
         {% for autenticationErrorMsg in app.flashes('authentication_error') %}
-            {{ autenticationErrorMsg }}
+            <span>{{ autenticationErrorMsg }}</span>
         {% endfor %}
     {% endif %}
 

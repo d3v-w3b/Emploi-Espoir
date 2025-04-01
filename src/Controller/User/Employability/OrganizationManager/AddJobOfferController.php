@@ -77,7 +77,7 @@
                 if($expirationDate <= $currentDate) {
                     $jobOfferForm->get('expirationDate')->addError(new FormError('La date d\'expiration doit être supérieur à la date de publication'));
 
-                    // If expiration date is greater than or equal to current date,
+                    // If expiration date is less than or equal to current date,
                     // display error in the view
                     return $this->render('user/employability/organizationManager/addJobOffer.html.twig', [
                         'job_offer_form' => $jobOfferForm->createView(),

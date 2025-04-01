@@ -60,7 +60,7 @@ inputFile.addEventListener('change', (event) => {
     // user Array for convert this FileList to array
     let filesSelected = Array.from(event.target.files);
 
-    console.log(filesSelected);
+    //console.log(filesSelected);
 
     if (filesSelected.length === 0) {
         Swal.fire("Vous devez ajouter au moins un fichier.");
@@ -69,8 +69,9 @@ inputFile.addEventListener('change', (event) => {
 
 
     filesSelected.forEach(file => {
-        if (file.type !== "application/pdf") {
-            Swal.fire(`Sélectionnez un fichier au format .pdf`);
+        const allowedTypes = ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
+        if (!allowedTypes.includes(file.type)) {
+            Swal.fire(`Sélectionnez un fichier au format .pdf, .doc ou .docx`);
             return;
         }
 

@@ -2,11 +2,15 @@
 
 {% block title %}Alternance - Emploi Espoir{% endblock %}
 
+{% block javascripts %}
+    <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
+{% endblock %}
+
 {% block body %}
     {# message if a changing has been make about alternation preferences #}
     {% if app.flashes('preferences_saved') is defined %}
         {% for preferenceSavedMsg in app.flashes('preferences_saved') %}
-            {{ preferenceSavedMsg }}
+            <span id="hide-flashMsg">{{ preferenceSavedMsg }}</span>
         {% endfor %}
     {% endif %}
 

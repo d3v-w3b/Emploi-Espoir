@@ -29,6 +29,12 @@
         #[IsGranted('ROLE_USER')]
         public function mainObjectives(): Response
         {
+            $user = $this->getUser();
+
+            if(!$user instanceof User) {
+                throw $this->createAccessDeniedException('Utilisateur invalide');
+            }
+
             $objectifFields = new MainObjectivesFields();
 
             $objectifForm = $this->createForm(MainObjectivesType::class, $objectifFields);
