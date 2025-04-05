@@ -24,11 +24,11 @@
                 ])
 
                 ->add('lastName', TextType::class, [
-                    'label' => 'Prénom'
+                    'label' => 'Nom'
                 ])
 
                 ->add('firstName', TextType::class, [
-                    'label' => 'Nom'
+                    'label' => 'Prénom'
                 ])
 
                 ->add('dateOfBirth', DateType::class, [

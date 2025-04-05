@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Identité - Emploi Espoir {% endblock %}
+
+{% block body %}
+
+    <header>
+        {% include('navbar.html.twig') %}
+    </header>
+
+    <a href="#">Bouton retour ici</a>
+
+    <div>
+        <h1>Identité</h1>
+
+        {{ form_start(last_first_name_form) }}
+
+            <div>
+                {{ form_label(last_first_name_form.firstName) }}<br>
+                {{ form_widget(last_first_name_form.firstName) }}
+                {{ form_errors(last_first_name_form.firstName) }}
+            </div>
+
+            <div>
+                {{ form_label(last_first_name_form.lastName) }}<br>
+                {{ form_widget(last_first_name_form.lastName) }}
+                {{ form_errors(last_first_name_form.lastName) }}
+            </div>
+
+            <div>
+                <button type="submit">Enregistrer</button>
+            </div>
+
+        {{ form_end(last_first_name_form) }}
+    </div>
+{% endblock %}

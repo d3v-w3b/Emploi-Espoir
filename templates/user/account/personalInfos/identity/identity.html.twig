@@ -2,20 +2,39 @@
 
 {% block title %}Emploi Espoir{% endblock %}
 
+{% block javascripts %}
+    <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
+{% endblock %}
+
 {% block body %}
+
+    {% if app.flashes is defined %}
+        {% for informationSaved in app.flashes('information_saved') %}
+            <span id="hide-flashMsg">{{ informationSaved }}</span>
+        {% endfor %}
+    {% endif %}
+
+    <header>
+        {% include('navbar.html.twig') %}
+    </header>
+
+    <a href="{{ path('account') }}">
+        <i class="bi bi-arrow-left"></i>
+    </a>
+
     <section>
         <h1>Identité</h1>
 
         <div>
-            <a href="#">
+            <a href="{{ path('account_last_first_name_edit') }}">
                 <strong>Prénom et nom : </strong> {{ user.firstName }} {{ user.lastName }}
             </a>
 
-            <a href="#">
+            <a href="{{ path('account_identity_birthday_edit') }}">
                 <strong>Date de naissance : </strong> {{ user.dateOfBirth|date('d/m/Y') }}
             </a>
 
-            <a href="#">
+            <a href="{{ path('account_identity_gender_edit') }}">
                 <strong>Genre : </strong>
                 <span>
                     {% if user.gender is not null %}
@@ -46,6 +65,8 @@
 
 
 {% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
     <style>
         a {
             display: block;

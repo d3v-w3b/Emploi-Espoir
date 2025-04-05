@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Identité - Emploi Espoir{% endblock %}
+
+{% block body %}
+    <header>
+        {% include('navbar.html.twig') %}
+    </header>
+
+
+    <div>
+        <h1>Identité</h1>
+
+        {{ form_start(date_of_birth_form) }}
+            <div>
+                {{ form_label(date_of_birth_form.dateOfBirth) }}<br >
+                {{ form_widget(date_of_birth_form.dateOfBirth) }}
+                {{ form_errors(date_of_birth_form.dateOfBirth) }}
+            </div>
+
+            <button type="submit">Enregistrer</button>
+        {{ form_end(date_of_birth_form) }}
+    </div>
+{% endblock %}

@@ -58,9 +58,9 @@
             <p>
                 <strong>CV</strong><br >
 
-                {% for docs in applicant.docsToProvide %}
-                    <a href="{{ asset(docs) }}">Voir le Cv</a>
-                {% endfor %}
+                {% if applicant.user.career is not null and applicant.user.career.cv is not null %}
+                    <a href="{{ asset(applicant.user.career.cv) }}" target="_blank">{{ applicant.user.career.cv|split('/')|last }}</a>
+                {% endif %}
             </p>
         </div>
     </section>

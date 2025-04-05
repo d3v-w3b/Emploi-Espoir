@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Identité - Emploi Espoir{% endblock %}
+
+{% block body %}
+    <header>
+        {% include('navbar.html.twig') %}
+    </header>
+
+    <div>
+        <h1>Identité</h1>
+
+        {{ form_start(gender_edit_form) }}
+            <div>
+                {{ form_label(gender_edit_form.gender) }}<br >
+                {{ form_widget(gender_edit_form.gender) }}
+                {{ form_errors(gender_edit_form.gender) }}
+            </div>
+
+            <button type="submit">Enregistrer</button>
+        {{ form_end(gender_edit_form) }}
+    </div>
+{% endblock %}

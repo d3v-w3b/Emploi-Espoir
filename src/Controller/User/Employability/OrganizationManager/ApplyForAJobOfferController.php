@@ -87,7 +87,7 @@
                 foreach ($docsFiles as $doc) {
                     // manage each file
                     $destination = $this->getParameter('user/employability/docs');
-                    $fileName = uniqid(). '.' .$doc->guessExtension();
+                    $fileName = $doc->getClientOriginalName();
                     $doc->move($destination, $fileName);
 
                     $docsToProvide[] = $destination. '/' .$fileName;
