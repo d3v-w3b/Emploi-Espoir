@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Situation et objectifs professionnels - Emploi Espoir{% endblock %}
+
+{% block body %}
+
+    <header>
+        {% include('navbar.html.twig') %}
+    </header>
+
+    <h1>Situation et objectifs professionnels</h1>
+
+    {{ form_start(main_objectives_form) }}
+        <div>
+            {{ form_label(main_objectives_form.mainObjectives) }}<br >
+            {{ form_widget(main_objectives_form.mainObjectives) }}
+            {{ form_errors(main_objectives_form.mainObjectives) }}
+        </div>
+
+        <button type="submit">Enregistré</button>
+    {{ form_end(main_objectives_form) }}
+{% endblock %}

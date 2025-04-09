@@ -2,11 +2,26 @@
 
 {% block title %}Situation et objectifs professionnels - Emploi Espoir{% endblock%}
 
+{% block javascripts %}
+    <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
+{% endblock %}
+
 {% block body %}
+
+    {% if app.flashes('information_saved') is defined %}
+        {% for informationSaved in app.flashes('information_saved') %}
+            <span id="hide-flashMsg">{{ informationSaved }}</span>
+        {% endfor %}
+    {% endif %}
+
+    <header>
+        {% include('navbar.html.twig') %}
+    </header>
+
     <h1>Situation et objectifs professionnels</h1>
 
     <div>
-        <a href="#">
+        <a href="{{ path('account_situation_main_objectives_edit') }}">
             <strong>Objectifs principaux</strong>
             <span>
                 {% for objective in user.mainObjectives %}
@@ -17,11 +32,11 @@
             </span>
         </a>
 
-        <a href="#">
+        <a href="{{ path('account_situation_current_professional_situation_edit') }}">
             <strong>Situation professionnelle actuelle : </strong>
             <span>
                 {% if user.currentProfessionalSituation is not null %}
-                    {{ currentProfessionalSituation }}
+                    {{ user.currentProfessionalSituation }}
                 {% else  %}
                     <em>Information non fournie</em>
                 {% endif %}

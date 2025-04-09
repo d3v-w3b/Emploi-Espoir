@@ -31,6 +31,7 @@
             }
 
             $addressManagerFields = new AddressManagerFields();
+            $addressManagerFields->setAddress($user->getAddress());
 
             $addressManagerForm = $this->createForm(AddressManagerType::class, $addressManagerFields);
             $addressManagerForm->handleRequest($this->requestStack->getCurrentRequest());

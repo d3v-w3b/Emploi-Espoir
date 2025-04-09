@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Situation et objectifs professionnels - Emploi Espoir{% endblock %}
+
+{% block stylesheets %}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{{ asset('js/user/account/PersonnalInfos/Situation/selectTagForCurrentProfessionalSituation.js') }}" defer></script>
+{% endblock %}
+
+{% block body %}
+    <header>
+        {% include('navbar.html.twig') %}
+    </header>
+
+    <h1>Situation et objectifs professionnels</h1>
+
+
+    {{ form_start(current_professional_situation_form) }}
+        <div>
+            {{ form_label(current_professional_situation_form.currentProfessionalSituation) }}<br >
+            {{ form_widget(current_professional_situation_form.currentProfessionalSituation) }}
+            {{ form_errors(current_professional_situation_form.currentProfessionalSituation) }}
+        </div>
+
+        <button type="submit">Enregistrer</button>
+    {{ form_end(current_professional_situation_form) }}
+{% endblock %}

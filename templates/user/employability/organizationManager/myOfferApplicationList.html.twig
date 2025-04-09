@@ -19,22 +19,22 @@
     <h1>Liste des candidatures pour l'offre <em>{{ offer.jobTitle }}</em></h1>
 
     {% for applicant in applications %}
-        <a href="#" style="color: black; text-decoration: none" title="details de la candidature">
+        <a href="#" style="color: black; text-decoration: none" title="details de la candidature" class="application-details"
+           data-offer-title="{{ applicant.offer }}"
+           data-lastName="{{ applicant.lastName }}"
+           data-firstName="{{ applicant.firstName }}"
+           data-email="{{ applicant.email }}"
+           data-phone="{{ applicant.phone }}"
+
+           {# allow to retrieve elements indide an array #}
+           data-docs="{{ applicant.docsToProvide|map(d => d|split('/')|last)|join(',') }}"
+
+           data-id="{{ applicant.id }}"
+        >
             <div>
                 <span>
                     {% if applicant.user.profilPic is not null %}
-                        <img src="{{ asset('user/profile/avatar/' ~ applicant.user.profilPic) }}" alt="Emploi_Espoir_applicant_profile_pic" width="150" class="application-details"
-                             data-offer-title="{{ applicant.offer }}"
-                             data-lastName="{{ applicant.lastName }}"
-                             data-firstName="{{ applicant.firstName }}"
-                             data-email="{{ applicant.email }}"
-                             data-phone="{{ applicant.phone }}"
-
-                             {# allow to retrieve elements indide an array #}
-                             data-docs="{{ applicant.docsToProvide|map(d => d|split('/')|last)|join(',') }}"
-
-                             data-id="{{ applicant.id }}"
-                        >
+                        <img src="{{ asset('user/profile/avatar/' ~ applicant.user.profilPic) }}" alt="Emploi_Espoir_applicant_profile_pic" width="150">
                     {% else %}
                         <i class="bi bi-person-circle" style="font-size: 3em"></i>
                     {% endif %}
