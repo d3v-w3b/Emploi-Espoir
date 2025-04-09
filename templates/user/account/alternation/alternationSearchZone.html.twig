@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Alternance - Emploi Espoir{% endblock %}
+
+{% block body %}
+
+    <header>
+        {% include('navbar.html.twig') %}
+    </header>
+
+    <h1>Alternance</h1>
+
+    {{ form_start(alternation_zone_form) }}
+        <div>
+            {{ form_label(alternation_zone_form.alternationZone) }}<br >
+            {{ form_widget(alternation_zone_form.alternationZone) }}
+            {{ form_errors(alternation_zone_form.alternationZone) }}
+        </div>
+
+        <button type="submit">Enregistrer</button>
+    {{ form_end(alternation_zone_form) }}
+{% endblock %}

@@ -2,6 +2,7 @@
 
 {% block title %}Alternance - Emploi Espoir{% endblock %}
 
+
 {% block javascripts %}
     <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
 {% endblock %}
@@ -19,6 +20,8 @@
         {% include 'navbar.html.twig' %}
     </header>
 
+    <a href="{{ path('account') }}"><i class="bi bi-arrow-left"></i></a>
+
 
     <section>
         <h1>Alternance</h1>
@@ -26,7 +29,7 @@
     </section>
 
     <div>
-        <a href="#">
+        <a href="{{ path('account_alternation_preferences_alternation_zone') }}">
             <strong>Zone de recherche d'alternance : </strong>
             <span>
                 {% if job_and_alternation is not null and job_and_alternation.alternationZone is not null %}
@@ -50,7 +53,7 @@
             </span>
         </a>
 
-        <a href="#">
+        <a href="{{ path('account_alternation_preference_alternation_domain') }}">
             <strong>Domaine d'alternance : </strong>
             <span>
                 {% if job_and_alternation is not null and job_and_alternation.alternationField is not null %}
@@ -76,6 +79,7 @@
 
 
 {% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         a {
             display:  block;

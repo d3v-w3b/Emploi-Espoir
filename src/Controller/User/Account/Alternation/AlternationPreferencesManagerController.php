@@ -15,15 +15,10 @@
 
     class AlternationPreferencesManagerController extends AbstractController
     {
-        private RequestStack $requestStack;
-        private EntityManagerInterface $entityManager;
-
-
-        public function __construct(RequestStack $requestStack, EntityManagerInterface $entityManager)
-        {
-            $this->requestStack = $requestStack;
-            $this->entityManager = $entityManager;
-        }
+        public function __construct(
+            private readonly RequestStack $requestStack,
+            private readonly EntityManagerInterface $entityManager
+        ){}
 
 
         #[Route(path: '/account/alternation-preferences/preferences', name: 'account_alternation_preferences_choices')]
