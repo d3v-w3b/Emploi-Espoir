@@ -19,6 +19,9 @@
         {% include 'navbar.html.twig' %}
     </header>
 
+    <p>
+        <a href="{{ path('account') }}">Retour</a>
+    </p>
 
     <section>
         <h1>Formations</h1>
@@ -26,7 +29,7 @@
         <div>
             {% if app.user.formations is not null and app.user.formations|length > 0 %}
 
-                {% for formation in app.user.formations %}
+                {% for formation in formations %}
 
                     <a href="#">
                         <div>
@@ -38,6 +41,8 @@
                         </div>
                     </a>
                 {% endfor %}
+
+                <p>Ajouter d'autres formations</p>
 
             {% else %}
                 <p>

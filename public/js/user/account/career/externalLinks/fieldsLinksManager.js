@@ -1,113 +1,84 @@
-let selectTag = document.getElementById('external_links_manager_linkType');
-let form = document.querySelector('form');
+const selectTag = document.getElementById('external_links_manager_linkType');
+const form = document.querySelector('form');
 
-let linkedInInput = document.getElementById('external_links_manager_linkedInUrl');
-let linkedInBlock = document.getElementById('linkedIn-block');
-let githubInput = document.getElementById('external_links_manager_githubUrl');
-let githubBlock = document.getElementById('github-block');
-let urlInput = document.getElementById('external_links_manager_websiteUrl');
-let urlBlock = document.getElementById('url-block');
+const linkedInInput = document.getElementById('external_links_manager_linkedInUrl');
+const linkedInBlock = document.getElementById('linkedIn-block');
+const githubInput = document.getElementById('external_links_manager_githubUrl');
+const githubBlock = document.getElementById('github-block');
+const urlInput = document.getElementById('external_links_manager_websiteUrl');
+const urlBlock = document.getElementById('url-block');
 
-// inputs error
+// Messages d'erreur
 const linkedFormatErrorSpan = document.querySelector('.linkedFormat-error');
 const githubFormatErrorSpan = document.querySelector('.githubFormat-error');
 const urlFormatErrorSpan = document.querySelector('.urlFormat-error');
 
-// regex inputs
+// Regex de validation
 const linkedFormatRegex = /^https:\/\/www\.linkedin\.com\/in\/[a-zA-Z0-9%_\-]+\/?$/;
 const githubFormatRegex = /^https:\/\/github\.com\/[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/;
 const urlFormatRegex = /^https?:\/\/(www\.)?[a-zA-Z0-9-]+(\.[a-zA-Z]{2,})(\/[a-zA-Z0-9._~:\/?#\[\]@!$&'()*+,;=-]*)?$/;
 
-// this function contain code to forbidden form
-function forbiddenForm()
-{
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();
-    });
+// Empêche la soumission du formulaire si invalide
+function preventSubmit(event) {
+    event.preventDefault();
+}
+function forbiddenForm() {
+    form.addEventListener('submit', preventSubmit);
+}
+function allowForm() {
+    form.removeEventListener('submit', preventSubmit);
 }
 
+// ========== Listeners de validation (ajoutés une seule fois) ==========
 
+linkedInInput.addEventListener('change', (event) => {
+    if (selectTag.value === 'LinkedIn') {
+        if (!linkedFormatRegex.test(event.target.value)) {
+            forbiddenForm();
+            linkedFormatErrorSpan.style.display = 'inline';
+        } else {
+            linkedFormatErrorSpan.style.display = 'none';
+            allowForm();
+        }
+    }
+});
+
+githubInput.addEventListener('change', (event) => {
+    if (selectTag.value === 'Github') {
+        if (!githubFormatRegex.test(event.target.value)) {
+            forbiddenForm();
+            githubFormatErrorSpan.style.display = 'inline';
+        } else {
+            githubFormatErrorSpan.style.display = 'none';
+            allowForm();
+        }
+    }
+});
+
+urlInput.addEventListener('change', (event) => {
+    if (selectTag.value === 'Autre') {
+        if (!urlFormatRegex.test(event.target.value)) {
+            forbiddenForm();
+            urlFormatErrorSpan.style.display = 'inline';
+        } else {
+            urlFormatErrorSpan.style.display = 'none';
+            allowForm();
+        }
+    }
+});
+
+// ========== Gestion de l'affichage dynamique ==========
 
 selectTag.addEventListener('input', (event) => {
+    const value = event.target.value;
 
-    // LinkedIn manager
-    if(event.target.value === 'LinkedIn') {
-        linkedInBlock.style.display = 'block';
-        linkedInInput.required = true;
+    // Affichage conditionnel
+    linkedInBlock.style.display = (value === 'LinkedIn') ? 'block' : 'none';
+    linkedInInput.required = (value === 'LinkedIn');
 
-        // event listener for LinkedIn input in case the format LinkedIn
-        // is wrong
-        linkedInInput.addEventListener('change', (event) => {
-            if(!linkedFormatRegex.test(event.target.value)) {
+    githubBlock.style.display = (value === 'Github') ? 'block' : 'none';
+    githubInput.required = (value === 'Github');
 
-                // forbid form submit if linked format for profil is wrong
-                forbiddenForm();
-
-                linkedFormatErrorSpan.style.display = 'inline';
-            }
-            else {
-                linkedFormatErrorSpan.style.display = 'none';
-
-                form.submit();
-            }
-        });
-    }
-    else {
-        linkedInBlock.style.display = 'none';
-        linkedInInput.required = false;
-    }
-
-    // GitHub manager
-    if(event.target.value === 'Github') {
-        githubBlock.style.display = 'block';
-        githubInput.required = true;
-
-        // event listener for GitHub input in case the format GitHub
-        // is wrong
-        githubInput.addEventListener('change', (event) => {
-            if(!githubFormatRegex.test(event.target.value)) {
-
-                // forbid form submit if GitHub format for profil is wrong
-                forbiddenForm();
-
-                githubFormatErrorSpan.style.display = 'inline';
-            }
-            else {
-                githubFormatErrorSpan.style.display = 'none';
-
-                form.submit();
-            }
-        });
-
-    }
-    else {
-        githubBlock.style.display = 'none';
-        githubInput.required = false;
-    }
-
-    // Url manager
-    if(event.target.value === 'Autre') {
-        urlBlock.style.display = 'block';
-        urlInput.required = true;
-
-        // event listener for url is case the url format is wrong
-        urlInput.addEventListener('change', (event) => {
-            if(!urlFormatRegex.test(event.target.value)) {
-
-                // forbid form submit if url format si wrong
-                forbiddenForm();
-
-                urlFormatErrorSpan.style.display = 'inline';
-            }
-            else {
-                urlFormatErrorSpan.style.display = 'none';
-
-                form.submit();
-            }
-        });
-    }
-    else {
-        urlBlock.style.display = 'none';
-        urlInput.required = false;
-    }
+    urlBlock.style.display = (value === 'Autre') ? 'block' : 'none';
+    urlInput.required = (value === 'Autre');
 });

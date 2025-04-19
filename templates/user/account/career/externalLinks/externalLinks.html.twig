@@ -18,9 +18,50 @@
         {% include 'navbar.html.twig' %}
     </header>
 
+    <p>
+        <a href="{{ path('account') }}">Retour</a>
+    </p>
 
     <section>
         <h1>Liens externes </h1>
+
+        <div>
+            {% if externalLinks is not null and (externalLinks.linkedInUrl is not null or externalLinks.githubUrl is not null or externalLinks.websiteUrl is not null) %}
+
+                <div>
+                    {% if externalLinks.linkedInUrl is not null %}
+                        <a href="#">
+                            <span>LinkedIn</span> <span>{{ externalLinks.linkedInUrl }}</span>
+                        </a>
+                    {% endif %}
+                </div>
+
+                <div>
+                    {% if externalLinks.githubUrl is not null %}
+                        <a href="#">
+                            <span>Github</span> <span>{{ externalLinks.githubUrl }}</span>
+                        </a>
+
+                    {% endif %}
+                </div>
+
+                <div>
+                    {% if externalLinks.websiteUrl is not null %}
+                        <a href="#">
+                            <span>Autre (site web, portfolio de projet)</span> <span>{{ externalLinks.websiteUrl }}</span>
+                        </a>
+
+                    {% endif %}
+                </div>
+
+            {% else %}
+                <p>
+                    Vous n'avez pas encore ajouté de lien externe (LinkedIn, sites web, projets...)
+                </p>
+            {% endif %}
+
+
+        </div>
 
         <p>
             <a href="{{ path('account_external_links_link') }}">Ajouter</a>

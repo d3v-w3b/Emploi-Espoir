@@ -61,9 +61,9 @@
                     return $this->redirectToRoute('user_profile_view_as_recruiter');
                 }
 
-                $this->addFlash('link_added_successfully', 'Informations sauvegardée');
+                $this->addFlash('link_added_successfully', 'Information sauvegardée');
 
-                return $this->redirectToRoute('account_external_link');
+                return $this->redirectToRoute('account_external_links');
             }
 
             return $this->render('user/account/career/externalLinks/externalLinksManager.html.twig', [

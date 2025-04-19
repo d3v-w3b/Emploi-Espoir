@@ -32,8 +32,11 @@
             }
 
             $alternationDomainFields = new AlternationDomainFields();
-            $alternationDomainFields->setAlternationDomain($user->getJobAndAlternation()->getAlternationField());
 
+            if($user->getJobAndAlternation()) {
+                $alternationDomainFields->setAlternationDomain($user->getJobAndAlternation()->getAlternationField());
+            }
+            
             $alternationDomainForm = $this->createForm(AlternationDomainType::class, $alternationDomainFields);
             $alternationDomainForm->handleRequest($this->requestStack->getCurrentRequest());
 

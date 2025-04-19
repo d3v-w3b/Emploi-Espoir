@@ -19,9 +19,42 @@
         {% include 'navbar.html.twig' %}
     </header>
 
+    <p>
+        <a href="{{ path('account') }}">Retour</a>
+    </p>
 
     <section>
         <h1>Expériences professionnelles</h1>
+
+        <div>
+            {% if experiences is not null %}
+                {% for experience in experiences %}
+                    <a href="#">
+                        <div>
+                            <h3>{{ experience.jobTitle }}</h3>
+                        </div>
+
+                        <div>
+                            {{ experience.enterpriseName }} | {{ experience.town }} | {{ experience.startDate|date('m/Y') }} - Aujourd'hui {# ici marquer la date genre 3ans quelques mois #}
+                        </div>
+
+                        <div>
+                            {% if experience.jobDescription is not empty %}
+                                {{ experience.jobDescription }}
+                            {% else %}
+                                <span>
+                                    <em>Description de poste à compléter</em>
+                                </span>
+                            {% endif %}
+                        </div>
+                    </a>
+                {% endfor %}
+            {% else %}
+                <p>
+                    Vous n’avez pas encore ajouté d’expérience professionnelle (stage, emploi, alternance, activités associatives)
+                </p>
+            {% endif %}
+        </div>
 
         <a href="{{ path('account_professional_experience_manager') }}">Ajouter</a>
     </section>

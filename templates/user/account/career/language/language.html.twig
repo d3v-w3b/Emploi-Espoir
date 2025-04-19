@@ -18,7 +18,28 @@
         {% include 'navbar.html.twig' %}
     </header>
 
+    <p>
+        <a href="{{ path('account') }}">Retour</a>
+    </p>
+
     <h1>Niveau de langues</h1>
+
+    {% if languages is not null and languages|length > 0 %}
+
+        {% for language in languages %}
+            <a href="#">
+                <span>{{ language.language }}</span> <span>{{ language.languageLevel }}</span>
+            </a>
+        {% endfor %}
+
+        <p>
+            Ajouter d'autres languages
+        </p>
+    {% else %}
+        <p>
+            Vous n'avez pas encore ajouté de langues
+        </p>
+    {% endif %}
 
     <div>
         <p>

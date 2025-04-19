@@ -37,27 +37,29 @@
                 throw $this->createAccessDeniedException('Vous n\'avez pas accès à cette page');
             }
 
-            // check if user has already preferences
-            $jobPreferenceEntity = $user->getJobAndAlternation() ?? new JobAndAlternation();
+            $jobPreferences = $user->getJobAndAlternation();
 
-            $alternationPreferences = $user->getJobAndAlternation()?->getAlternationPreference() ?? [];
+            $jobPreferencesFields = new JobPreferencesManagerFields();
 
-            $jobPreferenceFields = new JobPreferencesManagerFields();
-            $jobPreferenceFields->setJobPreferences($alternationPreferences);
+            if($jobPreferences) {
+                $jobPreferencesFields->setJobPreferences($user->getJobAndAlternation()->getEmploymentPreference());
+            }
 
-            $jobPreferenceType = $this->createForm(JobPreferencesManagerType::class, $jobPreferenceFields);
+            $jobPreferenceType = $this->createForm(JobPreferencesManagerType::class, $jobPreferencesFields);
 
             $jobPreferenceType->handleRequest($this->requestStack->getCurrentRequest());
 
             if($jobPreferenceType->isSubmitted() && $jobPreferenceType->isValid()) {
+                $jobPreferencesEntity = $user->getJobAndAlternation() ?? new JobAndAlternation();
+
                 // connect entities
-                $user->setJobAndAlternation($jobPreferenceEntity);
-                $jobPreferenceEntity->setUser($user);
+                $user->setJobAndAlternation($jobPreferencesEntity);
+                $jobPreferencesEntity->setUser($user);
 
                 // update preferences
-                $jobPreferenceEntity->setEmploymentPreference($jobPreferenceFields->getJobPreferences());
+                $jobPreferencesEntity->setEmploymentPreference($jobPreferencesFields->getJobPreferences());
 
-                $this->entityManager->persist($jobPreferenceEntity);
+                $this->entityManager->persist($jobPreferencesEntity);
                 $this->entityManager->flush();
 
                 // Make redirect to user profil if it from to user profile

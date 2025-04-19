@@ -32,7 +32,11 @@
             }
 
             $alternationZoneFields = new AlternationSearchZoneFields();
-            $alternationZoneFields->setAlternationZone($user->getJobAndAlternation()->getAlternationZone());
+
+            if($user->getJobAndAlternation()) {
+                $alternationZoneFields->setAlternationZone($user->getJobAndAlternation()->getAlternationZone());
+            }
+
 
             $alternationZoneForm = $this->createForm(AlternationSearchZoneType::class, $alternationZoneFields);
             $alternationZoneForm->handleRequest($this->requestStack->getCurrentRequest());
