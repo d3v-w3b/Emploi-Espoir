@@ -2,6 +2,7 @@
 
     namespace App\Controller\User\Account;
 
+    use App\Entity\User;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\Routing\Annotation\Route;
@@ -15,6 +16,10 @@
         {
             //get current user
             $user = $this->getUser();
+
+            if(!$user instanceof User) {
+                throw $this->createAccessDeniedException('Utilisateur invalide');
+            }
 
             return $this->render('user/account/account.html.twig', [
                 'user' => $user,

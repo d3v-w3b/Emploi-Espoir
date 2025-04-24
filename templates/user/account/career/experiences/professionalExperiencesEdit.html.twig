@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Expérience professionnelle - Emploi Espoir{% endblock %}
+
+{% block stylesheets %}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    {# <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> #}
+    {# <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/style.css"> #}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/user/account/career/experiences/selectTagManagerForJobFieldsEdit.js') }}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{{ asset('js/user/account/career/experiences/wordCounterForExperiencesEdit.js') }}" defer></script>
+    {# <script src="{{ asset('js/user/account/career/experiences/jobFieldsDisabledManager.js') }}" defer></script> #}
+
+    {# <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> #}
+    {# <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/index.js"></script> #}
+    {# <script src="{{ asset('js/user/account/career/experiences/experienceDateFormatManager.js') }}" defer></script> #}
+{% endblock %}
+
+{% block body %}
+    <header>
+        {% include('navbar.html.twig') %}
+    </header>
+
+    <section>
+        <h1>Expérience professionnelle</h1>
+
+        {{ form_start(experience_edit_form) }}
+            <div style="display: grid; grid-template-columns: 1fr; gap: 20px">
+                <div>
+                    {{ form_label(experience_edit_form.jobTitle) }}<br>
+                    {{ form_widget(experience_edit_form.jobTitle) }}<br>
+                    {{ form_errors(experience_edit_form.jobTitle) }}
+                </div>
+
+                <div>
+                    {{ form_label(experience_edit_form.jobField) }}<br>
+                    {{ form_widget(experience_edit_form.jobField) }}<br>
+                    {{ form_errors(experience_edit_form.jobField) }}
+                </div>
+
+                <div>
+                    {{ form_label(experience_edit_form.town) }}<br>
+                    {{ form_widget(experience_edit_form.town) }}<br >
+                    {{ form_errors(experience_edit_form.town) }}
+                </div>
+
+                <div>
+                    {{ form_label(experience_edit_form.enterpriseName) }}<br>
+                    {{ form_widget(experience_edit_form.enterpriseName) }}<br>
+                    {{ form_errors(experience_edit_form.enterpriseName) }}
+                </div>
+
+                <div>
+                    {{ form_label(experience_edit_form.endDateCheckbox) }}<br>
+                    {{ form_widget(experience_edit_form.endDateCheckbox) }}<br>
+                    {{ form_errors(experience_edit_form.endDateCheckbox) }}
+                </div>
+
+                <div>
+                    {{ form_label(experience_edit_form.startDate) }}<br>
+                    {{ form_widget(experience_edit_form.startDate) }}
+                    {{ form_errors(experience_edit_form.startDate) }}
+                </div>
+
+                <div style="display: none" class="end-date">
+                    {{ form_label(experience_edit_form.endDate) }}<br>
+                    {{ form_widget(experience_edit_form.endDate) }}
+                    {{ form_errors(experience_edit_form.endDate) }}
+                </div>
+
+                <div>
+                    {{ form_label(experience_edit_form.jobDescription) }}<br>
+                    {{ form_widget(experience_edit_form.jobDescription) }}
+                    {{ form_errors(experience_edit_form.jobDescription) }}
+
+                    <p>
+                        <span>
+                            {{ form_help(experience_edit_form.jobDescription) }}
+                        </span>
+
+                        <span class="words-counter">
+
+                        </span>
+                    </p>
+                </div>
+
+                <button type="submit">Enregistrer</button>
+            </div>
+        {{ form_end(experience_edit_form) }}
+    </section>
+
+    <p>
+        <a href="#">Supprimer</a>
+    </p>
+{% endblock %}

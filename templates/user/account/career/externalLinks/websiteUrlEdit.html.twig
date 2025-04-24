@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liens externes{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/user/account/career/externalLinks/wordsCounter.js') }}" defer></script>
+{% endblock %}
+
+{% block body %}
+
+    <header>
+        {% include('navbar.html.twig') %}
+    </header>
+
+    <section>
+        <h1>Liens externes</h1>
+
+        {{ form_start(website_url_edit_form) }}
+            <div>
+                {{ form_label(website_url_edit_form.websiteUrl) }}<br>
+                {{ form_widget(website_url_edit_form.websiteUrl) }}
+                {{ form_errors(website_url_edit_form.websiteUrl) }}
+                {{ form_help(website_url_edit_form.websiteUrl) }}
+
+                <p>
+                    <span class="words-counter">
+
+                    </span>
+                </p>
+            </div>
+
+            <button type="submit">Enregistrer</button>
+        {{ form_end(website_url_edit_form) }}
+    </section>
+{% endblock %}

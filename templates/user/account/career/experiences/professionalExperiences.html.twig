@@ -27,9 +27,9 @@
         <h1>Expériences professionnelles</h1>
 
         <div>
-            {% if experiences is not null %}
+            {% if experiences is not null and experiences|length > 0 %}
                 {% for experience in experiences %}
-                    <a href="#">
+                    <a href="{{ path('account_professional_experience_edit', {'id' : experience.id}) }}">
                         <div>
                             <h3>{{ experience.jobTitle }}</h3>
                         </div>
@@ -49,6 +49,10 @@
                         </div>
                     </a>
                 {% endfor %}
+
+                <p>
+                    Ajoutez d'autres expériences professionnelles, y compris stages, alternances, activités associatives
+                </p>
             {% else %}
                 <p>
                     Vous n’avez pas encore ajouté d’expérience professionnelle (stage, emploi, alternance, activités associatives)

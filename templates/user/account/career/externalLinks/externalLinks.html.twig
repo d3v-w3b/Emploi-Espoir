@@ -30,7 +30,7 @@
 
                 <div>
                     {% if externalLinks.linkedInUrl is not null %}
-                        <a href="#">
+                        <a href="{{ path('account_external_links_linked_in_edit') }}">
                             <span>LinkedIn</span> <span>{{ externalLinks.linkedInUrl }}</span>
                         </a>
                     {% endif %}
@@ -38,7 +38,7 @@
 
                 <div>
                     {% if externalLinks.githubUrl is not null %}
-                        <a href="#">
+                        <a href="{{ path('account_external_links_github_edit') }}">
                             <span>Github</span> <span>{{ externalLinks.githubUrl }}</span>
                         </a>
 
@@ -47,7 +47,7 @@
 
                 <div>
                     {% if externalLinks.websiteUrl is not null %}
-                        <a href="#">
+                        <a href="{{ path('account_external_links_website_url_edit') }}">
                             <span>Autre (site web, portfolio de projet)</span> <span>{{ externalLinks.websiteUrl }}</span>
                         </a>
 
