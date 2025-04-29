@@ -1,7 +1,7 @@
 document.querySelectorAll(".btn-supprimer").forEach(button => {
     button.addEventListener("click", function() {
-        const offerId = this.getAttribute("data-id");
-        const form = document.getElementById(`form-${offerId}`);
+        const experienceId = this.getAttribute("data-id");
+        const form = document.getElementById(`experience-form-${experienceId}`);
 
         Swal.fire({
             title: "Êtes-vous sûr ?",

@@ -31,7 +31,7 @@
 
                 {% for formation in formations %}
 
-                    <a href="#">
+                    <a href="{{ path('account_formation_edit', {'id' : formation.id}) }}">
                         <div>
                             <h3>{{ formation.diplomaName }}</h3>
                         </div>

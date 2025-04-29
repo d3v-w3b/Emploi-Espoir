@@ -1,4 +1,8 @@
-let selectTag = document.getElementById('formation_manager_types_diplomaLevel');
+/**
+ * This file is use for the diploma level into formation manager and formation edit
+ */
+
+let selectTag = document.querySelector('.select-tag-block')
 let diplomaDetails = document.getElementById('diploma-details')
 
 // on page load, hide the #diploma-details block

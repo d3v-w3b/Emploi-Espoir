@@ -1,0 +1,137 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formations - Emploi Espoir{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/user/account/career/formation/diplomaLevelManager.js') }}" defer></script>
+    <script src="{{ asset('js/user/account/career/formation/edit/inputFileManagerEdit.js') }}" defer></script>
+    <script src="{{ asset('js/user/account/career/formation/diplomaSpecialityDisabledManager.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% endblock %}
+
+{% block body %}
+    <header>
+        {% include('navbar.html.twig') %}
+    </header>
+
+    <h1>Formation</h1>
+
+    {{ form_start(formation_edit_form) }}
+        <div style="display: grid; grid-template-columns: 1fr; gap: 20px">
+        <div>
+            {{ form_label(formation_edit_form.diplomaLevel) }}<br >
+            {{ form_widget(formation_edit_form.diplomaLevel) }}
+            {{ form_errors(formation_edit_form.diplomaLevel) }}
+        </div>
+
+        <div id="diploma-details" style="display: none">
+
+            <div style="display: grid; grid-template-columns: 1fr; gap: 20px">
+
+                <div>
+                    {{ form_label(formation_edit_form.diplomaName) }}<br >
+                    {{ form_widget(formation_edit_form.diplomaName) }}
+                    {{ form_errors(formation_edit_form.diplomaName) }}
+                </div>
+
+                <div>
+                    {{ form_label(formation_edit_form.diplomaSpeciality) }}<br >
+                    {{ form_widget(formation_edit_form.diplomaSpeciality) }}
+                    {{ form_errors(formation_edit_form.diplomaSpeciality) }}
+                </div>
+
+                <div>
+                    {{ form_label(formation_edit_form.universityName) }}<br >
+                    {{ form_widget(formation_edit_form.universityName) }}
+                    {{ form_errors(formation_edit_form.universityName) }}
+                </div>
+
+                <div>
+                    {{ form_label(formation_edit_form.diplomaTown) }}<br >
+                    {{ form_widget(formation_edit_form.diplomaTown) }}
+                    {{ form_errors(formation_edit_form.diplomaTown) }}
+                </div>
+
+                <div>
+                    {{ form_label(formation_edit_form.diplomaMonth) }}<br >
+                    {{ form_widget(formation_edit_form.diplomaMonth) }}
+                    {{ form_errors(formation_edit_form.diplomaMonth) }}
+                </div>
+
+                <div>
+                    {{ form_label(formation_edit_form.diplomaYear) }}<br >
+                    {{ form_widget(formation_edit_form.diplomaYear) }}
+                    {{ form_errors(formation_edit_form.diplomaYear) }}
+                </div>
+
+                {# input of this block has been hide #}
+                <div>
+                    {{ form_label(formation_edit_form.diploma) }}<br >
+                    {{ form_widget(formation_edit_form.diploma) }}
+                    {{ form_errors(formation_edit_form.diploma) }}
+                </div>
+
+                <div>
+                    {{ form_widget(formation_edit_form.removed_files) }}
+                </div>
+
+
+                {# input file of this form will be changed by this block #}
+                <div>
+                    <div class="inputForFile">
+                        <span>Sélectionnez vos fichiers ici</span>
+                    </div>
+
+                    {{ form_help(formation_edit_form.diploma) }}
+
+                    <div class="files-placeholder">
+                        <div class="existing-files">
+                            {% for file in formation.diploma %}
+                                <div class="existing-file" data-existing-file="{{ file }}">
+                                    <a href="{{ asset('user/career/formation/diploma/' ~ file) }}" target="_blank" download>{{ file|split('/')|last }}</a>
+                                    <a href="#" class="remove-existing-file" data-file="{{ file }}">retirer</a>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+
+                        <div class="new-files">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <button type="submit">Enregistrer</button>
+
+    </div>
+    {{ form_end(formation_edit_form) }}
+
+
+    <p>
+        <a href="#">Supprimer</a>
+    </p>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+{% block stylesheets %}
+    <style>
+        input[type="file"] {
+            display: none;
+        }
+
+        .inputForFile {
+            border: 1px dashed blue;
+            cursor: pointer;
+        }
+    </style>
+{% endblock %}

@@ -14,6 +14,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('js/user/account/career/experiences/wordCounterForExperiencesEdit.js') }}" defer></script>
+    <script src="{{ asset('js/user/account/career/experiences/modelForRemoveExperience.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {# <script src="{{ asset('js/user/account/career/experiences/jobFieldsDisabledManager.js') }}" defer></script> #}
 
     {# <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> #}
@@ -94,7 +96,9 @@
         {{ form_end(experience_edit_form) }}
     </section>
 
-    <p>
-        <a href="#">Supprimer</a>
-    </p>
+
+    <form id="experience-form-{{ current_experiences.id }}" method="post" action="{{ path('account_professional_experience_remove', { 'id': current_experiences.id }) }}">
+        <input type="hidden" name="_token" value="{{ csrf_token('account_professional_experience_remove_' ~ current_experiences.id) }}">
+        <button type="button" class="btn-supprimer" data-id="{{ current_experiences.id }}">Supprimer</button>
+    </form>
 {% endblock %}

@@ -1,5 +1,10 @@
-let diplomaName = document.getElementById('formation_manager_types_diplomaName');
-let selectForSpeciality = document.getElementById('formation_manager_types_diplomaSpeciality');
+/**
+ * This file is use for formation manager and formation edit
+ */
+
+
+let diplomaName = document.querySelector('.diploma-name-input');
+let selectForSpeciality = document.querySelector('.diploma-speciality-select-tag');
 
 
 // Vérifie la valeur au chargement de la page

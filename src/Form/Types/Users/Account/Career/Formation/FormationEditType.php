@@ -4,16 +4,17 @@
 
     use App\Enum\User\Account\Career\Formation\DiplomaSpeciality;
     use App\Enum\User\Account\Career\Formation\Months;
+    use App\Form\Fields\Users\Account\Career\Formation\FormationEditFields;
     use Symfony\Component\Form\AbstractType;
-    use App\Form\Fields\Users\Account\Career\Formation\FormationManagerFields;
     use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
     use Symfony\Component\Form\Extension\Core\Type\EnumType;
     use Symfony\Component\Form\Extension\Core\Type\FileType;
+    use Symfony\Component\Form\Extension\Core\Type\HiddenType;
     use Symfony\Component\Form\Extension\Core\Type\TextType;
     use Symfony\Component\Form\FormBuilderInterface;
     use Symfony\Component\OptionsResolver\OptionsResolver;
 
-    class FormationManagerTypes extends AbstractType
+    class FormationEditType extends AbstractType
     {
         public function buildForm(FormBuilderInterface $builder, array $options): void
         {
@@ -75,19 +76,24 @@
                     'label' => 'Copie du diplôme ou certificat',
                     'help' => 'Fichier acceptés : .pdf, doc, docx',
                     'multiple' => true,
+                    'required' => false,
                     'attr' => [
                         'class' => 'input-file'
                     ]
+                ])
+
+                ->add('removed_files', HiddenType::class, [
+                    'mapped' => false,
+                    'required' => false,
                 ])
             ;
         }
 
 
-
-        public function configureOptions(OptionsResolver $resolver): void
+        public function configureOptions(OptionsResolver $resolver):  void
         {
             $resolver->setDefaults([
-                'data_class' => FormationManagerFields::class,
+                'data_class' => FormationEditFields::class,
             ]);
         }
     }

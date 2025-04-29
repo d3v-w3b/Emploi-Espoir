@@ -14,6 +14,27 @@
         {% endfor %}
     {% endif %}
 
+    {# message if the CSRF token for this removing form is invalid #}
+    {% if app.flashes('CSRF_error') is defined %}
+        {% for CSRFerrorMsg in app.flashes('CSRF_error') %}
+            <span id="hide-flashMsg">{{ CSRFerrorMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
+    {# message if an experience does not exists #}
+    {% if app.flashes('experience_missing') is defined %}
+        {% for offerErrorMsg in app.flashes('experience_missing') %}
+            <span id="hide-flashMsg">{{ offerErrorMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
+    {# message if an experience has been removed successfully #}
+    {% if app.flashes('experience_remove_success') is defined %}
+        {% for offerErrorMsg in app.flashes('experience_remove_success') %}
+            <span id="hide-flashMsg">{{ offerErrorMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
 
     <header>
         {% include 'navbar.html.twig' %}

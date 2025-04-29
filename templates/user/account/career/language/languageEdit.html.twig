@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Niveau de langue - Emploi Espoir{% endblock %}
+
+{% block body %}
+
+    <header>
+        {% include('navbar.html.twig') %}
+    </header>
+
+    <p>
+        <a href="{{ path('account_languages') }}">Retour</a>
+    </p>
+
+    <section>
+        <h1>Niveau de langue</h1>
+
+        <div>
+            <h3>Niveau en {{ current_language.language }}</h3>
+
+            {{ form_start(language_edit_form) }}
+                <div>
+                    {{ form_widget(language_edit_form.languageLevel) }}
+                    {{ form_errors(language_edit_form.languageLevel) }}
+                </div>
+
+                <button type="submit">Enregistrer</button>
+            {{ form_end(language_edit_form) }}
+
+
+            <p>
+                <a href="#">Supprimer</a>
+            </p>
+        </div>
+    </section>
+{% endblock %}

@@ -27,8 +27,8 @@
     {% if languages is not null and languages|length > 0 %}
 
         {% for language in languages %}
-            <a href="#">
-                <span>{{ language.language }}</span> <span>{{ language.languageLevel }}</span>
+            <a href="{{ path('account_languages_language_level_edit', {'id' : language.id}) }}">
+                <span>{{ language.language }}</span> <span>{{ language.languageLevel }}</span> <br>
             </a>
         {% endfor %}
 
