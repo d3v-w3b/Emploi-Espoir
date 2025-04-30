@@ -14,6 +14,20 @@
         {% endfor %}
     {% endif %}
 
+    {# message if formation does not exist #}
+    {% if app.flashes('formation_missing') is defined %}
+        {% for formationMissingMsg in app.flashes('formation_missing') %}
+            <span id="hide-flashMsg">{{ formationMissingMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
+    {# message if formation has been removed succesfully #}
+    {% if app.flashes('formation_removed_successfully') is defined %}
+        {% for formationRemovedMsg in app.flashes('formation_removed_successfully') %}
+            <span id="hide-flashMsg">{{ formationRemovedMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
 
     <header>
         {% include 'navbar.html.twig' %}

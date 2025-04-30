@@ -14,12 +14,6 @@
         {% endfor %}
     {% endif %}
 
-    {# message if the CSRF token for this removing form is invalid #}
-    {% if app.flashes('CSRF_error') is defined %}
-        {% for CSRFerrorMsg in app.flashes('CSRF_error') %}
-            <span id="hide-flashMsg">{{ CSRFerrorMsg }}</span>
-        {% endfor %}
-    {% endif %}
 
     {# message if an experience does not exists #}
     {% if app.flashes('experience_missing') is defined %}

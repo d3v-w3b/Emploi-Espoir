@@ -5,6 +5,7 @@
     use App\Entity\Formation;
     use App\Entity\User;
     use App\Enum\User\Account\Career\Formation\DiplomaSpeciality;
+    use App\Enum\User\Account\Career\Formation\Months;
     use Doctrine\Bundle\FixturesBundle\Fixture;
     use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
     use Doctrine\Persistence\ObjectManager;
@@ -13,22 +14,24 @@
     {
         public function load(ObjectManager $manager): void
         {
-            //get all users form User table
+            //get all users to form the User table
             $users = $manager->getRepository(User::class)->findAll();
 
             foreach ($users as $user) {
-                $formation = new Formation();
+                for ($i = 1; $i <= 5; $i++) {
 
-                $formation->setUser($user);
-                $formation->setDiplomaLevel('BAC+3');
-                $formation->setDiplomaName('MASTER');
-                $formation->setDiplomaSpeciality(DiplomaSpeciality::COMPUTER_SCIENCE);
-                $formation->setUniversityName('Université de HARVARD');
-                $formation->setDiplomaTown('Abidjan');
-                //$formation->setDiplomaMonth(new \DateTimeImmutable('2000-03-01'));
-                $formation->setDiplomaYear('2003');
+                    $formation = new Formation();
+                    $formation->addUser($user);
+                    $formation->setDiplomaLevel('Bac +3/4');
+                    $formation->setDiplomaName('MASTER'.$i);
+                    $formation->setDiplomaSpeciality(DiplomaSpeciality::COMPUTER_SCIENCE);
+                    $formation->setUniversityName('Université de HARVARD');
+                    $formation->setDiplomaTown('Abidjan_'.$i);
+                    $formation->setDiplomaMonth(Months::April);
+                    $formation->setDiplomaYear('200'.$i);
 
-                $manager->persist($formation);
+                    $manager->persist($formation);
+                }
             }
 
             $manager->flush();

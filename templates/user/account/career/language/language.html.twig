@@ -14,6 +14,21 @@
         {% endfor %}
     {% endif %}
 
+    {# message if a language is missing #}
+    {% if app.flashes('language_missing') is defined %}
+        {% for languageMissingMsg in app.flashes('language_missing') %}
+            <span id="hide-flashMsg">{{ languageMissingMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
+    {# message if a language has been removed #}
+    {% if app.flashes('language_removed_successfully') is defined %}
+        {% for languageRemovedMsg in app.flashes('language_removed_successfully') %}
+            <span id="hide-flashMsg">{{ languageRemovedMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
+
     <header>
         {% include 'navbar.html.twig' %}
     </header>

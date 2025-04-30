@@ -2,7 +2,21 @@
 
 {% block title %}Niveau de langue - Emploi Espoir{% endblock %}
 
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('js/user/account/career/language/modalForRemovedLanguage.js') }}" defer></script>
+    <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
+{% endblock %}
+
 {% block body %}
+
+    {# message if the CSRF token for this removing form is invalid #}
+    {% if app.flashes('CSRF_error') is defined %}
+        {% for CSRFerrorMsg in app.flashes('CSRF_error') %}
+            <span id="hide-flashMsg">{{ CSRFerrorMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
 
     <header>
         {% include('navbar.html.twig') %}
@@ -28,9 +42,10 @@
             {{ form_end(language_edit_form) }}
 
 
-            <p>
-                <a href="#">Supprimer</a>
-            </p>
+            <form id="language-deletion-form-{{ current_language.id }}" action="{{ path('account_remove_language', { 'id': current_language.id }) }}" method="post">
+                <input type="hidden" name="_token" value="{{ csrf_token('account_remove_language_' ~ current_language.id) }}">
+                <button type="button" class="remove-btn" data-id="{{ current_language.id }}">Supprimer</button>
+            </form>
         </div>
     </section>
 {% endblock %}

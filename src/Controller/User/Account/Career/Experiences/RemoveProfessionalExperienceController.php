@@ -24,7 +24,7 @@
         #[IsGranted('ROLE_USER')]
         public function removeProfessionalExperience(int $id): RedirectResponse
         {
-            if ($this->isCsrfTokenValid('remove_professional_experience_'.$id, $this->requestStack->getCurrentRequest()->get('_token'))) {
+            if (!$this->isCsrfTokenValid('account_professional_experience_remove_'.$id, $this->requestStack->getCurrentRequest()->get('_token'))) {
                 $this->addFlash('CSRF_error', 'Token CSRF invalide');
                 return $this->redirectToRoute('account_professional_experience_edit', [
                     'id' => $id
