@@ -2,13 +2,60 @@
 
 {% block title %}Paramètres - Emploi Espoir{% endblock %}
 
+{% block javascripts %}
+    <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
+{% endblock %}
+
 {% block body %}
+
+    {# message if an user try to change her current email #}
+    {% if app.flashes('update_email_confirmation_new_email') is defined %}
+        {% for newEmailConfirmationMsg in app.flashes('update_email_confirmation_new_email') %}
+            <span id="hide-flashMsg">{{ newEmailConfirmationMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
+    {# message if confirmation email has not send #}
+    {% if app.flashes('update_email_confirmation_error_sending') is defined %}
+        {% for emailErrorSending in app.flashes('update_email_confirmation_error_sending') %}
+            <span id="hide-flashMsg">{{ emailErrorSending }}</span>
+        {% endfor %}
+    {% endif %}
+
 
     <header>
         {% include('navbar.html.twig') %}
     </header>
 
     <section>
-        <h1>Paramètres</h1>
+        {% include('headerForProfil.html.twig') %}
+    </section>
+
+    <section>
+
+        {# block for update email #}
+        <div>
+            <h2>Votre email</h2>
+
+            <div>
+                {{ form_start(update_email_form) }}
+                    <div>
+
+                        <div>
+                            {{ form_label(update_email_form.currentEmail) }}<br>
+                            {{ form_widget(update_email_form.currentEmail) }}
+                        </div>
+
+                        <div>
+                            {{ form_label(update_email_form.newEmail) }}<br>
+                            {{ form_widget(update_email_form.newEmail) }}
+                            {{ form_errors(update_email_form.newEmail) }}
+                        </div>
+
+                        <button type="submit">Mettre à jour</button>
+                    </div>
+                {{ form_end(update_email_form) }}
+            </div>
+        </div>
     </section>
 {% endblock %}

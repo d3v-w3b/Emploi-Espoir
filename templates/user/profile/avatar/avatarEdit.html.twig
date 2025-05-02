@@ -19,14 +19,13 @@
         {% include('navbar.html.twig') %}
     </header>
 
-    <section>
-        <h1>
-            <a href="{{ path('user_profile') }}">Profile</a>
-        </h1>
 
-        <h1>
-            <a href="{{ path('user_profile_settings_edit') }}">Paramètres</a>
-        </h1>
+    <section>
+        {% include('headerForProfil.html.twig') %}
+    </section>
+
+
+    <section>
 
         <div class="icon-border">
             <p class="btn-modify">

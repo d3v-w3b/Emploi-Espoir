@@ -6,13 +6,13 @@
     use App\Form\Fields\Users\RegisterAndAuth\SaveUserFields;
     use App\Form\Types\Users\RegisterAndAuth\SaveUserTypes;
     use App\Security\UserAuthenticator;
+    use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
     use Symfony\Component\Security\Core\Exception\AuthenticationException;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\HttpFoundation\RequestStack;
     use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
     use Symfony\Component\Mailer\MailerInterface;
-    //use Symfony\Component\Mime\Email;
     use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
     use Symfony\Component\Routing\Annotation\Route;
     use Doctrine\ORM\EntityManagerInterface;
@@ -91,6 +91,7 @@
                                 'password' => $passwordGeneration,
                                 'userEmail' => $emailEntered,
                                 'userLastName' => $userSaved->getLastName(),
+                                'settingsUrl' => $this->generateUrl('user_profile_settings_edit', [], UrlGeneratorInterface::ABSOLUTE_URL)
                             ])
                         ;
 
