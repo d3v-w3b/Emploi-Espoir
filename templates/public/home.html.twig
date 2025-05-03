@@ -35,11 +35,17 @@
     {% endif %}
 
 
+    {# message if an user has changed her email #}
+    {% if app.flashes('changing_email_successfully') is defined %}
+        {% for changingEmailMsg in app.flashes('changing_email_successfully') %}
+            <span id="hide-flashMsg">{{ changingEmailMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
+
 
     <div>
-
         {% include 'navbar.html.twig' %}
-
     </div>
 
 

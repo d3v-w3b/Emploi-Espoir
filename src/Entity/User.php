@@ -85,6 +85,16 @@
         private Collection $experiences;
 
 
+        /**
+         * variables for email changing
+         */
+        #[ORM\Column(nullable: true)]
+        private ?string $emailChangeToken = null;
+
+        #[ORM\Column(nullable: true)]
+        private ?string $pendingEmail = null;
+
+
 
         public function __construct()
         {
@@ -257,6 +267,17 @@
             }
 
             return $this;
+        }
+
+
+        public function setEmailChangeToken(?string $emailChangeToken): void
+        {
+            $this->emailChangeToken = $emailChangeToken;
+        }
+
+        public function setPendingEmail(?string $pendingEmail): void
+        {
+            $this->pendingEmail = $pendingEmail;
         }
 
 
@@ -441,6 +462,17 @@
             }
 
             return $this;
+        }
+
+
+        public function getEmailChangeToken(): ?string
+        {
+            return $this->emailChangeToken;
+        }
+
+        public function getPendingEmail(): ?string
+        {
+            return $this->pendingEmail;
         }
 
     }

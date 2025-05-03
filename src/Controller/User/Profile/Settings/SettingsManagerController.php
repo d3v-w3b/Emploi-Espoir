@@ -13,8 +13,10 @@
     use Symfony\Component\Mailer\MailerInterface;
     use Symfony\Component\Routing\Annotation\Route;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+    use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
     use Symfony\Component\Security\Http\Attribute\IsGranted;
     use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+    use Symfony\Component\Uid\Uuid;
 
     class SettingsManagerController extends AbstractController
     {
@@ -36,12 +38,15 @@
                 throw $this->createAccessDeniedException('Utilisateur invalide');
             }
 
+            // Fields for update email
             $updateEmailFields = new UpdateEmailFields();
             $updateEmailFields->setCurrentEmail($user->getEmail());
 
+            // Create a form for update email
             $updateEmailForm = $this->createForm(UpdateEmailType::class, $updateEmailFields);
             $updateEmailForm->handleRequest($this->requestStack->getCurrentRequest());
 
+            // Form validation for update email
             if ($updateEmailForm->isSubmitted() && $updateEmailForm->isValid()) {
 
                 $userWithEmail = $this->entityManager->getRepository(User::class)->findOneBy([
@@ -51,7 +56,19 @@
                 if ($userWithEmail && $userWithEmail !== $user) {
                     $updateEmailForm->get('newEmail')->addError(new FormError('Cet email est déjà utilisé par un autre compte.'));
                 }
+                elseif ($updateEmailFields->getNewEmail() === $user->getEmail()) {
+                    $updateEmailForm->get('newEmail')->addError(new FormError('Vous utilisez déjà cet email.'));
+                }
                 else {
+                    // Generate a confirmation token
+                    $token = Uuid::v4()->toRfc4122();
+
+                    // Save pending email and token in database
+                    $user->setEmailChangeToken($token);
+                    $user->setPendingEmail($updateEmailFields->getNewEmail());
+
+                    $this->entityManager->flush();
+
                     // send confirmation email
                     try {
                         $message = (new TemplatedEmail())
@@ -61,6 +78,7 @@
                             ->htmlTemplate('user/profile/settings/emailConfirmationForNewEmail.html.twig')
                             ->context([
                                 'userFirstName' => $user->getFirstName(),
+                                'confirmation_url' => $this->generateUrl('user_confirm_new_email', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL)
                             ])
                         ;
                         $this->mailer->send($message);
