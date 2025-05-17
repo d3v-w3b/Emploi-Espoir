@@ -4,6 +4,7 @@
 
 {% block javascripts %}
     <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
+    <script src="{{ asset('js/user/profile/Settings/modalForDeleteAnUserAccount.js') }}" defer></script>
 {% endblock %}
 
 {% block body %}
@@ -15,10 +16,19 @@
         {% endfor %}
     {% endif %}
 
+
     {# message if confirmation email has not send #}
     {% if app.flashes('update_email_confirmation_error_sending') is defined %}
         {% for emailErrorSending in app.flashes('update_email_confirmation_error_sending') %}
             <span id="hide-flashMsg">{{ emailErrorSending }}</span>
+        {% endfor %}
+    {% endif %}
+
+
+    {# message if password has been modify #}
+    {% if app.flashes('update_password_successfully') is defined %}
+        {% for updatePasswordSuccesMsg in app.flashes('update_password_successfully') %}
+            <span id="hide-flashMsg">{{ updatePasswordSuccesMsg }}</span>
         {% endfor %}
     {% endif %}
 
@@ -57,5 +67,90 @@
                 {{ form_end(update_email_form) }}
             </div>
         </div>
+
+        {# block for update password #}
+        <div>
+            <h2>Changer votre mot de passe</h2>
+
+            <div>
+                {{ form_start(update_password_form) }}
+                    <div>
+                        {{ form_label(update_password_form.currentPassword) }}<br>
+                        {{ form_widget(update_password_form.currentPassword) }}
+                        {{ form_errors(update_password_form.currentPassword) }}
+                    </div>
+
+                    <div>
+                        {{ form_label(update_password_form.newPassword) }}<br>
+                        {{ form_widget(update_password_form.newPassword) }}
+                        {{ form_errors(update_password_form.newPassword) }}
+                    </div>
+
+                    <div>
+                        {{ form_label(update_password_form.confirmNewPassword) }}<br>
+                        {{ form_widget(update_password_form.confirmNewPassword) }}
+                        {{ form_errors(update_password_form.confirmNewPassword) }}
+                    </div>
+
+                    <button type="submit">Mettre à jour</button>
+                {{ form_end(update_password_form) }}
+            </div>
+        </div>
     </section>
+
+
+    <section>
+        <h1>Supprimer votre compte</h1>
+
+        {% if app.user.organization is not null %}
+            <div>
+                <p>
+                    Si vous souhaitez supprimer votre compte, contactez nous via <a href="#">ce formulaire</a>.
+                </p>
+            </div>
+        {% else %}
+            <div>
+                <p>
+                    <a href="#" class="deletion-link">Je veux supprimer mon compte</a>
+                </p>
+            </div>
+
+            <div id="form-delete-account" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid black; z-index: 1000;">
+
+                <h2>Cette action est irreversible</h2>
+
+                {{ form_start(delete_account_form) }}
+                    <div>
+                        {{ form_label(delete_account_form.password) }}<br>
+                        {{ form_widget(delete_account_form.password) }}
+                        {{ form_errors(delete_account_form.password) }}
+                    </div>
+
+                    <div>
+                        <button type="submit">Supprimer mon compte</button>
+                    </div>
+                {{ form_end(delete_account_form) }}
+            </div>
+        {% endif %}
+    </section>
+
+
+
+
+    <!-- Modal structure -->
+
+    <!--
+    <div id="password-modal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid black; z-index: 1000;">
+        <h2 id="modal-job-title"></h2>
+        <p><strong>Organisation :</strong> <span id="modal-organization-name"></span></p>
+        <p><strong>Date d'expiration :</strong> <span id="modal-expiration-date"></span></p>
+        <button id="close-modal" style="margin-top: 10px;">Fermer</button>
+        <a href="#" id="apply-link"></a>
+    </div>
+
+    -->
+
+
+    <!-- Modal backdrop -->
+    <div id="modal-backdrop" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(1,9,10,0.93); z-index: 999;"></div>
 {% endblock %}

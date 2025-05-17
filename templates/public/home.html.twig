@@ -43,6 +43,14 @@
     {% endif %}
 
 
+    {# message if an user has deleted her account #}
+    {% if app.flashes('account_deletion_successfully') is defined %}
+        {% for accountDeletionMsg in app.flashes('account_deletion_successfully') %}
+            <span id="hide-flashMsg">{{ accountDeletionMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
+
 
     <div>
         {% include 'navbar.html.twig' %}
