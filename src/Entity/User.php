@@ -95,6 +95,15 @@
         private ?string $pendingEmail = null;
 
 
+        /**
+         * variable for changing password during
+         * the forgotten password process
+         */
+        #[ORM\Column(nullable: true)]
+        private ?string $passwordChangeToken = null;
+
+
+
 
         public function __construct()
         {
@@ -278,6 +287,12 @@
         public function setPendingEmail(?string $pendingEmail): void
         {
             $this->pendingEmail = $pendingEmail;
+        }
+
+
+        public function setPasswordChangeToken(?string $passwordChangeToken): void
+        {
+            $this->passwordChangeToken = $passwordChangeToken;
         }
 
 
@@ -473,6 +488,11 @@
         public function getPendingEmail(): ?string
         {
             return $this->pendingEmail;
+        }
+
+        public function getPasswordChangeToken(): ?string
+        {
+            return $this->passwordChangeToken;
         }
 
     }

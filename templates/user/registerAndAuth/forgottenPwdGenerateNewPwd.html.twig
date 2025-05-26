@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Emploi Espoir - Mot de passe oublié | Généré nouveau mot de passe{% endblock %}
+
+{% block body %}
+
+    <header>
+        {% include('navbar.html.twig') %}
+    </header>
+
+    <div>
+        <h1>Vous y êtes presque !</h1>
+
+        <p>
+            Cliquez sur le bouton ci-dessous pour générer un nouveau mot de passe et vous connecter à votre compte.
+        </p>
+
+        <form action="{{ path('forgotten_pwd_generate_new_pwd') }}" method="post">
+            <button type="submit">Générer</button>
+        </form>
+    </div>
+
+
+{% endblock %}

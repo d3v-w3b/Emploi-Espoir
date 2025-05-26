@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mot de passe oublié{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
+{% endblock %}
+
+{% block body %}
+    {# message if an email has been send #}
+    {% if app.flashes('email_verify_msg') is defined %}
+        {% for emailVerifyMsg in app.flashes('email_verify_msg') %}
+            <span id="hide-flashMsg">{{ emailVerifyMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
+    <section>
+
+        <h1>
+            Vous avez oublié votre mot de passe ? <br>
+            Le changement, ça a du bon !
+        </h1>
+
+        <p>
+            Entrez votre adresse e-mail et nous vous enverrons la marche à suivre pour réinitialiser votre mot de passe.
+        </p>
+
+        {{ form_start(email_verify_form) }}
+            <div>
+                {{ form_label(email_verify_form.email) }}<br>
+                {{ form_widget(email_verify_form.email) }}
+                {{ form_errors(email_verify_form.email) }}
+            </div>
+
+            <button type="submit">Envoyer ma demande</button>
+        {{ form_end(email_verify_form) }}
+    </section>
+
+{% endblock %}
