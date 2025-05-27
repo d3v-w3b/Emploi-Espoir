@@ -46,6 +46,9 @@
         #[ORM\OneToMany(targetEntity: JobOffers::class, mappedBy: 'organization')]
         private Collection $jobOffers;
 
+        #[ORM\Column(length: 128, nullable: true)]
+        private ?string $subscription = 'free';
+
         public function __construct()
         {
             $this->jobOffers = new ArrayCollection();
@@ -107,6 +110,11 @@
             $this->user = $user;
 
             return $this;
+        }
+
+        public function setSubscription(?string $subscription): void
+        {
+            $this->subscription = $subscription;
         }
 
 
@@ -190,5 +198,10 @@
             }
 
             return $this;
+        }
+
+        public function getSubscription(): ?string
+        {
+            return $this->subscription;
         }
     }

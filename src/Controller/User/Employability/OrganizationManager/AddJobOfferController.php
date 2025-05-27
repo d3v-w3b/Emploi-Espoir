@@ -35,6 +35,15 @@
             // Get current organization
             $organization = $user->getOrganization();
 
+            // Show a message if the subscription of the organization is free
+            if ($organization->getSubscription() === 'free') {
+                $this->addFlash('premium_message', 'Passer en premium pour avoir accès au service');
+
+                return $this->redirectToRoute('organization_dashboard_preview', [
+                    'id' => $organization->getId(),
+                ]);
+            }
+
             $jobOfferFields = new AddJobOfferFields();
             $jobOfferEntity = new JobOffers();
 

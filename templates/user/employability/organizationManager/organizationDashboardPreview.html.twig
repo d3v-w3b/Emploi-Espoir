@@ -4,6 +4,8 @@
 
 {% block javascripts %}
     <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
+    <script src="{{ asset('js/user/employability/organizationManager/modalForPremium.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 {% endblock %}
 
 {% block body %}
@@ -14,12 +16,24 @@
         {% endfor %}
     {% endif %}
 
+
+    {# premium message #}
+    {% if app.flashes('premium_message') is defined %}
+        {% for premiumMsg in app.flashes('premium_message') %}
+            <span id="modal-for-premium" style="display: none">{{ premiumMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
+
     <header>
         {% include 'navbar.html.twig' %}
     </header>
 
 
-    <h2>{{ organization.organizationName }}</h2>
+    <h2>
+        {{ organization.organizationName }} | <span>{{ organization.subscription }}</span>
+    </h2>
+
 
     {# this block will be side during style #}
     <div>

@@ -24,8 +24,18 @@
         {
             // Check if this current organization belongs to the user logged
             $user = $this->getUser();
+
             if($organization->getUser() !== $user) {
                 throw new AccessDeniedException('Vous n\'êtes pas autorisé à accéder à ces offres');
+            }
+
+            // Show a message if the subscription of the organization is frees
+            if ($organization->getSubscription() === 'free') {
+                $this->addFlash('premium_message', 'Passer en premium pour avoir accès au service');
+
+                return $this->redirectToRoute('organization_dashboard_preview', [
+                    'id' => $organization->getId(),
+                ]);
             }
 
             $myOffers = $this->entityManager->getRepository(JobOffers::class)->findBy(
