@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration - Se connecter{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/admin/registerAndAuth/modalForForgottentPwd.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% endblock %}
+
+{% block body %}
+    <form method="post">
+        {% if error %}
+            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+
+        <h1>Connectez-vous</h1>
+
+        <div>
+
+            <div>
+                <label for="inputAdminName">Nom d'administration</label> <br >
+                <input type="text" value="{{ last_username }}" name="adminName" id="inputAdminName" class="form-control" autocomplete="adminName" required autofocus>
+            </div>
+
+            <div>
+                <label for="inputPassword">Password</label> <br >
+                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+            </div>
+        </div>
+
+
+        <input type="hidden" name="_csrf_token"
+               value="{{ csrf_token('authenticate') }}"
+        >
+
+        <button class="btn btn-lg btn-primary" type="submit">
+            Sign in
+        </button>
+    </form>
+
+    <p>
+        <a href="#" class="modalForForgottenPwd">Mot de passe oublié</a>
+    </p>
+
+    <p>
+        Vous n'avez pas encore de compte ? <a href="{{ path('admin_register') }}"> S'enregistrer</a>
+    </p>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration - S'enregistrer{% endblock %}
+
+{% block body %}
+    <section>
+        <h1>S'enregistrer</h1>
+
+        {{ form_start(admin_registration_form) }}
+            <div>
+                <div>
+                    {{ form_label(admin_registration_form.email) }}<br >
+                    {{ form_widget(admin_registration_form.email) }}
+                    {{ form_errors(admin_registration_form.email) }}
+                </div>
+
+                <div>
+                    {{ form_label(admin_registration_form.adminName) }}<br >
+                    {{ form_widget(admin_registration_form.adminName) }}
+                    {{ form_errors(admin_registration_form.adminName) }}
+                </div>
+
+                <div>
+                    {{ form_label(admin_registration_form.password) }}<br >
+                    {{ form_widget(admin_registration_form.password) }}
+                    {{ form_errors(admin_registration_form.password) }}
+                </div>
+
+                <button type="submit">S'enregistrer</button>
+            </div>
+        {{ form_end(admin_registration_form) }}
+    </section>
+{% endblock %}

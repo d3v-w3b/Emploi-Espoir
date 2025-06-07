@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration - Dashboard{% endblock %}
+
+{% block body %}
+    <details>
+        <summary>{{ app.user.adminName }}</summary>
+
+        <p>
+            <a href="{{ path('admin_logout') }}" style="color: red;">Déconnexion</a>
+        </p>
+    </details>
+
+    <section>
+        <h1>Tableau de bord admin</h1>
+
+        <p>
+            <a href="#">Demande de suppression de compte organisation</a>
+        </p>
+
+        <p>
+            <a href="#">Vérification des organisations enregistrées</a>
+        </p>
+    </section>
+{% endblock %}
