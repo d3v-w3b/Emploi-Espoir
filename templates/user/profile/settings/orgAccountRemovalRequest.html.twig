@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Envoyer une demande de suppression de compte - Emploi Espoir{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/user/profile/Settings/disabledSubmitButtonIfStatuIsEmpty.js') }}" defer></script>
+    <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
+{% endblock %}
+
+{% block body %}
+    {# message if a request has been sent #}
+    {% if app.flashes('request_sent') is defined %}
+        {% for requestSentMsg in app.flashes('request_sent') %}
+            <span id="hide-flashMsg">{{ requestSentMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
+
+    <header>
+        {% include('navbar.html.twig') %}
+    </header>
+
+    <h1>Envoyer une demande</h1>
+
+     {{ form_start(account_removal_form) }}
+
+        <div>
+            <div>
+                {{ form_label(account_removal_form.email) }}<br>
+                {{ form_widget(account_removal_form.email) }}
+                {{ form_errors(account_removal_form.email) }}
+            </div>
+
+            <div>
+                {{ form_label(account_removal_form.statu) }}<br>
+                {{ form_widget(account_removal_form.statu) }}
+                {{ form_errors(account_removal_form.statu) }}
+            </div>
+
+            <div>
+                {{ form_label(account_removal_form.phone) }}<br>
+                {{ form_widget(account_removal_form.phone) }}
+                {{ form_errors(account_removal_form.phone) }}
+            </div>
+
+            <div>
+                {{ form_label(account_removal_form.description) }}<br>
+                {{ form_widget(account_removal_form.description) }}
+                {{ form_errors(account_removal_form.description) }}
+            </div>
+
+            <button type="submit" disabled>Envoyer</button>
+        </div>
+
+     {{ form_end(account_removal_form) }}
+{% endblock %}

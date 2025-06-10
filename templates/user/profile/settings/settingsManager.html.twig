@@ -105,7 +105,7 @@
         {% if app.user.organization is not null %}
             <div>
                 <p>
-                    Si vous souhaitez supprimer votre compte, contactez nous via <a href="#">ce formulaire</a>.
+                    Si vous souhaitez supprimer votre compte, contactez nous via <a href="{{ path('user_remove_account_organization_request') }}">ce formulaire</a>.
                 </p>
             </div>
         {% else %}

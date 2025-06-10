@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration - Supprimer un compte lié{% endblock %}
+
+{% block body %}
+    <details>
+        <summary>{{ app.user.adminName }}</summary>
+
+        <p>
+            <a href="{{ path('admin_logout') }}" style="color: red;">Déconnexion</a>
+        </p>
+    </details>
+
+    <h1>Demandes de suppression de compte organisation</h1>
+
+    {% for request in all_removal_requests %}
+        <a href="#">
+            <h3>
+                {{ request.applicantOrganization }}
+            </h3>
+
+            <p>
+                <strong>Propriétaire : </strong> {{ request.applicantEmail }}
+            </p>
+
+            <p>
+                <strong>Localité : </strong>{{ organization.town }}
+            </p>
+
+            <p>
+                <strong>Abonnement : </strong> {{ organization.subscription }}
+            </p>
+        </a>
+
+    {% endfor %}
+{% endblock %}

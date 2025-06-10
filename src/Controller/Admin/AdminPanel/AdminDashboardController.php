@@ -2,6 +2,8 @@
 
     namespace App\Controller\Admin\AdminPanel;
 
+    use App\Entity\AccountDeletionRequest;
+    use Doctrine\ORM\EntityManagerInterface;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\Routing\Annotation\Route;
@@ -9,10 +11,20 @@
 
     class AdminDashboardController extends AbstractController
     {
+        public function __construct(
+            private readonly EntityManagerInterface $entityManager,
+        ){}
+
+
+
         #[Route(path: '/admin/dashboard', name: 'admin_dashboard')]
         #[isGranted('ROLE_ADMIN')]
         public function adminDashboard(): Response
         {
-            return $this->render('admin/adminPanel/adminDashboard.html.twig');
+            $requestCounter = $this->entityManager->getRepository(AccountDeletionRequest::class)->findBy([]);
+
+            return $this->render('admin/adminPanel/adminDashboard.html.twig', [
+                'request_counter' => count($requestCounter)
+            ]);
         }
     }
