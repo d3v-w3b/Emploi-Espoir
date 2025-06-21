@@ -17,7 +17,8 @@
         {
             $builder
                 ->add('email', EmailType::class, [
-                    'label' => 'Adresse e-mail',
+                    'label' => 'Adresse e-mail de l\'organization',
+                    'help' => 'Nous enverrons une confirmation de suppression sur cette email après validation de votre requête'
                 ])
 
                 ->add('statu', ChoiceType::class, [

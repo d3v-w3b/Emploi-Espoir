@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration - Supprimer un compte lié{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/admin/organizationManager/removalRequest/modalForFormDeletionOrg.js') }}" defer></script>
+{% endblock %}
+
+{% block body %}
+
+    <div>
+        {% include('adminNavbar.html.twig') %}
+    </div>
+
+
+
+    <section>
+        <h1>{{ current_org.applicantOrganization }}</h1>
+
+        <p>
+            <strong>Propriétaire : </strong> {{ current_org.applicantEmail }}
+        </p>
+
+        <p>
+            <strong>Email de l' organization : </strong> {{ current_org.email }}
+        </p>
+
+        <p>
+            <strong>Contact de l' organization : </strong> {{ current_org.telephone }}
+        </p>
+
+        <p>
+            <strong>Localité : </strong> {{ organization.town }}
+        </p>
+
+        <p>
+            <strong>Préférence de l'organisation : </strong>
+            <span>
+            {% for orgPreferences in organization.organizationPreferences %}
+                {{ orgPreferences }}
+            {% endfor %}
+        </span>
+        </p>
+
+        <p>
+            <strong>Secteur d'activités : </strong>
+            <span>
+            {% for orgSectorOfActivity in organization.sectorOfActivity %}
+                {{ orgSectorOfActivity }}
+            {% endfor %}
+        </span>
+        </p>
+
+        <p>
+            <strong>Abonnement : </strong> {{ organization.subscription }}
+        </p>
+
+        <p>
+            <strong>Description de la requête : </strong> {{ current_org.description }}
+        </p>
+
+
+    </section>
+
+    <p>
+        <a href="#" id="request-for-deletion-link">Accepter la demande de suppression</a>
+    </p>
+
+
+    <section id="form-deletion-org" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid black; z-index: 1000;">
+        <h3>Cette action est irreversible</h3>
+
+        {{ form_start(org_deletion_form) }}
+            <div>
+                {{ form_label(org_deletion_form.password) }}<br >
+                {{ form_widget(org_deletion_form.password) }}
+                {{ form_errors(org_deletion_form.password) }}
+            </div>
+
+            <button type="submit">Valider la requête</button>
+        {{ form_end(org_deletion_form) }}
+    </section>
+
+
+    {# backdrop for modal #}
+    <div id="modal-backdrop" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(1,9,10,0.93); z-index: 999;"></div>
+{% endblock %}

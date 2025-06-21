@@ -1,7 +1,7 @@
 <?php
 
     namespace App\Controller\User\RegisterAndAuth;
-
+    
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\RequestStack;
     use Symfony\Component\HttpFoundation\Response;
@@ -10,13 +10,11 @@
 
     class LoginController extends AbstractController
     {
-        private RequestStack $requestStack;
+        public function __construct(
+            private readonly RequestStack $requestStack,
+        ){}
 
 
-        public function __construct(RequestStack $requestStack)
-        {
-            $this->requestStack = $requestStack;
-        }
 
 
         #[Route(path: '/login/password', name: 'user_login')]
@@ -24,6 +22,10 @@
         {
             if ($this->getUser()) {
                 return $this->redirectToRoute('user_dashboard');
+            }
+
+            if (!$this->getUser()) {
+                return $this->redirectToRoute('home');
             }
 
             // get session

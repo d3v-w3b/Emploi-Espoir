@@ -12,18 +12,18 @@
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\Routing\Annotation\Route;
     use Symfony\Component\Security\Http\Attribute\IsGranted;
+    use App\Security\UserAuthenticator;
+    use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
     class AddOrganizationBasicsInfosController extends AbstractController
     {
-        private RequestStack $requestStack;
-        private EntityManagerInterface $entityManager;
 
-
-        public function __construct(RequestStack $requestStack, EntityManagerInterface $entityManager)
-        {
-            $this->entityManager = $entityManager;
-            $this->requestStack = $requestStack;
-        }
+        public function __construct(
+            private readonly RequestStack $requestStack,
+            private readonly EntityManagerInterface $entityManager,
+            private readonly UserAuthenticator $authenticator,
+            private readonly UserAuthenticatorInterface $userAuthenticator
+        ){}
 
 
         #[Route(path: '/organization/add', name: 'organization_add')]
@@ -69,10 +69,17 @@
                 $organizationEntity->setOrganizationRegistrationNumber($organizationAddFields->getOrganizationRegistrationNumber());
 
                 // add ROLE_ENT to the users which create new organization
-                $user->setRoles(array_unique([...$user->getRoles(), 'ROLE_ENT']));
+                $roles = $user->getRoles();
+                if (!in_array('ROLE_ENT', $roles, true)) {
+                    $roles[] = 'ROLE_ENT';
+                    $user->setRoles($roles);
+                }
 
                 $this->entityManager->persist($organizationEntity);
                 $this->entityManager->flush();
+
+                // re-authenticate user to add the new role
+                $this->userAuthenticator->authenticateUser($user, $this->authenticator, $this->requestStack->getCurrentRequest());
 
                 return $this->redirectToRoute('organisation_employer_phone_number');
             }
