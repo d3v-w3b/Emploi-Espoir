@@ -66,7 +66,7 @@
         #[ORM\ManyToMany(targetEntity: Formation::class, mappedBy: 'user')]
         private Collection $formations;
 
-        #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+        #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist'])]
         private ?Organization $organization = null;
 
         #[ORM\OneToMany(targetEntity: Applicant::class, mappedBy: 'user')]

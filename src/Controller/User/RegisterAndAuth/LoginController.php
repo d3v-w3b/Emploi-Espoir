@@ -24,10 +24,6 @@
                 return $this->redirectToRoute('user_dashboard');
             }
 
-            if (!$this->getUser()) {
-                return $this->redirectToRoute('home');
-            }
-
             // get session
             $session = $this->requestStack->getSession();
             $emailEntered = $session->get('email_entered');

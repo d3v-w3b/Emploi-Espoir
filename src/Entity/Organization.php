@@ -39,11 +39,11 @@
         #[ORM\Column(type: 'text', nullable: true)]
         private ?string $message = null;
 
-        #[ORM\OneToOne(inversedBy: 'organization', cascade: ['persist', 'remove'])]
+        #[ORM\OneToOne(inversedBy: 'organization', cascade: ['persist'])]
         #[ORM\JoinColumn(nullable: false)]
         private ?User $user = null;
 
-        #[ORM\OneToMany(targetEntity: JobOffers::class, mappedBy: 'organization')]
+        #[ORM\OneToMany(targetEntity: JobOffers::class, mappedBy: 'organization', cascade: ['remove'], orphanRemoval: true)]
         private Collection $jobOffers;
 
         #[ORM\Column(length: 128, nullable: true)]
