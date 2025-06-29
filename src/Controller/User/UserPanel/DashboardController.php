@@ -43,11 +43,18 @@
             }
 
             $userChoices = $user->getMainObjectives();
+            $userOrg = $user->getOrganization();
 
             $organizationPreferences = [];
 
             $allOrganizations = $this->entityManager->getRepository(Organization::class)->findAll();
             foreach ($allOrganizations as $organization) {
+
+                // Hide the organization of the current user
+                if ($userOrg !== null && $organization === $userOrg) {
+                    continue;
+                }
+
                 $organizationObjectives = $organization->getOrganizationPreferences();
 
                 // avoid that function array_diff() contain null values
