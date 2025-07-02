@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Emploi Espoir - {{ organization.organizationName}} {% endblock%}
+
+{% block body %}
+
+    <header>
+        {% include('navbar.html.twig') %}
+    </header>
+
+    <section>
+        <h1>
+            {{ organization.organizationName }}
+        </h1>
+        <p>
+            <span>
+                {% for orgPref in organization.organizationPreferences %}
+                    {{ orgPref }}
+                {% endfor %}
+            </span>
+
+            |
+
+            <span>
+                {% for orgSector in organization.sectorOfActivity %}
+                    {{ orgSector }}
+                {% endfor %}
+            </span>
+        </p>
+    </section>
+
+
+    <section>
+        <h1>Offres d'emploi</h1>
+
+        {% for offers in job_offers %}
+            <div>
+                <h3>{{ offers.jobTitle }}</h3>
+
+                <p>
+                    <strong>Contract : {{ offers.typeOfContract }}</strong>
+                </p>
+
+                <p>
+                    <strong>Localité : {{ offers.town }}</strong>
+                </p>
+
+                <p>
+                    <strong>Expirations : </strong>
+                    {% if offers.expirationDate is not null %}
+                        {{ offers.expirationDate|date('d-m-Y') }}
+                    {% endif %}
+
+                </p>
+
+                <p>
+                    <strong>Nombre de postulant : </strong> {{ applicants|length }}
+                </p>
+
+                <p>
+                    <a href="{{ path('organization_job_offer_apply', {'id' : offers.id}) }}">Postuler a l'offre</a>
+                </p>
+            </div>
+
+            {% else %}
+            <div>
+                <p>
+                    Aucune offre d'emploi n'a été émise par cette entreprise.
+                </p>
+            </div>
+        {% endfor %}
+    </section>
+{% endblock %}

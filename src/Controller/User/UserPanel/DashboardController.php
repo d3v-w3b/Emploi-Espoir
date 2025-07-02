@@ -73,8 +73,15 @@
             $allOffers = $this->entityManager->getRepository(JobOffers::class)->findAll();
 
             foreach ($allOffers as $offer) {
+                $offerOrganization = $offer->getOrganization();
+
+                // Skip offers from the user's own organization
+                if ($userOrg !== null && $offerOrganization === $userOrg) {
+                    continue;
+                }
+
                 // Get sectors of activities for each offer retrieve
-                $offerSectorOfActivity = $offer->getOrganization()->getSectorOfActivity();
+                $offerSectorOfActivity = $offerOrganization->getSectorOfActivity();
 
                 if(!empty(array_intersect($fieldsOfInterest, $offerSectorOfActivity))) {
                     $offerBasedOnUser[] = $offer;

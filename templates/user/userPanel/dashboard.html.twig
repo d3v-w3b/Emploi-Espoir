@@ -30,7 +30,7 @@
         <div>
             {% for organization in organizationPreferences %}
 
-                <a href="#">
+                <a href="{{ path('organization_offers', {'id' : organization.id}) }}">
                     <p>{{ organization.organizationName }}</p>
 
                     {% for preference in organization.organizationPreferences %}
