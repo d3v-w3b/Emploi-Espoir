@@ -34,7 +34,9 @@
             }
 
             // Création du formulaire global
-            $filterForm = $this->createForm(FilterJobOfferType::class);
+            $filterForm = $this->createForm(FilterJobOfferType::class, null, [
+                'method' => 'GET',
+            ]);
             $filterForm->handleRequest($this->requestStack->getCurrentRequest());
 
             // Création de la requête avec QueryBuilder
@@ -45,7 +47,7 @@
                 ->andWhere('job.statu = true')
             ;
 
-            if ($filterForm->isSubmitted() && $filterForm->isValid()) {
+            //if ($filterForm->isSubmitted() && $filterForm->isValid()) {
                 $data = $filterForm->getData();
 
                 if (!empty($data['typeOfContract'])) {
@@ -59,7 +61,7 @@
                         ->setParameter('sector', '%' . $data['organizationField'] . '%')
                     ;
                 }
-            }
+            //}
 
 
 
@@ -73,7 +75,8 @@
             return $this->render('public/home.html.twig', [
                 'organization' => $organizationEntity,
                 'job_offers' => $pagination,
-                'filter_form' => $filterForm->createView()
+                'filter_form' => $filterForm->createView(),
+                'filter_data' => $this->requestStack->getCurrentRequest()->query->all()
             ]);
         }
     }

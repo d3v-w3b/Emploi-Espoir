@@ -64,7 +64,7 @@
 
 
         <div>
-            {{ form_start(filter_form) }}
+            {{ form_start(filter_form, {'method': 'GET'}) }}
                 <h4>Type de contrat</h4>
                 {{ form_widget(filter_form.typeOfContract) }}
 
@@ -100,8 +100,10 @@
         </div>
 
 
-        <div class="pagination">
-            {{ knp_pagination_render(job_offers) }}
+        <div class="pagination"> {# pour le style retirer le div et la class pagination #}
+            {{ knp_pagination_render(job_offers, null, {
+                'query': filter_data
+            }) }}
         </div>
 
     </section>

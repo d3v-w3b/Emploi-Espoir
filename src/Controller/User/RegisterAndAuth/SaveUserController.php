@@ -102,6 +102,8 @@
                     }
                 }
 
+                $this->addFlash('registration_successfully', 'Bienvenue sur Emploi Espoir.<br> Vérifiez votre email pour obtenir vos paramètres de connexion.');
+
                 return $this->redirectToRoute('welcome');
             }
 

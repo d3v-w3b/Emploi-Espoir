@@ -40,14 +40,14 @@
             // Pre-filed fields for see current datas
             $offerEditFields->setJobTitle($jobOffer->getJobTitle());
             $offerEditFields->setTypeOfContract($jobOffer->getTypeOfContract());
-            $offerEditFields->setWhatWeOffer(implode(', ', $jobOffer->getWhatWeOffer()));
-            $offerEditFields->setMissions(implode(', ', $jobOffer->getMissions()));
+            $offerEditFields->setWhatWeOffer(implode(', ', $jobOffer->getWhatWeOffer() ?? []));
+            $offerEditFields->setMissions(implode(', ', $jobOffer->getMissions() ?? []));
             $offerEditFields->setOrganizationAbout($jobOffer->getOrganizationAbout());
             $offerEditFields->setTown($jobOffer->getTown());
             $offerEditFields->setJobPreferences($jobOffer->getJobPreferences());
             $offerEditFields->setDocsToProvide($jobOffer->getDocsToProvide());
             $offerEditFields->setExpirationDate($jobOffer->getExpirationDate());
-            $offerEditFields->setProfilSought(implode(', ', $jobOffer->getProfilSought()));
+            $offerEditFields->setProfilSought(implode(', ', $jobOffer->getProfilSought() ?? []));
 
             $offerEditForm = $this->createForm(JobOfferEditType::class, $offerEditFields);
             $offerEditForm->handleRequest($this->requestStack->getCurrentRequest());

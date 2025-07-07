@@ -5,9 +5,18 @@
 
 {% block javascripts %}
     <script src="{{ asset('js/user/userPanel/validateUserChoices.js') }}" defer></script>
+    <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
 {% endblock %}
 
 {% block body %}
+    {# message if a user has been registered #}
+    {% if app.flashes('registration_successfully') is defined %}
+        {% for welcomeMsg in app.flashes('registration_successfully') %}
+            <span id="hide-flashMsg">{{ welcomeMsg|raw }}</span>
+        {% endfor %}
+    {% endif %}
+
+
     <section>
 
         <header>
