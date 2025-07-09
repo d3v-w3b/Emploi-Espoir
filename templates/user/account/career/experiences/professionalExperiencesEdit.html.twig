@@ -4,6 +4,13 @@
 
 {% block stylesheets %}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    {# style à mettre dans le css #}
+    <style>
+        #professional_experiences_edit_startDate_day, #professional_experiences_edit_endDate_day {
+            display: none;
+        }
+    </style>
 {% endblock %}
 
 {% block javascripts %}
@@ -13,6 +20,7 @@
     <script src="{{ asset('js/user/account/career/experiences/wordCounterForExperiencesEdit.js') }}" defer></script>
     <script src="{{ asset('js/user/account/career/experiences/modalForRemoveExperience.js') }}" defer></script>
     <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
+    <script src="{{ asset('js/user/account/career/experiences/experienceEditDateManager.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 {% endblock %}
 
@@ -71,7 +79,7 @@
                     {{ form_errors(experience_edit_form.startDate) }}
                 </div>
 
-                <div style="display: none" class="end-date">
+                <div class="end-date">
                     {{ form_label(experience_edit_form.endDate) }}<br>
                     {{ form_widget(experience_edit_form.endDate) }}
                     {{ form_errors(experience_edit_form.endDate) }}

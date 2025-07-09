@@ -89,10 +89,12 @@
             }
 
             // Filter offers based on type of contract
-            $filterForm = $this->createForm(DashboardOfferFilterType::class);
+            $filterForm = $this->createForm(DashboardOfferFilterType::class, null, [
+                'method' => 'GET'
+            ]);
             $filterForm->handleRequest($this->requestStack->getCurrentRequest());
 
-            if($filterForm->isSubmitted() && $filterForm->isValid()) {
+            //if($filterForm->isSubmitted() && $filterForm->isValid()) {
                 $data = $filterForm->getData();
 
                 if (!empty($data['typeOfContract'])) {
@@ -100,7 +102,7 @@
                         return $offer->getTypeOfContract() === $data['typeOfContract'];
                     });
                 }
-            }
+            //}
 
             // Pagination
             $pagination = $this->paginator->paginate(
@@ -114,6 +116,7 @@
                 'organizationPreferences' => $organizationPreferences,
                 'offerBasedOnUser' => $pagination,
                 'filterForm' => $filterForm->createView(),
+                'filter_data' => $this->requestStack->getCurrentRequest()->query->all()
             ]);
         }
     }

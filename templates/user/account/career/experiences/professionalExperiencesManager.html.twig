@@ -5,8 +5,14 @@
 {% block stylesheets %}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
-    {# <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> #}
-    {# <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/style.css"> #}
+    {#
+        style à mettre dans le css
+    #}
+    <style>
+        #professional_experiences_manager_startDate_day, #professional_experiences_manager_endDate_day {
+            display: none;
+        }
+    </style>
 {% endblock %}
 
 {% block javascripts %}
@@ -14,10 +20,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('js/user/account/career/experiences/jobFieldsDisabledManager.js') }}" defer></script>
-
-    {# <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> #}
-    {# <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/index.js"></script> #}
-    <script src="{{ asset('js/user/account/career/experiences/experienceDateFormatManager.js') }}" defer></script>
 {% endblock %}
 
 {% block body %}

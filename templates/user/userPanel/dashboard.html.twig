@@ -54,7 +54,7 @@
             <span style="border: 1px solid black;">{{ fieldsOfInterest }}</span>
         {% endfor %}
 
-        {{ form_start(filterForm) }}
+        {{ form_start(filterForm, {'method': 'GET'}) }}
             {{ form_widget(filterForm.typeOfContract) }}
 
             <button type="submit" style="display: none">Filtrer</button>
@@ -88,7 +88,9 @@
         </div>
 
         <div class="pagination">
-            {{ knp_pagination_render(offerBasedOnUser) }}
+            {{ knp_pagination_render(offerBasedOnUser, null, {
+                'query': filter_data
+            }) }}
         </div>
 
     </div>

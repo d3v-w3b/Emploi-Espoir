@@ -101,12 +101,26 @@
                 ])
 
                 ->add('startDate', DateType::class, [
-                    'label' => 'Date de début'
+                    'label' => 'Date de début',
+                    'widget' => 'choice',
+                    'format' => 'dd MM yyyy',
+                    'years' => range(date('Y'), 1950),
+                    'days' => [1],                                  // on fixe le jour à 1 (car Symfony exige un jour)
+                    'placeholder' => [
+                        'year' => 'Année', 'month' => 'Mois', 'day' => false,
+                    ],
                 ])
 
                 ->add('endDate', DateType::class, [
                     'label' => 'Date de fin',
                     'required' => false,
+                    'widget' => 'choice',
+                    'format' => 'dd MM yyyy',
+                    'years' => range(date('Y'), 1950),
+                    'days' => [1],                                  // on fixe le jour à 1 (car Symfony exige un jour)
+                    'placeholder' => [
+                        'year' => 'Année', 'month' => 'Mois', 'day' => false,
+                    ],
                 ])
 
                 ->add('jobDescription', TextareaType::class, [

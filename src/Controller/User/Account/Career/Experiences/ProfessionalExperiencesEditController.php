@@ -36,7 +36,7 @@
 
             $experienceFields = new ProfessionalExperiencesEditFields();
 
-            // Prefile form fields with current values of $currentExperiences
+            // Pre-file form fields with current values of $currentExperiences
             $experienceFields->setJobTitle($currentExperiences->getJobTitle());
             $experienceFields->setJobField($currentExperiences->getJobField());
             $experienceFields->setTown($currentExperiences->getTown());

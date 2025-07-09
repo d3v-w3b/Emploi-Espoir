@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accès interdit - Emploi Espoir{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+{% endblock %}
+
+{% block body %}
+
+    <header>
+        {% include('navbar.html.twig') %}
+    </header>
+
+    {% if exception is defined %}
+        <h1>
+            {{ exception.message }}
+        </h1>
+
+        <p>
+            <a href="{{ path('user_dashboard') }}">Retour à la page d'accueil</a>
+        </p>
+    {% endif %}
+{% endblock %}
