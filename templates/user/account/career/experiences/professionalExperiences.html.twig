@@ -2,6 +2,10 @@
 
 {% block title %}Expériences professionnelles - Emploi Espoir{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+{% endblock %}
+
 {% block javascripts %}
     <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
 {% endblock %}
@@ -35,7 +39,9 @@
     </header>
 
     <p>
-        <a href="{{ path('account') }}">Retour</a>
+        <a href="{{ path('account') }}">
+            <i class="bi bi-arrow-left"></i>
+        </a>
     </p>
 
     <section>

@@ -34,7 +34,9 @@
                 ->add('dateOfBirth', DateType::class, [
                     'label' => 'Date de naissance',
                     'input' => 'datetime_immutable',
-                    'widget' => 'single_text',
+                    'widget' => 'choice',
+                    'format' => 'dd MM yyyy',
+                    'years' => range(date('Y'), 1950),
                 ])
             ;
         }

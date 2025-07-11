@@ -18,7 +18,7 @@
         #[ORM\Column(length: 128, nullable: true)]
         private ?string $town = null;
 
-        #[ORM\Column(length: 128, nullable: true)]
+        #[ORM\Column(length: 128, unique: true, nullable: true)]
         private ?string $organizationName = null;
 
         #[ORM\Column(length: 255, nullable: true)]

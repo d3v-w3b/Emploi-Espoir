@@ -15,6 +15,12 @@
         {% include 'navbar.html.twig' %}
     </header>
 
+    <p>
+        <a href="{{ path('account_formations') }}">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+    </p>
+
     <h1>Formations</h1>
 
     <div>
@@ -126,6 +132,7 @@
 
 
 {% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         input[type="file"] {
             display: none;

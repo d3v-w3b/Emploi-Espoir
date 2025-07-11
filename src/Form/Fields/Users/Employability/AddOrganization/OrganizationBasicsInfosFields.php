@@ -2,8 +2,11 @@
 
     namespace App\Form\Fields\Users\Employability\AddOrganization;
 
+    use App\Entity\Organization;
+    use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
     use Symfony\Component\Validator\Constraints as Assert;
 
+    #[UniqueEntity('organizationName', message: 'Une organisation utilise déjà ce nom', entityClass: Organization::class)]
     class OrganizationBasicsInfosFields
     {
         #[Assert\NotBlank]
