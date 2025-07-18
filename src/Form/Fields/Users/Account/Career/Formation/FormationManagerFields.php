@@ -14,7 +14,6 @@
         #[Assert\NotBlank]
         private ?string $diplomaName = null;
 
-        #[Assert\NotBlank]
         private ?DiplomaSpeciality $diplomaSpeciality = null;
 
         #[Assert\NotBlank]

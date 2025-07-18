@@ -8,12 +8,6 @@
 {% endblock %}
 
 {% block body %}
-    {# message if a request has been sent #}
-    {% if app.flashes('request_sent') is defined %}
-        {% for requestSentMsg in app.flashes('request_sent') %}
-            <span id="hide-flashMsg">{{ requestSentMsg }}</span>
-        {% endfor %}
-    {% endif %}
 
 
     <header>

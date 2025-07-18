@@ -33,7 +33,8 @@
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 
-            $this->addFlash('changing_email_successfully', 'Votre nouvelle adresse email a été confirmé');
+            // This msg flash does not work
+            //$this->addFlash('changing_email_successfully', 'Votre nouvelle adresse email a été confirmé');
 
             return $this->redirectToRoute('user_logout');
         }

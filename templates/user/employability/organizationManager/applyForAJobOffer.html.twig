@@ -192,7 +192,7 @@
                     <p>
                         {% if app.user.career is not null and app.user.career.linkedInUrl is not null %}
                             <span>
-                                <span>LinkedIn : {{ app.user.career.linkedInUrl }}</span>
+                                <span>LinkedIn : <a href="{{ app.user.career.linkedInUrl }}" target="_blank">{{ app.user.career.linkedInUrl }}</a></span>
                             </span>
                         {% endif %}
                     </p>
@@ -201,7 +201,7 @@
                     <p>
                         {% if app.user.career is not null and app.user.career.githubUrl is not null %}
                             <span>
-                                <span>Github : {{ app.user.career.githubUrl }}</span>
+                                <span>Github : <a href="{{ app.user.career.githubUrl }}" target="_blank">{{ app.user.career.githubUrl }}</a></span>
                             </span>
                         {% endif %}
                     </p>
@@ -211,7 +211,7 @@
 
                         {% if app.user.career is not null and app.user.career.websiteUrl is not null %}
                             <span>
-                                <span>Autre (site web, portfolio de projets) : {{ app.user.career.websiteUrl }}</span>
+                                <span>Autre (site web, portfolio de projets) : <a href="{{ app.user.career.websiteUrl }}" target="_blank">{{ app.user.career.websiteUrl }}</a></span>
                             </span>
                         {% endif %}
 

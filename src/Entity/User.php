@@ -69,19 +69,19 @@
         #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist'])]
         private ?Organization $organization = null;
 
-        #[ORM\OneToMany(targetEntity: Applicant::class, mappedBy: 'user')]
+        #[ORM\OneToMany(targetEntity: Applicant::class, mappedBy: 'user', cascade: ['remove'], orphanRemoval: true)]
         private Collection $applicants;
 
         /**
          * @var Collection<int, Language>
          */
-        #[ORM\OneToMany(targetEntity: Language::class, mappedBy: 'user')]
+        #[ORM\OneToMany(targetEntity: Language::class, mappedBy: 'user', cascade: ['remove'], orphanRemoval: true)]
         private Collection $languages;
 
         /**
          * @var Collection<int, Experiences>
          */
-        #[ORM\OneToMany(targetEntity: Experiences::class, mappedBy: 'user')]
+        #[ORM\OneToMany(targetEntity: Experiences::class, mappedBy: 'user', cascade: ['remove'], orphanRemoval: true)]
         private Collection $experiences;
 
 

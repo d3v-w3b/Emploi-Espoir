@@ -57,13 +57,9 @@
                 }
                 catch (CustomUserMessageAuthenticationException) {
                     $this->addFlash('authentication_failed', 'Essayez de vous connectez à nouveau');
-
-                    return $this->redirectToRoute('admin_login');
                 }
                 catch (AuthenticationException $e) {
                     $this->addFlash('authentication_error', $e->getMessage());
-
-                    return $this->redirectToRoute('admin_login');
                 }
             }
 

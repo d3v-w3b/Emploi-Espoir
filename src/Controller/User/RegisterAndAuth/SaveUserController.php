@@ -98,7 +98,7 @@
                         $this->mailer->send($message);
                     }
                     catch (TransportExceptionInterface $e) {
-                        $this->addFlash('error_sending', $e->getMessage());
+                        $this->addFlash('email_error_sending', $e->getMessage());
                     }
                 }
 

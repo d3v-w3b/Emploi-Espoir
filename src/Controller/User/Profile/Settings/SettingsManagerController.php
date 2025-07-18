@@ -106,12 +106,12 @@
                             ])
                         ;
                         $this->mailer->send($message);
+
+                        $this->addFlash('update_email_confirmation_new_email', 'Un email de confirmation vous à été envoyé');
                     }
                     catch (TransportExceptionInterface $e) {
                         $this->addFlash('update_email_confirmation_error_sending', $e->getMessage());
                     }
-
-                    $this->addFlash('update_email_confirmation_new_email', 'Un email de confirmation vous à été envoyé');
                 }
             }
 

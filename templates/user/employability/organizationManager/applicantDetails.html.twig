@@ -92,21 +92,21 @@
 
         {% if applicant.user.career is not null and applicant.user.career.linkedInUrl is not null %}
             <p>
-                LinkedIn : {{ applicant.user.career.linkedInUrl }}
+                LinkedIn : <a href="{{ applicant.user.career.linkedInUrl }}" target="_blank">{{ applicant.user.career.linkedInUrl }}</a>
             </p>
         {% endif %}
 
 
         {% if applicant.user.career is not null and applicant.user.career.githubUrl is not null %}
             <p>
-                Github : {{ applicant.user.career.githubUrl }}
+                Github : <a href="{{ applicant.user.career.githubUrl }}" target="_blank">{{ applicant.user.career.githubUrl }}</a>
             </p>
         {% endif %}
 
 
         {% if applicant.user.career is not null and applicant.user.career.websiteUrl is not null %}
             <p>
-                Autre (site web, portfolio, ...) : {{ applicant.user.career.websiteUrl }}
+            Autre (site web, portfolio, ...) : <a href="{{ applicant.user.career.websiteUrl }}" target="_blank">{{ applicant.user.career.websiteUrl }}</a>
             </p>
         {% endif %}
     </section>

@@ -32,7 +32,7 @@
                     'expanded' => false,
                     'multiple' => false,
                     'attr' => [
-                        'class' => 'select-tag-block'
+                        'class' => 'diploma-level'
                     ]
                 ])
 
@@ -47,6 +47,7 @@
                     'class' => DiplomaSpeciality::class,
                     'choice_label' => fn (DiplomaSpeciality $diplomaSpeciality) => $diplomaSpeciality->getLabel(),
                     'placeholder' => 'Sélectionnez une spécialité',
+                    'required' => false,
                     'attr' => [
                         'disabled' => true,
                         'class' => 'diploma-speciality-select-tag'

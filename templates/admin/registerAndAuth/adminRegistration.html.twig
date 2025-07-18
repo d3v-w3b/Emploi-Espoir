@@ -3,6 +3,21 @@
 {% block title %}Administration - S'enregistrer{% endblock %}
 
 {% block body %}
+    {# message if admin authentication has failed #}
+    {% if app.flashes('authentication_failed') is defined %}
+        {% for adminAuthFailedMsg in app.flashes('authentication_failed') %}
+            <span>{{ adminAuthFailedMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
+
+    {# message if admin authentication contai an error #}
+    {% if app.flashes('authentication_error') is defined %}
+        {% for adminAuthErrorMsg in app.flashes('authentication_error') %}
+            <span>{{ adminAuthErrorMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
     <section>
         <h1>S'enregistrer</h1>
 

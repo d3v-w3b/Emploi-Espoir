@@ -60,7 +60,7 @@
 
                 $this->addFlash('request_sent', 'Votre demande à été envoyé');
 
-                return $this->redirectToRoute('user_remove_account_organization_request');
+                return $this->redirectToRoute('user_profile_settings_edit');
             }
 
             return $this->render('user/profile/settings/orgAccountRemovalRequest.html.twig', [

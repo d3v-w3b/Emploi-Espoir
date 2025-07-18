@@ -1,6 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{# todo: changer le title si posisble pour le référencement #}
 {% block title %}Créer un compte - Emploi Espoir{% endblock %}
 
 {% block body %}
@@ -11,12 +10,22 @@
         {% endfor %}
     {% endif %}
 
+
     {# message if authentication contain errors #}
     {% if app.flashes('authentication_error') is defined %}
         {% for autenticationErrorMsg in app.flashes('authentication_error') %}
             <span>{{ autenticationErrorMsg }}</span>
         {% endfor %}
     {% endif %}
+
+
+    {# message if email has not been sent during authentication #}
+    {% if app.flashes('email_error_sending' is defined) %}
+        {% for emailSendigErrorMsg in app.flashes('email_error_sending') %}
+            <span>{{ emailSendigErrorMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
 
     <h1>Créer un compte</h1>
 
