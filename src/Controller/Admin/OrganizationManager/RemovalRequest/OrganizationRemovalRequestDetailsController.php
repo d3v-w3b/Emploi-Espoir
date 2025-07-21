@@ -99,7 +99,7 @@
 
                     $this->addFlash('org_account_removed_successfully', 'Un compte organization vient d\'être retiré');
 
-                    return $this->redirectToRoute('admin_organization_removal_request_list');
+                    return $this->redirectToRoute('admin_dashboard');
                 }
                 else {
                     $orgDeletionForm->get('password')->addError(new FormError('Mot de passe incorrect, suppression de compte impossible'));

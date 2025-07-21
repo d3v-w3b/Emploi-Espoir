@@ -26,7 +26,7 @@
             $admin = $this->getUser();
 
             if (!$admin instanceof Admin) {
-                $this->createAccessDeniedException('Cet espace est accessible uniquement aux administrateurs.');
+                throw $this->createAccessDeniedException('Cet espace est accessible uniquement aux administrateurs.');
             }
 
             $allRemovalRequests = $this->entityManager->getRepository(AccountDeletionRequest::class)->findBy(

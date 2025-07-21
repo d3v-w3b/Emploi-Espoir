@@ -2,7 +2,21 @@
 
 {% block title %}Administration - Dashboard{% endblock %}
 
+{% block javascripts %}
+    <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
+{% endblock %}
+
 {% block body %}
+
+    {# message if an organization has been removed #}
+    {% if app.flashes('org_account_removed_successfully') is defined %}
+        {% for orgRemovedMsg in app.flashes('org_account_removed_successfully') %}
+            <span id="hide-flashMsg">{{ orgRemovedMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
+
+
     <details>
         <summary>{{ app.user.adminName }}</summary>
 

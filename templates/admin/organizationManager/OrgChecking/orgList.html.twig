@@ -2,6 +2,10 @@
 
 {% block title %}Administration - Liste des organisations{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+{% endblock %}
+
 {% block javascripts %}
     <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
     <script src="{{ asset('js/admin/organizationManager/orgChecking/modalForFormRemoveOrg.js') }}" defer></script>
@@ -34,52 +38,66 @@
         {% include('adminNavbar.html.twig') %}
     </header>
 
+    <p>
+        <a href="{{ path('admin_dashboard') }}">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+    </p>
+
     <h1>Liste des organisations</h1>
 
-    {% for org in organization  %}
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px">
+        {% for org in organization  %}
 
-        <a href="#">
-            <h3>{{ org.organizationName }}</h3>
+            <div>
+                <a href="#">
+                    <h3>{{ org.organizationName }}</h3>
 
-            <p>
-                <strong>Localité :</strong> {{ org.town }}
-            </p>
+                    <p>
+                        <strong>Localité :</strong> {{ org.town }}
+                    </p>
 
-            <p>
-                <strong>Matricule :</strong> {{ org.organizationRegistrationNumber }}
-            </p>
+                    <p>
+                        <strong>Matricule :</strong> {{ org.organizationRegistrationNumber }}
+                    </p>
 
-            <p>
-                <strong>Preferences : </strong>
-                <span>
+                    <p>
+                        <strong>Preferences : </strong>
+                        <span>
                     {% for preferences in org.organizationPreferences %}
                         {{ preferences }}
                     {% endfor %}
                 </span>
-            </p>
+                    </p>
 
-            <p>
-                <strong>Secteurs d'activités : </strong>
-                <span>
+                    <p>
+                        <strong>Secteurs d'activités : </strong>
+                        <span>
                     {% for sector in org.sectorOfActivity %}
                         {{ sector }}
                     {% endfor %}
                 </span>
-            </p>
+                    </p>
 
+                    <p>
+                        <strong>Abonnement : </strong> {{ org.subscription }}
+                    </p>
+                </a>
+
+                <form id="form-{{ org.id }}" method="post" action="{{ path('admin_org_remove', {'id' : org.id}) }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token('admin_org_remove_' ~ org.id) }}">
+                    <button type="button" class="btn-remove" data-id="{{ org.id }}">Retirer l'organisation</button>
+                </form>
+            </div>
+
+        {% else %}
             <p>
-                <strong>Abonnement : </strong> {{ org.subscription }}
+                Aucune organisation enregistrée pour le moment
             </p>
-        </a>
+        {% endfor %}
+    </div>
 
 
-        <form id="form-{{ org.id }}" method="post" action="{{ path('admin_org_remove', {'id' : org.id}) }}">
-            <input type="hidden" name="_token" value="{{ csrf_token('admin_org_remove_' ~ org.id) }}">
-            <button type="button" class="btn-remove" data-id="{{ org.id }}">Retirer l'organisation</button>
-        </form>
-    {% else %}
-        <p>
-            Aucune organisation enregistrée pour le moment
-        </p>
-    {% endfor %}
+    {{ knp_pagination_render(organization) }}
+
 {% endblock %}
