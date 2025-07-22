@@ -197,7 +197,7 @@
 
         {% if app.user.experiences is not null %}
             {% for experience in app.user.experiences %}
-                <a href="#">
+                <a href="{{ path('account_professional_experience_edit', {'id' : experience.id, redirect: 'user_profile_view_as_recruiter'}) }}">
                     <div>
                         <h3>{{ experience.jobTitle }}</h3>
                     </div>

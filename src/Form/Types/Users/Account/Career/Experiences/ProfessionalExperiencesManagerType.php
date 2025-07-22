@@ -101,7 +101,7 @@
                     ],
                     'expanded' => true,
                     'multiple' => true,
-                    'mapped' => false
+                    'mapped' => false,
                 ])
 
                 ->add('startDate', DateType::class, [

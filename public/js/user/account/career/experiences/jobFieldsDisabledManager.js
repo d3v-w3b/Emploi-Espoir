@@ -28,18 +28,34 @@ jobTitle.addEventListener('input', (event) => {
  * else
  * input date of end is not required and display = none
  */
-let checkboxDate = document.getElementById('professional_experiences_manager_endDateCheckbox_0');
-let endDate = document.getElementById('professional_experiences_manager_endDate');
+let inputCheckbox = document.getElementById('professional_experiences_manager_endDateCheckbox_0');
 let endDateBlock = document.querySelector('.end-date');
+let endDateDay = document.getElementById('professional_experiences_manager_endDate_day');
+console.log(endDateDay.value);
+let endDateMonth = document.getElementById('professional_experiences_manager_endDate_month');
+let endDateYear = document.getElementById('professional_experiences_manager_endDate_year');
 
 // Function for manage displaying of date field
 function toggleEndDateBlock() {
-    if (checkboxDate.checked) {
+    if (inputCheckbox.checked) {
         endDateBlock.style.display = 'block';
-        endDate.required = true;
-    } else {
+        endDateMonth.required = true;
+        endDateYear.required = true;
+
+        // Initialize the end date day to 1 to avoid validation error
+        // in the backend
+        endDateDay.value = 1;
+    }
+    else {
         endDateBlock.style.display = 'none';
-        endDate.required = false;
+        endDateMonth.required = false;
+        endDateYear.required = false;
+
+        // If checkbox about date of end is not checked
+        // put null to the values about date of end (Day, Month, Year)
+        endDateMonth.value = null;
+        endDateYear.value = null;
+        endDateDay.value = null;
     }
 }
 
@@ -47,7 +63,7 @@ function toggleEndDateBlock() {
 document.addEventListener('DOMContentLoaded', toggleEndDateBlock);
 
 // Check every time the checkbox changes
-checkboxDate.addEventListener('change', toggleEndDateBlock);
+inputCheckbox.addEventListener('change', toggleEndDateBlock);
 
 
 /**

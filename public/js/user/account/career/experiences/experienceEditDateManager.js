@@ -5,7 +5,7 @@ const endDateDay = document.getElementById('professional_experiences_edit_endDat
 const dateEndBlock = document.querySelector('.end-date');
 
 // if value of month and value of year about date of end
-// is greater than ou equal to 1 put checked on the
+// is greater than or equal to 1 put checked on the
 // checkbox and show the block about date of end
 if (endDateMonth.value >= 1 && endDateYear.value >= 1) {
     inputCheckbox.checked = true;

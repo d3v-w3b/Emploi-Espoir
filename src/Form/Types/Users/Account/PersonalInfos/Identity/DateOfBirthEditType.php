@@ -13,7 +13,10 @@
         public function buildForm(FormBuilderInterface $builder, array $options): void
         {
             $builder->add('dateOfBirth', DateType::class, [
-                'label' => 'Date de naissance'
+                'label' => 'Date de naissance',
+                'widget' => 'choice',
+                'format' => 'dd MM yyyy',
+                'years' => range(date('Y'), 1950),
             ]);
         }
 
