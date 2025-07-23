@@ -221,7 +221,7 @@
 
         {% if app.user.formations is not empty %}
             {% for formation in app.user.formations %}
-                <a href="#">
+                <a href="{{ path('account_formation_edit', {'id' : formation.id, redirect: 'user_profile_view_as_recruiter'}) }}">
                     <div>
                         <h3>{{ formation.diplomaName }}</h3>
                     </div>
@@ -253,7 +253,7 @@
 
             {% for language in app.user.languages %}
                 <div>
-                    <a href="#">
+                    <a href="{{ path('account_languages_language_level_edit', {'id' : language.id, redirect: 'user_profile_view_as_recruiter'}) }}">
                         <span>{{ language.language }}</span> | <span>{{ language.languageLevel }}</span>
                     </a>
                 </div>

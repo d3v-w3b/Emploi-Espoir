@@ -15,6 +15,7 @@
             $builder->add('githubUrl', TextType::class, [
                 'label' => 'Lien de votre profil Github',
                 'help' => 'Format: https://github.com/username',
+                'required' => false,
                 'attr' => [
                     'class' => 'input-counter',
                 ]

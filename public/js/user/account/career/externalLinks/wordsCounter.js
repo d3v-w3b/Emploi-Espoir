@@ -1,5 +1,5 @@
 /**
- * This file is use for all inputs with counter into the
+ * This file is use for all inputs with counter into the edit of
  * external links
  */
 
@@ -18,7 +18,7 @@ updateCounter(input.value.length);
 input.addEventListener('input', (event) => {
     let textLength = event.target.value.length;
 
-    // Empêcher d'écrire plus de 300 caractères
+    // Empêcher d'écrire plus de 200 caractères
     if (textLength > maxLength) {
         input.value = input.value.substring(0, maxLength);
         textLength = maxLength;

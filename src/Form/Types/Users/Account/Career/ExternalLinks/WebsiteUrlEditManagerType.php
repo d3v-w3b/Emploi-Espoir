@@ -15,6 +15,7 @@
             $builder->add('websiteUrl', TextType::class, [
                 'label' => 'Liens',
                 'help' => 'Format: https://www.url.com',
+                'required' => false,
                 'attr' => [
                     'class' => 'input-counter'
                 ]

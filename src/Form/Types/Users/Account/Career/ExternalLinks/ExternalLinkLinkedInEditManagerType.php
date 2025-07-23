@@ -14,7 +14,11 @@
         {
             $builder->add('linkedInUrl', TextType::class, [
                 'label' => 'Lien de votre profil LinkedIn',
-                'help' => 'Format : https://www.linkedin.com/in/votrenom.'
+                'help' => 'Format : https://www.linkedin.com/in/votrenom.',
+                'required' => false,
+                'attr' => [
+                    'class' => 'input-counter'
+                ]
             ]);
         }
 

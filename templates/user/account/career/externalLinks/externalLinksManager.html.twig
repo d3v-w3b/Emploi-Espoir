@@ -3,10 +3,12 @@
 {% block title %}Liens externes - Emploi Espoir{% endblock %}
 
 {% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 {% endblock %}
 
 {% block javascripts %}
     <script src="{{ asset('js/user/account/career/externalLinks/fieldsLinksManager.js') }}" defer></script>
+    <script src="{{ asset('js/user/account/career/externalLinks/wordsCounterExternalLinkManager.js') }}" defer></script>
 {% endblock %}
 
 {% block body %}
@@ -14,6 +16,12 @@
     <header>
         {% include 'navbar.html.twig' %}
     </header>
+
+    <p>
+        <a href="{{ path('account_external_links') }}">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+    </p>
 
     <h1>Liens externes</h1>
 
@@ -30,6 +38,10 @@
                 {{ form_widget(external_link_form.linkedInUrl) }}
                 {{ form_errors(external_link_form.linkedInUrl) }}<br>
                 <span class="linkedFormat-error" style="color: red; display: none;">Le lien de votre profil LinkedIn doit ressembler à ça : https://www.linkedin.com/in/votrenom</span>
+
+                <span class="words-counter">
+
+                </span>
             </div>
 
             <div style="display: none;" id="github-block">
@@ -38,6 +50,10 @@
                 {{ form_errors(external_link_form.githubUrl) }}<br >
                 <span class="githubFormat-error" style="color: red; display: none;">Le lien de votre github doit ressembler à ça : https://github.com/username</span>
 
+                <span class="words-counter">
+
+                </span>
+
             </div>
 
             <div style="display: none;" id="url-block">
@@ -45,6 +61,10 @@
                 {{ form_widget(external_link_form.websiteUrl) }}
                 {{ form_errors(external_link_form.websiteUrl) }}<br >
                 <span class="urlFormat-error" style="color: red; display: none;">Vérifier le lien. Il doit ressembler à ça : https://www.url.com</span>
+
+                <span class="words-counter">
+
+                </span>
 
             </div>
 

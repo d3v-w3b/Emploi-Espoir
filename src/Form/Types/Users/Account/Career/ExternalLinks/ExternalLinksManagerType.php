@@ -30,7 +30,8 @@
                     'label' => 'Lien de votre profil LinkedIn',
                     'required' => false,
                     'attr' => [
-                        'placeholder' => 'Format : https://www.linkedin.com/in/votrenom.'
+                        'placeholder' => 'Format : https://www.linkedin.com/in/votrenom.',
+                        'class' => 'external-link input-counter'
                     ]
                 ])
 
@@ -38,7 +39,8 @@
                     'label' => 'Lien de votre profil Github',
                     'required' => false,
                     'attr' => [
-                        'placeholder' => 'Format: “https://github.com/votrepseudo”'
+                        'placeholder' => 'Format: “https://github.com/votrepseudo”',
+                        'class' => 'external-link input-counter'
                     ]
                 ])
 
@@ -46,7 +48,8 @@
                     'label' => 'Lien',
                     'required' => false,
                     'attr' => [
-                        'placeholder' => 'Format: “https://www.url.com”'
+                        'placeholder' => 'Format: “https://www.url.com”',
+                        'class' => 'external-link input-counter'
                     ]
                 ])
             ;
