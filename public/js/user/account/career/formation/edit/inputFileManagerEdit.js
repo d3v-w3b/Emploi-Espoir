@@ -14,7 +14,7 @@ function updateFilePlaceholder() {
         ? selectedFiles.map(file => `
             <div class="new-file">
                 ${file.name} 
-                <a href="#" class="remove-file" data-file="${file.name}">retirer</a>
+                <a href="#" class="remove-file" data-file="${file.name}">retire</a>
             </div>
         `).join('')
         : "";
@@ -58,25 +58,6 @@ document.querySelectorAll('.remove-existing-file').forEach(link => {
     });
 });
 
-document.querySelector('form').addEventListener('submit', (event) => {
-    const remainingExistingFiles = document.querySelectorAll('.existing-file');
-
-    if (selectedFiles.length === 0 && remainingExistingFiles.length === 0) {
-        event.preventDefault();
-        Swal.fire({
-            icon: 'error',
-            title: 'Erreur',
-            text: 'Vous devez ajouter au moins un fichier pour soumettre le formulaire.'
-        });
-        return;
-    }
-
-    updateInputFile();
-
-    if (removedFileInput) {
-        removedFileInput.value = JSON.stringify(existingFiles);
-    }
-});
 
 blockForFile.addEventListener('click', () => {
     inputFile.click();
@@ -84,11 +65,6 @@ blockForFile.addEventListener('click', () => {
 
 inputFile.addEventListener('change', (event) => {
     let filesSelected = Array.from(event.target.files);
-
-    if (filesSelected.length === 0) {
-        Swal.fire("Vous devez ajouter au moins un fichier.");
-        return;
-    }
 
     filesSelected.forEach(file => {
         const allowedTypes = ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"];

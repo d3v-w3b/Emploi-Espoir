@@ -31,7 +31,8 @@
                     'required' => false,
                     'attr' => [
                         'placeholder' => 'Format : https://www.linkedin.com/in/votrenom.',
-                        'class' => 'external-link input-counter'
+                        'class' => 'external-link input-counter',
+                        'maxlength' => 200
                     ]
                 ])
 
@@ -40,7 +41,8 @@
                     'required' => false,
                     'attr' => [
                         'placeholder' => 'Format: “https://github.com/votrepseudo”',
-                        'class' => 'external-link input-counter'
+                        'class' => 'external-link input-counter',
+                        'maxlength' => 200
                     ]
                 ])
 
@@ -49,7 +51,8 @@
                     'required' => false,
                     'attr' => [
                         'placeholder' => 'Format: “https://www.url.com”',
-                        'class' => 'external-link input-counter'
+                        'class' => 'external-link input-counter',
+                        'maxlength' => 200
                     ]
                 ])
             ;

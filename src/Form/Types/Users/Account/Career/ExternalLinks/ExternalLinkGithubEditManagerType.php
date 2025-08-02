@@ -18,6 +18,7 @@
                 'required' => false,
                 'attr' => [
                     'class' => 'input-counter',
+                    'maxlength' => 200
                 ]
             ]);
         }

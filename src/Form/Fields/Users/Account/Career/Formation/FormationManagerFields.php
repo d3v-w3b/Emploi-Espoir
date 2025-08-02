@@ -28,7 +28,6 @@
         #[Assert\NotBlank]
         private ?string $diplomaYear = null;
 
-        #[Assert\NotBlank]
         private ?array $diploma = null;
 
 

@@ -35,20 +35,6 @@ function updateInputFile() {
     selectedFiles.forEach(file => dataTransfer.items.add(file));
     inputFile.files = dataTransfer.files;
 }
-document.querySelector('form').addEventListener('submit', (event) => {
-    if (selectedFiles.length === 0) {
-        event.preventDefault(); // Empêche la soumission du formulaire
-        Swal.fire({
-            icon: 'error',
-            title: 'Erreur',
-            text: 'Vous devez ajouter au moins un fichier pour soumettre le formulaire.'
-        });
-    } else {
-        // Mettre à jour le champ input file avant soumission
-        updateInputFile();
-    }
-});
-
 
 blockForFile.addEventListener('click', () => {
     inputFile.click();
@@ -59,14 +45,6 @@ inputFile.addEventListener('change', (event) => {
     // event.target.files get a FileList
     // user Array for convert this FileList to array
     let filesSelected = Array.from(event.target.files);
-
-    //console.log(filesSelected);
-
-    if (filesSelected.length === 0) {
-        Swal.fire("Vous devez ajouter au moins un fichier.");
-        return;
-    }
-
 
     filesSelected.forEach(file => {
         const allowedTypes = ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"];

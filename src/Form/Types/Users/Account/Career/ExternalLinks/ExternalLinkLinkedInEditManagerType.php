@@ -17,7 +17,8 @@
                 'help' => 'Format : https://www.linkedin.com/in/votrenom.',
                 'required' => false,
                 'attr' => [
-                    'class' => 'input-counter'
+                    'class' => 'input-counter',
+                    'maxlength' => 200
                 ]
             ]);
         }

@@ -76,6 +76,7 @@
                     'label' => 'Copie du diplôme ou certificat',
                     'help' => 'Fichier acceptés : .pdf, doc, docx',
                     'multiple' => true,
+                    'required' => false,
                     'attr' => [
                         'class' => 'input-file'
                     ]

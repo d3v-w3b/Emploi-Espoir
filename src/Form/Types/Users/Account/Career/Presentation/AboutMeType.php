@@ -17,7 +17,8 @@
                 'help' => 'Cette présentation sera visible sur votre profil',
                 'attr' => [
                     'cols' => 80,
-                    'rows' => 8
+                    'rows' => 8,
+                    'max_length' => 300,
                 ]
             ]);
         }

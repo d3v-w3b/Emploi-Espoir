@@ -17,7 +17,8 @@
                 'help' => 'Format: https://www.url.com',
                 'required' => false,
                 'attr' => [
-                    'class' => 'input-counter'
+                    'class' => 'input-counter',
+                    'maxlength' => 200
                 ]
             ]);
         }

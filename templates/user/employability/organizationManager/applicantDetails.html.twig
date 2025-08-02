@@ -36,6 +36,10 @@
                 {{ userObjectives }}
             {% endfor %}
         </div>
+
+        <div>
+            <a href="{{ path('organization_candidate_recruitment', {'id' : applicant.id}) }}">Contactez ce candidat</a>
+        </div>
     </section>
 
 
@@ -183,6 +187,5 @@
             </p>
         {% endif %}
     </section>
-
     
 {% endblock %}

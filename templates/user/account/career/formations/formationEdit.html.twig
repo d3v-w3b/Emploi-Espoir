@@ -106,7 +106,7 @@
                         <div class="existing-files">
                             {% for file in formation.diploma %}
                                 <div class="existing-file" data-existing-file="{{ file }}">
-                                    <a href="{{ asset('user/career/formation/diploma/' ~ file) }}" target="_blank" download>{{ file|split('/')|last }}</a>
+                                    <a href="{{ asset(file) }}" target="_blank" download>{{ file|split('/')|last }}</a>
                                     <a href="#" class="remove-existing-file" data-file="{{ file }}">retirer</a>
                                 </div>
                             {% endfor %}

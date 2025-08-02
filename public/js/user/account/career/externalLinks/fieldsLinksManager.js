@@ -32,6 +32,7 @@ function allowForm() {
 // ========== Listeners de validation (ajoutés une seule fois) ==========
 
 linkedInInput.addEventListener('change', (event) => {
+    console.log(linkedInInput.value);
     if (selectTag.value === 'LinkedIn') {
         if (!linkedFormatRegex.test(event.target.value)) {
             forbiddenForm();
@@ -71,6 +72,20 @@ urlInput.addEventListener('change', (event) => {
 
 selectTag.addEventListener('input', (event) => {
     const value = event.target.value;
+
+    // Réinitialisation des champs non sélectionnés
+    if (value !== 'LinkedIn') {
+        linkedInInput.value = '';
+        linkedFormatErrorSpan.style.display = 'none';
+    }
+    if (value !== 'Github') {
+        githubInput.value = '';
+        githubFormatErrorSpan.style.display = 'none';
+    }
+    if (value !== 'Autre') {
+        urlInput.value = '';
+        urlFormatErrorSpan.style.display = 'none';
+    }
 
     // Affichage conditionnel
     linkedInBlock.style.display = (value === 'LinkedIn') ? 'block' : 'none';
