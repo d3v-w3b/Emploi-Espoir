@@ -40,12 +40,19 @@
         #[ORM\JoinColumn(nullable: false)]
         private ?User $user = null;
 
+        /**
+         * @var Collection<int, Hiring>
+         */
+        #[ORM\OneToMany(targetEntity: Hiring::class, mappedBy: 'applicant', cascade: ['remove'], orphanRemoval: true)]
+        private Collection $hirings;
+
 
 
 
         public function __construct()
         {
             $this->jobOffer = new ArrayCollection();
+            $this->hirings = new ArrayCollection();
         }
 
 
@@ -164,5 +171,35 @@
         public function getOffer(): ?string
         {
             return $this->offer;
+        }
+
+        /**
+         * @return Collection<int, Hiring>
+         */
+        public function getHirings(): Collection
+        {
+            return $this->hirings;
+        }
+
+        public function addHiring(Hiring $hiring): static
+        {
+            if (!$this->hirings->contains($hiring)) {
+                $this->hirings->add($hiring);
+                $hiring->setApplicant($this);
+            }
+
+            return $this;
+        }
+
+        public function removeHiring(Hiring $hiring): static
+        {
+            if ($this->hirings->removeElement($hiring)) {
+                // set the owning side to null (unless already changed)
+                if ($hiring->getApplicant() === $this) {
+                    $hiring->setApplicant(null);
+                }
+            }
+
+            return $this;
         }
     }

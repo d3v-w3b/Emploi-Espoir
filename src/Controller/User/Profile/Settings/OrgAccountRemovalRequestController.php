@@ -48,6 +48,18 @@
 
             if ($accountRemovalForm->isSubmitted() && $accountRemovalForm->isValid()) {
 
+                // Get a current existing deletion request if it exists
+                $existingDeletionRequest = $this->entityManager->getRepository(AccountDeletionRequest::class)->findOneBy([
+                    'applicantOrganization' => $organization,
+                ]);
+
+                // Display an alert if there is a request which already exists
+                if ($existingDeletionRequest) {
+                    $this->addFlash('request_already_exists', 'Vous avez déjà envoyé une demande de suppression.');
+
+                    return $this->redirectToRoute(  'user_profile_settings_edit');
+                }
+
                 $accountDeletionRequestEntity->setEmail($accountRemovalFields->getEmail());
                 $accountDeletionRequestEntity->setStatu($accountRemovalFields->getStatu());
                 $accountDeletionRequestEntity->setDescription($accountRemovalFields->getDescription());

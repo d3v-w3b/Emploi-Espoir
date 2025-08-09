@@ -8,6 +8,10 @@ const imgInput = document.getElementById('avatar_manager_inputChoice_1');
 const fileInputBlock = document.getElementById('fileInput-block');
 const fileInput = document.getElementById('avatar_manager_profilePic');
 
+const profilPicError = document.querySelector('li');
+
+console.log(profilPicError);
+
 
 btnModifier.addEventListener('click', (event) => {
     event.preventDefault();
@@ -24,3 +28,13 @@ btnModifier.addEventListener('click', (event) => {
         }
     });
 });
+
+// If error exists during the manage of profil pic, show the form and this error
+if (profilPicError) {
+    avatarFormContainer.style.display = 'block';
+    fileInputBlock.style.display = 'block';
+}
+else {
+    avatarFormContainer.style.display = 'none';
+    fileInputBlock.style.display = 'none';
+}

@@ -9,7 +9,7 @@
     {
         #[Assert\File(
             maxSize: '2M',
-            mimeTypes: ['image.png', 'image/jpg', 'image/jpeg', 'image/jfif'],
+            mimeTypes: ['image/png', 'image/jpg', 'image/jpeg', 'image/jfif'],
             maxSizeMessage: 'La taille de l\'image ne doit pas dépasser 2Mo',
             mimeTypesMessage: 'Les extensions recommandées sont : .png, .jpg, .jpeg, .jfif'
         )]

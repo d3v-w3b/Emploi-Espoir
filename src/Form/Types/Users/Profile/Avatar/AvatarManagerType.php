@@ -25,8 +25,11 @@
                 ])
 
                 ->add('profilePic', FileType::class, [
-                    'required' => false
-
+                    'required' => false,
+                    'attr' => [
+                        // Limit the user's choice only for this type of file
+                        'accept' => 'image/png,image/jpg,image/jpeg,image/jfif',
+                    ]
                 ])
             ;
         }

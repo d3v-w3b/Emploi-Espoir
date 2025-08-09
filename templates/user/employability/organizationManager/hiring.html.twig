@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ current_candidate.lastName }} {{ current_candidate.firstName }} - Emploi Espoir {% endblock %}
+
+{% block body %}
+
+    <header>
+        {% include('navbar.html.twig') %}
+    </header>
+
+    <h1>Personnalisez votre premier contact avec {{ current_candidate.firstName }}</h1>
+
+    <p>
+        Profitez de cette réponse pour donner des informations personnalisées au candidat dans l’objectif d’un futur entretien. Une fois cette étape complétée, vous aurez accès aux coordonnées du candidat (adresse email et numéro de téléphone).
+    </p>
+
+    {{ form_start(hiring_form) }}
+
+        <div>
+            <div>
+                {{ form_label(hiring_form.organizationResponse) }}<br >
+                {{ form_widget(hiring_form.organizationResponse) }}
+                {{ form_errors(hiring_form.organizationResponse) }}
+                {{ form_help(hiring_form.organizationResponse) }}
+            </div>
+        </div>
+
+        <div>
+            <h1>Vos coordonnées</h1>
+
+            <h2>ou les coordonnées de la personne chargée du recrutement</h2>
+
+            <div>
+                {{ form_label(hiring_form.orgOwnerFirstName) }}<br >
+                {{ form_widget(hiring_form.orgOwnerFirstName) }}
+                {{ form_errors(hiring_form.orgOwnerFirstName) }}
+            </div>
+
+            <div>
+                {{ form_label(hiring_form.orgOwnerLastName) }}<br >
+                {{ form_widget(hiring_form.orgOwnerLastName) }}
+                {{ form_errors(hiring_form.orgOwnerLastName) }}
+            </div>
+
+            <div>
+                {{ form_label(hiring_form.orgOwnerEmail) }}<br >
+                {{ form_widget(hiring_form.orgOwnerEmail) }}
+                {{ form_errors(hiring_form.orgOwnerEmail) }}
+            </div>
+
+            <div>
+                {{ form_label(hiring_form.orgOwnerPhone) }}<br >
+                {{ form_widget(hiring_form.orgOwnerPhone) }}
+                {{ form_errors(hiring_form.orgOwnerPhone) }}
+            </div>
+
+            <button type="submit">Envoyer</button>
+        </div>
+
+    {{ form_end(hiring_form) }}
+
+{% endblock %}

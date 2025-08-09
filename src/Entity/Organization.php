@@ -49,9 +49,16 @@
         #[ORM\Column(length: 128, nullable: true)]
         private ?string $subscription = 'free';
 
+        /**
+         * @var Collection<int, Hiring>
+         */
+        #[ORM\OneToMany(targetEntity: Hiring::class, mappedBy: 'organization', cascade: ['remove'], orphanRemoval: true)]
+        private Collection $hirings;
+
         public function __construct()
         {
             $this->jobOffers = new ArrayCollection();
+            $this->hirings = new ArrayCollection();
         }
 
 
@@ -203,5 +210,35 @@
         public function getSubscription(): ?string
         {
             return $this->subscription;
+        }
+
+        /**
+         * @return Collection<int, Hiring>
+         */
+        public function getHirings(): Collection
+        {
+            return $this->hirings;
+        }
+
+        public function addHiring(Hiring $hiring): static
+        {
+            if (!$this->hirings->contains($hiring)) {
+                $this->hirings->add($hiring);
+                $hiring->setOrganization($this);
+            }
+
+            return $this;
+        }
+
+        public function removeHiring(Hiring $hiring): static
+        {
+            if ($this->hirings->removeElement($hiring)) {
+                // set the owning side to null (unless already changed)
+                if ($hiring->getOrganization() === $this) {
+                    $hiring->setOrganization(null);
+                }
+            }
+
+            return $this;
         }
     }
