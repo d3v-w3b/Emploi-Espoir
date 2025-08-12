@@ -4,6 +4,12 @@
 
 {% block body %}
 
+    {% if app.flashes('success') is defined %}
+        {% for successMsg in app.flashes('success') %}
+            <span>{{ successMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
     <header>
         {% include('navbar.html.twig') %}
     </header>

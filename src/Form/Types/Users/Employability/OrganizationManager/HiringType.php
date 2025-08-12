@@ -17,7 +17,11 @@
             $builder
                 ->add('organizationResponse', TextareaType::class, [
                     'label' => 'Votre réponse',
-                    'help' => 'Le candidat recevra votre message ainsi que vos coordonnées par e-mail.'
+                    'help' => 'Le candidat recevra votre message ainsi que vos coordonnées par e-mail.',
+                    'attr' => [
+                        'cols' => 80,
+                        'rows' => 8
+                    ]
                 ])
 
                 ->add('orgOwnerFirstName', TextType::class, [
@@ -33,7 +37,8 @@
                 ])
 
                 ->add('orgOwnerPhone', TextType::class, [
-                    'label' => 'Votre téléphone'
+                    'label' => 'Votre téléphone',
+                    'required' => false
                 ])
             ;
         }

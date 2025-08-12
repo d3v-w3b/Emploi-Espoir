@@ -18,6 +18,10 @@
         #[Assert\NotBlank(message: 'Renseignez votre email')]
         private ?string $orgOwnerEmail = null;
 
+        #[Assert\Regex(
+            pattern: '/^(07|05|01|27|25|21)(\s?\d{2}){4}$/',
+            message: 'Le numéro doit être un numéro ivoirien valide (ex : 07 01 02 03 04 ou 2701020304)'
+        )]
         private ?string $orgOwnerPhone = null;
 
 
