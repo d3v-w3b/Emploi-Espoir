@@ -3,6 +3,7 @@
     namespace App\Controller\User\Employability\OrganizationManager;
 
     use App\Entity\Applicant;
+    use App\Entity\Hiring;
     use Doctrine\ORM\EntityManagerInterface;
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\Routing\Annotation\Route;
@@ -23,8 +24,20 @@
         {
             $applicant = $this->entityManager->getRepository(Applicant::class)->find($applicantId);
 
+            // Get the current hiring for an offer form the applicant ti display
+            // it in a modal
+            $applicantCurrentHiring = $this->entityManager->getRepository(Hiring::class)->findOneBy([
+                'applicant' => $applicant
+            ]);
+
+            $orgResponse = null;
+            if ($applicantCurrentHiring) {
+                $orgResponse = $applicantCurrentHiring->getOrganizationResponse();
+            }
+
             return $this->render('user/employability/organizationManager/applicantDetails.html.twig', [
                 'applicant' => $applicant,
+                'org_response' => $orgResponse,
             ]);
         }
     }

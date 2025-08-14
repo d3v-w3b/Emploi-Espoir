@@ -38,7 +38,7 @@ applicationDetails.forEach(link => {
         if (docs.length > 0 && docs[0] !== '') {
             docs.forEach(doc => {
                 const a = document.createElement('a');
-                a.href = `/user/employability/docs/${doc}`; // adapte selon ton dossier réel
+                a.href = `/user/employability/docs/${doc}`;
                 a.textContent = doc;
                 a.target = '_blank';
                 a.style.display = 'block';

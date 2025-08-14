@@ -40,24 +40,35 @@
 
             $currentCandidat = $this->entityManager->getRepository(Applicant::class)->find($id);
 
+            // Forbidden organization to  hiring the same candidate
+            $candidateAlreadyContacted = $this->entityManager->getRepository(Hiring::class)->findOneBy([
+                'applicant' => $currentCandidat->getId()
+            ]);
+
+            if ($candidateAlreadyContacted) {
+                $this->addFlash('candidate_already_contacted', 'Vous avez déjà contacté ce candidat');
+
+                return $this->redirectToRoute('organization_offer_applicant_details', [
+                    'applicantId' => $id
+                ]);
+            }
+
             // Get the job title we are recruiting the candidate for from the current organization
             $currentOrg = $this->entityManager->getRepository(JobOffers::class)->findOneBy([
                 'organization' => $user->getOrganization()
             ]);
             $jobTitle = $currentOrg->getJobTitle();
 
-
-
             $hiringEntity = new Hiring();
             $hiringFields = new HiringFields();
 
-            $organizationResponse = "Bonjour {$currentCandidat->getFirstName()}\nAprès avoir découvert votre profil sur Openclassrooms, nous sommes vivement intéressés par votre parcours. Nous aimerions convenir d'un premier rendez-vous pour discuter d'une opportunité en alternance chez om. \nPourriez-vous nous indiquer vos disponibilités pour un premier échange ?\nDans l’attente de votre retour,\nBien à vous,";
+            $organizationResponse = "Bonjour {$currentCandidat->getFirstName()}, \nAprès avoir découvert votre profil sur Emploi Espoir, nous sommes vivement intéressés par votre parcours. Nous aimerions convenir d'un premier rendez-vous pour discuter d'une opportunité en {$currentOrg->getTypeOfContract()} chez {$currentOrg->getOrganization()->getOrganizationName()}. \nPourriez-vous nous indiquer vos disponibilités pour un premier échange ?\nDans l’attente de votre retour,\nBien à vous,";
 
             $hiringFields->setOrgOwnerFirstName($user->getFirstName());
             $hiringFields->setOrgOwnerLastName($user->getLastName());
             $hiringFields->setOrgOwnerEmail($user->getEmail());
             $hiringFields->setOrgOwnerPhone($user->getPhone());
-            $hiringFields->setOrganizationResponse(trim($organizationResponse));
+            $hiringFields->setOrganizationResponse($organizationResponse);
 
             $hiringForm = $this->createForm(HiringType::class, $hiringFields);
             $hiringForm->handleRequest($this->requestStack->getCurrentRequest());
@@ -84,27 +95,28 @@
                         ->subject('Entretien d\'embauche pour le poste de '.$jobTitle.' - '.$user->getOrganization()->getOrganizationName())
                         ->htmlTemplate('user/employability/organizationManager/hiringEmail.html.twig')
                         ->context([
-                            'organizationResponse' => $hiringEntity->getOrganizationResponse()
+                            'organizationResponse' => $hiringEntity->getOrganizationResponse(),
+                            'orgOwnerFirstName' => $hiringEntity->getOrgOwnerFirstName(),
+                            'orgOwnerLastName' => $hiringEntity->getOrgOwnerLastName(),
+                            'orgOwnerEmail' => $hiringEntity->getOrgOwnerEmail(),
+                            'orgOwnerPhone' => $hiringEntity->getOrgOwnerPhone(),
                         ])
                     ;
 
                     $this->mailer->send($email);
-
-                    $this->addFlash('success', 'bravo');
-
-                    return $this->redirectToRoute('organization_candidate_hiring', [
-                        'id' => $id
-                    ]);
                 }
                 catch (TransportExceptionInterface $e)  {
                     $this->addFlash('error_sending', $e->getMessage());
                 }
+
+                return $this->redirectToRoute('organization_candidate_infos', [
+                    'id' => $id
+                ]);
             }
 
             return $this->render('user/employability/organizationManager/hiring.html.twig', [
                 'current_candidate' => $currentCandidat,
                 'hiring_form' => $hiringForm->createView(),
-                'current_job' => $jobTitle
             ]);
         }
     }

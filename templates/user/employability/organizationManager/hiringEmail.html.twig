@@ -8,7 +8,32 @@
     <body>
 
         <div>
-            {{ organizationResponse }}
+            {{ organizationResponse|nl2br }}
+        </div>
+
+        <div>
+            <h1>Coordonnées du recruteur</h1>
+
+            <h3>Vous pourrez le contacter si besoin</h3>
+
+            <p>
+                <strong>Nom : </strong> {{ orgOwnerLastName }}
+            </p>
+
+            <p>
+                <strong>Prénom : </strong> {{ orgOwnerFirstName }}
+            </p>
+
+            <p>
+                <strong>Email : </strong> {{ orgOwnerEmail }}
+            </p>
+
+            <p>
+                {% if orgOwnerPhone is not null %}
+                    <strong>Phone : </strong> {{ orgOwnerPhone }}
+                {% endif %}
+
+            </p>
         </div>
     </body>
 </html>

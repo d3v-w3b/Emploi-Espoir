@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre message a bien été envoyé - Emploi Espoir{% endblock %}
+
+{% block body %}
+
+    <h1>Votre message a bien été envoyé !</h1>
+
+    <h3>
+        Merci d'avoir pris le temps d'envoyer votre réponse. {{ candidate_contacted.firstName }} la recevra par e-mail, accompagné de vos coordonnées.
+    </h3>
+
+    <div>
+        <h3>{{ candidate_contacted.firstName }} {{ candidate_contacted.lastName }}</h3>
+
+        <p>
+            {{ candidate_contacted.phone }}
+        </p>
+
+        <p>
+            {{ candidate_contacted.email }}
+        </p>
+    </div>
+
+    <p>
+        <a href="{{ path('organization_offer_applicant_details', {'applicantId' : candidate_contacted.id}) }}">Retour au profil</a>
+    </p>
+{% endblock %}
