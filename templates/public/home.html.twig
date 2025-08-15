@@ -53,6 +53,14 @@
     {% endif %}
 
 
+    {# flash message if a candidacy has been send #}
+    {% if app.flashes('help_center_msg') is defined %}
+        {% for helpCenterMsg in app.flashes('help_center_msg') %}
+            <span id="hide-flashMsg">{{ helpCenterMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
+
 
     <header>
         {% include 'navbar.html.twig' %}

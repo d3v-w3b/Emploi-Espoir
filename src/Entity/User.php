@@ -102,6 +102,12 @@
         #[ORM\Column(nullable: true)]
         private ?string $passwordChangeToken = null;
 
+        /**
+         * @var Collection<int, HelpCenter>
+         */
+        #[ORM\OneToMany(targetEntity: HelpCenter::class, mappedBy: 'user')]
+        private Collection $helpCenters;
+
 
 
 
@@ -111,6 +117,7 @@
             $this->languages = new ArrayCollection();
             $this->experiences = new ArrayCollection();
             $this->formations = new ArrayCollection();
+            $this->helpCenters = new ArrayCollection();
         }
 
 
@@ -493,6 +500,36 @@
         public function getPasswordChangeToken(): ?string
         {
             return $this->passwordChangeToken;
+        }
+
+        /**
+         * @return Collection<int, HelpCenter>
+         */
+        public function getHelpCenters(): Collection
+        {
+            return $this->helpCenters;
+        }
+
+        public function addHelpCenter(HelpCenter $helpCenter): static
+        {
+            if (!$this->helpCenters->contains($helpCenter)) {
+                $this->helpCenters->add($helpCenter);
+                $helpCenter->setUser($this);
+            }
+
+            return $this;
+        }
+
+        public function removeHelpCenter(HelpCenter $helpCenter): static
+        {
+            if ($this->helpCenters->removeElement($helpCenter)) {
+                // set the owning side to null (unless already changed)
+                if ($helpCenter->getUser() === $this) {
+                    $helpCenter->setUser(null);
+                }
+            }
+
+            return $this;
         }
 
     }

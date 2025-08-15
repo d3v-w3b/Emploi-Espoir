@@ -16,6 +16,9 @@ parameters:
     #this service allows to save the user's CV
     user/career/presentation/cv : 'user/career/presentation/cv'
 
+    #this service allow to save screenshot about error 500
+    public/helpCenter/screenshot: 'public/helpCenter/screenshot'
+
 services:
     # default configuration for services in *this* file
     _defaults:
