@@ -41,8 +41,10 @@
 
             if ($helpCenterForm->isSubmitted() && $helpCenterForm->isValid()){
                 // Connect entities
-                $user->addHelpCenter($helpCenterEntity);
-                $helpCenterEntity->setUser($user);
+                if ($user instanceof User) {
+                    $user->addHelpCenter($helpCenterEntity);
+                    $helpCenterEntity->setUser($user);
+                }
 
                 $helpCenterEntity->setPhone($helpCenterFields->getPhone());
                 $helpCenterEntity->setEmail($helpCenterFields->getEmail());
