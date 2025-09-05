@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Centre d'aides{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/admin/helpCenterManager/modalForAidRemove.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% endblock %}
+
+{% block body %}
+
+    <h1>Liste de requête pour {{ email }} </h1>
+
+    {% for request in request_for_aid %}
+        <div>
+            {{ request.description }} <br >
+
+            {% if request.screenshot is not null %}
+                <img src="{{ asset(request.screenshot) }}" alt="help_center_screenshot" width="250px"> <br >
+            {% endif %}
+
+            <form id="form-{{ request.id }}" method="post" action="{{ path('admin_remove_aid', {'id' : request.id}) }}">
+                <input type="hidden" name="_token" value="{{ csrf_token('admin_remove_aid_' ~ request.id) }}">
+                <button type="button" class="btn-remove" data-id="{{ request.id }}">Retirer cette requête</button>
+            </form>
+
+        </div>
+    {% endfor %}
+
+{% endblock %}

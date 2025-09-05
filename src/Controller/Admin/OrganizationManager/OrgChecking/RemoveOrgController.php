@@ -2,7 +2,6 @@
 
     namespace App\Controller\Admin\OrganizationManager\OrgChecking;
 
-    use App\Entity\Admin;
     use App\Entity\Organization;
     use Doctrine\ORM\EntityManagerInterface;
     use Symfony\Component\HttpFoundation\RedirectResponse;

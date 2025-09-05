@@ -42,6 +42,7 @@
             // Création de la requête avec QueryBuilder
             $qb = $this->entityManager->getRepository(JobOffers::class)->createQueryBuilder('job')
                 ->leftJoin('job.organization', 'org')
+                ->orderBy('job.id', 'DESC')
 
                 // Filter offers in progress
                 ->andWhere('job.statu = true')

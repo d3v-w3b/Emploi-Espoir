@@ -2,9 +2,31 @@
 
 {% block title %}Centre d'aides{% endblock %}
 
+{% block javascripts %}
+    <script src="{{ asset('js/hidingFlashMsg/hideFlashMsg.js') }}" defer></script>
+{% endblock %}
+
 {% block body %}
+    {# message if a request has been removed #}
+    {% if app.flashes('remove_aid_successfully') is defined %}
+        {% for aidRemovedMsg in app.flashes('remove_aid_successfully') %}
+            <span id="hide-flashMsg">{{ aidRemovedMsg }}</span>
+        {% endfor %}
+    {% endif %}
 
     <h1>Centre d'aides</h1>
 
     <h2>Liste</h2>
+
+    <div>
+        {% for email in all_emails %}
+            <h3>
+                <a href="{{ path('admin_hel_center_details', {'email' : email.email}) }}">{{ email.email }}</a>
+            </h3>
+        {% else %}
+            <p>
+                Aucun besoin n'a été relevé pour le moment
+            </p>
+        {% endfor %}
+    </div>
 {% endblock %}

@@ -41,7 +41,7 @@
             $skillsEntity = $user->getCareer() ?? new Career();
 
             // Pre-filed skills with the current skills
-            $skillsManagerFields->setSkills($user->getCareer()->getSkills() ?? '');
+            $skillsManagerFields->setSkills($user->getCareer()->getSkills() ?? []);
 
             $skillsManagerType = $this->createForm(SkillsManagerType::class, $skillsManagerFields);
 

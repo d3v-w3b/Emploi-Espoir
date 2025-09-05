@@ -3,6 +3,7 @@
     namespace App\Controller\Admin\AdminPanel;
 
     use App\Entity\AccountDeletionRequest;
+    use App\Entity\HelpCenter;
     use Doctrine\ORM\EntityManagerInterface;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\Response;
@@ -23,8 +24,11 @@
         {
             $requestCounter = $this->entityManager->getRepository(AccountDeletionRequest::class)->findBy([]);
 
+            $helpCenterCounter = $this->entityManager->getRepository(HelpCenter::class)->findBy([]);
+
             return $this->render('admin/adminPanel/adminDashboard.html.twig', [
-                'request_counter' => count($requestCounter)
+                'request_counter' => count($requestCounter),
+                'help_center_counter' => count($helpCenterCounter),
             ]);
         }
     }
