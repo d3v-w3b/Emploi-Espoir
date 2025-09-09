@@ -1,19 +1,31 @@
 <nav>
-    <div>
-        <a href="{{ path('home') }}">
-            Emploi Espoir
-        </a>
+    <div class="title-ent">
+        <div>
+            <h1>
+                <a href="{{ path('home') }}">
+                    Emploi Espoir
+                </a>
+            </h1>
+        </div>
+
+
+        <div class="employers">
+            <details open>
+                <summary>Pour les employeurs <span class="material-symbols-outlined">keyboard_arrow_down</span></summary>
+
+                <div class="employers__details">
+                    <p>
+                        <a href="{{ path('organization') }}">Découvrir notre solution</a>
+                    </p>
+                </div>
+
+            </details>
+        </div>
     </div>
 
-    <div>
-        <details>
-            <summary>Pour les employeurs</summary>
 
-            <p>
-                <a href="{{ path('organization') }}">Découvrir notre solution</a>
-            </p>
-        </details>
 
+    <div class="user-block">
         <details>
             <summary>
                 {% if app.user %}

@@ -1,3 +1,99 @@
+// breakpoints for size of phones and tablets
+$breakpoints: (
+        tablet_max-width: 1024px,
+        phone_max-width: 480px,
+);
+
+// manager for screen tablets
+@mixin tablet {
+    @media screen and (max-width: map-get($breakpoints, tablet_max-width)) {
+        @content;
+    }
+}
+
+
+// manager for mobile tablets
+@mixin mobile {
+    @media screen and (max-width: map-get($breakpoints, phone_max-width)) {
+        @content;
+    }
+}
+
+
+
+* {
+    margin: 0;
+}
+
+
 header {
     border: 1px solid red;
+    width: 100%;
+    box-sizing: border-box;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: flex;
+    align-items: center;
+
+    nav {
+        border: 1px solid blue;
+        display: flex;
+        justify-content: space-between;
+        width: 90%;
+        margin: auto;
+
+        details {
+
+            summary {
+                list-style: none;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            span {
+                margin-left: 10px;
+                margin-top: 2px;
+            }
+        }
+
+        .title-ent {
+            border: 1px solid orange;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            width: 35%; // essayer une taille en px
+        }
+
+        .user-block {
+            border: 1px solid red;
+        }
+
+        h1 {
+            border: 1px solid;
+            padding-top: 10px;
+            padding-bottom: 10px;
+
+            a {
+                text-decoration: none;
+            }
+        }
+
+        .employers {
+            border: 1px solid;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+
+            &__details {
+                border: 1px solid blue;
+            }
+        }
+    }
+}
+
+
+
+section {
+    margin-top: 200px;
 }
