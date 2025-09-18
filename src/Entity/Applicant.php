@@ -2,6 +2,7 @@
 
     namespace App\Entity;
 
+    use App\Enum\User\Employability\OrganizationManager\ApplicantSource;
     use App\Repository\ApplicantRepository;
     use Doctrine\Common\Collections\ArrayCollection;
     use Doctrine\Common\Collections\Collection;
@@ -40,11 +41,11 @@
         #[ORM\JoinColumn(nullable: false)]
         private ?User $user = null;
 
-        /**
-         * @var Collection<int, Hiring>
-         */
         #[ORM\OneToMany(targetEntity: Hiring::class, mappedBy: 'applicant', cascade: ['remove'], orphanRemoval: true)]
         private Collection $hirings;
+
+        #[ORM\Column(length: 128, nullable: true, enumType: ApplicantSource::class)]
+        private ?ApplicantSource $source = null;
 
 
 
@@ -104,6 +105,11 @@
             $this->offer = $offer;
 
             return $this;
+        }
+
+        public function setSource(?ApplicantSource $source): void
+        {
+            $this->source = $source;
         }
 
 
@@ -201,5 +207,10 @@
             }
 
             return $this;
+        }
+
+        public function getSource(): ?ApplicantSource
+        {
+            return $this->source;
         }
     }

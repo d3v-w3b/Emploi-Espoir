@@ -1,3 +1,10 @@
+/*
+    This file manages the modal for the candidate already contacted
+    It is used by two files:
+    - applicantDetails.html.twig
+    - specificProfilDetails.html.twig
+ */
+
 const candidateAlreadyContacted = document.getElementById('candidate-already-contacted-msg');
 const backdrop = document.getElementById('modal-backdrop');
 const closeModalButton = document.getElementById('close-modal');
@@ -17,7 +24,7 @@ if (candidateAlreadyContacted)  {
     const orgResponse = contactCandidateLink.getAttribute('data-org-response');
 
 
-    // Put datas into the modal
+    // Put data into the modal
     applicantModalTitle.textContent = title;
     applicantEmail.textContent = email;
     applicantPhone.textContent = phone;
@@ -36,7 +43,7 @@ closeModalButton.addEventListener('click', () => {
     backdrop.style.display = 'none';
 });
 
-// Close modal when clicking on backdrop
+// Close modal when clicking on the backdrop
 backdrop.addEventListener('click', () => {
     modal.style.display = 'none';
     backdrop.style.display = 'none';

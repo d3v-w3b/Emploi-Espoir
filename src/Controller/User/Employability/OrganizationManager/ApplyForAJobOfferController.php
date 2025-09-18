@@ -5,6 +5,7 @@
     use App\Entity\Applicant;
     use App\Entity\JobOffers;
     use App\Entity\User;
+    use App\Enum\User\Employability\OrganizationManager\ApplicantSource;
     use App\Form\Fields\Users\Employability\OrganizationManager\ApplyForAJobOfferFields;
     use App\Form\Types\Users\Employability\OrganizationManager\ApplyForAJobOfferType;
     use Doctrine\ORM\EntityManagerInterface;
@@ -79,6 +80,7 @@
                 $applicantEntity->setLastName($applyJobOfferFields->getLastName());
                 $applicantEntity->setFirstName($applyJobOfferFields->getFirstName());
                 $applicantEntity->setOffer($jobOffer->getJobTitle());
+                $applicantEntity->setSource(ApplicantSource::SELF_APPLICATION);
 
                 // Docs to provide manager
                 $docsFiles = $applyJobOfferFields->getDocsToProvide();

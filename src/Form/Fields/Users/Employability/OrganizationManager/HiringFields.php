@@ -1,4 +1,10 @@
 <?php
+    /*
+     * This file is used in 2 files
+     *
+     * File 1 - HiringController.php: This controller allows organizations to contacte users who are applied to their job offers.
+     * File 2 - SpecificProfilHiringController.php: This controller allows an organization to contact a specific profile for a job offer.
+     */
 
     namespace App\Form\Fields\Users\Employability\OrganizationManager;
 
@@ -23,6 +29,10 @@
             message: 'Le numéro doit être un numéro ivoirien valide (ex : 07 01 02 03 04 ou 2701020304)'
         )]
         private ?string $orgOwnerPhone = null;
+
+        // This variable is only used on the SpecificProfilHiringController.php
+        //#[Assert\NotBlank(message: 'Renseignez une offre')]
+        private ?string $offer = null;
 
 
         //Setters
@@ -51,6 +61,11 @@
             $this->orgOwnerPhone = $orgOwnerPhone;
         }
 
+        public function setOffer(?string $offer): void
+        {
+            $this->offer = $offer;
+        }
+
 
         //Getters
         public function getOrgOwnerFirstName(): ?string
@@ -76,5 +91,10 @@
         public function getOrgOwnerPhone(): ?string
         {
             return $this->orgOwnerPhone;
+        }
+
+        public function getOffer(): ?string
+        {
+            return $this->offer;
         }
     }

@@ -32,6 +32,7 @@
         #[IsGranted('ROLE_ENT')]
         public function hiring(int $id): Response
         {
+            // This user represents the owner of the current org
             $user = $this->getUser();
 
             if (!$user instanceof User) {
@@ -40,9 +41,9 @@
 
             $currentCandidat = $this->entityManager->getRepository(Applicant::class)->find($id);
 
-            // Forbidden organization to  hiring the same candidate
+            // Forbidden organization to hiring the same candidate
             $candidateAlreadyContacted = $this->entityManager->getRepository(Hiring::class)->findOneBy([
-                'applicant' => $currentCandidat->getId()
+                'applicant' => $currentCandidat
             ]);
 
             if ($candidateAlreadyContacted) {
@@ -57,7 +58,6 @@
             $currentOrg = $this->entityManager->getRepository(JobOffers::class)->findOneBy([
                 'organization' => $user->getOrganization()
             ]);
-            $jobTitle = $currentOrg->getJobTitle();
 
             $hiringEntity = new Hiring();
             $hiringFields = new HiringFields();
@@ -70,7 +70,9 @@
             $hiringFields->setOrgOwnerPhone($user->getPhone());
             $hiringFields->setOrganizationResponse($organizationResponse);
 
-            $hiringForm = $this->createForm(HiringType::class, $hiringFields);
+            $hiringForm = $this->createForm(HiringType::class, $hiringFields, [
+                'with_offer' => false,
+            ]);
             $hiringForm->handleRequest($this->requestStack->getCurrentRequest());
 
             if ($hiringForm->isSubmitted() && $hiringForm->isValid()) {
@@ -87,31 +89,38 @@
                 $this->entityManager->persist($hiringEntity);
                 $this->entityManager->flush();
 
-                //Send email
-                try {
-                    $email = (new TemplatedEmail())
-                        ->from('EmploiEspoir-Admin@admin.fr')
-                        ->to($currentCandidat->getEmail())
-                        ->subject('Entretien d\'embauche pour le poste de '.$jobTitle.' - '.$user->getOrganization()->getOrganizationName())
-                        ->htmlTemplate('user/employability/organizationManager/hiringEmail.html.twig')
-                        ->context([
-                            'organizationResponse' => $hiringEntity->getOrganizationResponse(),
-                            'orgOwnerFirstName' => $hiringEntity->getOrgOwnerFirstName(),
-                            'orgOwnerLastName' => $hiringEntity->getOrgOwnerLastName(),
-                            'orgOwnerEmail' => $hiringEntity->getOrgOwnerEmail(),
-                            'orgOwnerPhone' => $hiringEntity->getOrgOwnerPhone(),
-                        ])
-                    ;
-
-                    $this->mailer->send($email);
-                }
-                catch (TransportExceptionInterface $e)  {
-                    $this->addFlash('error_sending', $e->getMessage());
-                }
-
-                return $this->redirectToRoute('organization_candidate_infos', [
-                    'id' => $id
+                $candidatContactedSaved = $this->entityManager->getRepository(Hiring::class)->findOneBy([
+                    'applicant' => $currentCandidat
                 ]);
+
+                //Send email if flush has been done
+                if ($candidatContactedSaved) {
+
+                    try {
+                        $email = (new TemplatedEmail())
+                            ->from('EmploiEspoir-Admin@admin.fr')
+                            ->to($currentCandidat->getEmail())
+                            ->subject('Entretien d\'embauche pour le poste de '.$currentCandidat->getOffer().' - '.$user->getOrganization()->getOrganizationName())
+                            ->htmlTemplate('user/employability/organizationManager/hiringEmail.html.twig')
+                            ->context([
+                                'organizationResponse' => $hiringEntity->getOrganizationResponse(),
+                                'orgOwnerFirstName' => $hiringEntity->getOrgOwnerFirstName(),
+                                'orgOwnerLastName' => $hiringEntity->getOrgOwnerLastName(),
+                                'orgOwnerEmail' => $hiringEntity->getOrgOwnerEmail(),
+                                'orgOwnerPhone' => $hiringEntity->getOrgOwnerPhone(),
+                            ])
+                        ;
+
+                        $this->mailer->send($email);
+                    }
+                    catch (TransportExceptionInterface $e)  {
+                        $this->addFlash('error_sending', $e->getMessage());
+                    }
+
+                    return $this->redirectToRoute('organization_candidate_infos', [
+                        'id' => $id
+                    ]);
+                }
             }
 
             return $this->render('user/employability/organizationManager/hiring.html.twig', [

@@ -10,13 +10,13 @@ parameters:
     # this service allows to user to put a profile pic on his profile
     user/profile/avatar: 'user/profile/avatar'
 
-    #this service allows to save docs to provide for each applicant
+    #this service allows saving docs to provide for each applicant
     user/employability/docs: 'user/employability/docs'
 
-    #this service allows to save the user's CV
+    #this service allows saving the user's CV
     user/career/presentation/cv : 'user/career/presentation/cv'
 
-    #this service allow to save screenshot about error 500
+    #this service allows saving screenshot about error 500
     public/helpCenter/screenshot: 'public/helpCenter/screenshot'
 
 services:

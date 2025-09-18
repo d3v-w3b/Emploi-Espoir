@@ -1,16 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ user. firstName}} - Emploi Espoir{% endblock %}
+{% block title %}{{ user.firstName }} {{ user.lastName }} - Emploi Espoir{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 {% endblock %}
 
+{% block javascripts %}
+    <script src="{{ asset('js/user/employability/organizationManager/modalForCandidateAlreadyContacted.js') }}" defer></script>
+{% endblock %}
+
 {% block body %}
+
+    {# flash message if organzation try to contact the same candidate #}
+    {% if app.flashes('specific_profil_already_contacted') is defined %}
+        {% for specificProfilAlreadyContactedMsg in app.flashes('specific_profil_already_contacted') %}
+            <span id="candidate-already-contacted-msg" style="display: none">{{ specificProfilAlreadyContactedMsg }}</span>
+        {% endfor %}
+    {% endif %}
+
 
     <header>
         {% include('navbar.html.twig') %}
     </header>
+
 
     <div>
         <span>
@@ -22,5 +35,204 @@
         </span>
         <h1>{{ user.firstName }} {{ user.lastName }}</h1>
     </div>
+
+
+    <div>
+        {{ user.address }}
+    </div>
+
+    <div>
+        {% for userObjectives in user.mainObjectives %}
+            {{ userObjectives }}
+        {% endfor %}
+    </div>
+
+    <div>
+        <a href="{{ path('organization_specific_profil_hiring', {'id' : user.id}) }}" class="contact-candidat"
+           data-modal-title="Comment contacter {{ user.firstName }} {{ user.lastName}}"
+           data-applicant-email="{{ user.email }}"
+           data-applicant-phone="{{ user.phone }}"
+           data-org-response="{{ org_response }}"
+        >
+            Contactez ce candidat
+        </a>
+    </div>
+
+
+    <section>
+        <h1>Présentation</h1>
+
+        <div>
+            <p>
+                <strong>A propos de vous </strong><br>
+
+                <span>
+                     {% if user.career is not null and user.career.aboutYou is not null %}
+                         {{ user.career.aboutYou }}
+                     {% else %}
+                         <em>Informations non fournies</em>
+                     {% endif %}
+                 </span>
+            </p>
+
+            <p>
+                <strong>CV</strong><br >
+
+                {% if user.career is not null and user.career.cv is not null %}
+                    <a href="{{ asset(user.career.cv) }}" target="_blank">{{ user.career.cv|split('/')|last }}</a>
+                {% endif %}
+            </p>
+        </div>
+    </section>
+
+
+    <section>
+        <h1>Compétences</h1>
+
+        {% if user.career is not null %}
+            <p>
+                <span>Compétences principales : </span>
+                {% for skill in user.career.skills %}
+                    {{ skill }}
+                {% endfor %}
+            </p>
+
+        {% else %}
+            <p>
+                <em>Information non fournie</em>
+            </p>
+        {% endif %}
+    </section>
+
+
+    <section>
+        <h1>Liens externes</h1>
+
+        {% if user.career is not null and user.career.linkedInUrl is not null %}
+            <p>
+                LinkedIn : <a href="{{ user.career.linkedInUrl }}" target="_blank">{{ user.career.linkedInUrl }}</a>
+            </p>
+        {% endif %}
+
+
+        {% if user.career is not null and user.career.githubUrl is not null %}
+            <p>
+                Github : <a href="{{ user.career.githubUrl }}" target="_blank">{{ user.career.githubUrl }}</a>
+            </p>
+        {% endif %}
+
+
+        {% if user.career is not null and user.career.websiteUrl is not null %}
+            <p>
+                Autre(site web,portfolio,...) : <a href="{{ user.career.websiteUrl }}" target="_blank">{{ user.career.websiteUrl }}</a>
+            </p>
+        {% endif %}
+    </section>
+
+
+
+    <section>
+        <h1>Expériences professionnelles</h1>
+
+
+        {% if user.experiences is not null and user.experiences|length > 0 %}
+
+            {% for experience in user.experiences %}
+                <div>
+                    <h3>{{ experience.jobTitle }}</h3>
+                </div>
+
+                <div>
+                    {{ experience.enterpriseName }} | {{ experience.town }} | {{ experience.startDate|date('m/Y') }} - Aujourd'hui {# ici marquer la date genre 3ans quelques mois #}
+                </div>
+            {% endfor %}
+
+        {% else %}
+            <p>
+                <em>Information non fournie</em>
+            </p>
+        {% endif %}
+    </section>
+
+
+
+    <section>
+        <h1>Formations</h1>
+
+        {% if user.formations is not null and user.formations|length > 0 %}
+
+            {% for formation in user.formations %}
+
+                <div>
+                    <h3>{{ formation.diplomaName }}</h3>
+                </div>
+
+                <div>
+                    {{ formation.universityName }} | {{ formation.diplomaTown }} | {{ formation.diplomaLevel }} | {{ formation.diplomaMonth.value }}/{{ formation.diplomaYear }}
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+            <p>
+                <em>Information non fournie</em>
+            </p>
+        {% endif %}
+    </section>
+
+
+    <section>
+        <h1>Niveau de langues</h1>
+
+        {% if user.languages is not null and user.languages|length > 0 %}
+
+            {% for language in user.languages %}
+                <div>
+                    <p>
+                        <span>{{ language.language }}</span> | <span>{{ language.languageLevel }}</span>
+                    </p>
+                </div>
+            {% endfor %}
+
+        {% else %}
+            <p>
+                <em>Information non fournie</em>
+            </p>
+        {% endif %}
+    </section>
+
+
+
+
+
+
+
+    <div id="modal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid black; z-index: 1000;">
+        <h2 id="modal-title"></h2>
+        <p>Envoyez-lui un e-mail ou appelez-le pour convenir d’un premier entretien.</p>
+        <hr>
+
+        <p> <span id="candidat-email"></span></p>
+        <hr>
+
+        <p> <span id="candidat-phone"></span></p>
+        <hr>
+
+        <p>
+            Voici un modèle de message à personnaliser pour gagner du temps :
+        </p>
+        <p id="org-response"></p>
+
+
+        <div>
+            <button id="close-modal" style="margin-top: 10px;">Fermer</button>
+        </div>
+    </div>
+
+
+
+    <!-- Modal backdrop -->
+    <div id="modal-backdrop" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
+
 
 {% endblock %}

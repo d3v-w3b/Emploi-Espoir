@@ -1,4 +1,10 @@
 <?php
+    /*
+     * This file is used in 2 files
+     *
+     * File 1 - HiringController.php: This controller allows organizations to contacte users who are applied to their job offers.
+     * File 2 - SpecificProfilHiringController.php: This controller allows an organization to contact a specific profile for a job offer.
+     */
 
     namespace App\Form\Types\Users\Employability\OrganizationManager;
 
@@ -41,6 +47,16 @@
                     'required' => false
                 ])
             ;
+
+            // Conditionally add the offer field
+            // Use only on the SpecificProfilHiringController.php
+            if ($options['with_offer']) {
+                $builder->add('offer', TextType::class, [
+                    'label' => 'Offre',
+                    'help' => 'Indiquez l\'offre pour laquelle vous contacter ce candidat',
+                    'required' => true
+                ]);
+            }
         }
 
 
@@ -48,7 +64,10 @@
         public function configureOptions(OptionsResolver $resolver): void
         {
             $resolver->setDefaults([
-                'data_class' => HiringFields::class
+                'data_class' => HiringFields::class,
+
+                // This fields is false by default
+                'with_offer' => false
             ]);
         }
     }

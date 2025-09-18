@@ -24,7 +24,7 @@
         {
             $applicant = $this->entityManager->getRepository(Applicant::class)->find($applicantId);
 
-            // Get the current hiring for an offer form the applicant ti display
+            // Get the current hiring for an offer from the applicant to display
             // it in a modal
             $applicantCurrentHiring = $this->entityManager->getRepository(Hiring::class)->findOneBy([
                 'applicant' => $applicant
